@@ -1,498 +1,532 @@
+
 // ==========================================================================
-// CHAT WIDGET
+//           CHAT WIDGET FOR PATRICE MIRINDI PORTFOLIO
 // ==========================================================================
 
 class ChatWidget {
-    constructor() {
-        this.isOpen = false;
-        this.messages = [];
-        this.aboutData = null;
-        this.workExperienceData = [];
-        this.skillsData = null;
-        this.projectsData = [];
-        this.apiEndpoint = '/api/chat'; // Will be replaced with actual serverless function URL
-
+    constructor(options = {}) {
+        this.options = {
+            questionsFile: options.questionsFile || 'assets/data/chatbot_PatMir_questions_keywords_answers.csv',
+            maxMessages: options.maxMessages || 50,
+            typingDelay: options.typingDelay || 1000,
+            ...options
+        };
+        
+        this.chatData = [];
+        this.conversationHistory = [];
+        this.isTyping = false;
+        
         this.init();
     }
-
+    
     async init() {
-        await this.loadData();
-        this.setupEventListeners();
-        this.addWelcomeMessage();
+        await this.loadChatData();
+        this.bindEvents();
+        this.showWelcomeMessage();
     }
-
-    async loadData() {
+    
+    async loadChatData() {
         try {
-            // Load About data
-            const aboutResponse = await fetch('/data/about.json');
-            if (aboutResponse.ok) {
-                this.aboutData = await aboutResponse.json();
-            }
-
-            // Load Work Experience data
-            const workResponse = await fetch('/data/work_experience.json');
-            if (workResponse.ok) {
-                this.workExperienceData = await workResponse.json();
-            }
-
-            // Load Skills data
-            const skillsResponse = await fetch('/data/skills_expertise.json');
-            if (skillsResponse.ok) {
-                this.skillsData = await skillsResponse.json();
-            }
-
-            // Load Projects data
-            const projectsResponse = await fetch('/data/key_projects.json');
-            if (projectsResponse.ok) {
-                this.projectsData = await projectsResponse.json();
-            }
+            const response = await fetch(this.options.questionsFile);
+            const csvText = await response.text();
+            this.chatData = this.parseCSV(csvText);
+            console.log('Chat data loaded:', this.chatData.length, 'entries');
         } catch (error) {
-            console.warn('Could not load chat data:', error);
+            console.error('Error loading chat data:', error);
+            this.chatData = this.getFallbackData();
         }
     }
-
-    setupEventListeners() {
+    
+    parseCSV(csvText) {
+        const lines = csvText.split('\n');
+        const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+        const data = [];
+        
+        for (let i = 1; i < lines.length; i++) {
+            if (lines[i].trim()) {
+                const values = this.parseCSVLine(lines[i]);
+                const entry = {};
+                headers.forEach((header, index) => {
+                    entry[header] = values[index] || '';
+                });
+                data.push(entry);
+            }
+        }
+        
+        return data;
+    }
+    
+    parseCSVLine(line) {
+        const values = [];
+        let current = '';
+        let inQuotes = false;
+        
+        for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            const nextChar = line[i + 1];
+            
+            if (char === '"' && nextChar === '"') {
+                current += '"';
+                i++; // Skip next quote
+            } else if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                values.push(current.trim());
+                current = '';
+            } else {
+                current += char;
+            }
+        }
+        
+        values.push(current.trim());
+        return values;
+    }
+    
+    bindEvents() {
         const chatToggle = document.getElementById('chat-toggle');
         const chatClose = document.getElementById('chat-close');
         const chatSend = document.getElementById('chat-send');
         const chatInput = document.getElementById('chat-input');
-
+        
         if (chatToggle) {
-            chatToggle.addEventListener('click', () => this.toggle());
+            chatToggle.addEventListener('click', () => this.toggleChat());
         }
-
+        
         if (chatClose) {
-            chatClose.addEventListener('click', () => this.close());
+            chatClose.addEventListener('click', () => this.closeChat());
         }
-
+        
         if (chatSend) {
             chatSend.addEventListener('click', () => this.sendMessage());
         }
-
+        
         if (chatInput) {
             chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
                     this.sendMessage();
                 }
             });
         }
-
-        // Close chat when clicking outside
+        
+        // Quick reply buttons
         document.addEventListener('click', (e) => {
-            const chatWidget = document.getElementById('chat-widget');
-            if (chatWidget && !chatWidget.contains(e.target) && this.isOpen) {
-                this.close();
+            if (e.target.classList.contains('quick-reply')) {
+                const message = e.target.getAttribute('data-message');
+                this.handleUserMessage(message);
             }
         });
     }
-
-    toggle() {
-        if (this.isOpen) {
-            this.close();
-        } else {
-            this.open();
-        }
-    }
-
-    open() {
+    
+    toggleChat() {
         const chatPanel = document.getElementById('chat-panel');
         if (chatPanel) {
-            chatPanel.style.display = 'flex';
-            this.isOpen = true;
-
-            // Focus on input
-            const chatInput = document.getElementById('chat-input');
-            if (chatInput) {
-                setTimeout(() => chatInput.focus(), 100);
+            chatPanel.classList.toggle('active');
+            
+            if (chatPanel.classList.contains('active')) {
+                this.focusChatInput();
+                this.trackEvent('chat_opened');
+            } else {
+                this.trackEvent('chat_closed');
             }
         }
     }
-
-    close() {
+    
+    closeChat() {
         const chatPanel = document.getElementById('chat-panel');
         if (chatPanel) {
-            chatPanel.style.display = 'none';
-            this.isOpen = false;
+            chatPanel.classList.remove('active');
+            this.trackEvent('chat_closed');
         }
     }
-
-    addWelcomeMessage() {
-        this.addMessage(
-            'Hello! I\'m here to answer questions about my background, work experience, skills, and projects. How can I help you today?',
-            'bot'
-        );
-    }
-
-    async sendMessage() {
+    
+    focusChatInput() {
         const chatInput = document.getElementById('chat-input');
-        if (!chatInput || !chatInput.value.trim()) return;
-
-        const userMessage = chatInput.value.trim();
+        if (chatInput) {
+            setTimeout(() => {
+                chatInput.focus();
+            }, 300);
+        }
+    }
+    
+    sendMessage() {
+        const chatInput = document.getElementById('chat-input');
+        if (!chatInput) return;
+        
+        const message = chatInput.value.trim();
+        if (!message || this.isTyping) return;
+        
+        this.handleUserMessage(message);
         chatInput.value = '';
-
-        // Add user message to chat
-        this.addMessage(userMessage, 'user');
-
+    }
+    
+    handleUserMessage(message) {
+        this.addMessage(message, 'user');
+        this.conversationHistory.push({ role: 'user', content: message });
+        
         // Show typing indicator
         this.showTyping();
-
-        try {
-            // Try to get response from API first
-            const response = await this.getApiResponse(userMessage);
+        
+        setTimeout(() => {
+            const response = this.generateResponse(message);
             this.hideTyping();
-            this.addMessage(response.answer, 'bot', response.sources);
-        } catch (error) {
-            console.warn('API unavailable, using fallback:', error);
-            this.hideTyping();
-
-            // Fallback to client-side matching
-            const fallbackResponse = this.getFallbackResponse(userMessage);
-            this.addMessage(
-                fallbackResponse.answer + '\n\n_AI service unavailable—showing closest matches._',
-                'bot',
-                fallbackResponse.sources
-            );
-        }
+            this.addMessage(response, 'bot');
+            this.conversationHistory.push({ role: 'bot', content: response });
+        }, this.options.typingDelay);
+        
+        this.trackEvent('message_sent', { message_length: message.length });
     }
-
-    async getApiResponse(message) {
-        const response = await fetch(this.apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: message,
-                session_id: this.getSessionId()
-            })
+    
+    generateResponse(userMessage) {
+        const normalizedMessage = userMessage.toLowerCase().trim();
+        
+        // Find best match from CSV data
+        let bestMatch = null;
+        let bestScore = 0;
+        
+        this.chatData.forEach(entry => {
+            const keywords = entry.keywords ? entry.keywords.toLowerCase().split(',') : [];
+            const question = entry.question ? entry.question.toLowerCase() : '';
+            
+            let score = 0;
+            
+            // Check keywords
+            keywords.forEach(keyword => {
+                if (normalizedMessage.includes(keyword.trim())) {
+                    score += 3;
+                }
+            });
+            
+            // Check question similarity
+            const questionWords = question.split(' ');
+            const messageWords = normalizedMessage.split(' ');
+            
+            questionWords.forEach(word => {
+                if (messageWords.includes(word) && word.length > 3) {
+                    score += 1;
+                }
+            });
+            
+            if (score > bestScore) {
+                bestScore = score;
+                bestMatch = entry;
+            }
         });
-
-        if (!response.ok) {
-            throw new Error('API request failed');
+        
+        if (bestMatch && bestScore > 0) {
+            return this.formatResponse(bestMatch.answer);
         }
-
-        return await response.json();
+        
+        return this.getFallbackResponse(normalizedMessage);
     }
-
+    
+    formatResponse(response) {
+        // Add personality and formatting to responses
+        const responses = response.split('|');
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        
+        return randomResponse.trim();
+    }
+    
     getFallbackResponse(message) {
-        const intent = this.classifyIntent(message);
-        let matches = [];
-        let sources = [];
-
-        switch (intent) {
-            case 'ABOUT':
-                matches = this.searchAbout(message);
-                sources = matches.map(match => `About: ${match.key}`);
-                break;
-            case 'WORK':
-                matches = this.searchWorkExperience(message);
-                sources = matches.map(match => `Work: ${match.title}`);
-                break;
-            case 'SKILLS':
-                matches = this.searchSkills(message);
-                sources = matches.map(match => `Skills: ${match.category}`);
-                break;
-            case 'PROJECTS':
-                matches = this.searchProjects(message);
-                sources = matches.map(match => `Project: ${match.title}`);
-                break;
-            default:
-                return {
-                    answer: "I can only answer questions about my background, work experience, skills, and projects. Please try rephrasing or use the Contact page for other inquiries.",
-                    sources: []
-                };
-        }
-
-        if (matches.length === 0) {
-            return {
-                answer: "I don't have enough information in the site data to answer that question. Please try rephrasing or contact me directly.",
-                sources: []
-            };
-        }
-
-        // Return the best match
-        const bestMatch = matches[0];
-        return {
-            answer: bestMatch.answer || bestMatch.value || bestMatch.description,
-            sources: sources.slice(0, 3)
-        };
-    }
-
-    classifyIntent(message) {
-        const lowerMessage = message.toLowerCase();
-
-        // About indicators
-        const aboutKeywords = [
-            'about you', 'bio', 'tell me', 'personal', 'yourself',
-            'who are you', 'your story', 'background', 'from', 'languages',
-            'location', 'education', 'journey'
+        const fallbacks = [
+            "That's an interesting question! You can find more detailed information about my background and services throughout the website, or feel free to contact me directly at patricemirindi@gmail.com.",
+            "I'd be happy to help with that! For specific inquiries about my services or experience, please check out the relevant sections of my portfolio or reach out to me directly.",
+            "Thanks for your question! While I have information about my general background and services, for detailed discussions, I'd recommend using the contact form or emailing me at patricemirindi@gmail.com.",
+            "Great question! You can explore my work experience, skills, and projects throughout this website. For personalized consultations, let's connect via the contact page!",
+            "I appreciate your interest! For comprehensive information about my expertise in data analytics and economic consulting, please browse the different sections of my portfolio."
         ];
-
-        // Work experience indicators
-        const workKeywords = [
-            'work', 'experience', 'job', 'career', 'position', 'role',
-            'employer', 'company', 'responsibilities', 'achievements'
-        ];
-
-        // Skills indicators
-        const skillsKeywords = [
-            'skills', 'expertise', 'tools', 'technologies', 'programming',
-            'languages', 'certifications', 'capabilities', 'proficient'
-        ];
-
-        // Projects indicators
-        const projectsKeywords = [
-            'projects', 'work samples', 'portfolio', 'case studies',
-            'what have you built', 'examples', 'deliverables'
-        ];
-
-        let aboutScore = this.calculateKeywordScore(lowerMessage, aboutKeywords);
-        let workScore = this.calculateKeywordScore(lowerMessage, workKeywords);
-        let skillsScore = this.calculateKeywordScore(lowerMessage, skillsKeywords);
-        let projectsScore = this.calculateKeywordScore(lowerMessage, projectsKeywords);
-
-        // Return the intent with the highest score
-        const maxScore = Math.max(aboutScore, workScore, skillsScore, projectsScore);
-
-        if (maxScore === 0) return 'OTHER';
-        if (maxScore === aboutScore) return 'ABOUT';
-        if (maxScore === workScore) return 'WORK';
-        if (maxScore === skillsScore) return 'SKILLS';
-        if (maxScore === projectsScore) return 'PROJECTS';
-
-        return 'OTHER';
+        
+        return fallbacks[Math.floor(Math.random() * fallbacks.length)];
     }
-
-    calculateKeywordScore(message, keywords) {
-        return keywords.reduce((score, keyword) => {
-            return message.includes(keyword) ? score + 1 : score;
-        }, 0);
-    }
-
-    searchAbout(message) {
-        if (!this.aboutData) return [];
-
-        const lowerMessage = message.toLowerCase();
-        const matches = [];
-
-        const searchableFields = {
-            'name': this.aboutData.name,
-            'title': this.aboutData.title,
-            'tagline': this.aboutData.tagline,
-            'summary': this.aboutData.summary,
-            'location': this.aboutData.location,
-            'languages': this.aboutData.languages.join(', '),
-            'personal_info': JSON.stringify(this.aboutData.personal_info)
-        };
-
-        Object.entries(searchableFields).forEach(([key, value]) => {
-            if (typeof value === 'string') {
-                const words = value.toLowerCase().split(/\s+/);
-                const messageWords = lowerMessage.split(/\s+/);
-
-                let score = 0;
-                messageWords.forEach(msgWord => {
-                    if (msgWord.length > 3 && words.some(word => word.includes(msgWord))) {
-                        score += 1;
-                    }
-                });
-
-                if (score > 0) {
-                    matches.push({
-                        key: key,
-                        value: value,
-                        answer: value,
-                        score: score
-                    });
-                }
-            }
-        });
-
-        return matches.sort((a, b) => b.score - a.score).slice(0, 3);
-    }
-
-    searchWorkExperience(message) {
-        if (!this.workExperienceData || this.workExperienceData.length === 0) return [];
-
-        const lowerMessage = message.toLowerCase();
-        const matches = [];
-
-        this.workExperienceData.forEach(job => {
-            let score = 0;
-
-            // Check title and company
-            const searchText = `${job.title} ${job.company} ${job.description} ${job.achievements.join(' ')}`.toLowerCase();
-            const words = searchText.split(/\s+/);
-            const messageWords = lowerMessage.split(/\s+/);
-
-            messageWords.forEach(msgWord => {
-                if (msgWord.length > 3 && words.some(word => word.includes(msgWord))) {
-                    score += 1;
-                }
-            });
-
-            if (score > 0) {
-                matches.push({
-                    title: job.title,
-                    company: job.company,
-                    answer: `${job.title} at ${job.company} (${job.period}): ${job.description}`,
-                    score: score
-                });
-            }
-        });
-
-        return matches.sort((a, b) => b.score - a.score).slice(0, 3);
-    }
-
-    searchSkills(message) {
-        if (!this.skillsData) return [];
-
-        const lowerMessage = message.toLowerCase();
-        const matches = [];
-
-        // Search technical skills
-        Object.entries(this.skillsData.technical_skills || {}).forEach(([category, data]) => {
-            const skills = data.skills || [];
-            skills.forEach(skill => {
-                if (lowerMessage.includes(skill.name.toLowerCase())) {
-                    matches.push({
-                        category: data.category,
-                        skill: skill.name,
-                        answer: `I have ${skill.level.toLowerCase()} level expertise in ${skill.name} with ${skill.years} years of experience.`,
-                        score: 2
-                    });
-                }
-            });
-        });
-
-        // Search domain expertise
-        Object.entries(this.skillsData.domain_expertise || {}).forEach(([domain, data]) => {
-            const areas = data.areas || [];
-            areas.forEach(area => {
-                const words = area.toLowerCase().split(/\s+/);
-                const messageWords = lowerMessage.split(/\s+/);
-
-                let score = 0;
-                messageWords.forEach(msgWord => {
-                    if (msgWord.length > 3 && words.some(word => word.includes(msgWord))) {
-                        score += 1;
-                    }
-                });
-
-                if (score > 0) {
-                    matches.push({
-                        category: data.category,
-                        area: area,
-                        answer: `I specialize in ${area} as part of my expertise in ${data.category}.`,
-                        score: score
-                    });
-                }
-            });
-        });
-
-        return matches.sort((a, b) => b.score - a.score).slice(0, 3);
-    }
-
-    searchProjects(message) {
-        if (!this.projectsData || this.projectsData.length === 0) return [];
-
-        const lowerMessage = message.toLowerCase();
-        const matches = [];
-
-        this.projectsData.forEach(project => {
-            let score = 0;
-
-            // Check project details
-            const searchText = `${project.title} ${project.client} ${project.category} ${project.description} ${project.technologies.join(' ')}`.toLowerCase();
-            const words = searchText.split(/\s+/);
-            const messageWords = lowerMessage.split(/\s+/);
-
-            messageWords.forEach(msgWord => {
-                if (msgWord.length > 3 && words.some(word => word.includes(msgWord))) {
-                    score += 1;
-                }
-            });
-
-            if (score > 0) {
-                matches.push({
-                    title: project.title,
-                    client: project.client,
-                    answer: `${project.title} for ${project.client}: ${project.description}`,
-                    score: score
-                });
-            }
-        });
-
-        return matches.sort((a, b) => b.score - a.score).slice(0, 3);
-    }
-
-    addMessage(text, sender, sources = []) {
-        const messagesContainer = document.getElementById('chat-messages');
-        if (!messagesContainer) return;
-
+    
+    addMessage(content, sender, showAvatar = true) {
+        const chatMessages = document.getElementById('chat-messages');
+        if (!chatMessages) return;
+        
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${sender}-message`;
-
-        let messageContent = `<p>${this.escapeHtml(text)}</p>`;
-
-        if (sources && sources.length > 0) {
-            messageContent += `<div class="sources"><small><strong>Sources:</strong> ${sources.join(', ')}</small></div>`;
+        
+        let avatarHTML = '';
+        if (showAvatar && sender === 'bot') {
+            avatarHTML = '<div class="message-avatar"><img src="assets/img/patricemirindi.jpg" alt="Patrice" width="30" height="30"></div>';
         }
-
-        messageDiv.innerHTML = messageContent;
-        messagesContainer.appendChild(messageDiv);
-
-        // Scroll to bottom
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-        // Add to messages array
-        this.messages.push({
-            text: text,
-            sender: sender,
-            sources: sources,
-            timestamp: new Date()
-        });
+        
+        messageDiv.innerHTML = `
+            ${avatarHTML}
+            <div class="message-content">
+                <p>${content}</p>
+                <span class="message-time">${this.getCurrentTime()}</span>
+            </div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        
+        // Animate message
+        messageDiv.style.opacity = '0';
+        messageDiv.style.transform = sender === 'user' ? 'translateX(20px)' : 'translateX(-20px)';
+        
+        setTimeout(() => {
+            messageDiv.style.opacity = '1';
+            messageDiv.style.transform = 'translateX(0)';
+        }, 50);
+        
+        this.scrollToBottom();
+        
+        // Limit message history
+        if (chatMessages.children.length > this.options.maxMessages) {
+            chatMessages.removeChild(chatMessages.firstChild);
+        }
     }
-
+    
     showTyping() {
-        const messagesContainer = document.getElementById('chat-messages');
-        if (!messagesContainer) return;
-
+        this.isTyping = true;
+        const chatMessages = document.getElementById('chat-messages');
+        if (!chatMessages) return;
+        
         const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot-message typing-message';
         typingDiv.id = 'typing-indicator';
-        typingDiv.className = 'message bot-message';
-        typingDiv.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Patrice is typing...</p>';
-
-        messagesContainer.appendChild(typingDiv);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        typingDiv.innerHTML = `
+            <div class="message-avatar">
+                <img src="assets/img/patricemirindi.jpg" alt="Patrice" width="30" height="30">
+            </div>
+            <div class="typing-indicator">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            </div>
+        `;
+        
+        chatMessages.appendChild(typingDiv);
+        this.scrollToBottom();
     }
-
+    
     hideTyping() {
+        this.isTyping = false;
         const typingIndicator = document.getElementById('typing-indicator');
         if (typingIndicator) {
             typingIndicator.remove();
         }
     }
-
-    escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-    }
-
-    getSessionId() {
-        let sessionId = localStorage.getItem('chat_session_id');
-        if (!sessionId) {
-            sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('chat_session_id', sessionId);
+    
+    scrollToBottom() {
+        const chatMessages = document.getElementById('chat-messages');
+        if (chatMessages) {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         }
-        return sessionId;
+    }
+    
+    getCurrentTime() {
+        return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    
+    showWelcomeMessage() {
+        setTimeout(() => {
+            const welcomeMessages = [
+                "Hello! I'm here to answer questions about my background, experience, and services. How can I help you today?",
+                "Welcome! Feel free to ask me about my data analytics expertise, project experience, or consulting services.",
+                "Hi there! I can help you learn more about my work in economic development, data analytics, and project management."
+            ];
+            
+            const randomWelcome = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+            this.addMessage(randomWelcome, 'bot');
+            
+            // Add quick reply buttons
+            setTimeout(() => {
+                this.addQuickReplies();
+            }, 1000);
+        }, 2000);
+    }
+    
+    addQuickReplies() {
+        const chatMessages = document.getElementById('chat-messages');
+        if (!chatMessages) return;
+        
+        const quickRepliesDiv = document.createElement('div');
+        quickRepliesDiv.className = 'quick-replies-container';
+        quickRepliesDiv.innerHTML = `
+            <div class="quick-replies">
+                <button class="quick-reply" data-message="Tell me about your experience">Experience</button>
+                <button class="quick-reply" data-message="What services do you offer?">Services</button>
+                <button class="quick-reply" data-message="Show me your key projects">Projects</button>
+                <button class="quick-reply" data-message="What are your technical skills?">Skills</button>
+            </div>
+        `;
+        
+        chatMessages.appendChild(quickRepliesDiv);
+        this.scrollToBottom();
+    }
+    
+    getFallbackData() {
+        return [
+            {
+                question: "What is your experience?",
+                keywords: "experience, background, work, career, years",
+                answer: "I have 8+ years of experience in data analytics and economic development, working with organizations like the World Bank, GIZ, and Financial Resilience Institute."
+            },
+            {
+                question: "What services do you offer?",
+                keywords: "services, offer, consulting, help, work",
+                answer: "I offer data analytics consulting, economic development advisory services, financial resilience frameworks, and project management for international development initiatives."
+            },
+            {
+                question: "What are your technical skills?",
+                keywords: "skills, technical, programming, tools, software",
+                answer: "I'm proficient in R programming, Python, Stata, SPSS, Power BI, Tableau, and advanced Excel. I specialize in statistical analysis, econometric modeling, and data visualization."
+            },
+            {
+                question: "Tell me about your projects",
+                keywords: "projects, work, portfolio, examples, case studies",
+                answer: "I've led projects like the Financial Resilience Framework in Canada, multi-country agricultural development initiatives, and EU trade facilitation programs. You can see detailed examples in my portfolio."
+            },
+            {
+                question: "How can I contact you?",
+                keywords: "contact, reach, email, phone, connect",
+                answer: "You can reach me at patricemirindi@gmail.com or through the contact form on this website. I'm based in Winnipeg, Canada and available for remote and on-site consulting."
+            }
+        ];
+    }
+    
+    trackEvent(eventName, properties = {}) {
+        // Integrate with analytics (Google Analytics, etc.)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, {
+                event_category: 'chat_widget',
+                ...properties
+            });
+        }
+        
+        console.log('Chat event:', eventName, properties);
     }
 }
 
-// Initialize chat widget when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize chat widget when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('chat-widget')) {
-        window.chatWidget = new ChatWidget();
+        window.chatWidget = new ChatWidget({
+            questionsFile: 'assets/data/chatbot_PatMir_questions_keywords_answers.csv'
+        });
     }
 });
+
+// Add CSS for typing indicator if not already present
+if (!document.querySelector('#chat-typing-styles')) {
+    const style = document.createElement('style');
+    style.id = 'chat-typing-styles';
+    style.textContent = `
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            gap: 0.25rem;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-light);
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+        
+        .quick-replies-container {
+            padding: 1rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .quick-reply {
+            padding: 0.5rem 1rem;
+            background: var(--background-light);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .quick-reply:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        .message-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .message-content {
+            flex: 1;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 0.25rem;
+            display: block;
+        }
+        
+        .bot-message {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .user-message {
+            text-align: right;
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .user-message .message-content {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 4px 18px;
+            display: inline-block;
+        }
+        
+        .bot-message .message-content {
+            background: var(--background-light);
+            padding: 0.75rem 1rem;
+            border-radius: 18px 18px 18px 4px;
+        }
+    `;
+    document.head.appendChild(style);
+}
