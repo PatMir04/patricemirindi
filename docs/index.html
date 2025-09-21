@@ -87,45 +87,29 @@
                     </p>
                     
                     <!-- Stats -->
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number" data-count="8">0</span><span class="stat-plus">+</span>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="8">8</span><span class="stat-plus">+</span>
                             <span class="stat-label">Years Experience</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="50">0</span><span class="stat-plus">+</span>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="50">50</span><span class="stat-plus">+</span>
                             <span class="stat-label">Projects Completed</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="12">0</span>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="12">12</span>
                             <span class="stat-label">Countries Worked</span>
                         </div>
-                        <div class="stat">
-                            <span class="stat-number" data-count="2000">0</span><span class="stat-plus">+</span>
+                        <div class="stat-card">
+                            <span class="stat-number" data-count="2000">2000</span><span class="stat-plus">+</span>
                             <span class="stat-label">Lives Impacted</span>
                         </div>
                     </div>
                     
                     <!-- Buttons -->
-                    <div class="hero-buttons">
+                    <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0;">
                         <a href="about.html" class="btn btn-primary btn-large">About Me</a>
                         <a href="contact.html" class="btn btn-secondary btn-large">Get In Touch</a>
-                    </div>
-                    
-                    <!-- Quick Links -->
-                    <div class="quick-links">
-                        <a href="#expertise" class="quick-link">
-                            <i class="fas fa-chart-line"></i>
-                            <span>View Expertise</span>
-                        </a>
-                        <a href="#highlights" class="quick-link">
-                            <i class="fas fa-star"></i>
-                            <span>Recent Work</span>
-                        </a>
-                        <a href="key-projects.html" class="quick-link">
-                            <i class="fas fa-project-diagram"></i>
-                            <span>Key Projects</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -133,81 +117,77 @@
     </section>
 
     <!-- Expertise Section -->
-    <section class="expertise-overview" id="expertise">
+    <section class="section" id="expertise">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Core Expertise</h2>
                 <p class="section-subtitle">Delivering data-driven solutions across multiple domains</p>
             </div>
             
-            <div class="expertise-grid">
-                <div class="expertise-card">
-                    <div class="card-number">01</div>
-                    <div class="expertise-icon">
-                        <i class="fas fa-chart-line"></i>
+            <div class="testimonials-grid">
+                <div class="card">
+                    <div class="expertise-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-chart-line" style="color: var(--dark-bg); font-size: 28px;"></i>
                     </div>
                     <h3>Data Analytics & Visualization</h3>
                     <p>Advanced analytics using R, Python, Stata, and Power BI to transform complex data into actionable insights for policy and business decisions.</p>
-                    <div class="expertise-skills">
-                        <span class="skill-badge">R Programming</span>
-                        <span class="skill-badge">Python</span>
-                        <span class="skill-badge">Power BI</span>
+                    <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                        <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">R Programming</span>
+                        <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Python</span>
+                        <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Power BI</span>
                     </div>
-                    <a href="skills-expertise.html" class="learn-more">
+                    <a href="skills-expertise.html" style="color: var(--neon-cyan); text-decoration: none; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;">
                         <span>Learn More</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="expertise-card">
-                    <div class="card-number">02</div>
-                    <div class="expertise-icon">
-                        <i class="fas fa-coins"></i>
+                <div class="card">
+                    <div class="expertise-icon" style="background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-coins" style="color: var(--dark-bg); font-size: 28px;"></i>
                     </div>
                     <h3>Financial Resilience Consulting</h3>
                     <p>Specialized expertise in financial health assessment, resilience modeling, and well-being strategies for institutions and governments.</p>
-                    <div class="expertise-skills">
-                        <span class="skill-badge">Risk Assessment</span>
-                        <span class="skill-badge">Policy Design</span>
-                        <span class="skill-badge">Impact Measurement</span>
+                    <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                        <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Risk Assessment</span>
+                        <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Policy Design</span>
+                        <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Impact Measurement</span>
                     </div>
-                    <a href="key-projects.html" class="learn-more">
+                    <a href="key-projects.html" style="color: var(--neon-green); text-decoration: none; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;">
                         <span>View Projects</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="expertise-card">
-                    <div class="card-number">03</div>
-                    <div class="expertise-icon">
-                        <i class="fas fa-seedling"></i>
+                <div class="card">
+                    <div class="expertise-icon" style="background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-seedling" style="color: var(--dark-bg); font-size: 28px;"></i>
                     </div>
                     <h3>Agricultural Economics</h3>
                     <p>Policy analysis and market research for agricultural systems, food security, and sustainable rural development initiatives.</p>
-                    <div class="expertise-skills">
-                        <span class="skill-badge">Market Analysis</span>
-                        <span class="skill-badge">Food Security</span>
-                        <span class="skill-badge">Rural Development</span>
+                    <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                        <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Market Analysis</span>
+                        <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Food Security</span>
+                        <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Rural Development</span>
                     </div>
-                    <a href="work-experience.html" class="learn-more">
+                    <a href="work-experience.html" style="color: var(--neon-pink); text-decoration: none; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;">
                         <span>Experience</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="expertise-card">
-                    <div class="card-number">04</div>
-                    <div class="expertise-icon">
-                        <i class="fas fa-project-diagram"></i>
+                <div class="card">
+                    <div class="expertise-icon" style="background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-project-diagram" style="color: var(--dark-bg); font-size: 28px;"></i>
                     </div>
                     <h3>Project Management</h3>
                     <p>PMP-certified project leadership for international development initiatives, capacity building, and institutional strengthening.</p>
-                    <div class="expertise-skills">
-                        <span class="skill-badge">PMP Certified</span>
-                        <span class="skill-badge">International Projects</span>
-                        <span class="skill-badge">Team Leadership</span>
+                    <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                        <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">PMP Certified</span>
+                        <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">International Projects</span>
+                        <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">Team Leadership</span>
                     </div>
-                    <a href="key-projects.html" class="learn-more">
+                    <a href="key-projects.html" style="color: var(--neon-orange); text-decoration: none; margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;">
                         <span>Key Projects</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
@@ -228,7 +208,7 @@
                 <div class="testimonial-card featured">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-kerry.jpg" alt="Kerry Kyd" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Kerry Kyd">
                         </div>
                         <div class="testimonial-author">
                             <h4>Kerry Kyd</h4>
@@ -260,7 +240,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-melanie.jpg" alt="Melanie van der Baaren-Haga" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Melanie van der Baaren-Haga">
                         </div>
                         <div class="testimonial-author">
                             <h4>Melanie van der Baaren-Haga</h4>
@@ -272,14 +252,14 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"At CBI we worked with Patrice through Economic Sense Ltd in our dried pineapple sector project in Benin from November 2022 - July 2024. Patrice has been very professional to share his knowledge of the sector and market to local farmers. Based on his experience in other projects and countries (Burkina Faso and Ivory Coast) he was able to provide a bigger picture of how to tackle challenges. Patrice had a good understanding of local culture, and therefore was able to collaborate with local SMEs effectively. His communication skills are very good and he often delivers more than expected."</p>
+                        <p>"At CBI we worked with Patrice through Economic Sense Ltd in our dried pineapple sector project in Benin from November 2022 - July 2024. Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</p>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-nikki.jpg" alt="Nikki Naiker" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Nikki Naiker">
                         </div>
                         <div class="testimonial-author">
                             <h4>Nikki Naiker (Pr.Sci.Nat.)</h4>
@@ -291,14 +271,14 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"I am delighted to recommend Patrice Mirindi, an exceptional development consultant with a proven track record of delivering outstanding results across various African countries. His deep expertise, combined with a commitment to excellence, has consistently led to the successful execution and completion of every project he has undertaken. His ability to navigate complex challenges and drive meaningful outcomes is truly impressive. Patrice is not just a colleague but a mentor, whose influence has left a lasting impact on my professional growth."</p>
+                        <p>"I am delighted to recommend Patrice Mirindi, an exceptional development consultant with a proven track record of delivering outstanding results across various African countries. His ability to navigate complex challenges and drive meaningful outcomes is truly impressive."</p>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-kelly.jpg" alt="Kelly Daniels" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Kelly Daniels">
                         </div>
                         <div class="testimonial-author">
                             <h4>Kelly Daniels</h4>
@@ -310,14 +290,14 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"I had the pleasure of working with Patrice for a few years, gaining invaluable insights and knowledge from him. He possesses a unique blend of patience, expertise, and calmness under pressure, making him an exceptional professional. His understanding of his field is truly impressive, and he's an outstanding individual - a rare gem. Moreover, Patrice is extremely easy to get along with, always approachable and willing to help. Nothing ever seemed too difficult for him, and his positive attitude and willingness to assist made him a joy to work with."</p>
+                        <p>"I had the pleasure of working with Patrice for a few years, gaining invaluable insights and knowledge from him. He possesses a unique blend of patience, expertise, and calmness under pressure, making him an exceptional professional."</p>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-tamara.jpg" alt="Tamara Flink" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Tamara Flink">
                         </div>
                         <div class="testimonial-author">
                             <h4>Tamara Flink</h4>
@@ -329,14 +309,14 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"Working with Patrice on a project in the processed mango sector in Burkina Faso was a real pleasure. Patrice is very hands on and practical and has a solution for everything. He is also able to switch to the more strategic side and think along on the project implementation side. Patrice is very humble but makes himself heard at the right moments. He is always supportive and ready to help. As a project manager it is always great to have an expert work / stand next to you. I highly recommend Patrice."</p>
+                        <p>"Working with Patrice on a project in the processed mango sector in Burkina Faso was a real pleasure. Patrice is very hands on and practical and has a solution for everything. He is always supportive and ready to help."</p>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-kundai.jpg" alt="Kundai Victoria Chibarabada" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Kundai Victoria Chibarabada">
                         </div>
                         <div class="testimonial-author">
                             <h4>Kundai Victoria Chibarabada</h4>
@@ -348,14 +328,14 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"Such an honour to have worked with Patrice over the past 3 years. Very professional, knowledgeable and detail oriented. He has made an impact in the development of farmers, entrepreneurs and colleagues. The go to person for academic, technical, translation and technological support. A young man excelling in his career. Always positive, ready to take on new projects and passionate about making a positive difference in economic development."</p>
+                        <p>"Such an honour to have worked with Patrice over the past 3 years. Very professional, knowledgeable and detail oriented. He has made an impact in the development of farmers, entrepreneurs and colleagues."</p>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/testimonial-rexford.jpg" alt="Rexford Akrong" onerror="this.src='assets/img/avatar-placeholder.png'">
+                            <img src="assets/img/avatar-placeholder.png" alt="Rexford Akrong">
                         </div>
                         <div class="testimonial-author">
                             <h4>Rexford Akrong</h4>
@@ -367,7 +347,7 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
-                        <p>"Patrice Mirindi has been exceptional in nearly all activities, projects and engagements he has been involved in. He demonstrates strong critical thinking skills, interpersonal skills, bilingual skills and communication skills. So far, his accomplishments are enormous and it is important to state that he is timely in all his delivery. Patrice has shown great project management skills, research skills, data analysis skills and business development skills. He understands the socioeconomic landscape of Eastern, Southern, Western and Southern Africa. Against this backdrop, I recommend him for any position, activity or engagement he desires."</p>
+                        <p>"Patrice Mirindi has been exceptional in nearly all activities, projects and engagements he has been involved in. He demonstrates strong critical thinking skills, interpersonal skills, bilingual skills and communication skills."</p>
                     </div>
                 </div>
             </div>
@@ -382,109 +362,32 @@
         </div>
     </section>
 
-    <!-- Recent Highlights -->
-    <section class="recent-highlights" id="highlights">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Recent Highlights</h2>
-                <p class="section-subtitle">Current projects and recent achievements</p>
-            </div>
-            
-            <div class="highlights-grid">
-                <div class="highlight-card featured">
-                    <div class="card-badge current">Current Role</div>
-                    <div class="highlight-icon">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="highlight-content">
-                        <h3>Senior Data Analyst</h3>
-                        <h4>Financial Resilience Institute</h4>
-                        <p class="highlight-period">October 2024 - Present</p>
-                        <p>Leading complex data analyses and strategic consulting to advance financial resilience across Canada and globally.</p>
-                        <div class="highlight-metrics">
-                            <span class="metric">
-                                <i class="fas fa-chart-line"></i>
-                                <span>15+ Analysis Projects</span>
-                            </span>
-                            <span class="metric">
-                                <i class="fas fa-users"></i>
-                                <span>Multi-team Leadership</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-badge project">Featured Project</div>
-                    <div class="highlight-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <div class="highlight-content">
-                        <h3>Financial Resilience Framework</h3>
-                        <h4>Research & Development</h4>
-                        <p class="highlight-period">2024 - Ongoing</p>
-                        <p>Developing comprehensive framework to measure and improve financial well-being across Canadian communities.</p>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%"></div>
-                            </div>
-                            <span class="progress-text">75% Complete</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-badge achievement">Major Achievement</div>
-                    <div class="highlight-icon">
-                        <i class="fas fa-globe-africa"></i>
-                    </div>
-                    <div class="highlight-content">
-                        <h3>Multi-Country Agricultural Initiative</h3>
-                        <h4>CBI & Netherlands Enterprise Agency</h4>
-                        <p class="highlight-period">2022 - 2024</p>
-                        <p>Led comprehensive agricultural development strategy across Benin, Burkina Faso, and Ivory Coast for dried fruit sectors.</p>
-                        <div class="achievement-stats">
-                            <div class="stat-item">
-                                <span class="stat-value">2,000+</span>
-                                <span class="stat-label">Farmers Impacted</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">3</span>
-                                <span class="stat-label">Countries</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="section">
         <div class="container">
-            <div class="cta-content">
-                <div class="cta-icon">
-                    <i class="fas fa-rocket"></i>
+            <div style="text-align: center;">
+                <div style="margin-bottom: 20px;">
+                    <i class="fas fa-rocket" style="font-size: 3rem; color: var(--neon-cyan); margin-bottom: 20px;"></i>
                 </div>
                 <h2>Ready to Transform Your Data into Impact?</h2>
                 <p>Let's discuss how data-driven insights can accelerate your organization's growth and resilience.</p>
                 
-                <div class="cta-features">
-                    <div class="feature-item">
+                <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0;">
+                    <div style="display: flex; align-items: center; gap: 10px; color: var(--dark-text-secondary);">
                         <i class="fas fa-clock"></i>
                         <span>Available for immediate engagement</span>
                     </div>
-                    <div class="feature-item">
+                    <div style="display: flex; align-items: center; gap: 10px; color: var(--dark-text-secondary);">
                         <i class="fas fa-handshake"></i>
                         <span>Free 30-minute consultation</span>
                     </div>
-                    <div class="feature-item">
+                    <div style="display: flex; align-items: center; gap: 10px; color: var(--dark-text-secondary);">
                         <i class="fas fa-globe"></i>
                         <span>Remote & on-site collaboration</span>
                     </div>
                 </div>
                 
-                <div class="cta-buttons">
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
                     <a href="contact.html" class="btn btn-primary btn-large">Start a Conversation</a>
                     <a href="key-projects.html" class="btn btn-secondary btn-large">View My Work</a>
                 </div>
@@ -542,7 +445,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
             </div>
         </div>
     </footer>
