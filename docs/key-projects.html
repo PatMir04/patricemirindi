@@ -24,6 +24,9 @@
                 <li class="nav-item"><a href="work-experience.html" class="nav-link">Work Experience</a></li>
                 <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
                 <li class="nav-item"><a href="key-projects.html" class="nav-link active">Key Projects</a></li>
+                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link">SDG Dashboard</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
             </ul>
             <div class="hamburger">
@@ -46,9 +49,9 @@
     </section>
 
     <!-- Projects Overview -->
-    <section class="projects-overview">
+    <section class="section">
         <div class="container">
-            <div class="overview-stats">
+            <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-icon">
                         <i class="fas fa-dollar-sign"></i>
@@ -81,438 +84,189 @@
         </div>
     </section>
 
-    <!-- Project Filters -->
-    <section class="project-filters">
-        <div class="container">
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-category="all">
-                    <span>All Projects</span>
-                </button>
-                <button class="filter-btn" data-category="financial-resilience">
-                    <span>Financial Resilience</span>
-                </button>
-                <button class="filter-btn" data-category="agriculture">
-                    <span>Agriculture</span>
-                </button>
-                <button class="filter-btn" data-category="policy">
-                    <span>Policy Analysis</span>
-                </button>
-                <button class="filter-btn" data-category="trade">
-                    <span>Trade & Development</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
     <!-- Featured Projects -->
-    <section class="featured-projects">
+    <section class="section">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <p class="section-subtitle">Signature initiatives demonstrating impact and expertise</p>
             
-            <div class="projects-grid">
+            <div class="testimonials-grid">
                 <!-- Project 1: Financial Resilience Framework -->
-                <div class="project-card featured" data-category="financial-resilience">
-                    <div class="project-badge featured-badge">Featured</div>
+                <div class="card">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fas fa-shield-alt" style="color: var(--dark-bg); font-size: 28px;"></i>
                         </div>
-                        <div class="project-meta">
-                            <div class="project-status ongoing">Ongoing</div>
-                            <div class="project-timeline">2024 - Present</div>
-                        </div>
+                        <div class="project-meta" style="color: var(--neon-green); font-weight: 600; margin-bottom: 10px;">2024 - Present | Ongoing</div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Financial Resilience Framework Development</h3>
-                        <div class="project-client">
+                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
                             <i class="fas fa-building"></i>
                             <span>Financial Resilience Institute</span>
                         </div>
-                        <div class="project-location">
+                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Canada & International</span>
                         </div>
                         
                         <p>Leading the development of a comprehensive framework to measure and enhance financial resilience across Canadian communities and internationally.</p>
                         
-                        <div class="project-details">
-                            <h4>Key Objectives:</h4>
-                            <ul>
-                                <li>Design measurement indicators for financial health assessment</li>
-                                <li>Develop interactive dashboards for policy makers</li>
-                                <li>Create policy recommendations for financial inclusion</li>
-                                <li>Establish partnerships with financial institutions</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">500K+</div>
-                                <div class="impact-label">Canadians Assessed</div>
+                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">500K+</div>
+                                <div class="stat-label">Canadians Assessed</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">15</div>
-                                <div class="impact-label">Partner Organizations</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">15</div>
+                                <div class="stat-label">Partner Organizations</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$2.1M</div>
-                                <div class="impact-label">Project Value</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">$2.1M</div>
+                                <div class="stat-label">Project Value</div>
                             </div>
                         </div>
                         
-                        <div class="project-tech">
-                            <h5>Technologies Used:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">R Programming</span>
-                                <span class="tech-tag">Power BI</span>
-                                <span class="tech-tag">Statistical Modeling</span>
-                                <span class="tech-tag">Survey Design</span>
-                            </div>
-                        </div>
-                        
-                        <div class="project-progress">
-                            <div class="progress-header">
-                                <span>Project Progress</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%"></div>
-                            </div>
+                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">R Programming</span>
+                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Power BI</span>
+                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Statistical Modeling</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2: Multi-Country Agricultural Initiative -->
-                <div class="project-card" data-category="agriculture">
-                    <div class="project-badge completed-badge">Completed</div>
+                <div class="card">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-seedling"></i>
+                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fas fa-seedling" style="color: var(--dark-bg); font-size: 28px;"></i>
                         </div>
-                        <div class="project-meta">
-                            <div class="project-status completed">Completed</div>
-                            <div class="project-timeline">2022 - 2024</div>
-                        </div>
+                        <div class="project-meta" style="color: var(--neon-cyan); font-weight: 600; margin-bottom: 10px;">2022 - 2024 | Completed</div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Multi-Country Agricultural Development Initiative</h3>
-                        <div class="project-client">
+                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
                             <i class="fas fa-building"></i>
                             <span>GIZ ProEmploi & World Bank</span>
                         </div>
-                        <div class="project-location">
+                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>West & Central Africa (5 Countries)</span>
                         </div>
                         
                         <p>Led comprehensive agricultural value chain analysis and market development strategies across five African countries to improve farmer livelihoods and food security.</p>
                         
-                        <div class="project-details">
-                            <h4>Project Components:</h4>
-                            <ul>
-                                <li>Agricultural market analysis and value chain mapping</li>
-                                <li>Farmer productivity and income impact assessment</li>
-                                <li>Policy recommendations for agricultural development</li>
-                                <li>Capacity building for local agricultural organizations</li>
-                                <li>Development of sustainable financing mechanisms</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">2,000+</div>
-                                <div class="impact-label">Farmers Benefited</div>
+                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">2,000+</div>
+                                <div class="stat-label">Farmers Benefited</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">35%</div>
-                                <div class="impact-label">Income Increase</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">35%</div>
+                                <div class="stat-label">Income Increase</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$1.8M</div>
-                                <div class="impact-label">Project Value</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">$1.8M</div>
+                                <div class="stat-label">Project Value</div>
                             </div>
                         </div>
                         
-                        <div class="project-outcomes">
-                            <h5>Key Outcomes:</h5>
-                            <div class="outcome-list">
-                                <div class="outcome-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Improved market access for 1,500+ smallholder farmers</span>
-                                </div>
-                                <div class="outcome-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Established 12 farmer cooperatives</span>
-                                </div>
-                                <div class="outcome-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Created sustainable financing mechanisms</span>
-                                </div>
-                                <div class="outcome-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Generated policy recommendations adopted by 3 governments</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-tech">
-                            <h5>Methodologies Used:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Impact Evaluation</span>
-                                <span class="tech-tag">Stata Analysis</span>
-                                <span class="tech-tag">Survey Design</span>
-                                <span class="tech-tag">GIS Mapping</span>
-                            </div>
+                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Impact Evaluation</span>
+                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Stata Analysis</span>
+                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Survey Design</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 3: EU Trade Facilitation Program -->
-                <div class="project-card" data-category="trade">
-                    <div class="project-badge success-badge">High Impact</div>
+                <div class="card">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-handshake"></i>
+                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fas fa-handshake" style="color: var(--dark-bg); font-size: 28px;"></i>
                         </div>
-                        <div class="project-meta">
-                            <div class="project-status completed">Completed</div>
-                            <div class="project-timeline">2023</div>
-                        </div>
+                        <div class="project-meta" style="color: var(--neon-pink); font-weight: 600; margin-bottom: 10px;">2023 | Completed</div>
                     </div>
                     
                     <div class="project-content">
                         <h3>EU Trade Facilitation Program</h3>
-                        <div class="project-client">
+                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
                             <i class="fas fa-flag"></i>
                             <span>European Union - Trade Program</span>
                         </div>
-                        <div class="project-location">
+                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>East Africa Regional</span>
                         </div>
                         
                         <p>Conducted comprehensive trade facilitation analysis and policy recommendations to enhance regional trade integration and economic growth.</p>
                         
-                        <div class="project-details">
-                            <h4>Scope of Work:</h4>
-                            <ul>
-                                <li>Trade flow analysis and barrier identification</li>
-                                <li>Economic impact assessment of trade policies</li>
-                                <li>Stakeholder consultations with government and private sector</li>
-                                <li>Development of trade facilitation roadmap</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">$2.3M</div>
-                                <div class="impact-label">Trade Value Facilitated</div>
+                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">$2.3M</div>
+                                <div class="stat-label">Trade Value Facilitated</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">6</div>
-                                <div class="impact-label">Countries Involved</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">6</div>
+                                <div class="stat-label">Countries Involved</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$800K</div>
-                                <div class="impact-label">Project Value</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">$800K</div>
+                                <div class="stat-label">Project Value</div>
                             </div>
                         </div>
                         
-                        <div class="project-tech">
-                            <h5>Analysis Methods:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Economic Modeling</span>
-                                <span class="tech-tag">Trade Analysis</span>
-                                <span class="tech-tag">Policy Evaluation</span>
-                                <span class="tech-tag">Stakeholder Analysis</span>
-                            </div>
+                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Economic Modeling</span>
+                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Trade Analysis</span>
+                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Policy Evaluation</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 4: Youth Employment Study -->
-                <div class="project-card" data-category="policy">
+                <div class="card">
                     <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-users"></i>
+                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                            <i class="fas fa-users" style="color: var(--dark-bg); font-size: 28px;"></i>
                         </div>
-                        <div class="project-meta">
-                            <div class="project-status completed">Completed</div>
-                            <div class="project-timeline">2020 - 2021</div>
-                        </div>
+                        <div class="project-meta" style="color: var(--neon-orange); font-weight: 600; margin-bottom: 10px;">2020 - 2021 | Completed</div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Youth Employment Impact Assessment</h3>
-                        <div class="project-client">
+                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
                             <i class="fas fa-university"></i>
                             <span>World Bank & The Anzisha Prize</span>
                         </div>
-                        <div class="project-location">
+                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Sub-Saharan Africa</span>
                         </div>
                         
                         <p>Comprehensive analysis of youth employment programs and entrepreneurship initiatives across multiple African countries to inform policy development.</p>
                         
-                        <div class="project-details">
-                            <h4>Research Components:</h4>
-                            <ul>
-                                <li>Labor market analysis for youth demographics</li>
-                                <li>Impact evaluation of entrepreneurship programs</li>
-                                <li>Policy recommendations for youth employment</li>
-                                <li>Development of measurement frameworks</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">500+</div>
-                                <div class="impact-label">Youth Entrepreneurs Studied</div>
+                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">500+</div>
+                                <div class="stat-label">Youth Entrepreneurs</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">8</div>
-                                <div class="impact-label">Research Reports</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">8</div>
+                                <div class="stat-label">Research Reports</div>
                             </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$400K</div>
-                                <div class="impact-label">Project Value</div>
+                            <div class="impact-item" style="text-align: center;">
+                                <div class="stat-number" style="font-size: 2rem;">$400K</div>
+                                <div class="stat-label">Project Value</div>
                             </div>
                         </div>
                         
-                        <div class="project-outcomes">
-                            <h5>Key Findings:</h5>
-                            <div class="outcome-list">
-                                <div class="outcome-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>Identified 5 key barriers to youth entrepreneurship</span>
-                                </div>
-                                <div class="outcome-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>Developed policy framework adopted by 3 governments</span>
-                                </div>
-                                <div class="outcome-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <span>Created impact measurement tools for program evaluation</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-tech">
-                            <h5>Research Methods:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Survey Design</span>
-                                <span class="tech-tag">SPSS Analysis</span>
-                                <span class="tech-tag">Qualitative Research</span>
-                                <span class="tech-tag">Impact Evaluation</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5: Market Research Initiative -->
-                <div class="project-card" data-category="agriculture trade">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-status completed">Completed</div>
-                            <div class="project-timeline">2022</div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-content">
-                        <h3>Regional Market Development Study</h3>
-                        <div class="project-client">
-                            <i class="fas fa-industry"></i>
-                            <span>Economic Sense & Private Sector Partners</span>
-                        </div>
-                        <div class="project-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Southern Africa</span>
-                        </div>
-                        
-                        <p>Conducted comprehensive market research to identify opportunities for agricultural product development and cross-border trade enhancement.</p>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">12</div>
-                                <div class="impact-label">Market Analyses</div>
-                            </div>
-                            <div class="impact-item">
-                                <div class="impact-number">25</div>
-                                <div class="impact-label">Business Partnerships</div>
-                            </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$600K</div>
-                                <div class="impact-label">Project Value</div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-tech">
-                            <h5>Analysis Tools:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Market Analysis</span>
-                                <span class="tech-tag">Excel Modeling</span>
-                                <span class="tech-tag">Statistical Analysis</span>
-                                <span class="tech-tag">Visualization</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6: Policy Analysis Framework -->
-                <div class="project-card" data-category="policy financial-resilience">
-                    <div class="project-header">
-                        <div class="project-icon">
-                            <i class="fas fa-file-contract"></i>
-                        </div>
-                        <div class="project-meta">
-                            <div class="project-status completed">Completed</div>
-                            <div class="project-timeline">2023</div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-content">
-                        <h3>Economic Policy Analysis Framework</h3>
-                        <div class="project-client">
-                            <i class="fas fa-landmark"></i>
-                            <span>Government Agencies (Multiple Countries)</span>
-                        </div>
-                        <div class="project-location">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Central & East Africa</span>
-                        </div>
-                        
-                        <p>Developed comprehensive framework for economic policy analysis and impact assessment for multiple government agencies.</p>
-                        
-                        <div class="project-impact">
-                            <div class="impact-item">
-                                <div class="impact-number">5</div>
-                                <div class="impact-label">Government Agencies</div>
-                            </div>
-                            <div class="impact-item">
-                                <div class="impact-number">15</div>
-                                <div class="impact-label">Policy Recommendations</div>
-                            </div>
-                            <div class="impact-item">
-                                <div class="impact-number">$300K</div>
-                                <div class="impact-label">Project Value</div>
-                            </div>
-                        </div>
-                        
-                        <div class="project-tech">
-                            <h5>Methods Used:</h5>
-                            <div class="tech-tags">
-                                <span class="tech-tag">Policy Analysis</span>
-                                <span class="tech-tag">Economic Modeling</span>
-                                <span class="tech-tag">Stakeholder Engagement</span>
-                                <span class="tech-tag">Framework Development</span>
-                            </div>
+                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
+                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">Survey Design</span>
+                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">SPSS Analysis</span>
+                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">Impact Evaluation</span>
                         </div>
                     </div>
                 </div>
@@ -520,173 +274,82 @@
         </div>
     </section>
 
-    <!-- Project Methodology -->
-    <section class="project-methodology">
-        <div class="container">
-            <h2 class="section-title">Project Methodology</h2>
-            <p class="section-subtitle">Proven approach to delivering impactful results</p>
-            
-            <div class="methodology-steps">
-                <div class="step-item">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3>Discovery & Planning</h3>
-                        <p>Comprehensive stakeholder consultation, needs assessment, and project planning with clear objectives and measurable outcomes.</p>
-                        <div class="step-tools">
-                            <span class="tool">Stakeholder Analysis</span>
-                            <span class="tool">Theory of Change</span>
-                            <span class="tool">Risk Assessment</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3>Data Collection & Analysis</h3>
-                        <p>Rigorous data collection using appropriate methodologies, followed by comprehensive analysis using advanced statistical techniques.</p>
-                        <div class="step-tools">
-                            <span class="tool">Survey Design</span>
-                            <span class="tool">Statistical Modeling</span>
-                            <span class="tool">Impact Evaluation</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3>Insights & Recommendations</h3>
-                        <p>Transform data into actionable insights and evidence-based recommendations tailored to stakeholder needs and contexts.</p>
-                        <div class="step-tools">
-                            <span class="tool">Data Visualization</span>
-                            <span class="tool">Policy Briefs</span>
-                            <span class="tool">Dashboard Development</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step-item">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3>Implementation Support</h3>
-                        <p>Ongoing support for implementation including capacity building, monitoring systems, and adaptive management approaches.</p>
-                        <div class="step-tools">
-                            <span class="tool">Capacity Building</span>
-                            <span class="tool">M&E Systems</span>
-                            <span class="tool">Adaptive Management</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Summary -->
-    <section class="impact-summary">
-        <div class="container">
-            <h2 class="section-title">Collective Impact</h2>
-            <p class="section-subtitle">Measurable outcomes across all projects</p>
-            
-            <div class="impact-grid">
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-arrow-up"></i>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="impact-number">35%</div>
-                        <div class="impact-label">Average Income Increase</div>
-                    </div>
-                    <div class="impact-description">
-                        <p>Average income improvement for project beneficiaries across agricultural and entrepreneurship initiatives.</p>
-                    </div>
-                </div>
-                
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="impact-number">50+</div>
-                        <div class="impact-label">Strategic Partnerships</div>
-                    </div>
-                    <div class="impact-description">
-                        <p>Established partnerships with governments, NGOs, private sector, and international organizations.</p>
-                    </div>
-                </div>
-                
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="impact-number">75+</div>
-                        <div class="impact-label">Policy Recommendations</div>
-                    </div>
-                    <div class="impact-description">
-                        <p>Evidence-based policy recommendations delivered to governments and international organizations.</p>
-                    </div>
-                </div>
-                
-                <div class="impact-card">
-                    <div class="impact-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="impact-stat">
-                        <div class="impact-number">500+</div>
-                        <div class="impact-label">People Trained</div>
-                    </div>
-                    <div class="impact-description">
-                        <p>Individuals trained in data analysis, research methods, and economic development approaches.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Client Testimonials -->
-    <section class="client-testimonials">
+    <!-- Testimonials Section -->
+    <section class="testimonials section">
         <div class="container">
             <h2 class="section-title">Client Success Stories</h2>
             <p class="section-subtitle">What project partners say about our collaboration</p>
             
-            <div class="testimonials-carousel">
-                <div class="testimonial-item active">
-                    <div class="testimonial-content">
-                        <p>"Patrice's work on our financial resilience framework has been exceptional. His analytical rigor and policy insights have directly informed our strategic direction and enhanced our impact measurement capabilities."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Dr. Sarah Mitchell</h4>
-                            <p>Research Director, Financial Resilience Institute</p>
-                            <div class="project-reference">Financial Resilience Framework</div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="assets/img/avatar-placeholder.png" alt="Kerry Kyd">
                         </div>
+                        <div class="testimonial-author">
+                            <h4>Kerry Kyd</h4>
+                            <p>Africa Sector & Business Development</p>
+                            <div class="testimonial-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"Patrice is smart, hard-working, and very capable. He can manage complex topics and always looks for ways to find practical solutions. His calm and warm personality enables him to connect with clients and beneficiaries, and his commitment to finishing the job makes him a valued team member."</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"The agricultural development project exceeded all expectations. Patrice's comprehensive analysis and stakeholder engagement approach resulted in sustainable improvements to farmer livelihoods across multiple countries."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Marcus Weber</h4>
-                            <p>Program Manager, GIZ ProEmploi</p>
-                            <div class="project-reference">Multi-Country Agricultural Initiative</div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="assets/img/avatar-placeholder.png" alt="Melanie van der Baaren-Haga">
                         </div>
+                        <div class="testimonial-author">
+                            <h4>Melanie van der Baaren-Haga</h4>
+                            <p>CBI - Centre for the Promotion of Imports</p>
+                            <div class="testimonial-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"At CBI we worked with Patrice through Economic Sense Ltd in our dried pineapple sector project in Benin from November 2022 - July 2024. Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</p>
                     </div>
                 </div>
                 
-                <div class="testimonial-item">
-                    <div class="testimonial-content">
-                        <p>"Patrice delivered thorough trade facilitation analysis that directly contributed to policy changes and increased trade volumes. His expertise in economic modeling was invaluable to our program success."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Elena Rodriguez</h4>
-                            <p>Trade Program Coordinator, European Union</p>
-                            <div class="project-reference">EU Trade Facilitation Program</div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="assets/img/avatar-placeholder.png" alt="Tamara Flink">
                         </div>
+                        <div class="testimonial-author">
+                            <h4>Tamara Flink</h4>
+                            <p>Programme Manager CBI at Netherlands Enterprise Agency</p>
+                            <div class="testimonial-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"Working with Patrice on a project in the processed mango sector in Burkina Faso was a real pleasure. Patrice is very hands on and practical and has a solution for everything. He is always supportive and ready to help. As a project manager it is always great to have an expert work / stand next to you."</p>
                     </div>
                 </div>
             </div>
@@ -694,13 +357,13 @@
     </section>
 
     <!-- CTA -->
-    <section class="cta">
+    <section class="section">
         <div class="container">
-            <div class="cta-content">
+            <div style="text-align: center;">
                 <h2>Ready to Create Impact Together?</h2>
                 <p>Looking to implement data-driven solutions for sustainable development? Let's discuss how my project experience can benefit your organization.</p>
                 
-                <div class="cta-buttons">
+                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
                     <a href="contact.html" class="btn btn-primary btn-large">Discuss Your Project</a>
                     <a href="work-experience.html" class="btn btn-secondary btn-large">View Full Experience</a>
                 </div>
@@ -758,7 +421,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
             </div>
         </div>
     </footer>
@@ -773,37 +436,5 @@
 
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
-    <script>
-        // Project filtering functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const projectCards = document.querySelectorAll('.project-card');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    // Filter projects
-                    const category = button.getAttribute('data-category');
-                    
-                    projectCards.forEach(card => {
-                        if (category === 'all' || card.getAttribute('data-category').includes(category)) {
-                            card.style.display = 'block';
-                            setTimeout(() => {
-                                card.classList.add('show');
-                            }, 100);
-                        } else {
-                            card.classList.remove('show');
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }
-                    });
-                });
-            });
-        });
-    </script>
 </body>
 </html>
