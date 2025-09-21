@@ -737,7 +737,25 @@ select.form-control {
     format('woff2');
 }
 
-/* Import futuristic theme styles */
+/* Import component styles */
 @import url('futuristic-theme.css');
+@import url('testimonials.css');
+
+/* Avatar placeholder styles */
+.avatar-placeholder,
+img[src*="avatar-placeholder.png"] {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-bg);
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.avatar-placeholder::before {
+  content: '👤';
+  font-size: 30px;
+}
 
 /* END PERPLEXITY DESIGN SYSTEM */
