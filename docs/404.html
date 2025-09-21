@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Patrice Mirindi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Patrice Mirindi</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 404 Content -->
+    <section class="error-page">
+        <div class="container">
+            <div class="error-content">
+                <div class="error-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h1>404 - Page Not Found</h1>
+                <h2>Oops! The page you're looking for doesn't exist.</h2>
+                <p>The page might have been moved, deleted, or you may have entered the wrong URL.</p>
+
+                <div class="error-actions">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-home"></i>
+                        Go Home
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                </div>
+
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Patrice</a></li>
+                        <li><a href="faq.html">Frequently Asked Questions</a></li>
+                        <li><a href="contact.html">Get In Touch</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+    .error-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+        color: var(--white);
+        text-align: center;
+        padding: calc(80px + var(--spacing-xl)) var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .error-content {
+        max-width: 600px;
+    }
+
+    .error-icon {
+        font-size: 6rem;
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.8;
+    }
+
+    .error-page h1 {
+        font-size: 3rem;
+        color: var(--white);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .error-page h2 {
+        font-size: var(--font-size-xl);
+        color: var(--accent-color);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .error-page p {
+        font-size: var(--font-size-lg);
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: var(--spacing-2xl);
+    }
+
+    .error-actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-lg);
+        margin-bottom: var(--spacing-2xl);
+        flex-wrap: wrap;
+    }
+
+    .quick-links {
+        background: rgba(255, 255, 255, 0.1);
+        padding: var(--spacing-xl);
+        border-radius: 12px;
+        margin-top: var(--spacing-2xl);
+    }
+
+    .quick-links h3 {
+        color: var(--white);
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .quick-links ul {
+        list-style: none;
+        margin: 0;
+    }
+
+    .quick-links li {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .quick-links a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: var(--transition-fast);
+    }
+
+    .quick-links a:hover {
+        color: var(--accent-color);
+    }
+
+    @media (max-width: 768px) {
+        .error-page h1 {
+            font-size: 2rem;
+        }
+
+        .error-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+        }
+    }
+    </style>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

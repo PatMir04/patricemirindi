@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions about Patrice Mirindi's services and expertise">
+    <meta name="keywords" content="FAQ, patrice mirindi questions, data analyst services, consulting questions">
+    <title>FAQ - Patrice Mirindi</title>
+
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Patrice Mirindi</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="faq.html" class="nav-link active">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FAQ Hero -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p class="page-subtitle">Common questions about my background, services, and expertise</p>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <section class="faq-search">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="faq-search-input" placeholder="Search FAQ..." class="search-input">
+                <button id="faq-search-btn" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="faq-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="about">About Me</button>
+                <button class="category-btn" data-category="services">Services</button>
+                <button class="category-btn" data-category="experience">Experience</button>
+                <button class="category-btn" data-category="technical">Technical</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-grid" id="faq-container">
+                <!-- FAQ items will be loaded here by JavaScript -->
+            </div>
+            <div id="no-results" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No results found</h3>
+                <p>Try adjusting your search terms or browse different categories.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact -->
+    <section class="quick-contact">
+        <div class="container">
+            <div class="contact-card">
+                <h2>Didn't find what you're looking for?</h2>
+                <p>Feel free to reach out with any specific questions about my services or experience.</p>
+                <div class="contact-options">
+                    <a href="contact.html" class="btn btn-primary">Send a Message</a>
+                    <a href="mailto:patricemirindi@gmail.com" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Email Directly
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Patrice Mirindi</h3>
+                    <p>Senior Data Analyst & Economic Development Consultant</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:patricemirindi@gmail.com">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Languages</h4>
+                    <ul>
+                        <li>English (Fluent)</li>
+                        <li>French (Native)</li>
+                        <li>Swahili (Conversational)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Patrice Mirindi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget">
+        <button id="chat-toggle" class="chat-toggle">
+            <i class="fas fa-comments"></i>
+            <span>Chat with Patrice</span>
+        </button>
+        <div id="chat-panel" class="chat-panel">
+            <div class="chat-header">
+                <h3>💬 Chat with Patrice</h3>
+                <button id="chat-close" class="chat-close">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    <p>Hello! I'm here to answer questions about my background, experience, and services. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Type your question..." maxlength="500">
+                <button id="chat-send">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="chat-disclaimer">
+                <small>Answers use this site's FAQ and About data only.</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/faq.js"></script>
+    <script src="assets/js/chat.js"></script>
+</body>
+</html>

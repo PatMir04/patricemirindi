@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://patricemirindi.github.io/sitemap.xml
+
+# Disallow sensitive areas (none for this site)
+# Disallow: /private/
+
+# Allow search engines to crawl the site
+Crawl-delay: 1
