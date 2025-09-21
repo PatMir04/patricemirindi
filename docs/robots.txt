@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.patricemirindi.com/sitemap.xml
+
+# Allow search engines to crawl the site
+Crawl-delay: 1
