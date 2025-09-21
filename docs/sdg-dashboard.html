@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SDG Dashboard - Track Sustainable Development Goals progress across countries with real-time data by Patrice Mirindi">
+    <meta name="keywords" content="SDG, sustainable development goals, dashboard, country comparison, UN goals, development tracking">
+    <title>SDG Dashboard - Sustainable Development Goals Tracking | Patrice Mirindi</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="SDG Dashboard - Real-time Sustainable Development Goals Tracking">
+    <meta property="og:description" content="Interactive dashboard tracking progress on all 17 UN Sustainable Development Goals with country comparisons">
+    <meta property="og:type" content="website">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/futuristic-theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <!-- Futuristic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="futuristic-theme">
+    <!-- Navigation -->
+    <nav class="navbar futuristic-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <span class="logo-icon">🌍</span>
+                    Patrice Mirindi
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
+                <li class="nav-item"><a href="work-experience.html" class="nav-link">Work Experience</a></li>
+                <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
+                <li class="nav-item"><a href="key-projects.html" class="nav-link">Key Projects</a></li>
+                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link active">SDG Dashboard</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="reading-progress">
+            <div class="reading-progress-bar" id="reading-progress"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="futuristic-hero">
+        <div class="hero-background">
+            <div class="floating-particles"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="SDG Progress Tracker">
+                    SDG Progress Tracker
+                </h1>
+                <p class="hero-subtitle neon-text">Real-time • Data-driven • Global Impact</p>
+                <p class="hero-description">
+                    Monitor progress toward the UN's 17 Sustainable Development Goals with 
+                    real-time data visualization, country comparisons, and trend analysis. 
+                    Explore how nations are advancing toward a sustainable future.
+                </p>
+                <div class="hero-stats futuristic-stats">
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number">17</span>
+                        <span class="stat-label">SDG Goals</span>
+                    </div>
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number">193</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number">120+</span>
+                        <span class="stat-label">Indicators</span>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <a href="#sdg-overview" class="btn btn-futuristic btn-primary">
+                        <i class="fas fa-chart-line"></i> Explore Dashboard
+                    </a>
+                    <a href="#country-comparison" class="btn btn-futuristic btn-secondary">
+                        <i class="fas fa-globe"></i> Compare Countries
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDG Overview -->
+    <section class="sdg-dashboard" id="sdg-overview">
+        <div class="container">
+            <div class="sdg-header">
+                <h2>Sustainable Development Goals Overview</h2>
+                <p class="section-subtitle">Track global progress toward the 2030 Agenda</p>
+            </div>
+            
+            <!-- Real-time Status Banner -->
+            <div class="status-banner futuristic-card glowing-border">
+                <div class="status-info">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Live Data</span>
+                    </div>
+                    <div class="last-updated">
+                        <i class="fas fa-sync-alt"></i>
+                        <span>Last Updated: <span id="last-update">Just now</span></span>
+                    </div>
+                </div>
+                <div class="global-progress">
+                    <span class="progress-label">Global SDG Progress</span>
+                    <div class="progress-circle">
+                        <svg width="80" height="80">
+                            <circle cx="40" cy="40" r="35" stroke="var(--dark-border)" stroke-width="6" fill="none"/>
+                            <circle cx="40" cy="40" r="35" stroke="var(--neon-green)" stroke-width="6" fill="none" 
+                                    stroke-dasharray="220" stroke-dashoffset="88" class="progress-ring" 
+                                    transform="rotate(-90 40 40)"/>
+                        </svg>
+                        <span class="progress-text">60%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SDG Goals Grid -->
+            <div class="sdg-goals-grid" id="sdg-goals-grid">
+                <!-- SDG Goals will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Country Comparison -->
+    <section class="country-comparison" id="country-comparison">
+        <div class="container">
+            <h3><i class="fas fa-balance-scale"></i> Country Comparison</h3>
+            <p>Compare SDG progress across different countries and regions</p>
+            
+            <div class="country-selector">
+                <select id="country1" class="futuristic-select">
+                    <option value="">Select Country 1</option>
+                    <!-- Countries populated by JS -->
+                </select>
+                <select id="country2" class="futuristic-select">
+                    <option value="">Select Country 2</option>
+                    <!-- Countries populated by JS -->
+                </select>
+                <select id="country3" class="futuristic-select">
+                    <option value="">Select Country 3</option>
+                    <!-- Countries populated by JS -->
+                </select>
+                <button id="compare-btn" class="btn btn-futuristic btn-primary">
+                    <i class="fas fa-chart-bar"></i> Compare
+                </button>
+            </div>
+            
+            <div class="country-cards" id="country-cards">
+                <!-- Country comparison cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Analytics -->
+    <section class="detailed-analytics">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="holographic-text">In-Depth Analysis</h2>
+                <p class="section-subtitle">Explore trends, correlations, and projections</p>
+            </div>
+            
+            <div class="analytics-grid">
+                <div class="analytics-card futuristic-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-trending-up neon-icon"></i> Progress Trends</h3>
+                        <div class="card-controls">
+                            <select id="trend-timeframe" class="futuristic-select">
+                                <option value="5">Last 5 Years</option>
+                                <option value="10">Last 10 Years</option>
+                                <option value="15" selected>Last 15 Years</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="trends-chart"></div>
+                    </div>
+                </div>
+                
+                <div class="analytics-card futuristic-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-project-diagram neon-icon"></i> Goal Correlations</h3>
+                        <div class="card-controls">
+                            <button id="correlation-refresh" class="btn-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="correlation-chart"></div>
+                    </div>
+                </div>
+                
+                <div class="analytics-card futuristic-card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-globe-americas neon-icon"></i> Global Heatmap</h3>
+                        <div class="card-controls">
+                            <select id="heatmap-goal" class="futuristic-select">
+                                <option value="overall">Overall Progress</option>
+                                <option value="1">No Poverty</option>
+                                <option value="2">Zero Hunger</option>
+                                <option value="3">Good Health</option>
+                                <option value="4">Quality Education</option>
+                                <option value="5">Gender Equality</option>
+                                <option value="6">Clean Water</option>
+                                <option value="7">Clean Energy</option>
+                                <option value="8">Decent Work</option>
+                                <option value="9">Innovation</option>
+                                <option value="10">Reduced Inequalities</option>
+                                <option value="11">Sustainable Cities</option>
+                                <option value="12">Responsible Consumption</option>
+                                <option value="13">Climate Action</option>
+                                <option value="14">Life Below Water</option>
+                                <option value="15">Life on Land</option>
+                                <option value="16">Peace & Justice</option>
+                                <option value="17">Partnerships</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <div id="global-heatmap"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Insights -->
+    <section class="regional-insights">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="holographic-text">Regional Performance</h2>
+                <p class="section-subtitle">Compare progress across world regions</p>
+            </div>
+            
+            <div class="region-tabs">
+                <button class="region-tab active" data-region="africa">Africa</button>
+                <button class="region-tab" data-region="asia">Asia-Pacific</button>
+                <button class="region-tab" data-region="europe">Europe</button>
+                <button class="region-tab" data-region="americas">Americas</button>
+                <button class="region-tab" data-region="mena">MENA</button>
+            </div>
+            
+            <div class="region-content" id="region-content">
+                <div class="region-stats">
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number" id="region-countries">54</span>
+                        <span class="stat-label">Countries</span>
+                    </div>
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number" id="region-avg-score">52.3</span>
+                        <span class="stat-label">Average Score</span>
+                    </div>
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number" id="region-top-performer">Mauritius</span>
+                        <span class="stat-label">Top Performer</span>
+                    </div>
+                    <div class="stat-card glowing-border">
+                        <span class="stat-number neon-number" id="region-progress">+2.1</span>
+                        <span class="stat-label">Annual Progress</span>
+                    </div>
+                </div>
+                
+                <div class="region-chart">
+                    <div id="regional-comparison-chart"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Sources & Methodology -->
+    <section class="methodology-section">
+        <div class="container">
+            <h2>Data Sources & Methodology</h2>
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <i class="fas fa-united-nations"></i>
+                    </div>
+                    <h3>UN Statistics Division</h3>
+                    <p>Official SDG indicators database with comprehensive country-level data on all 17 goals and 169 targets.</p>
+                    <a href="https://unstats.un.org/sdgs/dataportal" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Sustainable Development Report</h3>
+                    <p>Annual rankings and analysis from the UN Sustainable Development Solutions Network (SDSN).</p>
+                    <a href="https://dashboards.sdgindex.org" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>World Bank Open Data</h3>
+                    <p>Complementary indicators for economic and social development metrics supporting SDG tracking.</p>
+                    <a href="https://data.worldbank.org" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="methodology-card">
+                    <div class="methodology-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Real-time Updates</h3>
+                    <p>Data is automatically updated every 24 hours from official sources with change tracking and notifications.</p>
+                    <span class="methodology-link">Auto-refresh enabled <i class="fas fa-check-circle"></i></span>
+                </div>
+            </div>
+            
+            <div class="analytical-approach">
+                <h3>Scoring Methodology</h3>
+                <div class="approach-content">
+                    <p>SDG scores are calculated using a standardized methodology that ensures comparability across countries and goals:</p>
+                    <ul>
+                        <li><strong>Normalization:</strong> All indicators are normalized to a 0-100 scale where 100 represents SDG achievement</li>
+                        <li><strong>Aggregation:</strong> Goal-level scores aggregate indicator values using equal weights</li>
+                        <li><strong>Country Scores:</strong> Overall country scores are the arithmetic mean of all 17 goal scores</li>
+                        <li><strong>Trend Analysis:</strong> Progress trends are calculated using compound annual growth rates</li>
+                        <li><strong>Missing Data:</strong> Countries with less than 80% indicator coverage are excluded from rankings</li>
+                        <li><strong>Regional Grouping:</strong> Based on UN geographical classifications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer futuristic-footer">
+        <div class="footer-particles"></div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="neon-text">Patrice Mirindi</h3>
+                    <p>Development Economics • SDG Analytics • Policy Innovation</p>
+                    <p class="footer-tagline">Advancing sustainable development through data-driven insights and evidence-based policy recommendations</p>
+                    <div class="social-links futuristic-social">
+                        <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>SDG Focus Areas</h4>
+                    <ul>
+                        <li><a href="#">Poverty Eradication</a></li>
+                        <li><a href="#">Food Security</a></li>
+                        <li><a href="#">Quality Education</a></li>
+                        <li><a href="#">Economic Growth</a></li>
+                        <li><a href="#">Climate Action</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Analytics Tools</h4>
+                    <ul>
+                        <li><a href="data-analytics.html">Economic Data Analytics</a></li>
+                        <li><a href="#">Country Comparisons</a></li>
+                        <li><a href="#">Progress Tracking</a></li>
+                        <li><a href="#">Trend Analysis</a></li>
+                        <li><a href="#">Impact Projections</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect & Collaborate</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Winnipeg, MB, Canada</li>
+                        <li><i class="fas fa-envelope"></i> patricemirindi@gmail.com</li>
+                        <li><i class="fas fa-globe"></i> www.patricemirindi.com</li>
+                        <li><i class="fas fa-language"></i> EN • FR • SW • LN</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Building a sustainable future through data.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SDG Dashboard JavaScript -->
+    <script src="assets/js/sdg-dashboard.js"></script>
+    
+    <!-- Enhanced Chatbot with Data Integration -->
+    <script src="assets/js/data-enhanced-chatbot.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
