@@ -1,6 +1,6 @@
-// assets/js/tawk-enhanced.js
+
 // ==========================================================================
-// ENHANCED TAWK.TO INTEGRATION FOR PATRICE MIRINDI PORTFOLIO
+//         TAWK.TO INTEGRATION FOR PATRICE MIRINDI PORTFOLIO
 // Site ID: 68d05919a5528e1923b76c3a | Widget ID: 1j5mto36j
 // ==========================================================================
 
