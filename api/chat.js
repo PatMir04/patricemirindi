@@ -1,321 +1,407 @@
 // ==========================================================================
-// SERVERLESS CHAT FUNCTION (Cloudflare Workers)
+// CLOUDFLARE WORKERS CHAT API FOR PATRICE MIRINDI WEBSITE
 // ==========================================================================
-
-// This is a Cloudflare Workers function that handles the chat API
-// It implements strict grounding with dual-source routing as specified
 
 export default {
   async fetch(request, env, ctx) {
-    // Handle CORS
+    // CORS headers
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+
+    // Handle preflight requests
     if (request.method === 'OPTIONS') {
-      return new Response(null, {
-        status: 200,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type',
-        },
-      });
+      return new Response(null, { headers: corsHeaders });
     }
 
+    // Only allow POST requests
     if (request.method !== 'POST') {
-      return new Response('Method not allowed', { status: 405 });
+      return new Response('Method not allowed', { 
+        status: 405, 
+        headers: corsHeaders 
+      });
     }
 
     try {
       const { message, session_id } = await request.json();
 
-      if (!message || typeof message !== 'string') {
-        return new Response(JSON.stringify({ error: 'Invalid message' }), {
+      if (!message || message.trim().length === 0) {
+        return new Response(JSON.stringify({ 
+          error: 'Message is required' 
+        }), {
           status: 400,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
       }
 
       // Load data sources
-      const faqData = await this.loadFAQData();
       const aboutData = await this.loadAboutData();
+      const workData = await this.loadWorkData();
+      const skillsData = await this.loadSkillsData();
+      const projectsData = await this.loadProjectsData();
 
-      // Route intent and retrieve relevant information
-      const result = await this.processMessage(message, faqData, aboutData, env);
+      // Classify intent and route to appropriate source
+      const intent = this.classifyIntent(message);
+      let response;
 
-      return new Response(JSON.stringify(result), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+      switch (intent) {
+        case 'ABOUT':
+          response = await this.handleAboutQuery(message, aboutData, env);
+          break;
+        case 'WORK':
+          response = await this.handleWorkQuery(message, workData, env);
+          break;
+        case 'SKILLS':
+          response = await this.handleSkillsQuery(message, skillsData, env);
+          break;
+        case 'PROJECTS':
+          response = await this.handleProjectsQuery(message, projectsData, env);
+          break;
+        default:
+          response = {
+            answer: "I can only answer questions about Patrice's background, work experience, skills, and projects. Please try rephrasing or use the Contact page for other inquiries.",
+            sources: [],
+            intent: 'OTHER'
+          };
+      }
+
+      return new Response(JSON.stringify(response), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
 
     } catch (error) {
       console.error('Chat API Error:', error);
+
       return new Response(JSON.stringify({ 
         error: 'Internal server error',
-        answer: 'I\'m experiencing technical difficulties. Please try again or contact me directly at patricemirindi@gmail.com',
-        sources: []
+        message: 'Sorry, I encountered an error processing your request. Please try again or contact me directly.'
       }), {
         status: 500,
-        headers: { 
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
   },
 
-  async loadFAQData() {
-    // In production, this would fetch from your GitHub Pages or CDN
-    // For now, return a subset of the FAQ data
-    return [
-      {
-        id: 1,
-        question: "Where are you from?",
-        keywords: ["origin", "country", "from", "nationality"],
-        answer: "I am from the Democratic Republic of Congo.",
-        category: "personal"
-      },
-      {
-        id: 2,
-        question: "What do you do for a living?",
-        keywords: ["job", "profession", "work", "career"],
-        answer: "I am a Senior Data Analyst and Consultant, specializing in economic policy, financial resilience, data analytics, and market research.",
-        category: "work"
-      },
-      {
-        id: 3,
-        question: "How can I contact you?",
-        keywords: ["contact", "email", "reach out", "get in touch"],
-        answer: "You can reach me via email at patricemirindi@gmail.com.",
-        category: "contact"
-      },
-      {
-        id: 4,
-        question: "What tools do you use for data analytics?",
-        keywords: ["analytics", "visualization", "tools"],
-        answer: "I use R, Python, Stata, SPSS, and Power BI for data analytics. These tools help in modeling economic trends, creating dashboards, and making data-driven policy recommendations.",
-        category: "technical"
-      },
-      {
-        id: 5,
-        question: "What languages do you speak?",
-        keywords: ["languages", "speak", "fluent", "multilingual"],
-        answer: "I am fluent in English and French, with conversational abilities in Swahili and Lingala.",
-        category: "personal"
-      }
-    ];
-  },
-
-  async loadAboutData() {
-    return {
-      name: "Patrice Mirindi",
-      roles: ["Senior Data Analyst & Consultant", "Economic Development Expert"],
-      summary: "Senior Data Analyst & Economic Development Consultant with expertise in financial resilience, agricultural economics, and policy analysis.",
-      location: "Winnipeg, MB, Canada",
-      languages: ["English", "French", "Swahili", "Lingala"],
-      skills: ["R", "Python", "Stata", "SPSS", "Power BI", "Project Management (PMP)"],
-      availability: "Open to consulting, speaking engagements, and teaching opportunities"
-    };
-  },
-
-  async processMessage(message, faqData, aboutData, env) {
-    const intent = this.classifyIntent(message);
-
-    let retrievedData = [];
-    let sources = [];
-
-    switch (intent) {
-      case 'FAQ':
-        retrievedData = this.retrieveFromFAQ(message, faqData);
-        sources = retrievedData.map(item => `FAQ #${item.id}`);
-        break;
-
-      case 'ABOUT':
-        retrievedData = this.retrieveFromAbout(message, aboutData);
-        sources = retrievedData.map(item => `About: ${item.key}`);
-        break;
-
-      default:
-        return {
-          answer: "I can only answer questions from the site FAQ or about Patrice. Please try rephrasing or use the Contact page.",
-          sources: [],
-          intent: 'OTHER'
-        };
-    }
-
-    if (retrievedData.length === 0) {
-      return {
-        answer: "I don't have enough information in the site data to answer that question. Please try rephrasing or contact me directly.",
-        sources: [],
-        intent: intent
-      };
-    }
-
-    // Use LLM to compose answer (if available) or return best match
-    const answer = await this.composeAnswer(message, retrievedData, env) || 
-                   retrievedData[0].answer || 
-                   retrievedData[0].value;
-
-    return {
-      answer: answer,
-      sources: sources.slice(0, 3), // Limit to top 3 sources
-      intent: intent
-    };
-  },
-
+  // Intent classification
   classifyIntent(message) {
     const lowerMessage = message.toLowerCase();
 
-    // FAQ indicators
-    const faqKeywords = [
-      'what do you do', 'experience', 'projects', 'tools', 'skills',
-      'education', 'background', 'work', 'consulting', 'analytics',
-      'services', 'contact', 'from where', 'languages'
-    ];
-
-    // About indicators  
     const aboutKeywords = [
-      'about you', 'bio', 'tell me', 'personal', 'yourself',
-      'who are you', 'your story', 'career', 'journey', 'name',
-      'location', 'availability', 'roles'
+      'about', 'bio', 'tell me', 'personal', 'yourself', 'who are you', 
+      'your story', 'background', 'from', 'languages', 'location', 
+      'education', 'journey', 'origin', 'where from'
     ];
 
-    const faqScore = faqKeywords.reduce((score, keyword) => {
-      return lowerMessage.includes(keyword) ? score + 1 : score;
-    }, 0);
+    const workKeywords = [
+      'work', 'experience', 'job', 'career', 'position', 'role',
+      'employer', 'company', 'responsibilities', 'achievements', 'employment'
+    ];
 
-    const aboutScore = aboutKeywords.reduce((score, keyword) => {
-      return lowerMessage.includes(keyword) ? score + 1 : score;
-    }, 0);
+    const skillsKeywords = [
+      'skills', 'expertise', 'tools', 'technologies', 'programming',
+      'certifications', 'capabilities', 'proficient', 'good at', 'can you'
+    ];
 
-    if (aboutScore > faqScore) {
-      return 'ABOUT';
-    } else if (faqScore > 0) {
-      return 'FAQ';
-    } else {
-      return 'OTHER';
+    const projectsKeywords = [
+      'projects', 'work samples', 'portfolio', 'case studies',
+      'what have you built', 'examples', 'deliverables', 'completed'
+    ];
+
+    let aboutScore = this.calculateKeywordScore(lowerMessage, aboutKeywords);
+    let workScore = this.calculateKeywordScore(lowerMessage, workKeywords);
+    let skillsScore = this.calculateKeywordScore(lowerMessage, skillsKeywords);
+    let projectsScore = this.calculateKeywordScore(lowerMessage, projectsKeywords);
+
+    const maxScore = Math.max(aboutScore, workScore, skillsScore, projectsScore);
+
+    if (maxScore === 0) return 'OTHER';
+    if (maxScore === aboutScore) return 'ABOUT';
+    if (maxScore === workScore) return 'WORK';
+    if (maxScore === skillsScore) return 'SKILLS';
+    if (maxScore === projectsScore) return 'PROJECTS';
+
+    return 'OTHER';
+  },
+
+  calculateKeywordScore(message, keywords) {
+    return keywords.reduce((score, keyword) => {
+      return message.includes(keyword) ? score + 1 : score;
+    }, 0);
+  },
+
+  // Data loading functions (these would fetch from your data endpoints)
+  async loadAboutData() {
+    // In a real implementation, you'd fetch from your data source
+    // For demo purposes, returning sample data structure
+    return {
+      name: "Patrice (Prina) Mirindi",
+      title: "Senior Data Analyst & Economic Development Consultant",
+      summary: "Senior Data Analyst & Economic Development Consultant with expertise in financial resilience, agricultural economics, and policy analysis.",
+      location: "Winnipeg, MB, Canada",
+      languages: ["English", "French", "Swahili", "Lingala"],
+      personal_info: {
+        origin: "Democratic Republic of Congo",
+        current_location: "Winnipeg, MB, Canada",
+        education: "MSc Agricultural Economics, University of Nairobi"
+      }
+    };
+  },
+
+  async loadWorkData() {
+    return [
+      {
+        title: "Senior Data Analyst and Consultant",
+        company: "Financial Resilience Institute",
+        period: "October 2024 - Present",
+        description: "Leading complex data analyses and strategic consulting to advance financial resilience across Canada and globally."
+      }
+      // Additional work experience would be loaded here
+    ];
+  },
+
+  async loadSkillsData() {
+    return {
+      technical_skills: {
+        data_analytics: {
+          category: "Data Analytics & Statistical Analysis",
+          skills: [
+            { name: "R Programming", level: "Expert", years: 8 },
+            { name: "Python", level: "Advanced", years: 6 },
+            { name: "Stata", level: "Expert", years: 7 }
+          ]
+        }
+      }
+    };
+  },
+
+  async loadProjectsData() {
+    return [
+      {
+        title: "Financial Resilience Assessment Framework",
+        client: "Financial Resilience Institute",
+        category: "Financial Health Research",
+        description: "Developing comprehensive framework to measure and improve financial well-being across Canadian communities."
+      }
+      // Additional projects would be loaded here
+    ];
+  },
+
+  // Query handlers
+  async handleAboutQuery(message, aboutData, env) {
+    const matches = this.searchAbout(message, aboutData);
+
+    if (matches.length === 0) {
+      return {
+        answer: "I don't have enough information about that specific aspect of Patrice's background. You can find more details on the About page.",
+        sources: [],
+        intent: 'ABOUT'
+      };
     }
+
+    // If we have OpenAI API key, use it to generate a more natural response
+    if (env.OPENAI_API_KEY) {
+      try {
+        const enhancedResponse = await this.enhanceResponseWithAI(
+          message, matches[0].value, 'about', env.OPENAI_API_KEY
+        );
+        return {
+          answer: enhancedResponse,
+          sources: [`About: ${matches[0].key}`],
+          intent: 'ABOUT'
+        };
+      } catch (error) {
+        console.warn('OpenAI enhancement failed, using fallback');
+      }
+    }
+
+    // Fallback response
+    return {
+      answer: matches[0].value,
+      sources: [`About: ${matches[0].key}`],
+      intent: 'ABOUT'
+    };
   },
 
-  retrieveFromFAQ(message, faqData) {
-    const lowerMessage = message.toLowerCase();
-    const scored = faqData.map(item => {
-      let score = 0;
+  async handleWorkQuery(message, workData, env) {
+    const matches = this.searchWork(message, workData);
 
-      // Check keywords
-      item.keywords.forEach(keyword => {
-        if (lowerMessage.includes(keyword.toLowerCase())) {
-          score += 2;
-        }
-      });
+    if (matches.length === 0) {
+      return {
+        answer: "I don't have specific information about that aspect of Patrice's work experience. Check the Work Experience page for detailed information.",
+        sources: [],
+        intent: 'WORK'
+      };
+    }
 
-      // Check question similarity
-      const questionWords = item.question.toLowerCase().split(/\s+/);
-      questionWords.forEach(word => {
-        if (word.length > 3 && lowerMessage.includes(word)) {
-          score += 1;
-        }
-      });
+    const bestMatch = matches[0];
+    const answer = `${bestMatch.title} at ${bestMatch.company} (${bestMatch.period}): ${bestMatch.description}`;
 
-      return { ...item, score };
-    });
-
-    return scored
-      .filter(item => item.score > 0)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 3);
+    return {
+      answer: answer,
+      sources: [`Work: ${bestMatch.title}`],
+      intent: 'WORK'
+    };
   },
 
-  retrieveFromAbout(message, aboutData) {
+  async handleSkillsQuery(message, skillsData, env) {
+    const matches = this.searchSkills(message, skillsData);
+
+    if (matches.length === 0) {
+      return {
+        answer: "I don't have specific information about that skill or expertise area. Visit the Skills & Expertise page for a comprehensive overview.",
+        sources: [],
+        intent: 'SKILLS'
+      };
+    }
+
+    const bestMatch = matches[0];
+    return {
+      answer: bestMatch.answer,
+      sources: [`Skills: ${bestMatch.skill || bestMatch.category}`],
+      intent: 'SKILLS'
+    };
+  },
+
+  async handleProjectsQuery(message, projectsData, env) {
+    const matches = this.searchProjects(message, projectsData);
+
+    if (matches.length === 0) {
+      return {
+        answer: "I don't have information about projects matching that query. Check the Key Projects page for Patrice's portfolio.",
+        sources: [],
+        intent: 'PROJECTS'
+      };
+    }
+
+    const bestMatch = matches[0];
+    return {
+      answer: `${bestMatch.title} for ${bestMatch.client}: ${bestMatch.description}`,
+      sources: [`Project: ${bestMatch.title}`],
+      intent: 'PROJECTS'
+    };
+  },
+
+  // Search functions
+  searchAbout(message, aboutData) {
     const lowerMessage = message.toLowerCase();
     const matches = [];
 
     const searchableFields = {
       'name': aboutData.name,
+      'title': aboutData.title,
       'summary': aboutData.summary,
       'location': aboutData.location,
-      'languages': aboutData.languages.join(', '),
-      'skills': aboutData.skills.join(', '),
-      'availability': aboutData.availability,
-      'roles': aboutData.roles.join(', ')
+      'languages': aboutData.languages.join(', ')
     };
 
     Object.entries(searchableFields).forEach(([key, value]) => {
       if (typeof value === 'string') {
-        const words = value.toLowerCase().split(/\s+/);
-        const messageWords = lowerMessage.split(/\s+/);
-
-        let score = 0;
-        messageWords.forEach(msgWord => {
-          if (msgWord.length > 3 && words.some(word => word.includes(msgWord))) {
-            score += 1;
-          }
-        });
-
+        const score = this.calculateTextSimilarity(lowerMessage, value.toLowerCase());
         if (score > 0) {
-          matches.push({
-            key: key,
-            value: value,
-            answer: value,
-            score: score
-          });
+          matches.push({ key, value, score });
         }
       }
     });
 
-    return matches.sort((a, b) => b.score - a.score).slice(0, 3);
+    return matches.sort((a, b) => b.score - a.score);
   },
 
-  async composeAnswer(message, retrievedData, env) {
-    // If OpenAI API key is available, use GPT to compose a better answer
-    if (env.OPENAI_API_KEY) {
-      try {
-        const context = retrievedData.map(item => 
-          `${item.question || item.key}: ${item.answer || item.value}`
-        ).join('\n\n');
+  searchWork(message, workData) {
+    const lowerMessage = message.toLowerCase();
+    const matches = [];
 
-        const prompt = `Based strictly on the following information about Patrice Mirindi, answer the user's question. Do not add any information not present in the context.
+    workData.forEach(job => {
+      const searchText = `${job.title} ${job.company} ${job.description}`.toLowerCase();
+      const score = this.calculateTextSimilarity(lowerMessage, searchText);
 
-Context:
-${context}
-
-User Question: ${message}
-
-Answer (be concise and helpful):`;
-
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${env.OPENAI_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
-            messages: [
-              {
-                role: 'system',
-                content: 'You are a helpful assistant that answers questions about Patrice Mirindi based strictly on provided context. Never add information not in the context.'
-              },
-              {
-                role: 'user',
-                content: prompt
-              }
-            ],
-            max_tokens: 200,
-            temperature: 0.3,
-          }),
-        });
-
-        const data = await response.json();
-        if (data.choices && data.choices[0]) {
-          return data.choices[0].message.content.trim();
-        }
-      } catch (error) {
-        console.error('OpenAI API error:', error);
+      if (score > 0) {
+        matches.push({ ...job, score });
       }
-    }
+    });
 
-    // Fallback: return the best match
-    return null;
+    return matches.sort((a, b) => b.score - a.score);
+  },
+
+  searchSkills(message, skillsData) {
+    const lowerMessage = message.toLowerCase();
+    const matches = [];
+
+    // Search technical skills
+    Object.entries(skillsData.technical_skills || {}).forEach(([category, data]) => {
+      const skills = data.skills || [];
+      skills.forEach(skill => {
+        if (lowerMessage.includes(skill.name.toLowerCase())) {
+          matches.push({
+            category: data.category,
+            skill: skill.name,
+            answer: `Patrice has ${skill.level.toLowerCase()} level expertise in ${skill.name} with ${skill.years} years of experience.`,
+            score: 2
+          });
+        }
+      });
+    });
+
+    return matches.sort((a, b) => b.score - a.score);
+  },
+
+  searchProjects(message, projectsData) {
+    const lowerMessage = message.toLowerCase();
+    const matches = [];
+
+    projectsData.forEach(project => {
+      const searchText = `${project.title} ${project.client} ${project.description}`.toLowerCase();
+      const score = this.calculateTextSimilarity(lowerMessage, searchText);
+
+      if (score > 0) {
+        matches.push({ ...project, score });
+      }
+    });
+
+    return matches.sort((a, b) => b.score - a.score);
+  },
+
+  calculateTextSimilarity(query, text) {
+    const queryWords = query.split(/\s+/).filter(word => word.length > 2);
+    const textWords = text.split(/\s+/);
+
+    let score = 0;
+    queryWords.forEach(queryWord => {
+      if (textWords.some(textWord => textWord.includes(queryWord))) {
+        score += 1;
+      }
+    });
+
+    return score;
+  },
+
+  // Enhanced AI response generation (optional)
+  async enhanceResponseWithAI(query, content, intent, apiKey) {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: `You are a helpful assistant answering questions about Patrice Mirindi's professional background. Use ONLY the provided information to answer questions. Do not add information not present in the source material. Keep responses conversational but professional, under 150 words.`
+          },
+          {
+            role: 'user',
+            content: `Question: "${query}"\n\nSource information: "${content}"\n\nPlease provide a helpful response using only the source information.`
+          }
+        ],
+        max_tokens: 200,
+        temperature: 0.7,
+      }),
+    });
+
+    const data = await response.json();
+    return data.choices[0].message.content;
   }
 };
