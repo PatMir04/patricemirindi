@@ -1,0 +1,131 @@
+[
+  {
+    "id": 1,
+    "title": "Financial Resilience Assessment Framework",
+    "client": "Financial Resilience Institute",
+    "period": "2024 - Present",
+    "category": "Financial Health Research",
+    "description": "Developing comprehensive framework to measure and improve financial well-being across Canadian communities.",
+    "objectives": [
+      "Design standardized financial health metrics",
+      "Create interactive assessment tools",
+      "Develop policy recommendations for financial inclusion"
+    ],
+    "outcomes": [
+      "Framework adopted by 15+ community organizations",
+      "Generated actionable insights for policy makers",
+      "Improved financial literacy program design"
+    ],
+    "technologies": [
+      "R",
+      "Python",
+      "Power BI",
+      "Statistical Modeling"
+    ],
+    "impact": "Enhanced financial well-being measurement capabilities nationwide",
+    "status": "Ongoing"
+  },
+  {
+    "id": 2,
+    "title": "Multi-Country Agricultural Development Initiative",
+    "client": "GIZ ProEmploi & World Bank",
+    "period": "2022 - 2024",
+    "category": "Agricultural Economics",
+    "description": "Led comprehensive agricultural market analysis and development strategy across multiple African countries focusing on food security and sustainable farming practices.",
+    "objectives": [
+      "Assess agricultural market dynamics in 5 countries",
+      "Develop sustainable farming transition strategies",
+      "Design financial inclusion programs for farmers"
+    ],
+    "outcomes": [
+      "Increased farmer income by average 35% across target regions",
+      "Improved food security indicators in project areas",
+      "Established 12 cooperative farming groups"
+    ],
+    "technologies": [
+      "Stata",
+      "GIS Mapping",
+      "Survey Design",
+      "Economic Modeling"
+    ],
+    "impact": "Improved livelihoods for 2,000+ farming families",
+    "status": "Completed"
+  },
+  {
+    "id": 3,
+    "title": "EU Trade Facilitation Program",
+    "client": "European Union & Economic Sense",
+    "period": "2023",
+    "category": "International Trade",
+    "description": "Analyzed trade barriers and opportunities for African agricultural exports to EU markets, developing comprehensive trade facilitation strategies.",
+    "objectives": [
+      "Identify regulatory and logistical trade barriers",
+      "Develop market entry strategies for African exporters",
+      "Create trade facilitation frameworks"
+    ],
+    "outcomes": [
+      "Facilitated $2.3M in new export agreements",
+      "Reduced export processing time by 40%",
+      "Trained 150+ exporters on EU compliance requirements"
+    ],
+    "technologies": [
+      "Market Analysis Tools",
+      "Trade Data Analysis",
+      "Excel",
+      "Presentation Tools"
+    ],
+    "impact": "Enhanced trade relationships between Africa and EU",
+    "status": "Completed"
+  },
+  {
+    "id": 4,
+    "title": "Youth Entrepreneurship Development Program",
+    "client": "The Anzisha Prize",
+    "period": "2020 - 2021",
+    "category": "Entrepreneurship Development",
+    "description": "Designed and implemented comprehensive support system for young African entrepreneurs, focusing on business model development and investment readiness.",
+    "objectives": [
+      "Develop scalable business models for youth entrepreneurs",
+      "Improve investment readiness and access to funding",
+      "Create mentorship and capacity building programs"
+    ],
+    "outcomes": [
+      "Supported 25+ young entrepreneurs to scale their businesses",
+      "Generated $1.8M in follow-on investment for alumni",
+      "Created sustainable mentorship network across 12 countries"
+    ],
+    "technologies": [
+      "Financial Modeling",
+      "Business Planning Tools",
+      "Data Analytics"
+    ],
+    "impact": "Fostered next generation of African business leaders",
+    "status": "Completed"
+  },
+  {
+    "id": 5,
+    "title": "Climate-Resilient Agriculture Study",
+    "client": "International Development Partners",
+    "period": "2022",
+    "category": "Climate & Agriculture",
+    "description": "Comprehensive analysis of climate change impacts on agricultural productivity with development of adaptation strategies for smallholder farmers.",
+    "objectives": [
+      "Assess climate vulnerability in agricultural systems",
+      "Develop climate adaptation strategies",
+      "Design resilient agricultural financing mechanisms"
+    ],
+    "outcomes": [
+      "Created climate adaptation toolkit for 500+ farmers",
+      "Established climate-smart agriculture practices",
+      "Secured $800K in climate adaptation funding"
+    ],
+    "technologies": [
+      "Climate Data Analysis",
+      "R",
+      "GIS",
+      "Economic Modeling"
+    ],
+    "impact": "Enhanced climate resilience for vulnerable farming communities",
+    "status": "Completed"
+  }
+]
