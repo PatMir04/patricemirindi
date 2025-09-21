@@ -1,0 +1,124 @@
+{
+  "technical_skills": {
+    "data_analytics": {
+      "category": "Data Analytics & Statistical Analysis",
+      "skills": [
+        {
+          "name": "R Programming",
+          "level": "Expert",
+          "years": 8
+        },
+        {
+          "name": "Python",
+          "level": "Advanced",
+          "years": 6
+        },
+        {
+          "name": "Stata",
+          "level": "Expert",
+          "years": 7
+        },
+        {
+          "name": "SPSS",
+          "level": "Advanced",
+          "years": 5
+        },
+        {
+          "name": "SQL",
+          "level": "Intermediate",
+          "years": 4
+        }
+      ]
+    },
+    "visualization": {
+      "category": "Data Visualization & Reporting",
+      "skills": [
+        {
+          "name": "Power BI",
+          "level": "Expert",
+          "years": 5
+        },
+        {
+          "name": "Tableau",
+          "level": "Advanced",
+          "years": 4
+        },
+        {
+          "name": "Excel Advanced",
+          "level": "Expert",
+          "years": 10
+        },
+        {
+          "name": "Dashboard Design",
+          "level": "Expert",
+          "years": 6
+        }
+      ]
+    }
+  },
+  "domain_expertise": {
+    "economic_development": {
+      "category": "Economic Development & Policy",
+      "areas": [
+        "Policy Analysis and Development",
+        "Market Research and Intelligence",
+        "Financial Inclusion Strategies",
+        "Impact Assessment and Evaluation",
+        "Economic Modeling and Forecasting"
+      ]
+    },
+    "financial_resilience": {
+      "category": "Financial Resilience & Health",
+      "areas": [
+        "Financial Health Assessment",
+        "Resilience Modeling and Analysis",
+        "Well-being Measurement Frameworks",
+        "Risk Assessment and Mitigation",
+        "Financial Inclusion Programs"
+      ]
+    },
+    "agricultural_economics": {
+      "category": "Agricultural Economics & Food Security",
+      "areas": [
+        "Food Security and Nutrition Analysis",
+        "Agricultural Market Dynamics",
+        "Supply Chain Optimization",
+        "Rural Development Strategies",
+        "Climate-Resilient Agriculture"
+      ]
+    }
+  },
+  "management_skills": {
+    "project_management": {
+      "category": "Project & Team Management",
+      "certifications": [
+        "PMP - Project Management Professional"
+      ],
+      "skills": [
+        "Multi-country Project Coordination",
+        "Stakeholder Management",
+        "Risk Management",
+        "Budget Management",
+        "Team Leadership"
+      ]
+    }
+  },
+  "languages": {
+    "English": {
+      "level": "Fluent",
+      "note": "Professional working proficiency"
+    },
+    "French": {
+      "level": "Native",
+      "note": "Mother tongue"
+    },
+    "Swahili": {
+      "level": "Conversational",
+      "note": "East African regional work"
+    },
+    "Lingala": {
+      "level": "Conversational",
+      "note": "Central African regional work"
+    }
+  }
+}

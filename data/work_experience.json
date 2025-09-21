@@ -1,0 +1,91 @@
+[
+  {
+    "id": 1,
+    "title": "Senior Data Analyst and Consultant",
+    "company": "Financial Resilience Institute",
+    "location": "Vancouver, Canada",
+    "period": "October 2024 - Present",
+    "duration": "Current",
+    "type": "Full-time",
+    "description": "Leading complex data analyses and strategic consulting to advance financial resilience across Canada and globally.",
+    "achievements": [
+      "Conducting multivariate and regression modeling to uncover financial health trends",
+      "Managing multiple planned and ad-hoc research projects",
+      "Developing customized reports and interactive dashboards for clients",
+      "Ensuring robust data governance and compliance standards"
+    ],
+    "skills": [
+      "R",
+      "Python",
+      "Statistical Modeling",
+      "Data Visualization",
+      "Financial Analysis"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Senior Business Development Consultant",
+    "company": "Economic Sense",
+    "location": "Durban, South Africa",
+    "period": "March 2024 - August 2024",
+    "duration": "6 months",
+    "type": "Consulting",
+    "description": "Led multinational teams on large-scale projects across finance, agriculture, and emerging markets.",
+    "achievements": [
+      "Expanded client portfolios by 25% through strategic growth initiatives",
+      "Consulted on financial modeling and investment strategies for public-private partnerships",
+      "Conducted advanced market analyses and competitive intelligence",
+      "Designed business continuity and risk mitigation frameworks"
+    ],
+    "skills": [
+      "Business Development",
+      "Financial Modeling",
+      "Market Analysis",
+      "Risk Management"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Business Development Consultant",
+    "company": "Economic Sense",
+    "location": "Durban, South Africa",
+    "period": "October 2021 - March 2024",
+    "duration": "2.5 years",
+    "type": "Consulting",
+    "description": "Developed financial models and managed diverse project portfolios including agriculture, climate change, and financial health initiatives.",
+    "achievements": [
+      "Developed over 20 financial models, improving client profitability by 30%",
+      "Led international consulting projects for EU, GIZ, and World Bank",
+      "Executed comprehensive market research and business planning",
+      "Secured funding for multi-country development programs"
+    ],
+    "skills": [
+      "Project Management",
+      "Financial Modeling",
+      "International Development",
+      "Grant Writing"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Entrepreneur Support & Portfolio Manager",
+    "company": "The Anzisha Prize",
+    "location": "Johannesburg, South Africa",
+    "period": "January 2020 - October 2021",
+    "duration": "1.8 years",
+    "type": "Full-time",
+    "description": "Supported young African entrepreneurs with strategic guidance and business development.",
+    "achievements": [
+      "Designed financial models for 20+ young entrepreneurs",
+      "Increased business investment readiness by 40% through strategic support",
+      "Developed 3-year capacity-building program improving outcomes by 30%",
+      "Reviewed over 500 business plans for program selection"
+    ],
+    "skills": [
+      "Mentoring",
+      "Business Planning",
+      "Capacity Building",
+      "Entrepreneurship"
+    ]
+  }
+]
