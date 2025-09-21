@@ -155,7 +155,7 @@
         // Fixed values for statistics
         const stats = {
             'years-experience': 8,
-            'projects-completed': 50,
+            'projects-completed': 20,
             'countries-worked': 12,
             'lives-impacted': 2000,
             'client-satisfaction': 100,
@@ -175,7 +175,7 @@
                 } else if (key === 'client-satisfaction') {
                     element.textContent = value + '%';
                 } else {
-                    element.textContent = value + (value > 1 ? '+' : '');
+                    element.textContent = value + '+';
                 }
             });
         });
