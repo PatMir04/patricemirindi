@@ -16,7 +16,6 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -68,112 +67,204 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Profile Photo -->
-    <section class="hero">
+    <!-- Enhanced Hero Section with Prominent Profile Photo -->
+    <section class="hero enhanced">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        
         <div class="hero-content">
-            <div class="hero-image">
-                <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Senior Data Analyst & Economic Development Consultant" class="profile-img" onerror="this.style.display='none'">
-                <div class="availability-badge">
-                    <div class="status-indicator">
-                        <div class="status-dot"></div>
-                        <span>Available for Projects</span>
+            <div class="hero-profile">
+                <div class="profile-photo-container">
+                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Senior Data Analyst & Economic Development Consultant" class="profile-photo" onerror="this.style.display='none'">
+                    <div class="profile-badge">
+                        <div class="badge-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <span class="badge-text">Available for Projects</span>
+                    </div>
+                </div>
+                
+                <div class="profile-content">
+                    <div class="name-title">
+                        <h1>Patrice Mirindi, MSc</h1>
+                        <div class="title-highlight">
+                            <h2>Senior Data Analyst & Economic Development Consultant</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="professional-summary">
+                        <p class="hero-description">
+                            I transform complex data into actionable strategies that drive sustainable growth and financial resilience. 
+                            With <strong>8+ years of experience</strong> across <strong>12+ countries</strong>, I design evidence-based policies and implement 
+                            high-impact projects that empower communities and reshape emerging economies.
+                        </p>
+                    </div>
+                    
+                    <!-- Key Highlights -->
+                    <div class="professional-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>MSc Economics, University of Manitoba</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>PMP Certified Project Manager</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>International Development Specialist</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Advanced Analytics Expert</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="hero-buttons">
+                        <a href="data-analytics.html" class="btn btn-primary btn-large">
+                            <i class="fas fa-chart-bar"></i>
+                            View My Analytics Platform
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary btn-large">
+                            <i class="fas fa-envelope"></i>
+                            Let's Collaborate
+                        </a>
                     </div>
                 </div>
             </div>
             
-            <div class="hero-text">
-                <h1>Patrice Mirindi, MSc</h1>
-                <h2 class="hero-subtitle">Senior Data Analyst & Economic Development Consultant</h2>
-                
-                <p class="hero-description">
-                    I transform complex data into actionable strategies that drive sustainable growth and financial resilience. 
-                    With 8+ years of experience across 12+ countries, I design evidence-based policies and implement 
-                    high-impact projects that empower communities and reshape emerging economies.
-                </p>
-                
-                <!-- Statistics -->
-                <div class="hero-stats">
-                    <div class="stat-item">
+            <!-- Professional Statistics -->
+            <div class="hero-stats">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
                         <span class="stat-number" data-stat="years-experience">8+</span>
                         <span class="stat-label">Years Experience</span>
                     </div>
-                    <div class="stat-item">
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
                         <span class="stat-number" data-stat="projects-completed">20+</span>
                         <span class="stat-label">Projects Completed</span>
                     </div>
-                    <div class="stat-item">
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
                         <span class="stat-number" data-stat="countries-worked">12+</span>
                         <span class="stat-label">Countries Worked</span>
                     </div>
-                    <div class="stat-item">
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
                         <span class="stat-number" data-stat="lives-impacted">2,000+</span>
                         <span class="stat-label">Lives Impacted</span>
                     </div>
-                </div>
-                
-                <!-- Buttons -->
-                <div class="hero-buttons">
-                    <a href="about.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-user"></i>
-                        About Me
-                    </a>
-                    <a href="contact.html" class="btn btn-secondary btn-large">
-                        <i class="fas fa-envelope"></i>
-                        Get In Touch
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Development Indicators Widgets -->
+    <!-- Global Development Indicators Dashboard -->
     <section class="widgets-section">
         <div class="container">
-            <h2 class="section-title">Global Development Indicators</h2>
-            <p class="section-subtitle">Key statistics that inform my economic development and policy work</p>
+            <div class="section-header">
+                <h2 class="section-title">Real-Time Global Development Indicators</h2>
+                <p class="section-subtitle">Key statistics that inform my economic development and policy work</p>
+                <a href="data-analytics.html" class="section-link">
+                    <i class="fas fa-external-link-alt"></i>
+                    Explore Full Analytics Dashboard
+                </a>
+            </div>
             
             <div class="widgets-grid">
-                <div class="widget-card">
-                    <div class="widget-icon">
-                        <i class="fas fa-chart-line"></i>
+                <div class="widget-card economic">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="widget-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+0.3%</span>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <span class="widget-value" id="global-gdp-growth">3.1%</span>
+                        <span class="widget-label">Global GDP Growth</span>
+                        <span class="widget-meta">World Bank 2024</span>
+                        <div class="widget-insight">
+                            <p>Post-pandemic recovery showing steady improvement across emerging markets</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="widget-card social">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="widget-trend down">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>-0.8%</span>
+                        </div>
                     </div>
                     <div class="widget-content">
                         <span class="widget-value" id="poverty-rate">8.5%</span>
-                        <span class="widget-label">Global Poverty Rate</span>
+                        <span class="widget-label">Extreme Poverty Rate</span>
                         <span class="widget-meta">World Bank 2024</span>
+                        <div class="widget-insight">
+                            <p>Continued progress toward SDG 1 target despite global challenges</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="widget-card">
-                    <div class="widget-icon">
-                        <i class="fas fa-seedling"></i>
+                <div class="widget-card development">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="widget-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+180M</span>
+                        </div>
                     </div>
                     <div class="widget-content">
-                        <span class="widget-value" id="food-insecurity">2.3B</span>
-                        <span class="widget-label">Food Insecurity</span>
+                        <span class="widget-value" id="food-insecurity">735M</span>
+                        <span class="widget-label">People in Hunger</span>
                         <span class="widget-meta">FAO 2024</span>
+                        <div class="widget-insight">
+                            <p>Food security remains critical focus area requiring targeted interventions</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="widget-card">
-                    <div class="widget-icon">
-                        <i class="fas fa-coins"></i>
+                <div class="widget-card financial">
+                    <div class="widget-header">
+                        <div class="widget-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="widget-trend up">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12%</span>
+                        </div>
                     </div>
                     <div class="widget-content">
                         <span class="widget-value" id="financial-inclusion">76%</span>
                         <span class="widget-label">Financial Inclusion</span>
                         <span class="widget-meta">Global Findex 2021</span>
-                    </div>
-                </div>
-                
-                <div class="widget-card">
-                    <div class="widget-icon">
-                        <i class="fas fa-tractor"></i>
-                    </div>
-                    <div class="widget-content">
-                        <span class="widget-value" id="agri-gdp">4.4%</span>
-                        <span class="widget-label">Agriculture GDP</span>
-                        <span class="widget-meta">IFAD 2024</span>
+                        <div class="widget-insight">
+                            <p>Digital financial services driving inclusion in emerging markets</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,155 +272,154 @@
     </section>
 
     <!-- Core Expertise Section -->
-    <section class="section">
+    <section class="section expertise-showcase">
         <div class="container">
-            <h2 class="section-title">Core Expertise</h2>
-            <p class="section-subtitle">Delivering data-driven solutions across multiple domains</p>
+            <div class="section-header">
+                <h2 class="section-title">Core Expertise & Specializations</h2>
+                <p class="section-subtitle">Delivering data-driven solutions across multiple domains with proven impact</p>
+            </div>
             
             <div class="expertise-grid">
-                <div class="expertise-card">
+                <div class="expertise-card primary">
                     <div class="expertise-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3>Data Analytics & Visualization</h3>
-                    <p>Advanced analytics using R, Python, Stata, and Power BI to transform complex data into actionable insights for policy and business decisions.</p>
+                    <h3>Advanced Data Analytics</h3>
+                    <p>Transforming complex datasets into strategic insights using cutting-edge analytical tools and methodologies. Specialized in econometric modeling, time series analysis, and predictive analytics for development finance.</p>
                     <div class="skill-tags">
                         <span class="skill-tag">R Programming</span>
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">Power BI</span>
                         <span class="skill-tag">Stata</span>
+                        <span class="skill-tag">Machine Learning</span>
                     </div>
-                    <a href="skills-expertise.html" class="btn btn-secondary">
-                        Learn More <i class="fas fa-arrow-right"></i>
+                    <div class="expertise-metrics">
+                        <div class="metric">
+                            <span class="metric-value">95%</span>
+                            <span class="metric-label">Project Success Rate</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">20+</span>
+                            <span class="metric-label">Analytics Projects</span>
+                        </div>
+                    </div>
+                    <a href="skills-expertise.html" class="expertise-link">
+                        View Technical Skills <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="expertise-card">
+                <div class="expertise-card secondary">
                     <div class="expertise-icon">
-                        <i class="fas fa-coins"></i>
+                        <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>Financial Resilience Consulting</h3>
-                    <p>Specialized expertise in financial health assessment, resilience modeling, and well-being strategies for institutions and governments.</p>
+                    <p>Leading research and policy development for financial health assessment and resilience modeling. Currently advancing frameworks at the Financial Resilience Institute to enhance community economic stability.</p>
                     <div class="skill-tags">
                         <span class="skill-tag">Risk Assessment</span>
                         <span class="skill-tag">Policy Design</span>
                         <span class="skill-tag">Impact Measurement</span>
+                        <span class="skill-tag">Resilience Modeling</span>
                     </div>
-                    <a href="key-projects.html" class="btn btn-secondary">
-                        View Projects <i class="fas fa-arrow-right"></i>
+                    <div class="expertise-metrics">
+                        <div class="metric">
+                            <span class="metric-value">$5.2M+</span>
+                            <span class="metric-label">Project Value</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">15+</span>
+                            <span class="metric-label">Organizations</span>
+                        </div>
+                    </div>
+                    <a href="work-experience.html" class="expertise-link">
+                        View Experience <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
                 
-                <div class="expertise-card">
+                <div class="expertise-card tertiary">
                     <div class="expertise-icon">
                         <i class="fas fa-seedling"></i>
                     </div>
-                    <h3>Agricultural Economics</h3>
-                    <p>Policy analysis and market research for agricultural systems, food security, and sustainable rural development initiatives.</p>
+                    <h3>Agricultural Economics & Value Chains</h3>
+                    <p>Comprehensive market research and policy analysis for agricultural systems, food security initiatives, and sustainable rural development across Africa. Expert in commodity value chain analysis and export market development.</p>
                     <div class="skill-tags">
                         <span class="skill-tag">Market Analysis</span>
+                        <span class="skill-tag">Value Chain Development</span>
                         <span class="skill-tag">Food Security</span>
-                        <span class="skill-tag">Rural Development</span>
+                        <span class="skill-tag">Export Strategy</span>
                     </div>
-                    <a href="work-experience.html" class="btn btn-secondary">
-                        Experience <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-                
-                <div class="expertise-card">
-                    <div class="expertise-icon">
-                        <i class="fas fa-project-diagram"></i>
+                    <div class="expertise-metrics">
+                        <div class="metric">
+                            <span class="metric-value">8</span>
+                            <span class="metric-label">Countries</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">100+</span>
+                            <span class="metric-label">Farmers Impacted</span>
+                        </div>
                     </div>
-                    <h3>Project Management</h3>
-                    <p>PMP-certified project leadership for international development initiatives, capacity building, and institutional strengthening.</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PMP Certified</span>
-                        <span class="skill-tag">International Projects</span>
-                        <span class="skill-tag">Team Leadership</span>
-                    </div>
-                    <a href="key-projects.html" class="btn btn-secondary">
-                        Key Projects <i class="fas fa-arrow-right"></i>
+                    <a href="key-projects.html" class="expertise-link">
+                        View Projects <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Global Projects Map -->
-    <section class="map-section">
+    <!-- Current Role & Recent Achievements -->
+    <section class="section current-role">
         <div class="container">
-            <h2 class="section-title">Global Project Portfolio</h2>
-            <p class="section-subtitle">Interactive map showing my project locations across Africa and beyond</p>
-            
-            <div id="projects-map" class="projects-map"></div>
-            
-            <div class="map-legend">
-                <div class="legend-item">
-                    <div class="legend-marker active"></div>
-                    <span>Active Projects</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-marker completed"></div>
-                    <span>Completed Projects</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-marker research"></div>
-                    <span>Research & Policy</span>
-                </div>
+            <div class="section-header">
+                <h2 class="section-title">Current Role & Recent Achievements</h2>
+                <p class="section-subtitle">Making a measurable impact through strategic research and consulting</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Current Role & Impact -->
-    <section class="section" style="background: #F4F7FC;">
-        <div class="container">
-            <h2 class="section-title">Current Role & Impact</h2>
-            <p class="section-subtitle">Making a difference through data and strategic consulting</p>
             
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">
+            <div class="role-showcase">
+                <div class="current-position">
+                    <div class="position-header">
+                        <div class="company-logo">
                             <i class="fas fa-building"></i>
                         </div>
-                        <span class="card-badge">Current Role</span>
+                        <div class="position-details">
+                            <div class="role-badge current">Current Role</div>
+                            <h3>Senior Data Analyst</h3>
+                            <h4>Financial Resilience Institute</h4>
+                            <p class="role-period">October 2024 - Present | Winnipeg, MB</p>
+                        </div>
                     </div>
-                    <h3>Senior Data Analyst</h3>
-                    <h4 style="color: #004085; margin-bottom: 1rem;">Financial Resilience Institute</h4>
-                    <p style="margin-bottom: 1rem;">October 2024 - Present</p>
-                    <p>Leading research initiatives to develop evidence-based frameworks for measuring and enhancing financial resilience across diverse communities in Canada and internationally.</p>
                     
-                    <div class="project-metrics" style="margin-top: 2rem;">
-                        <div class="metric-item">
-                            <span class="metric-number" data-stat="organizations">15+</span>
-                            <span class="metric-label">Partner Organizations</span>
-                        </div>
-                        <div class="metric-item">
-                            <span class="metric-number">5</span>
-                            <span class="metric-label">Research Publications</span>
+                    <div class="role-description">
+                        <p>Leading comprehensive research initiatives to develop evidence-based frameworks for measuring and enhancing financial resilience across diverse communities in Canada and internationally.</p>
+                        
+                        <div class="key-responsibilities">
+                            <h4>Key Responsibilities & Achievements:</h4>
+                            <ul>
+                                <li><strong>Research Leadership:</strong> Designing and implementing large-scale financial health studies</li>
+                                <li><strong>Policy Development:</strong> Creating frameworks for community financial resilience assessment</li>
+                                <li><strong>Data Integration:</strong> Building comprehensive databases combining multiple financial indicators</li>
+                                <li><strong>Stakeholder Engagement:</strong> Collaborating with 15+ partner organizations</li>
+                                <li><strong>Publication Pipeline:</strong> 5 research publications in development for peer-reviewed journals</li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <span class="card-badge">Featured Research</span>
-                    </div>
-                    <h3>Financial Resilience Assessment</h3>
-                    <h4 style="color: #FF6600; margin-bottom: 1rem;">Policy Development</h4>
-                    <p style="margin-bottom: 1rem;">2024 - Ongoing</p>
-                    <p>Developing comprehensive frameworks to measure and improve financial well-being across Canadian communities and internationally.</p>
                     
-                    <div class="progress-container" style="margin-top: 2rem;">
-                        <div class="progress-label">
-                            <span>Research Progress</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%; background: #FF6600;"></div>
+                    <div class="impact-metrics">
+                        <div class="impact-grid">
+                            <div class="impact-item">
+                                <span class="impact-value">$2.8M</span>
+                                <span class="impact-label">Research Funding</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-value">15+</span>
+                                <span class="impact-label">Partner Organizations</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-value">5</span>
+                                <span class="impact-label">Research Publications</span>
+                            </div>
+                            <div class="impact-item">
+                                <span class="impact-value">85%</span>
+                                <span class="impact-label">Framework Completion</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -337,19 +427,22 @@
         </div>
     </section>
 
-    <!-- Testimonials with Initials -->
-    <section class="testimonials">
+    <!-- Professional Recommendations -->
+    <section class="testimonials-section">
         <div class="container">
-            <h2 class="section-title">Professional Recommendations</h2>
-            <p class="section-subtitle">What colleagues and clients say about working with me</p>
+            <div class="section-header">
+                <h2 class="section-title">Professional Recommendations</h2>
+                <p class="section-subtitle">What international colleagues and clients say about working with me</p>
+            </div>
             
             <div class="testimonials-grid">
-                <div class="testimonial-card">
+                <div class="testimonial-card featured">
                     <div class="testimonial-header">
                         <div class="testimonial-initials">KK</div>
                         <div class="testimonial-author">
                             <h4>Kerry Kyd</h4>
                             <p>Africa Sector & Business Development</p>
+                            <div class="company-tag">International Development</div>
                         </div>
                         <div class="testimonial-rating">
                             <div class="stars">
@@ -364,6 +457,9 @@
                     <div class="testimonial-content">
                         <p>"Patrice is smart, hard-working, and very capable. He can manage complex topics and always looks for ways to find practical solutions. His calm and warm personality enables him to connect with clients and beneficiaries."</p>
                     </div>
+                    <div class="testimonial-footer">
+                        <span class="testimonial-project">Africa Development Projects</span>
+                    </div>
                 </div>
                 
                 <div class="testimonial-card">
@@ -372,6 +468,7 @@
                         <div class="testimonial-author">
                             <h4>Melanie van der Baaren-Haga</h4>
                             <p>CBI - Centre for the Promotion of Imports</p>
+                            <div class="company-tag">Netherlands Enterprise Agency</div>
                         </div>
                         <div class="testimonial-rating">
                             <div class="stars">
@@ -386,6 +483,9 @@
                     <div class="testimonial-content">
                         <p>"Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</p>
                     </div>
+                    <div class="testimonial-footer">
+                        <span class="testimonial-project">Agricultural Value Chain Development</span>
+                    </div>
                 </div>
                 
                 <div class="testimonial-card">
@@ -393,7 +493,8 @@
                         <div class="testimonial-initials">TF</div>
                         <div class="testimonial-author">
                             <h4>Tamara Flink</h4>
-                            <p>Programme Manager CBI at Netherlands Enterprise Agency</p>
+                            <p>Programme Manager CBI</p>
+                            <div class="company-tag">Netherlands Enterprise Agency</div>
                         </div>
                         <div class="testimonial-rating">
                             <div class="stars">
@@ -408,44 +509,57 @@
                     <div class="testimonial-content">
                         <p>"Working with Patrice was a real pleasure. He is very hands on and practical and has a solution for everything. He is always supportive and ready to help."</p>
                     </div>
+                    <div class="testimonial-footer">
+                        <span class="testimonial-project">CBI Partnership Programs</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="section">
+    <!-- Strategic Call to Action -->
+    <section class="cta-section">
         <div class="container">
-            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <div style="margin-bottom: 2rem;">
-                    <i class="fas fa-rocket" style="font-size: 3rem; color: #004085; margin-bottom: 1rem;"></i>
-                </div>
-                <h2>Ready to Transform Your Data into Impact?</h2>
-                <p style="font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how evidence-based insights can accelerate your organization's growth and resilience.</p>
-                
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 2rem 0;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-clock" style="color: #FF6600;"></i>
-                        <span>Available for immediate engagement</span>
+            <div class="cta-content">
+                <div class="cta-header">
+                    <div class="cta-icon">
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-handshake" style="color: #FF6600;"></i>
-                        <span>Free 30-minute consultation</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fas fa-globe" style="color: #FF6600;"></i>
-                        <span>Remote & on-site collaboration</span>
-                    </div>
+                    <h2>Ready to Transform Your Development Challenges into Growth Opportunities?</h2>
                 </div>
                 
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+                <p class="cta-description">
+                    Let's collaborate to design data-driven solutions that create lasting impact. Whether you need comprehensive analytics, 
+                    policy research, or strategic consulting, I bring proven methodologies and international experience to every engagement.
+                </p>
+                
+                <div class="cta-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Immediate availability for new projects</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-handshake"></i>
+                        <span>Complimentary 30-minute strategy consultation</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-globe"></i>
+                        <span>Remote and on-site collaboration options</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-award"></i>
+                        <span>Proven track record across 12+ countries</span>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
                     <a href="contact.html" class="btn btn-primary btn-large">
                         <i class="fas fa-envelope"></i>
                         Start a Conversation
                     </a>
-                    <a href="key-projects.html" class="btn btn-secondary btn-large">
-                        <i class="fas fa-folder-open"></i>
-                        View My Work
+                    <a href="data-analytics.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-chart-bar"></i>
+                        Explore My Analytics Platform
                     </a>
                 </div>
             </div>
@@ -459,7 +573,7 @@
                 <div class="footer-section">
                     <h3>Patrice Mirindi</h3>
                     <p>Senior Data Analyst & Economic Development Consultant</p>
-                    <p>Transforming data into sustainable impact</p>
+                    <p>Transforming data into sustainable impact across emerging markets</p>
                     <div class="social-links">
                         <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -473,44 +587,437 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Quick Navigation</h4>
                     <ul>
                         <li><a href="about.html">About Me</a></li>
                         <li><a href="work-experience.html">Work Experience</a></li>
                         <li><a href="skills-expertise.html">Skills & Expertise</a></li>
                         <li><a href="key-projects.html">Key Projects</a></li>
-                        <li><a href="contact.html">Contact Me</a></li>
+                        <li><a href="data-analytics.html">Data Analytics</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Expertise</h4>
+                    <h4>Core Expertise</h4>
                     <ul>
-                        <li>Data Analytics</li>
-                        <li>Financial Resilience</li>
+                        <li>Advanced Data Analytics</li>
+                        <li>Financial Resilience Research</li>
                         <li>Agricultural Economics</li>
-                        <li>Project Management</li>
-                        <li>Policy Analysis</li>
+                        <li>International Development</li>
+                        <li>Strategic Consulting</li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact Info</h4>
+                    <h4>Contact Information</h4>
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> Winnipeg, MB, Canada</li>
                         <li><i class="fas fa-envelope"></i> patricemirindi@gmail.com</li>
-                        <li><i class="fas fa-globe"></i> www.patricemirindi.com</li>
+                        <li><i class="fas fa-globe"></i> International Development Consultant</li>
+                        <li><i class="fas fa-certificate"></i> PMP Certified</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Designed for sustainable impact.</p>
             </div>
         </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
-    <script src="assets/js/map.js"></script>
+    
+    <!-- Enhanced Hero Styling -->
+    <style>
+    /* Enhanced Hero Section with Prominent Profile Photo */
+    .hero.enhanced {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+        padding: 120px 0 80px;
+    }
+    
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+    
+    .hero-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 64, 133, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
+    }
+    
+    .hero-pattern {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23004085" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.1"/><circle cx="40" cy="80" r="2" fill="%23004085" opacity="0.1"/></svg>');
+        opacity: 0.3;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+    
+    .hero-profile {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4rem;
+        align-items: center;
+        margin-bottom: 4rem;
+    }
+    
+    .profile-photo-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .profile-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 6px solid white;
+        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.3), 0 8px 25px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 30px 80px rgba(0, 64, 133, 0.4), 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+    
+    .profile-badge {
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    .badge-icon {
+        font-size: 1rem;
+    }
+    
+    .profile-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .name-title h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+    }
+    
+    .title-highlight {
+        margin-bottom: 2rem;
+    }
+    
+    .title-highlight h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--accent-orange);
+        margin-bottom: 0;
+    }
+    
+    .professional-summary {
+        margin-bottom: 2rem;
+    }
+    
+    .hero-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        color: var(--gray-700);
+        margin-bottom: 0;
+    }
+    
+    .professional-highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .highlight-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 1rem;
+        border: 2px solid rgba(0, 64, 133, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .highlight-item:hover {
+        background: rgba(0, 64, 133, 0.05);
+        border-color: var(--accent-orange);
+        transform: translateY(-2px);
+    }
+    
+    .highlight-item i {
+        color: var(--accent-orange);
+        font-size: 1.25rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .highlight-item span {
+        font-weight: 600;
+        color: var(--gray-700);
+    }
+    
+    .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .hero-stats {
+        margin-top: 3rem;
+    }
+    
+    .stats-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+    
+    .stat-card {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem 1.5rem;
+        border-radius: 1.5rem;
+        border: 2px solid rgba(0, 64, 133, 0.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 64, 133, 0.15);
+        border-color: var(--accent-orange);
+    }
+    
+    .stat-card .stat-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin: 0 auto 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 64, 133, 0.3);
+    }
+    
+    .stat-card .stat-number {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary-blue);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-card .stat-label {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--gray-600);
+    }
+    
+    /* Enhanced Sections Styling */
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    
+    .section-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent-orange);
+        font-weight: 600;
+        text-decoration: none;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .section-link:hover {
+        color: var(--primary-blue);
+        transform: translateX(5px);
+    }
+    
+    .widgets-section {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        padding: 5rem 0;
+    }
+    
+    .expertise-showcase {
+        padding: 5rem 0;
+    }
+    
+    .current-role {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        padding: 5rem 0;
+    }
+    
+    .testimonials-section {
+        padding: 5rem 0;
+        background: var(--white);
+    }
+    
+    .cta-section {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, #1e40af 100%);
+        color: var(--white);
+        padding: 5rem 0;
+    }
+    
+    .cta-content {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .cta-header {
+        margin-bottom: 2rem;
+    }
+    
+    .cta-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--accent-orange), #ea580c);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2rem;
+        box-shadow: 0 15px 40px rgba(255, 102, 0, 0.4);
+    }
+    
+    .cta-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        color: var(--white);
+    }
+    
+    .cta-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .cta-benefits {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .benefit-item i {
+        color: var(--accent-orange);
+        font-size: 1.25rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    .benefit-item span {
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .hero-profile {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 2rem;
+        }
+        
+        .profile-photo {
+            width: 220px;
+            height: 220px;
+        }
+        
+        .name-title h1 {
+            font-size: 2.5rem;
+        }
+        
+        .professional-highlights {
+            grid-template-columns: 1fr;
+        }
+        
+        .hero-buttons {
+            justify-content: center;
+        }
+        
+        .cta-header h2 {
+            font-size: 2rem;
+        }
+        
+        .cta-benefits {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
 </body>
 </html>
