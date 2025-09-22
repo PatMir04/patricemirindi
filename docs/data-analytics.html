@@ -3,27 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Interactive Data Analytics - Explore economic development datasets with visualization tools by Patrice Mirindi">
-    <meta name="keywords" content="data analytics, economic development, visualization, datasets, R, Python, statistics">
-    <title>Data Analytics - Interactive Economic Development Analysis | Patrice Mirindi</title>
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Data Analytics - Interactive Economic Development Analysis">
-    <meta property="og:description" content="Explore and analyze economic development datasets with interactive visualization tools">
-    <meta property="og:type" content="website">
+    <meta name="description" content="Interactive data analytics dashboard by Patrice Mirindi - Economic development indicators, agricultural data, and financial resilience metrics">
+    <title>Data Analytics Dashboard - Patrice Mirindi</title>
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Chart.js for visualizations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-    
-    <!-- Plotly.js for advanced analytics -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    
-    <!-- D3.js for custom visualizations -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -52,315 +42,418 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="page-hero data-analytics-hero">
+    <!-- Page Header -->
+    <section class="page-header">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="page-title">Interactive Data Analytics</h1>
-                <p class="page-subtitle">Explore Economic Development Through Data</p>
-                <p class="hero-description">
-                    Dive into comprehensive economic development datasets and perform real-time analytics. 
-                    Use professional visualization tools to uncover insights in agricultural economics, 
-                    poverty reduction, and development finance.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">Interactive Datasets</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">6</span>
-                        <span class="stat-label">Analysis Tools</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">50+</span>
-                        <span class="stat-label">Countries Covered</span>
-                    </div>
-                </div>
-            </div>
+            <h1>Interactive Data Analytics Dashboard</h1>
+            <p class="page-subtitle">
+                Explore the latest indicators in economic development, agricultural production, and household resilience. 
+                These visualizations inform my consulting work and policy recommendations.
+            </p>
         </div>
     </section>
 
-    <!-- Analytics Dashboard -->
-    <section class="analytics-dashboard">
+    <!-- Interactive Dashboard Section -->
+    <section class="section" id="dashboard-section">
         <div class="container">
             <div class="dashboard-header">
-                <h2>Economic Development Analytics Dashboard</h2>
-                <p>Select datasets and visualization tools to perform interactive analysis</p>
-            </div>
-
-            <!-- Dataset Selection Panel -->
-            <div class="dataset-panel">
-                <h3><i class="fas fa-database"></i> Available Datasets</h3>
-                <div class="dataset-grid">
-                    <div class="dataset-card active" data-dataset="poverty">
-                        <div class="dataset-icon">
-                            <i class="fas fa-hand-holding-heart"></i>
-                        </div>
-                        <h4>Global Poverty Data</h4>
-                        <p>World Bank poverty headcount ratios, income distribution, and multidimensional poverty indicators across 189 countries</p>
-                        <div class="dataset-meta">
-                            <span class="data-points">189 countries</span>
-                            <span class="time-series">1990-2023</span>
-                        </div>
-                    </div>
-
-                    <div class="dataset-card" data-dataset="agriculture">
-                        <div class="dataset-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h4>Agricultural Indicators</h4>
-                        <p>FAO agricultural production, land use, crop yields, livestock data, and food security metrics</p>
-                        <div class="dataset-meta">
-                            <span class="data-points">195 countries</span>
-                            <span class="time-series">1961-2023</span>
-                        </div>
-                    </div>
-
-                    <div class="dataset-card" data-dataset="development">
-                        <div class="dataset-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Human Development</h4>
-                        <p>UNDP Human Development Index, education, health, and living standards indicators</p>
-                        <div class="dataset-meta">
-                            <span class="data-points">191 countries</span>
-                            <span class="time-series">1990-2023</span>
-                        </div>
-                    </div>
-
-                    <div class="dataset-card" data-dataset="finance">
-                        <div class="dataset-icon">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <h4>Development Finance</h4>
-                        <p>OECD-DAC official development assistance, climate finance, and investment flows</p>
-                        <div class="dataset-meta">
-                            <span class="data-points">150+ donors</span>
-                            <span class="time-series">2000-2023</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Controls -->
-            <div class="analytics-controls">
-                <div class="controls-section">
-                    <h4><i class="fas fa-filter"></i> Filters & Parameters</h4>
+                <h2>Global Development Indicators Dashboard</h2>
+                <p>Real-time data visualization of key economic and development metrics</p>
+                
+                <div class="dashboard-controls">
                     <div class="control-group">
-                        <div class="control-item">
-                            <label for="region-select">Region</label>
-                            <select id="region-select" class="form-control">
-                                <option value="world">World</option>
-                                <option value="africa">Sub-Saharan Africa</option>
-                                <option value="asia">East Asia & Pacific</option>
-                                <option value="europe">Europe & Central Asia</option>
-                                <option value="latin">Latin America & Caribbean</option>
-                                <option value="mena">Middle East & North Africa</option>
-                                <option value="north-america">North America</option>
-                            </select>
-                        </div>
-                        
-                        <div class="control-item">
-                            <label for="year-range">Year Range</label>
-                            <div class="year-range-container">
-                                <input type="range" id="year-start" min="1990" max="2023" value="2000" class="year-slider">
-                                <input type="range" id="year-end" min="1990" max="2023" value="2023" class="year-slider">
-                                <div class="year-display">
-                                    <span id="year-start-display">2000</span> - <span id="year-end-display">2023</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="control-item">
-                            <label for="indicator-select">Primary Indicator</label>
-                            <select id="indicator-select" class="form-control">
-                                <!-- Options populated dynamically based on dataset -->
-                            </select>
-                        </div>
-                        
-                        <div class="control-item">
-                            <label for="chart-type">Visualization Type</label>
-                            <select id="chart-type" class="form-control">
-                                <option value="line">Time Series Line Chart</option>
-                                <option value="bar">Bar Chart</option>
-                                <option value="scatter">Scatter Plot</option>
-                                <option value="map">Choropleth Map</option>
-                                <option value="heatmap">Correlation Heatmap</option>
-                                <option value="box">Box Plot Distribution</option>
-                            </select>
-                        </div>
-                        
-                        <button id="update-analysis" class="btn btn-primary">
-                            <i class="fas fa-chart-bar"></i> Update Analysis
-                        </button>
+                        <label for="region-selector">Region:</label>
+                        <select id="region-selector" class="dashboard-select">
+                            <option value="global">Global</option>
+                            <option value="africa">Sub-Saharan Africa</option>
+                            <option value="canada">Canada</option>
+                            <option value="eu">European Union</option>
+                        </select>
                     </div>
+                    <div class="control-group">
+                        <label for="indicator-selector">Indicator:</label>
+                        <select id="indicator-selector" class="dashboard-select">
+                            <option value="poverty">Poverty Rate</option>
+                            <option value="food-security">Food Security</option>
+                            <option value="financial-inclusion">Financial Inclusion</option>
+                            <option value="agricultural-productivity">Agricultural Productivity</option>
+                        </select>
+                    </div>
+                    <button id="update-charts" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Update Charts
+                    </button>
                 </div>
             </div>
 
-            <!-- Visualization Area -->
-            <div class="visualization-area">
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <!-- Poverty Trends Chart -->
                 <div class="chart-container">
                     <div class="chart-header">
-                        <h3 id="chart-title">Global Poverty Trends (1990-2023)</h3>
-                        <div class="chart-actions">
-                            <button class="btn-icon" id="download-chart" title="Download Chart">
-                                <i class="fas fa-download"></i>
-                            </button>
-                            <button class="btn-icon" id="fullscreen-chart" title="Fullscreen">
-                                <i class="fas fa-expand"></i>
-                            </button>
+                        <h3>Poverty Rate Trends</h3>
+                        <span class="chart-info">Global poverty headcount ratio at $2.15 a day (2017 PPP)</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="povertyChart"></canvas>
+                    </div>
+                    <div class="chart-insights">
+                        <div class="insight-item">
+                            <span class="insight-label">Current Global Rate:</span>
+                            <span class="insight-value" style="color: #FF6600;">8.5%</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-label">Reduction since 2000:</span>
+                            <span class="insight-value" style="color: #10b981;">-20.5%</span>
                         </div>
                     </div>
-                    <div id="main-chart"></div>
-                    <div class="chart-insights" id="chart-insights">
-                        <h4>Key Insights</h4>
-                        <ul id="insights-list">
-                            <li>Global extreme poverty has declined from 36% in 1990 to 8.5% in 2023</li>
-                            <li>Sub-Saharan Africa accounts for 60% of the world's extremely poor</li>
-                            <li>COVID-19 reversed progress, adding 97 million people to extreme poverty</li>
-                        </ul>
+                </div>
+
+                <!-- Food Security Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Global Food Security</h3>
+                        <span class="chart-info">Prevalence of moderate or severe food insecurity</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="foodSecurityChart"></canvas>
+                    </div>
+                    <div class="chart-insights">
+                        <div class="insight-item">
+                            <span class="insight-label">People Affected:</span>
+                            <span class="insight-value" style="color: #FF6600;">2.3B</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-label">Severe Insecurity:</span>
+                            <span class="insight-value" style="color: #ef4444;">900M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Inclusion Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Financial Inclusion Rates</h3>
+                        <span class="chart-info">Adults with account at financial institution or mobile money provider</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="financialInclusionChart"></canvas>
+                    </div>
+                    <div class="chart-insights">
+                        <div class="insight-item">
+                            <span class="insight-label">Global Average:</span>
+                            <span class="insight-value" style="color: #004085;">76%</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-label">Gender Gap:</span>
+                            <span class="insight-value" style="color: #FF6600;">6%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agricultural Productivity Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Agricultural Productivity</h3>
+                        <span class="chart-info">Cereal yield (kg per hectare) by region</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="agriculturalChart"></canvas>
+                    </div>
+                    <div class="chart-insights">
+                        <div class="insight-item">
+                            <span class="insight-label">Global Average:</span>
+                            <span class="insight-value" style="color: #10b981;">4,050 kg/ha</span>
+                        </div>
+                        <div class="insight-item">
+                            <span class="insight-label">Growth Rate:</span>
+                            <span class="insight-value" style="color: #004085;">+2.1%/year</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Statistical Analysis Panel -->
-            <div class="stats-panel">
-                <h3><i class="fas fa-calculator"></i> Statistical Analysis</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <h4>Descriptive Statistics</h4>
-                        <div class="stat-content" id="descriptive-stats">
-                            <div class="stat-row">
-                                <span class="stat-label">Mean:</span>
-                                <span class="stat-value" id="stat-mean">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Median:</span>
-                                <span class="stat-value" id="stat-median">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Std Dev:</span>
-                                <span class="stat-value" id="stat-stddev">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Range:</span>
-                                <span class="stat-value" id="stat-range">--</span>
-                            </div>
+            <!-- Key Metrics Summary -->
+            <div class="metrics-summary">
+                <h3>Key Development Metrics Summary</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">8.5%</div>
+                            <div class="metric-label">Extreme Poverty Rate</div>
+                            <div class="metric-source">World Bank 2024</div>
                         </div>
                     </div>
                     
-                    <div class="stat-card">
-                        <h4>Trend Analysis</h4>
-                        <div class="stat-content" id="trend-stats">
-                            <div class="stat-row">
-                                <span class="stat-label">Annual Change:</span>
-                                <span class="stat-value" id="annual-change">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">Correlation:</span>
-                                <span class="stat-value" id="correlation">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">R-squared:</span>
-                                <span class="stat-value" id="r-squared">--</span>
-                            </div>
-                            <div class="stat-row">
-                                <span class="stat-label">P-value:</span>
-                                <span class="stat-value" id="p-value">--</span>
-                            </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">2.3B</div>
+                            <div class="metric-label">Food Insecure People</div>
+                            <div class="metric-source">FAO 2024</div>
                         </div>
                     </div>
                     
-                    <div class="stat-card">
-                        <h4>Regional Comparison</h4>
-                        <div class="stat-content" id="regional-stats">
-                            <div class="region-comparison" id="region-comparison">
-                                <!-- Populated dynamically -->
-                            </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">76%</div>
+                            <div class="metric-label">Financial Inclusion</div>
+                            <div class="metric-source">Global Findex 2021</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Data Export Section -->
-            <div class="export-section">
-                <h3><i class="fas fa-file-export"></i> Export & Share</h3>
-                <div class="export-options">
-                    <button class="btn btn-secondary" id="export-csv">
-                        <i class="fas fa-file-csv"></i> Export CSV
-                    </button>
-                    <button class="btn btn-secondary" id="export-json">
-                        <i class="fas fa-file-code"></i> Export JSON
-                    </button>
-                    <button class="btn btn-secondary" id="export-r-code">
-                        <i class="fab fa-r-project"></i> Generate R Code
-                    </button>
-                    <button class="btn btn-secondary" id="export-python-code">
-                        <i class="fab fa-python"></i> Generate Python Code
-                    </button>
-                    <button class="btn btn-primary" id="share-analysis">
-                        <i class="fas fa-share-alt"></i> Share Analysis
-                    </button>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">4.4%</div>
+                            <div class="metric-label">Agriculture GDP Share</div>
+                            <div class="metric-source">IFAD 2024</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">1.6B</div>
+                            <div class="metric-label">Inadequate Housing</div>
+                            <div class="metric-source">UN-Habitat 2024</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">244M</div>
+                            <div class="metric-label">Out-of-School Children</div>
+                            <div class="metric-source">UNESCO 2024</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Methodology Section -->
-    <section class="methodology-section">
+    <!-- Data Analysis Tools & Methodology -->
+    <section class="section" style="background: #F4F7FC;">
         <div class="container">
-            <h2>Data Sources & Methodology</h2>
-            <div class="methodology-grid">
-                <div class="methodology-card">
-                    <div class="methodology-icon">
-                        <i class="fas fa-globe"></i>
+            <h2 class="section-title">Analysis Tools & Methodology</h2>
+            <p class="section-subtitle">Professional tools and approaches I use for data analytics and visualization</p>
+            
+            <div class="tools-grid">
+                <div class="tool-category">
+                    <div class="tool-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Programming & Analysis</h3>
                     </div>
-                    <h3>World Bank Open Data</h3>
-                    <p>Comprehensive development indicators including poverty, education, health, and economic growth metrics from 189 countries.</p>
-                    <a href="https://data.worldbank.org" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <span class="tool-name">R Programming</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 95%; background: #004085;"></div>
+                                </div>
+                                <span class="proficiency-label">Expert</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Python</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 90%; background: #004085;"></div>
+                                </div>
+                                <span class="proficiency-label">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Stata</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 85%; background: #004085;"></div>
+                                </div>
+                                <span class="proficiency-label">Advanced</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="methodology-card">
-                    <div class="methodology-icon">
-                        <i class="fas fa-wheat-awn"></i>
+                <div class="tool-category">
+                    <div class="tool-header">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Visualization & BI</h3>
                     </div>
-                    <h3>FAO Statistical Database</h3>
-                    <p>Agricultural production, land use, food security, and nutrition data from the UN Food and Agriculture Organization.</p>
-                    <a href="https://www.fao.org/faostat" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <span class="tool-name">Power BI</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 90%; background: #FF6600;"></div>
+                                </div>
+                                <span class="proficiency-label">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Tableau</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 80%; background: #FF6600;"></div>
+                                </div>
+                                <span class="proficiency-label">Proficient</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">ggplot2/D3.js</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 85%; background: #FF6600;"></div>
+                                </div>
+                                <span class="proficiency-label">Advanced</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="methodology-card">
-                    <div class="methodology-icon">
-                        <i class="fas fa-users"></i>
+                <div class="tool-category">
+                    <div class="tool-header">
+                        <i class="fas fa-database"></i>
+                        <h3>Data Management</h3>
                     </div>
-                    <h3>UNDP Human Development</h3>
-                    <p>Human Development Index, Gender Development Index, and Multidimensional Poverty Index from the UN Development Programme.</p>
-                    <a href="https://hdr.undp.org/data-center" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
-                </div>
-                
-                <div class="methodology-card">
-                    <div class="methodology-icon">
-                        <i class="fas fa-handshake"></i>
+                    <div class="tools-list">
+                        <div class="tool-item">
+                            <span class="tool-name">SQL</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 85%; background: #10b981;"></div>
+                                </div>
+                                <span class="proficiency-label">Advanced</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">Excel Advanced</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 95%; background: #10b981;"></div>
+                                </div>
+                                <span class="proficiency-label">Expert</span>
+                            </div>
+                        </div>
+                        <div class="tool-item">
+                            <span class="tool-name">SPSS</span>
+                            <div class="tool-proficiency">
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: 75%; background: #10b981;"></div>
+                                </div>
+                                <span class="proficiency-label">Proficient</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>OECD-DAC Statistics</h3>
-                    <p>Official Development Assistance, climate finance flows, and aid effectiveness indicators from OECD Development Assistance Committee.</p>
-                    <a href="https://stats.oecd.org/Index.aspx?DataSetCode=TABLE1" target="_blank" class="methodology-link">View Source <i class="fas fa-external-link-alt"></i></a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Data Sources & References -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Data Sources & References</h2>
+            <p class="section-subtitle">Authoritative sources informing the analytics and visualizations above</p>
             
-            <div class="analytical-approach">
-                <h3>Analytical Approach</h3>
-                <div class="approach-content">
-                    <p>The analytics platform employs rigorous statistical methodologies commonly used in development economics research:</p>
-                    <ul>
-                        <li><strong>Descriptive Analytics:</strong> Summary statistics, distributions, and trend analysis</li>
-                        <li><strong>Correlation Analysis:</strong> Pearson and Spearman correlation coefficients</li>
-                        <li><strong>Time Series Analysis:</strong> Trend decomposition and seasonality detection</li>
-                        <li><strong>Comparative Analysis:</strong> Cross-country and regional comparisons</li>
-                        <li><strong>Regression Analysis:</strong> Linear and non-linear trend fitting</li>
-                        <li><strong>Data Visualization:</strong> Interactive charts using D3.js, Chart.js, and Plotly</li>
-                    </ul>
+            <div class="sources-grid">
+                <div class="source-category">
+                    <h3>International Organizations</h3>
+                    <div class="sources-list">
+                        <a href="https://www.worldbank.org/en/research/brief/poverty-and-inequality-database" target="_blank" class="source-item">
+                            <div class="source-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>World Bank - Poverty & Inequality Database</h4>
+                                <p>Global poverty statistics, inequality measures, and development indicators</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.fao.org/faostat/en/" target="_blank" class="source-item">
+                            <div class="source-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>FAO - Food and Agriculture Data</h4>
+                                <p>Agricultural production, food security, and nutrition statistics</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://globalfindex.worldbank.org/" target="_blank" class="source-item">
+                            <div class="source-icon">
+                                <i class="fas fa-money-check-alt"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>Global Findex Database</h4>
+                                <p>Financial inclusion indicators and access to financial services</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="source-category">
+                    <h3>Development Finance</h3>
+                    <div class="sources-list">
+                        <a href="https://www.oecd.org/development/financing-sustainable-development/" target="_blank" class="source-item">
+                            <div class="source-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>OECD Development Finance</h4>
+                                <p>Official development assistance and development finance flows</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.ifad.org/en/results-and-impact" target="_blank" class="source-item">
+                            <div class="source-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>IFAD - Rural Development Data</h4>
+                                <p>Agricultural investment, rural finance, and smallholder development</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="source-category">
+                    <h3>Research & Analysis</h3>
+                    <div class="sources-list">
+                        <div class="source-item personal">
+                            <div class="source-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>Personal Research & Analysis</h4>
+                                <p>Original data analysis and visualizations based on field research and academic work in agricultural economics and financial resilience</p>
+                            </div>
+                        </div>
+                        
+                        <div class="source-item personal">
+                            <div class="source-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div class="source-content">
+                                <h4>Project Data Collection</h4>
+                                <p>Primary data collection from consulting projects across Africa, Canada, and Europe in agricultural development and financial inclusion</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -378,7 +471,7 @@
                         <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
@@ -387,24 +480,23 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Analytics Services</h4>
                     <ul>
-                        <li><a href="about.html">About Me</a></li>
-                        <li><a href="work-experience.html">Work Experience</a></li>
-                        <li><a href="skills-expertise.html">Skills & Expertise</a></li>
-                        <li><a href="key-projects.html">Key Projects</a></li>
-                        <li><a href="data-analytics.html">Data Analytics</a></li>
-                        <li><a href="contact.html">Contact Me</a></li>
+                        <li>Data Visualization</li>
+                        <li>Statistical Modeling</li>
+                        <li>Economic Analysis</li>
+                        <li>Policy Research</li>
+                        <li>Impact Evaluation</li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Analytics Tools</h4>
+                    <h4>Tools & Technologies</h4>
                     <ul>
-                        <li>Interactive Datasets</li>
-                        <li>Statistical Analysis</li>
-                        <li>Data Visualization</li>
-                        <li>Export & Sharing</li>
-                        <li>Methodology Documentation</li>
+                        <li>R Programming</li>
+                        <li>Python Analytics</li>
+                        <li>Power BI Dashboards</li>
+                        <li>Advanced Excel</li>
+                        <li>Stata Analysis</li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -417,18 +509,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Patrice Mirindi. All rights reserved. | Data-driven insights for development.</p>
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Data-driven solutions for sustainable impact.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Data Analytics JavaScript -->
-    <script src="assets/js/data-analytics.js"></script>
-    
-    <!-- Agricultural Expert Chatbot -->
-    <script src="assets/js/agricultural-expert-chatbot.js"></script>
-    
-    <!-- Main JavaScript -->
+    <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/analytics-dashboard.js"></script>
 </body>
 </html>
