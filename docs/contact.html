@@ -10,6 +10,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
@@ -25,8 +26,6 @@
                 <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
                 <li class="nav-item"><a href="key-projects.html" class="nav-link">Key Projects</a></li>
                 <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link">SDG Dashboard</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link active">Contact Me</a></li>
             </ul>
             <div class="hamburger">
@@ -72,10 +71,105 @@
         </div>
     </section>
 
-    <!-- Contact Methods -->
+    <!-- Main Contact Section -->
     <section class="section">
         <div class="container">
             <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Send Me a Message</h2>
+                    <p>Fill out the form below and I'll get back to you within 24 hours.</p>
+                    
+                    <form id="contact-form" class="professional-form" action="https://formspree.io/f/mldrpkek" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="organization">Organization</label>
+                                <input type="text" id="organization" name="organization">
+                            </div>
+                            <div class="form-group">
+                                <label for="project-type">Project Type</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="">Select project type</option>
+                                    <option value="data-analytics">Data Analytics & Visualization</option>
+                                    <option value="financial-resilience">Financial Resilience Assessment</option>
+                                    <option value="agricultural-economics">Agricultural Economics</option>
+                                    <option value="economic-development">Economic Development Strategy</option>
+                                    <option value="project-management">Project Management</option>
+                                    <option value="policy-analysis">Policy Analysis</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="timeline">Expected Timeline</label>
+                                <select id="timeline" name="timeline">
+                                    <option value="">Select timeline</option>
+                                    <option value="immediate">Immediate (1-2 weeks)</option>
+                                    <option value="short-term">Short-term (1-3 months)</option>
+                                    <option value="medium-term">Medium-term (3-6 months)</option>
+                                    <option value="long-term">Long-term (6+ months)</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="budget">Budget Range (Optional)</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Select budget range</option>
+                                    <option value="under-5k">Under $5,000</option>
+                                    <option value="5k-15k">$5,000 - $15,000</option>
+                                    <option value="15k-50k">$15,000 - $50,000</option>
+                                    <option value="50k-plus">$50,000+</option>
+                                    <option value="discuss">To be discussed</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required placeholder="Brief description of your project">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Description *</label>
+                            <textarea id="message" name="message" required rows="6" placeholder="Please describe your project, objectives, specific needs, and any relevant background information. The more details you provide, the better I can understand your requirements."></textarea>
+                        </div>
+                        
+                        <!-- Hidden fields for Formspree -->
+                        <input type="hidden" name="_replyto" id="email">
+                        <input type="hidden" name="_subject" value="New Project Inquiry from Contact Form">
+                        
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter" value="yes">
+                                <span class="checkmark"></span>
+                                I'd like to receive occasional updates about data analytics trends and insights
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large" id="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                Send Message
+                            </button>
+                        </div>
+                        
+                        <div id="form-status" class="form-status"></div>
+                    </form>
+                </div>
+                
                 <!-- Contact Information -->
                 <div class="contact-info-section">
                     <h2>Get In Touch</h2>
@@ -109,7 +203,7 @@
                             </div>
                             <div class="method-content">
                                 <h3>GitHub</h3>
-                                <p><a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer">github.com/patricemirindi</a></p>
+                                <p><a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer">github.com/PatMir04</a></p>
                                 <span class="method-note">Code samples and technical projects</span>
                             </div>
                         </div>
@@ -133,7 +227,7 @@
                             <div class="stat-label">Years Experience</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">50+</div>
+                            <div class="stat-number">20+</div>
                             <div class="stat-label">Projects Completed</div>
                         </div>
                         <div class="stat-card">
@@ -144,6 +238,61 @@
                             <div class="stat-number">100%</div>
                             <div class="stat-label">Client Satisfaction</div>
                         </div>
+                    </div>
+                    
+                    <!-- Services Overview -->
+                    <div class="services-overview">
+                        <h3>My Services</h3>
+                        <ul class="services-list">
+                            <li><i class="fas fa-chart-line"></i> Data Analytics & Statistical Modeling</li>
+                            <li><i class="fas fa-coins"></i> Financial Resilience Assessment</li>
+                            <li><i class="fas fa-seedling"></i> Agricultural Economics & Policy</li>
+                            <li><i class="fas fa-project-diagram"></i> Economic Development Strategy</li>
+                            <li><i class="fas fa-tasks"></i> Project Management (PMP Certified)</li>
+                            <li><i class="fas fa-search"></i> Impact Evaluation & Measurement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section" style="background: #F4F7FC;">
+        <div class="container">
+            <h2 class="section-title">How We'll Work Together</h2>
+            <p class="section-subtitle">My collaborative approach ensures project success from initial consultation to final delivery</p>
+            
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Initial Consultation</h3>
+                        <p>Free 30-minute discussion to understand your needs, objectives, and expected outcomes.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Proposal & Planning</h3>
+                        <p>Detailed project proposal with methodology, timeline, deliverables, and transparent pricing.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Implementation</h3>
+                        <p>Regular progress updates, collaborative feedback sessions, and quality assurance throughout.</p>
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Delivery & Support</h3>
+                        <p>Final deliverables with documentation, training if needed, and ongoing support period.</p>
                     </div>
                 </div>
             </div>
@@ -157,7 +306,7 @@
                 <h2>Ready to Get Started?</h2>
                 <p>Transform your data challenges into sustainable growth opportunities. Let's discuss your project today.</p>
                 
-                <div class="cta-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
+                <div class="cta-buttons" style="display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
                     <a href="mailto:patricemirindi@gmail.com?subject=Project%20Inquiry&body=Hi%20Patrice,%0A%0AI'm%20interested%20in%20discussing%20a%20potential%20project.%20Here%20are%20some%20initial%20details:%0A%0AProject%20Type:%20%0ATimeline:%20%0ABudget%20Range:%20%0A%0ADescription:%20%0A%0ABest%20regards," class="btn btn-primary btn-large">Email Me Directly</a>
                     <a href="key-projects.html" class="btn btn-secondary btn-large">View My Work</a>
                 </div>
@@ -177,7 +326,7 @@
                         <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
@@ -220,15 +369,9 @@
         </div>
     </footer>
 
-    <!-- Tawk.to Chat Widget -->
-    <script src="assets/js/tawk-enhanced.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            window.enhancedTawk = new EnhancedTawkWidget('68d05919a5528e1923b76c3a', '1j5mto36j');
-        });
-    </script>
-
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/contact-form.js"></script>
 </body>
 </html>
