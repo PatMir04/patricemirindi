@@ -52,6 +52,60 @@
         </div>
     </section>
 
+    <!-- Platform Introduction Section -->
+    <section class="section platform-introduction">
+        <div class="container">
+            <div class="intro-header">
+                <div class="intro-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2>Building a Unified Open Data Ecosystem for Global Development</h2>
+            </div>
+            
+            <div class="intro-content">
+                <p class="intro-description">
+                    This interactive platform represents an ongoing initiative to consolidate and democratize access to global development data from leading international organizations. As a development economist with <strong>8+ years of experience</strong> across multiple continents, I am building this comprehensive analytics dashboard to bridge the gap between scattered data sources and actionable insights.
+                </p>
+                
+                <div class="intro-grid">
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h4>🎯 Platform Vision</h4>
+                        <p>Integrate World Bank, IMF, UN, FAO, and other authoritative datasets into a single, interactive interface that enables researchers, policymakers, and development practitioners to conduct comparative analysis across <strong>195+ countries and territories</strong>.</p>
+                    </div>
+                    
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>⚡ Technical Approach</h4>
+                        <p>Leveraging modern web technologies, API integrations, and statistical methodologies to create <strong>real-time visualizations</strong> that transform complex datasets into accessible, decision-ready intelligence.</p>
+                    </div>
+                    
+                    <div class="intro-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>🚧 Current Status</h4>
+                        <p><strong>Actively expanding</strong> - New indicators, enhanced visualizations, and additional data sources are continuously being integrated. This platform showcases the intersection of technical expertise, development economics knowledge, and practical field experience.</p>
+                    </div>
+                </div>
+                
+                <div class="intro-footer">
+                    <div class="progress-indicator">
+                        <span class="progress-label">Platform Development Progress:</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">75% Complete - Core Features Live</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Interactive Dashboard Section -->
     <section class="section" id="dashboard-section">
         <div class="container">
@@ -69,6 +123,8 @@
                                 <option value="BJ" selected>Benin</option>
                                 <option value="BF" selected>Burkina Faso</option>
                                 <option value="CI" selected>Ivory Coast</option>
+                                <option value="GH" selected>Ghana</option>
+                                <option value="NG" selected>Nigeria</option>
                                 <option value="NL">Netherlands</option>
                                 <option value="ZA">South Africa</option>
                             </optgroup>
@@ -83,9 +139,7 @@
                                 <option value="BR">Brazil</option>
                             </optgroup>
                             <optgroup label="African Countries">
-                                <option value="NG">Nigeria</option>
                                 <option value="KE">Kenya</option>
-                                <option value="GH">Ghana</option>
                                 <option value="EG">Egypt</option>
                                 <option value="MA">Morocco</option>
                                 <option value="RW">Rwanda</option>
@@ -433,6 +487,44 @@
                         </div>
                     </div>
 
+                    <div class="profile-card" data-country="GH">
+                        <div class="country-flag">🇬🇭</div>
+                        <h4>Ghana</h4>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <span class="stat-value">$77.6B</span>
+                                <span class="stat-label">GDP 2023</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="stat-value">$18.2B</span>
+                                <span class="stat-label">Exports</span>
+                            </div>
+                        </div>
+                        <div class="expertise-note">
+                            <i class="fas fa-seedling"></i>
+                            <span>Agricultural Value Chain Development</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-card" data-country="NG">
+                        <div class="country-flag">🇳🇬</div>
+                        <h4>Nigeria</h4>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <span class="stat-value">$440.8B</span>
+                                <span class="stat-label">GDP 2023</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="stat-value">$67.3B</span>
+                                <span class="stat-label">Exports</span>
+                            </div>
+                        </div>
+                        <div class="expertise-note">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Economic Policy & Market Analysis</span>
+                        </div>
+                    </div>
+
                     <div class="profile-card" data-country="NL">
                         <div class="country-flag">🇳🇱</div>
                         <h4>Netherlands</h4>
@@ -633,7 +725,7 @@
                             </div>
                             <div class="source-content">
                                 <h4>Primary Field Research</h4>
-                                <p>Direct data collection and analysis from consulting projects in DRC, Benin, Burkina Faso, and Ivory Coast</p>
+                                <p>Direct data collection and analysis from consulting projects in DRC, Benin, Burkina Faso, Ivory Coast, Ghana, and Nigeria</p>
                                 <span class="source-update">Updated: Per Project</span>
                             </div>
                         </div>
@@ -761,5 +853,185 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
     <script src="assets/js/global-analytics-dashboard.js"></script>
+    
+    <style>
+    /* Professional Introduction Section Styling */
+    .platform-introduction {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+        border-bottom: 3px solid var(--primary-blue);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .platform-introduction::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(255, 102, 0, 0.1) 0%, transparent 70%);
+    }
+    
+    .intro-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .intro-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-orange) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 64, 133, 0.3);
+    }
+    
+    .intro-header h2 {
+        color: var(--primary-blue);
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0;
+        text-align: center;
+        line-height: 1.2;
+    }
+    
+    .intro-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .intro-description {
+        font-size: 1.25rem;
+        line-height: 1.7;
+        color: var(--gray-700);
+        text-align: center;
+        margin-bottom: 3rem;
+        font-weight: 500;
+    }
+    
+    .intro-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+    
+    .intro-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: 2px solid transparent;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        backdrop-filter: blur(10px);
+    }
+    
+    .intro-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(0, 64, 133, 0.15);
+        border-color: var(--accent-orange);
+    }
+    
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 25px rgba(0, 64, 133, 0.3);
+    }
+    
+    .intro-card h4 {
+        color: var(--primary-blue);
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .intro-card p {
+        color: var(--gray-600);
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+    
+    .intro-footer {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 2px solid rgba(0, 64, 133, 0.1);
+    }
+    
+    .progress-indicator {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .progress-label {
+        display: block;
+        color: var(--primary-blue);
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 12px;
+        background: rgba(0, 64, 133, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange));
+        border-radius: 10px;
+        transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(0, 64, 133, 0.4);
+    }
+    
+    .progress-text {
+        color: var(--gray-600);
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    @media (max-width: 768px) {
+        .intro-header h2 {
+            font-size: 2rem;
+        }
+        
+        .intro-description {
+            font-size: 1.125rem;
+        }
+        
+        .intro-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .intro-card {
+            padding: 1.5rem;
+        }
+        
+        .intro-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+    }
+    </style>
 </body>
 </html>
