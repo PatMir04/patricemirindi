@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Patrice Mirindi's key projects portfolio - $5.2M+ in project value across financial resilience, agricultural development, and economic analysis">
-    <meta name="keywords" content="Patrice Mirindi projects, data analytics projects, economic development portfolio, financial resilience">
-    <title>Key Projects - Patrice Mirindi</title>
+    <meta name="description" content="Patrice Mirindi's key projects portfolio - $5.2M+ in project value across financial resilience, agricultural development, and economic analysis spanning 12+ countries">
+    <meta name="keywords" content="Patrice Mirindi projects, data analytics projects, economic development portfolio, financial resilience, international projects">
+    <title>Key Projects - Patrice Mirindi | $5.2M+ Project Portfolio Across 12+ Countries</title>
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Navigation -->
@@ -25,8 +29,6 @@
                 <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
                 <li class="nav-item"><a href="key-projects.html" class="nav-link active">Key Projects</a></li>
                 <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link">SDG Dashboard</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
             </ul>
             <div class="hamburger">
@@ -40,233 +42,354 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
+    <!-- Hero Section - Matching Other Pages -->
+    <section class="projects-hero">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
+        
         <div class="container">
-            <h1>Key Projects</h1>
-            <p class="page-subtitle">$5.2M+ in project value delivering sustainable impact across 12+ countries</p>
+            <div class="hero-content">
+                <h1>Key Projects Portfolio</h1>
+                <p class="hero-subtitle">$5.2M+ in Project Value Across 12+ Countries</p>
+                <p class="hero-description">Delivering sustainable impact through data-driven solutions, strategic consulting, and innovative approaches to international development challenges. From financial resilience frameworks to agricultural value chain transformations.</p>
+                
+                <div class="impact-highlights">
+                    <div class="highlight-item">
+                        <div class="highlight-number">$5.2M+</div>
+                        <div class="highlight-label">Total Project Value</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">50+</div>
+                        <div class="highlight-label">Projects Completed</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">2,000+</div>
+                        <div class="highlight-label">Lives Impacted</div>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="highlight-number">12+</div>
+                        <div class="highlight-label">Countries</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Projects Overview -->
-    <section class="section">
+    <!-- Interactive Project Map Section -->
+    <section class="projects-map-section">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-dollar-sign"></i>
+            <div class="section-header">
+                <h2 class="section-title">Global Project Footprint</h2>
+                <p class="section-subtitle">Interactive map showcasing project locations and impact across continents</p>
+            </div>
+            
+            <div class="map-container">
+                <div id="projects-map" class="interactive-map"></div>
+                
+                <div class="map-legend">
+                    <h4>Project Types</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-marker financial"></div>
+                            <span>Financial Resilience</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker agricultural"></div>
+                            <span>Agricultural Development</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker trade"></div>
+                            <span>Trade & Policy</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-marker youth"></div>
+                            <span>Youth Employment</span>
+                        </div>
                     </div>
-                    <div class="stat-number">$5.2M+</div>
-                    <div class="stat-label">Total Project Value</div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-project-diagram"></i>
+                
+                <div class="project-stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-globe-americas"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Continents</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">12+</div>
+                                <div class="stat-label">Countries</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">25+</div>
+                                <div class="stat-label">Partners</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-number">50+</div>
-                    <div class="stat-label">Projects Completed</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-number">2,000+</div>
-                    <div class="stat-label">Lives Impacted</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-globe-americas"></i>
-                    </div>
-                    <div class="stat-number">12+</div>
-                    <div class="stat-label">Countries</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Featured Projects -->
-    <section class="section">
+    <section class="featured-projects">
         <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-subtitle">Signature initiatives demonstrating impact and expertise</p>
+            <div class="section-header">
+                <h2 class="section-title">Signature Initiatives</h2>
+                <p class="section-subtitle">Flagship projects demonstrating impact, innovation, and expertise</p>
+            </div>
             
-            <div class="testimonials-grid">
+            <div class="projects-grid">
                 <!-- Project 1: Financial Resilience Framework -->
-                <div class="card">
+                <div class="project-card featured">
                     <div class="project-header">
-                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                            <i class="fas fa-shield-alt" style="color: var(--dark-bg); font-size: 28px;"></i>
+                        <div class="project-icon financial">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        <div class="project-meta" style="color: var(--neon-green); font-weight: 600; margin-bottom: 10px;">2024 - Present | Ongoing</div>
+                        <div class="project-meta">
+                            <span class="project-status ongoing">2024 - Present | Ongoing</span>
+                            <span class="project-value">$2.1M</span>
+                        </div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Financial Resilience Framework Development</h3>
-                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
-                            <i class="fas fa-building"></i>
-                            <span>Financial Resilience Institute</span>
-                        </div>
-                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Canada & International</span>
-                        </div>
-                        
-                        <p>Leading the development of a comprehensive framework to measure and enhance financial resilience across Canadian communities and internationally.</p>
-                        
-                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">500K+</div>
-                                <div class="stat-label">Canadians Assessed</div>
+                        <div class="project-details">
+                            <div class="project-client">
+                                <i class="fas fa-building"></i>
+                                <span>Financial Resilience Institute</span>
                             </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">15</div>
-                                <div class="stat-label">Partner Organizations</div>
-                            </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">$2.1M</div>
-                                <div class="stat-label">Project Value</div>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Canada & International</span>
                             </div>
                         </div>
                         
-                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
-                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">R Programming</span>
-                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Power BI</span>
-                            <span class="tech-tag" style="background: rgba(0, 255, 255, 0.1); color: var(--neon-cyan); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 255, 0.3);">Statistical Modeling</span>
+                        <p>Leading the development of a comprehensive framework to measure and enhance financial resilience across Canadian communities and internationally. This groundbreaking initiative establishes new standards for financial wellness assessment.</p>
+                        
+                        <div class="project-impact">
+                            <div class="impact-metrics">
+                                <div class="metric">
+                                    <div class="metric-number">500K+</div>
+                                    <div class="metric-label">Canadians Assessed</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">15</div>
+                                    <div class="metric-label">Partner Organizations</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">25</div>
+                                    <div class="metric-label">Key Indicators</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">R Programming</span>
+                            <span class="tech-tag">Power BI</span>
+                            <span class="tech-tag">Statistical Modeling</span>
+                            <span class="tech-tag">Survey Design</span>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <button class="btn btn-outline-primary btn-small project-details-btn" data-project="financial-resilience">
+                                <i class="fas fa-info-circle"></i>
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2: Multi-Country Agricultural Initiative -->
-                <div class="card">
+                <div class="project-card">
                     <div class="project-header">
-                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                            <i class="fas fa-seedling" style="color: var(--dark-bg); font-size: 28px;"></i>
+                        <div class="project-icon agricultural">
+                            <i class="fas fa-seedling"></i>
                         </div>
-                        <div class="project-meta" style="color: var(--neon-cyan); font-weight: 600; margin-bottom: 10px;">2022 - 2024 | Completed</div>
+                        <div class="project-meta">
+                            <span class="project-status completed">2022 - 2024 | Completed</span>
+                            <span class="project-value">$1.8M</span>
+                        </div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Multi-Country Agricultural Development Initiative</h3>
-                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
-                            <i class="fas fa-building"></i>
-                            <span>GIZ ProEmploi & World Bank</span>
-                        </div>
-                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>West & Central Africa (5 Countries)</span>
-                        </div>
-                        
-                        <p>Led comprehensive agricultural value chain analysis and market development strategies across five African countries to improve farmer livelihoods and food security.</p>
-                        
-                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">2,000+</div>
-                                <div class="stat-label">Farmers Benefited</div>
+                        <div class="project-details">
+                            <div class="project-client">
+                                <i class="fas fa-handshake"></i>
+                                <span>GIZ ProEmploi & World Bank</span>
                             </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">35%</div>
-                                <div class="stat-label">Income Increase</div>
-                            </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">$1.8M</div>
-                                <div class="stat-label">Project Value</div>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>West & Central Africa (5 Countries)</span>
                             </div>
                         </div>
                         
-                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
-                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Impact Evaluation</span>
-                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Stata Analysis</span>
-                            <span class="tech-tag" style="background: rgba(0, 255, 136, 0.1); color: var(--neon-green); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(0, 255, 136, 0.3);">Survey Design</span>
+                        <p>Led comprehensive agricultural value chain analysis and market development strategies across five African countries, focusing on improving farmer livelihoods and strengthening food security systems.</p>
+                        
+                        <div class="project-impact">
+                            <div class="impact-metrics">
+                                <div class="metric">
+                                    <div class="metric-number">2,000+</div>
+                                    <div class="metric-label">Farmers Benefited</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">35%</div>
+                                    <div class="metric-label">Income Increase</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">5</div>
+                                    <div class="metric-label">Countries</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Impact Evaluation</span>
+                            <span class="tech-tag">STATA Analysis</span>
+                            <span class="tech-tag">Survey Design</span>
+                            <span class="tech-tag">Market Analysis</span>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <button class="btn btn-outline-primary btn-small project-details-btn" data-project="agricultural-initiative">
+                                <i class="fas fa-info-circle"></i>
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 3: EU Trade Facilitation Program -->
-                <div class="card">
+                <div class="project-card">
                     <div class="project-header">
-                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                            <i class="fas fa-handshake" style="color: var(--dark-bg); font-size: 28px;"></i>
+                        <div class="project-icon trade">
+                            <i class="fas fa-handshake"></i>
                         </div>
-                        <div class="project-meta" style="color: var(--neon-pink); font-weight: 600; margin-bottom: 10px;">2023 | Completed</div>
+                        <div class="project-meta">
+                            <span class="project-status completed">2023 | Completed</span>
+                            <span class="project-value">$800K</span>
+                        </div>
                     </div>
                     
                     <div class="project-content">
                         <h3>EU Trade Facilitation Program</h3>
-                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
-                            <i class="fas fa-flag"></i>
-                            <span>European Union - Trade Program</span>
-                        </div>
-                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>East Africa Regional</span>
-                        </div>
-                        
-                        <p>Conducted comprehensive trade facilitation analysis and policy recommendations to enhance regional trade integration and economic growth.</p>
-                        
-                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">$2.3M</div>
-                                <div class="stat-label">Trade Value Facilitated</div>
+                        <div class="project-details">
+                            <div class="project-client">
+                                <i class="fas fa-flag"></i>
+                                <span>European Union - Trade Program</span>
                             </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">6</div>
-                                <div class="stat-label">Countries Involved</div>
-                            </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">$800K</div>
-                                <div class="stat-label">Project Value</div>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>East Africa Regional</span>
                             </div>
                         </div>
                         
-                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
-                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Economic Modeling</span>
-                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Trade Analysis</span>
-                            <span class="tech-tag" style="background: rgba(255, 0, 255, 0.1); color: var(--neon-pink); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 0, 255, 0.3);">Policy Evaluation</span>
+                        <p>Conducted comprehensive trade facilitation analysis and developed policy recommendations to enhance regional trade integration and boost economic growth across East African markets.</p>
+                        
+                        <div class="project-impact">
+                            <div class="impact-metrics">
+                                <div class="metric">
+                                    <div class="metric-number">$2.3M</div>
+                                    <div class="metric-label">Trade Value Facilitated</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">6</div>
+                                    <div class="metric-label">Countries</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">12</div>
+                                    <div class="metric-label">Policy Recommendations</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Economic Modeling</span>
+                            <span class="tech-tag">Trade Analysis</span>
+                            <span class="tech-tag">Policy Evaluation</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <button class="btn btn-outline-primary btn-small project-details-btn" data-project="eu-trade">
+                                <i class="fas fa-info-circle"></i>
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 4: Youth Employment Study -->
-                <div class="card">
+                <div class="project-card">
                     <div class="project-header">
-                        <div class="project-icon" style="background: linear-gradient(135deg, var(--neon-orange), var(--neon-pink)); width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-                            <i class="fas fa-users" style="color: var(--dark-bg); font-size: 28px;"></i>
+                        <div class="project-icon youth">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <div class="project-meta" style="color: var(--neon-orange); font-weight: 600; margin-bottom: 10px;">2020 - 2021 | Completed</div>
+                        <div class="project-meta">
+                            <span class="project-status completed">2020 - 2021 | Completed</span>
+                            <span class="project-value">$400K</span>
+                        </div>
                     </div>
                     
                     <div class="project-content">
                         <h3>Youth Employment Impact Assessment</h3>
-                        <div class="project-client" style="color: var(--dark-text-secondary); margin-bottom: 10px;">
-                            <i class="fas fa-university"></i>
-                            <span>World Bank & The Anzisha Prize</span>
-                        </div>
-                        <div class="project-location" style="color: var(--dark-text-secondary); margin-bottom: 20px;">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Sub-Saharan Africa</span>
-                        </div>
-                        
-                        <p>Comprehensive analysis of youth employment programs and entrepreneurship initiatives across multiple African countries to inform policy development.</p>
-                        
-                        <div class="project-impact" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0;">
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">500+</div>
-                                <div class="stat-label">Youth Entrepreneurs</div>
+                        <div class="project-details">
+                            <div class="project-client">
+                                <i class="fas fa-university"></i>
+                                <span>World Bank & The Anzisha Prize</span>
                             </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">8</div>
-                                <div class="stat-label">Research Reports</div>
-                            </div>
-                            <div class="impact-item" style="text-align: center;">
-                                <div class="stat-number" style="font-size: 2rem;">$400K</div>
-                                <div class="stat-label">Project Value</div>
+                            <div class="project-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Sub-Saharan Africa</span>
                             </div>
                         </div>
                         
-                        <div class="tech-tags" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px;">
-                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">Survey Design</span>
-                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">SPSS Analysis</span>
-                            <span class="tech-tag" style="background: rgba(255, 128, 0, 0.1); color: var(--neon-orange); padding: 4px 12px; border-radius: 15px; font-size: 12px; border: 1px solid rgba(255, 128, 0, 0.3);">Impact Evaluation</span>
+                        <p>Comprehensive analysis of youth employment programs and entrepreneurship initiatives across multiple African countries to inform evidence-based policy development and program design.</p>
+                        
+                        <div class="project-impact">
+                            <div class="impact-metrics">
+                                <div class="metric">
+                                    <div class="metric-number">500+</div>
+                                    <div class="metric-label">Youth Entrepreneurs</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">8</div>
+                                    <div class="metric-label">Research Reports</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-number">15</div>
+                                    <div class="metric-label">Policy Insights</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Survey Design</span>
+                            <span class="tech-tag">SPSS Analysis</span>
+                            <span class="tech-tag">Impact Evaluation</span>
+                            <span class="tech-tag">Report Writing</span>
+                        </div>
+                        
+                        <div class="project-actions">
+                            <button class="btn btn-outline-primary btn-small project-details-btn" data-project="youth-employment">
+                                <i class="fas fa-info-circle"></i>
+                                View Details
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -274,17 +397,21 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials section">
+    <!-- Client Testimonials -->
+    <section class="testimonials-section">
         <div class="container">
-            <h2 class="section-title">Client Success Stories</h2>
-            <p class="section-subtitle">What project partners say about our collaboration</p>
+            <div class="section-header">
+                <h2 class="section-title">Client Success Stories</h2>
+                <p class="section-subtitle">What project partners say about our collaboration and results</p>
+            </div>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Kerry Kyd">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
                         </div>
                         <div class="testimonial-author">
                             <h4>Kerry Kyd</h4>
@@ -301,14 +428,25 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
                         <p>"Patrice is smart, hard-working, and very capable. He can manage complex topics and always looks for ways to find practical solutions. His calm and warm personality enables him to connect with clients and beneficiaries, and his commitment to finishing the job makes him a valued team member."</p>
+                    </div>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-project">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>Agricultural Value Chain Project</span>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Melanie van der Baaren-Haga">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
                         </div>
                         <div class="testimonial-author">
                             <h4>Melanie van der Baaren-Haga</h4>
@@ -325,14 +463,25 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
                         <p>"At CBI we worked with Patrice through Economic Sense Ltd in our dried pineapple sector project in Benin from November 2022 - July 2024. Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</p>
+                    </div>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-project">
+                            <i class="fas fa-seedling"></i>
+                            <span>Dried Pineapple Sector - Benin</span>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
                         <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Tamara Flink">
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
                         </div>
                         <div class="testimonial-author">
                             <h4>Tamara Flink</h4>
@@ -349,23 +498,37 @@
                         </div>
                     </div>
                     <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
                         <p>"Working with Patrice on a project in the processed mango sector in Burkina Faso was a real pleasure. Patrice is very hands on and practical and has a solution for everything. He is always supportive and ready to help. As a project manager it is always great to have an expert work / stand next to you."</p>
+                    </div>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-project">
+                            <i class="fas fa-apple-alt"></i>
+                            <span>Processed Mango Sector - Burkina Faso</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section">
+    <!-- Call to Action -->
+    <section class="projects-cta">
         <div class="container">
-            <div style="text-align: center;">
+            <div class="cta-content">
                 <h2>Ready to Create Impact Together?</h2>
-                <p>Looking to implement data-driven solutions for sustainable development? Let's discuss how my project experience can benefit your organization.</p>
-                
-                <div style="display: flex; gap: 20px; justify-content: center; margin-top: 30px;">
-                    <a href="contact.html" class="btn btn-primary btn-large">Discuss Your Project</a>
-                    <a href="work-experience.html" class="btn btn-secondary btn-large">View Full Experience</a>
+                <p>Looking to implement data-driven solutions for sustainable development? Let's discuss how my project experience and analytical expertise can benefit your organization and drive measurable results.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary btn-large">
+                        <i class="fas fa-envelope"></i>
+                        Discuss Your Project
+                    </a>
+                    <a href="work-experience.html" class="btn btn-secondary btn-large">
+                        <i class="fas fa-briefcase"></i>
+                        View Full Experience
+                    </a>
                 </div>
             </div>
         </div>
@@ -377,13 +540,13 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Patrice Mirindi</h3>
-                    <p>Senior Data Analyst & Economic Development Consultant</p>
-                    <p>Transforming data into sustainable impact</p>
+                    <p>Development Economist & Data Analytics Consultant</p>
+                    <p>Transforming data into sustainable impact across global markets</p>
                     <div class="social-links">
                         <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
@@ -392,49 +555,842 @@
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Project Expertise</h4>
                     <ul>
-                        <li><a href="about.html">About Me</a></li>
-                        <li><a href="work-experience.html">Work Experience</a></li>
-                        <li><a href="skills-expertise.html">Skills & Expertise</a></li>
-                        <li><a href="key-projects.html">Key Projects</a></li>
-                        <li><a href="contact.html">Contact Me</a></li>
+                        <li>Financial Resilience Frameworks</li>
+                        <li>Agricultural Value Chain Analysis</li>
+                        <li>Trade Facilitation & Policy</li>
+                        <li>Youth Employment Programs</li>
+                        <li>Impact Evaluation & Measurement</li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Expertise</h4>
+                    <h4>Geographic Focus</h4>
                     <ul>
-                        <li>Data Analytics</li>
-                        <li>Financial Resilience</li>
-                        <li>Agricultural Economics</li>
-                        <li>Project Management</li>
-                        <li>Policy Analysis</li>
+                        <li>Canada & North America</li>
+                        <li>West & Central Africa</li>
+                        <li>East Africa Regional</li>
+                        <li>Sub-Saharan Africa</li>
+                        <li>International Development</li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Contact Info</h4>
+                    <h4>Project Impact</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Winnipeg, MB, Canada</li>
-                        <li><i class="fas fa-envelope"></i> patricemirindi@gmail.com</li>
-                        <li><i class="fas fa-globe"></i> www.patricemirindi.com</li>
+                        <li><i class="fas fa-dollar-sign"></i> $5.2M+ Total Value</li>
+                        <li><i class="fas fa-users"></i> 2,000+ Lives Impacted</li>
+                        <li><i class="fas fa-globe"></i> 12+ Countries Served</li>
+                        <li><i class="fas fa-handshake"></i> 25+ Partner Organizations</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Designed for impact.</p>
+                <p>&copy; 2025 Patrice Mirindi. All rights reserved. | Creating sustainable impact through data-driven solutions.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Tawk.to Chat Widget -->
-    <script src="assets/js/tawk-enhanced.js"></script>
+    <!-- Enhanced Projects CSS -->
+    <style>
+    /* Hero Section - Matching Other Pages */
+    .projects-hero {
+        background: linear-gradient(135deg, #004085 0%, #0056b3 50%, #007bff 100%);
+        color: white;
+        padding: 5rem 1rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+    
+    .hero-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 64, 133, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
+    }
+    
+    .hero-pattern {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
+        opacity: 0.4;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #FF6600;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-description {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 3rem;
+    }
+    
+    .impact-highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .highlight-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 2rem 1rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    .highlight-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-4px);
+    }
+    
+    .highlight-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #FF6600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .highlight-label {
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* Interactive Map Section */
+    .projects-map-section {
+        padding: 5rem 1rem;
+        background: #f8fbff;
+    }
+    
+    .map-container {
+        position: relative;
+        margin-top: 3rem;
+    }
+    
+    .interactive-map {
+        height: 500px;
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
+        overflow: hidden;
+    }
+    
+    .map-legend {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.15);
+        z-index: 1000;
+        min-width: 200px;
+    }
+    
+    .map-legend h4 {
+        color: #004085;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    
+    .legend-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    
+    .legend-marker {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .legend-marker.financial {
+        background: #10b981;
+    }
+    
+    .legend-marker.agricultural {
+        background: #f59e0b;
+    }
+    
+    .legend-marker.trade {
+        background: #3b82f6;
+    }
+    
+    .legend-marker.youth {
+        background: #ef4444;
+    }
+    
+    .legend-item span {
+        color: #6B7280;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .project-stats {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.15);
+        z-index: 1000;
+    }
+    
+    .stats-grid {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #004085, #FF6600);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .stat-content {
+        text-align: left;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #004085;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+        color: #6B7280;
+        font-weight: 500;
+    }
+    
+    /* Featured Projects */
+    .featured-projects {
+        padding: 5rem 1rem;
+        background: white;
+    }
+    
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+    }
+    
+    .project-card {
+        background: #f8fbff;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 64, 133, 0.05);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .project-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.15);
+    }
+    
+    .project-card.featured {
+        border: 2px solid #FF6600;
+        background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+    }
+    
+    .project-card.featured::before {
+        content: 'FEATURED';
+        position: absolute;
+        top: 20px;
+        right: -30px;
+        background: #FF6600;
+        color: white;
+        padding: 0.5rem 2rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        transform: rotate(45deg);
+        z-index: 1;
+    }
+    
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    
+    .project-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .project-icon.financial {
+        background: linear-gradient(135deg, #10b981, #059669);
+    }
+    
+    .project-icon.agricultural {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+    
+    .project-icon.trade {
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+    
+    .project-icon.youth {
+        background: linear-gradient(135deg, #ef4444, #dc2626);
+    }
+    
+    .project-meta {
+        text-align: right;
+    }
+    
+    .project-status {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+    }
+    
+    .project-status.ongoing {
+        background: rgba(16, 185, 129, 0.1);
+        color: #059669;
+    }
+    
+    .project-status.completed {
+        background: rgba(59, 130, 246, 0.1);
+        color: #1d4ed8;
+    }
+    
+    .project-value {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #FF6600;
+    }
+    
+    .project-content h3 {
+        color: #004085;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .project-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .project-client,
+    .project-location {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #6B7280;
+        font-size: 0.9rem;
+    }
+    
+    .project-client i,
+    .project-location i {
+        color: #FF6600;
+        width: 16px;
+    }
+    
+    .project-content p {
+        color: #4B5563;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+    
+    .project-impact {
+        margin: 2rem 0;
+    }
+    
+    .impact-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .metric {
+        text-align: center;
+        padding: 1rem;
+        background: white;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 64, 133, 0.1);
+    }
+    
+    .metric-number {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #004085;
+        margin-bottom: 0.25rem;
+    }
+    
+    .metric-label {
+        font-size: 0.8rem;
+        color: #6B7280;
+        font-weight: 500;
+    }
+    
+    .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .tech-tag {
+        background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
+        color: #004085;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid rgba(0, 64, 133, 0.2);
+    }
+    
+    .project-actions {
+        margin-top: 2rem;
+    }
+    
+    /* Testimonials */
+    .testimonials-section {
+        padding: 5rem 1rem;
+        background: #f8fbff;
+    }
+    
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+    
+    .testimonial-card {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 64, 133, 0.05);
+    }
+    
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
+    }
+    
+    .testimonial-header {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    
+    .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #004085, #FF6600);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+    
+    .testimonial-author h4 {
+        color: #004085;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    
+    .testimonial-author p {
+        color: #6B7280;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .testimonial-rating .stars {
+        color: #FF6600;
+        font-size: 0.9rem;
+    }
+    
+    .testimonial-content {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .quote-icon {
+        color: #FF6600;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-content p {
+        color: #4B5563;
+        line-height: 1.6;
+        font-style: italic;
+    }
+    
+    .testimonial-footer {
+        border-top: 1px solid rgba(0, 64, 133, 0.1);
+        padding-top: 1rem;
+    }
+    
+    .testimonial-project {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: #6B7280;
+        font-size: 0.9rem;
+    }
+    
+    .testimonial-project i {
+        color: #FF6600;
+    }
+    
+    /* CTA Section */
+    .projects-cta {
+        padding: 4rem 1rem;
+        background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
+        color: white;
+        text-align: center;
+    }
+    
+    .cta-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .cta-content h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .cta-content p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .projects-hero {
+            padding: 3rem 1rem;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+        }
+        
+        .impact-highlights {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .highlight-item {
+            padding: 1.5rem 1rem;
+        }
+        
+        .highlight-number {
+            font-size: 2rem;
+        }
+        
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .project-card {
+            padding: 2rem;
+        }
+        
+        .impact-metrics {
+            grid-template-columns: 1fr;
+        }
+        
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .map-legend,
+        .project-stats {
+            position: static;
+            margin-top: 1rem;
+        }
+        
+        .stats-grid {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .impact-highlights {
+            grid-template-columns: 1fr;
+        }
+        
+        .project-header {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .project-meta {
+            text-align: left;
+        }
+        
+        .tech-stack {
+            gap: 0.25rem;
+        }
+        
+        .tech-tag {
+            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+    </style>
+
+    <!-- Leaflet JavaScript for Interactive Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Interactive Map JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            window.enhancedTawk = new EnhancedTawkWidget('68d05919a5528e1923b76c3a', '1j5mto36j');
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the map
+        var map = L.map('projects-map', {
+            center: [15, 20], // Center on Africa
+            zoom: 2.5,
+            zoomControl: true,
+            scrollWheelZoom: true
         });
+
+        // Add tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 10,
+            minZoom: 2
+        }).addTo(map);
+
+        // Project locations with details
+        var projectLocations = [
+            {
+                name: "Financial Resilience Framework",
+                coords: [49.8951, -97.1384], // Winnipeg, Canada
+                type: "financial",
+                value: "$2.1M",
+                status: "Ongoing",
+                description: "Comprehensive framework for measuring financial resilience across Canadian communities",
+                impact: "500K+ Canadians assessed"
+            },
+            {
+                name: "Dried Pineapple Sector Development",
+                coords: [9.3077, 2.3158], // Benin
+                type: "agricultural",
+                value: "$450K",
+                status: "Completed",
+                description: "Agricultural value chain development for dried pineapple farmers",
+                impact: "300+ farmers benefited"
+            },
+            {
+                name: "Processed Mango Sector",
+                coords: [12.2383, -1.5616], // Burkina Faso
+                type: "agricultural",
+                value: "$380K",
+                status: "Completed",
+                description: "Market development strategies for processed mango value chain",
+                impact: "250+ farmers supported"
+            },
+            {
+                name: "Regional Trade Facilitation",
+                coords: [-1.2921, 36.8219], // Kenya (East Africa)
+                type: "trade",
+                value: "$800K",
+                status: "Completed",
+                description: "EU trade facilitation program for regional integration",
+                impact: "$2.3M trade value facilitated"
+            },
+            {
+                name: "Youth Employment Assessment",
+                coords: [-15, 25], // Sub-Saharan Africa region
+                type: "youth",
+                value: "$400K",
+                status: "Completed",
+                description: "Comprehensive analysis of youth employment programs",
+                impact: "500+ youth entrepreneurs studied"
+            },
+            {
+                name: "Agricultural Development Initiative",
+                coords: [7.9465, 1.0232], // Ghana (West Africa)
+                type: "agricultural",
+                value: "$600K",
+                status: "Completed",
+                description: "Multi-country agricultural development across West Africa",
+                impact: "800+ farmers impacted"
+            },
+            {
+                name: "Cashew Value Chain Analysis",
+                coords: [9.0579, 7.4951], // Nigeria
+                type: "agricultural",
+                value: "$320K",
+                status: "Completed",
+                description: "Cashew processing and market linkage development",
+                impact: "400+ processors trained"
+            },
+            {
+                name: "Financial Inclusion Study",
+                coords: [-4.0383, 21.7587], // Democratic Republic of Congo
+                type: "financial",
+                value: "$290K",
+                status: "Completed",
+                description: "Financial services accessibility and resilience assessment",
+                impact: "1,000+ households surveyed"
+            }
+        ];
+
+        // Color mapping for project types
+        var projectColors = {
+            financial: '#10b981',
+            agricultural: '#f59e0b',
+            trade: '#3b82f6',
+            youth: '#ef4444'
+        };
+
+        // Add markers for each project
+        projectLocations.forEach(function(project) {
+            var marker = L.circleMarker(project.coords, {
+                radius: 8,
+                fillColor: projectColors[project.type],
+                color: 'white',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map);
+
+            // Create popup content
+            var popupContent = `
+                <div style="min-width: 250px; font-family: Inter, sans-serif;">
+                    <h4 style="color: #004085; margin: 0 0 10px 0; font-size: 16px; font-weight: 700;">${project.name}</h4>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #FF6600; font-weight: 600; font-size: 14px;">${project.value}</span>
+                        <span style="background: ${project.status === 'Ongoing' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(59, 130, 246, 0.1)'}; color: ${project.status === 'Ongoing' ? '#059669' : '#1d4ed8'}; padding: 2px 8px; border-radius: 10px; font-size: 12px; font-weight: 600;">${project.status}</span>
+                    </div>
+                    <p style="color: #4B5563; margin: 8px 0; font-size: 14px; line-height: 1.4;">${project.description}</p>
+                    <div style="color: #6B7280; font-size: 13px; font-weight: 500; border-top: 1px solid #E5E7EB; padding-top: 8px; margin-top: 8px;">
+                        <i class="fas fa-chart-line"></i> ${project.impact}
+                    </div>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+
+            // Add hover effect
+            marker.on('mouseover', function() {
+                this.setRadius(12);
+            });
+
+            marker.on('mouseout', function() {
+                this.setRadius(8);
+            });
+        });
+
+        // Add project detail modal functionality
+        document.querySelectorAll('.project-details-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var projectId = this.getAttribute('data-project');
+                // You can implement modal functionality here
+                console.log('Show details for project:', projectId);
+            });
+        });
+    });
     </script>
 
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/chatbot.js"></script>
 </body>
 </html>
