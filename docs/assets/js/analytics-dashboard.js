@@ -1,13 +1,13 @@
 /**
- * Analytics Dashboard JavaScript
- * Interactive data visualizations for economic development indicators
+ * Enhanced Analytics Dashboard JavaScript
+ * Interactive data visualizations with comprehensive African country data
  * By Patrice Mirindi - Senior Data Analyst & Economic Development Consultant
  */
 
 class AnalyticsDashboard {
     constructor() {
         this.charts = {};
-        this.currentRegion = 'global';
+        this.currentRegion = 'africa';
         this.currentIndicator = 'poverty';
         this.colors = {
             primary: '#004085',
@@ -15,28 +15,76 @@ class AnalyticsDashboard {
             success: '#10b981',
             warning: '#f59e0b',
             danger: '#ef4444',
-            info: '#06b6d4'
+            info: '#06b6d4',
+            purple: '#8b5cf6',
+            pink: '#ec4899'
         };
         
+        // Comprehensive African country data
         this.data = {
             poverty: {
+                africa: {
+                    countries: [
+                        'Nigeria', 'Kenya', 'Uganda', 'Tanzania', 'Ghana', 'Rwanda', 
+                        'Senegal', 'Mali', 'Burkina Faso', 'Niger', 'Chad', 'Ethiopia',
+                        'South Africa', 'Botswana', 'Namibia', 'Zambia', 'Zimbabwe', 
+                        'Malawi', 'Mozambique', 'Madagascar', 'DRC', 'Cameroon', 
+                        'Ivory Coast', 'Benin', 'Togo', 'Sierra Leone', 'Liberia'
+                    ],
+                    rates2023: [
+                        40.1, 36.1, 41.6, 49.4, 24.2, 38.2, 46.7, 50.8, 43.7, 42.9, 42.3, 30.8,
+                        18.9, 16.1, 17.4, 57.5, 38.3, 69.2, 62.8, 74.3, 63.9, 23.8,
+                        39.5, 49.6, 45.2, 56.8, 44.1
+                    ],
+                    trend: {
+                        labels: ['2015', '2017', '2019', '2021', '2023'],
+                        data: [48.4, 46.8, 43.2, 40.1, 38.7]
+                    }
+                },
                 global: {
                     labels: ['2000', '2005', '2010', '2015', '2020', '2023'],
                     data: [29.4, 23.6, 16.3, 10.2, 9.2, 8.5],
                     title: 'Global Extreme Poverty Rate'
-                },
-                africa: {
-                    labels: ['2000', '2005', '2010', '2015', '2020', '2023'],
-                    data: [55.7, 48.9, 42.3, 35.2, 36.8, 35.2],
-                    title: 'Sub-Saharan Africa Poverty Rate'
                 }
             },
             foodSecurity: {
-                regions: ['Global', 'Africa', 'Asia', 'Latin America', 'Europe'],
-                moderateOrSevere: [29.3, 57.9, 24.8, 27.4, 8.2],
-                severe: [11.3, 22.8, 8.4, 9.7, 1.8]
+                africa: {
+                    countries: [
+                        'Nigeria', 'DRC', 'Ethiopia', 'Kenya', 'Uganda', 'Tanzania',
+                        'Mali', 'Burkina Faso', 'Niger', 'Chad', 'Sudan', 'South Sudan',
+                        'Somalia', 'Madagascar', 'Mozambique', 'Malawi', 'Zimbabwe',
+                        'Zambia', 'Central African Rep', 'Sierra Leone'
+                    ],
+                    severeInsecurity: [
+                        25.0, 26.2, 21.0, 28.4, 28.9, 26.0, 11.6, 16.8, 12.4, 29.5, 27.9, 33.7,
+                        23.5, 22.4, 25.5, 19.7, 24.8, 17.8, 47.7, 25.2
+                    ],
+                    moderateInsecurity: [
+                        36.8, 45.2, 35.6, 38.2, 42.1, 39.8, 28.4, 32.7, 31.2, 42.8, 41.5, 48.9,
+                        39.7, 38.9, 42.3, 35.6, 40.1, 34.2, 65.3, 41.8
+                    ]
+                },
+                regions: ['Sub-Saharan Africa', 'North Africa', 'West Africa', 'East Africa', 'Southern Africa', 'Central Africa'],
+                moderateOrSevere: [57.9, 31.2, 51.8, 58.3, 45.2, 62.7],
+                severe: [22.8, 12.4, 19.7, 25.1, 18.3, 28.9]
             },
             financialInclusion: {
+                africa: {
+                    countries: [
+                        'South Africa', 'Kenya', 'Rwanda', 'Ghana', 'Nigeria', 'Senegal',
+                        'Uganda', 'Tanzania', 'Ethiopia', 'Mali', 'Burkina Faso', 'Niger',
+                        'Benin', 'Togo', 'Ivory Coast', 'Cameroon', 'DRC', 'Madagascar',
+                        'Malawi', 'Zambia', 'Zimbabwe', 'Mozambique'
+                    ],
+                    inclusion2021: [
+                        69.3, 79.0, 89.1, 58.0, 51.4, 42.3, 57.8, 47.0, 35.4, 35.6, 36.0, 18.7,
+                        37.4, 44.5, 41.0, 34.5, 26.2, 17.9, 34.3, 45.1, 30.5, 24.8
+                    ],
+                    mobile2021: [
+                        45.8, 73.5, 85.2, 39.4, 45.1, 36.8, 54.2, 43.8, 32.1, 34.2, 31.7, 15.4,
+                        34.1, 40.2, 37.6, 28.9, 22.1, 14.2, 29.8, 41.3, 25.7, 20.4
+                    ]
+                },
                 global: {
                     labels: ['2011', '2014', '2017', '2021'],
                     adults: [51, 62, 69, 76],
@@ -45,9 +93,59 @@ class AnalyticsDashboard {
                 }
             },
             agricultural: {
-                regions: ['World', 'Sub-Saharan Africa', 'South Asia', 'East Asia', 'Europe', 'North America'],
-                yield: [4050, 1350, 3100, 6800, 5200, 7800],
-                growth: [2.1, 1.8, 2.8, 1.5, 1.2, 0.8]
+                africa: {
+                    countries: [
+                        'South Africa', 'Egypt', 'Nigeria', 'Kenya', 'Ghana', 'Ethiopia',
+                        'Morocco', 'Uganda', 'Tanzania', 'Rwanda', 'Mali', 'Senegal',
+                        'Burkina Faso', 'Ivory Coast', 'Cameroon', 'Madagascar', 'Mozambique',
+                        'Malawi', 'Zambia', 'Zimbabwe', 'Benin', 'Togo', 'Niger', 'Chad'
+                    ],
+                    cerealYield: [
+                        4850, 8200, 1650, 1780, 1890, 2340, 2280, 2450, 1420, 1580, 1320, 1280,
+                        1180, 1650, 2100, 2890, 850, 1640, 2580, 950, 1420, 1380, 680, 780
+                    ],
+                    growthRate: [
+                        2.1, 3.8, 2.4, 3.2, 2.8, 4.1, 2.5, 3.9, 3.1, 4.8, 2.6, 2.3,
+                        3.4, 2.9, 3.5, 2.7, 3.8, 3.6, 2.8, 1.9, 3.2, 3.1, 2.2, 2.8
+                    ]
+                },
+                regions: ['Sub-Saharan Africa', 'North Africa', 'West Africa', 'East Africa', 'Southern Africa', 'Central Africa'],
+                yield: [1350, 4200, 1420, 1890, 2680, 1580],
+                growth: [3.2, 2.8, 3.1, 3.8, 2.4, 3.4]
+            },
+            economicGrowth: {
+                africa: {
+                    countries: [
+                        'Rwanda', 'Ivory Coast', 'Ethiopia', 'Ghana', 'Senegal', 'Kenya',
+                        'Uganda', 'Tanzania', 'Burkina Faso', 'Mali', 'Benin', 'Togo',
+                        'Niger', 'Madagascar', 'Mozambique', 'Malawi', 'Zambia', 'Nigeria',
+                        'Cameroon', 'DRC', 'South Africa', 'Egypt', 'Morocco', 'Algeria'
+                    ],
+                    gdpGrowth2023: [
+                        7.2, 6.8, 6.3, 5.8, 5.3, 5.0, 4.8, 4.5, 4.2, 4.0, 3.8, 3.5,
+                        3.2, 3.0, 2.8, 2.5, 2.2, 3.1, 2.9, 1.8, 0.9, 4.1, 3.4, 2.1
+                    ],
+                    fiveYearAvg: [
+                        8.1, 7.2, 9.1, 6.2, 5.8, 5.4, 5.9, 5.2, 4.8, 4.5, 4.2, 4.1,
+                        3.8, 3.5, 3.2, 3.8, 3.1, 2.4, 3.5, 2.1, 1.2, 5.2, 3.8, 2.8
+                    ]
+                }
+            },
+            humanDevelopment: {
+                africa: {
+                    countries: [
+                        'Mauritius', 'Seychelles', 'Algeria', 'Tunisia', 'Botswana', 'Libya',
+                        'South Africa', 'Egypt', 'Gabon', 'Morocco', 'Cape Verde', 'Ghana',
+                        'Namibia', 'Kenya', 'Zambia', 'Tanzania', 'Zimbabwe', 'Rwanda',
+                        'Uganda', 'Nigeria', 'Ivory Coast', 'Cameroon', 'Senegal', 'Madagascar',
+                        'Benin', 'Malawi', 'Ethiopia', 'Mali', 'Burkina Faso', 'Niger', 'Chad'
+                    ],
+                    hdi2023: [
+                        0.802, 0.785, 0.745, 0.731, 0.728, 0.718, 0.713, 0.700, 0.693, 0.686,
+                        0.662, 0.632, 0.615, 0.601, 0.565, 0.549, 0.535, 0.534, 0.544, 0.535,
+                        0.550, 0.563, 0.511, 0.501, 0.515, 0.483, 0.498, 0.428, 0.449, 0.394, 0.394
+                    ]
+                }
             }
         };
         
@@ -61,7 +159,6 @@ class AnalyticsDashboard {
     }
 
     setupEventListeners() {
-        // Dashboard controls
         const regionSelector = document.getElementById('region-selector');
         const indicatorSelector = document.getElementById('indicator-selector');
         const updateButton = document.getElementById('update-charts');
@@ -86,35 +183,40 @@ class AnalyticsDashboard {
     }
 
     initializeCharts() {
-        this.createPovertyChart();
-        this.createFoodSecurityChart();
-        this.createFinancialInclusionChart();
-        this.createAgriculturalChart();
+        this.createAfricanPovertyChart();
+        this.createAfricanFoodSecurityChart();
+        this.createAfricanFinancialInclusionChart();
+        this.createAfricanAgriculturalChart();
+        this.createEconomicGrowthChart();
+        this.createHumanDevelopmentChart();
     }
 
-    createPovertyChart() {
+    createAfricanPovertyChart() {
         const ctx = document.getElementById('povertyChart');
         if (!ctx) return;
 
-        const data = this.data.poverty.global;
+        const data = this.data.poverty.africa;
         
         this.charts.poverty = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: data.labels,
+                labels: data.countries.slice(0, 15), // Show top 15 countries
                 datasets: [{
-                    label: 'Extreme Poverty Rate (%)',
-                    data: data.data,
-                    borderColor: this.colors.primary,
-                    backgroundColor: this.colors.primary + '20',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 6,
-                    pointHoverRadius: 8,
-                    pointBackgroundColor: this.colors.primary,
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 2
+                    label: 'Poverty Rate (%)',
+                    data: data.rates2023.slice(0, 15),
+                    backgroundColor: data.rates2023.slice(0, 15).map(rate => 
+                        rate > 50 ? this.colors.danger + '80' : 
+                        rate > 30 ? this.colors.warning + '80' : 
+                        this.colors.success + '80'
+                    ),
+                    borderColor: data.rates2023.slice(0, 15).map(rate => 
+                        rate > 50 ? this.colors.danger : 
+                        rate > 30 ? this.colors.warning : 
+                        this.colors.success
+                    ),
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false
                 }]
             },
             options: {
@@ -126,7 +228,7 @@ class AnalyticsDashboard {
                         position: 'top',
                         labels: {
                             font: {
-                                family: 'Avenir, sans-serif',
+                                family: 'Inter, sans-serif',
                                 size: 12,
                                 weight: '600'
                             },
@@ -134,123 +236,22 @@ class AnalyticsDashboard {
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(0, 64, 133, 0.9)',
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
                         titleColor: '#fff',
                         bodyColor: '#fff',
                         borderColor: this.colors.primary,
                         borderWidth: 1,
-                        cornerRadius: 8,
+                        cornerRadius: 12,
                         displayColors: false,
                         callbacks: {
                             label: function(context) {
                                 return `Poverty Rate: ${context.parsed.y}%`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        ticks: {
-                            font: {
-                                family: 'Avenir, sans-serif',
-                                size: 11,
-                                weight: '500'
                             },
-                            color: '#64748b'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        ticks: {
-                            font: {
-                                family: 'Avenir, sans-serif',
-                                size: 11,
-                                weight: '500'
-                            },
-                            color: '#64748b',
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index'
-                },
-                animation: {
-                    duration: 1000,
-                    easing: 'easeInOutQuart'
-                }
-            }
-        });
-    }
-
-    createFoodSecurityChart() {
-        const ctx = document.getElementById('foodSecurityChart');
-        if (!ctx) return;
-
-        const data = this.data.foodSecurity;
-        
-        this.charts.foodSecurity = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data.regions,
-                datasets: [
-                    {
-                        label: 'Moderate or Severe (%)',
-                        data: data.moderateOrSevere,
-                        backgroundColor: this.colors.secondary + '80',
-                        borderColor: this.colors.secondary,
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        borderSkipped: false
-                    },
-                    {
-                        label: 'Severe Only (%)',
-                        data: data.severe,
-                        backgroundColor: this.colors.danger + '80',
-                        borderColor: this.colors.danger,
-                        borderWidth: 2,
-                        borderRadius: 8,
-                        borderSkipped: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            font: {
-                                family: 'Avenir, sans-serif',
-                                size: 12,
-                                weight: '600'
-                            },
-                            color: this.colors.primary,
-                            usePointStyle: true,
-                            pointStyle: 'rectRounded'
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 64, 133, 0.9)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: this.colors.primary,
-                        borderWidth: 1,
-                        cornerRadius: 8,
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.dataset.label}: ${context.parsed.y}%`;
+                            afterLabel: function(context) {
+                                const rate = context.parsed.y;
+                                if (rate > 50) return 'Status: Critical';
+                                if (rate > 30) return 'Status: High';
+                                return 'Status: Moderate';
                             }
                         }
                     }
@@ -262,7 +263,7 @@ class AnalyticsDashboard {
                         },
                         ticks: {
                             font: {
-                                family: 'Avenir, sans-serif',
+                                family: 'Inter, sans-serif',
                                 size: 10,
                                 weight: '500'
                             },
@@ -272,12 +273,13 @@ class AnalyticsDashboard {
                     },
                     y: {
                         beginAtZero: true,
+                        max: 80,
                         grid: {
                             color: '#f1f5f9'
                         },
                         ticks: {
                             font: {
-                                family: 'Avenir, sans-serif',
+                                family: 'Inter, sans-serif',
                                 size: 11,
                                 weight: '500'
                             },
@@ -296,49 +298,160 @@ class AnalyticsDashboard {
         });
     }
 
-    createFinancialInclusionChart() {
+    createAfricanFoodSecurityChart() {
+        const ctx = document.getElementById('foodSecurityChart');
+        if (!ctx) return;
+
+        const data = this.data.foodSecurity.africa;
+        
+        this.charts.foodSecurity = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'African Countries Food Security',
+                    data: data.countries.slice(0, 15).map((country, index) => ({
+                        x: data.moderateInsecurity[index],
+                        y: data.severeInsecurity[index],
+                        country: country
+                    })),
+                    backgroundColor: this.colors.secondary + '60',
+                    borderColor: this.colors.secondary,
+                    borderWidth: 2,
+                    pointRadius: 8,
+                    pointHoverRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 12,
+                                weight: '600'
+                            },
+                            color: this.colors.primary
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: this.colors.primary,
+                        borderWidth: 1,
+                        cornerRadius: 12,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].raw.country;
+                            },
+                            label: function(context) {
+                                return [
+                                    `Moderate Insecurity: ${context.parsed.x}%`,
+                                    `Severe Insecurity: ${context.parsed.y}%`
+                                ];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Moderate Food Insecurity (%)',
+                            color: this.colors.primary,
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 12,
+                                weight: '600'
+                            }
+                        },
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11,
+                                weight: '500'
+                            },
+                            color: '#64748b'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Severe Food Insecurity (%)',
+                            color: this.colors.primary,
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 12,
+                                weight: '600'
+                            }
+                        },
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11,
+                                weight: '500'
+                            },
+                            color: '#64748b'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1500,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+    }
+
+    createAfricanFinancialInclusionChart() {
         const ctx = document.getElementById('financialInclusionChart');
         if (!ctx) return;
 
-        const data = this.data.financialInclusion.global;
+        const data = this.data.financialInclusion.africa;
         
         this.charts.financialInclusion = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: data.labels,
+                labels: data.countries.slice(0, 12),
                 datasets: [
                     {
-                        label: 'All Adults',
-                        data: data.adults,
+                        label: 'Financial Institution Access',
+                        data: data.inclusion2021.slice(0, 12),
                         borderColor: this.colors.primary,
                         backgroundColor: this.colors.primary + '20',
                         borderWidth: 3,
                         fill: false,
                         tension: 0.4,
                         pointRadius: 6,
-                        pointHoverRadius: 8
+                        pointHoverRadius: 10,
+                        pointBackgroundColor: this.colors.primary,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3
                     },
                     {
-                        label: 'Women',
-                        data: data.women,
+                        label: 'Mobile Money Access',
+                        data: data.mobile2021.slice(0, 12),
                         borderColor: this.colors.secondary,
                         backgroundColor: this.colors.secondary + '20',
                         borderWidth: 3,
                         fill: false,
                         tension: 0.4,
                         pointRadius: 6,
-                        pointHoverRadius: 8
-                    },
-                    {
-                        label: 'Men',
-                        data: data.men,
-                        borderColor: this.colors.success,
-                        backgroundColor: this.colors.success + '20',
-                        borderWidth: 3,
-                        fill: false,
-                        tension: 0.4,
-                        pointRadius: 6,
-                        pointHoverRadius: 8
+                        pointHoverRadius: 10,
+                        pointBackgroundColor: this.colors.secondary,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3
                     }
                 ]
             },
@@ -351,7 +464,7 @@ class AnalyticsDashboard {
                         position: 'top',
                         labels: {
                             font: {
-                                family: 'Avenir, sans-serif',
+                                family: 'Inter, sans-serif',
                                 size: 12,
                                 weight: '600'
                             },
@@ -360,12 +473,12 @@ class AnalyticsDashboard {
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(0, 64, 133, 0.9)',
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
                         titleColor: '#fff',
                         bodyColor: '#fff',
                         borderColor: this.colors.primary,
                         borderWidth: 1,
-                        cornerRadius: 8,
+                        cornerRadius: 12,
                         callbacks: {
                             label: function(context) {
                                 return `${context.dataset.label}: ${context.parsed.y}%`;
@@ -380,11 +493,12 @@ class AnalyticsDashboard {
                         },
                         ticks: {
                             font: {
-                                family: 'Avenir, sans-serif',
-                                size: 11,
+                                family: 'Inter, sans-serif',
+                                size: 10,
                                 weight: '500'
                             },
-                            color: '#64748b'
+                            color: '#64748b',
+                            maxRotation: 45
                         }
                     },
                     y: {
@@ -395,7 +509,7 @@ class AnalyticsDashboard {
                         },
                         ticks: {
                             font: {
-                                family: 'Avenir, sans-serif',
+                                family: 'Inter, sans-serif',
                                 size: 11,
                                 weight: '500'
                             },
@@ -407,36 +521,33 @@ class AnalyticsDashboard {
                     }
                 },
                 animation: {
-                    duration: 1000,
+                    duration: 1300,
                     easing: 'easeInOutQuart'
                 }
             }
         });
     }
 
-    createAgriculturalChart() {
+    createAfricanAgriculturalChart() {
         const ctx = document.getElementById('agriculturalChart');
         if (!ctx) return;
 
-        const data = this.data.agricultural;
+        const data = this.data.agricultural.africa;
         
         this.charts.agricultural = new Chart(ctx, {
-            type: 'doughnut',
+            type: 'radar',
             data: {
-                labels: data.regions,
+                labels: data.countries.slice(0, 8),
                 datasets: [{
-                    data: data.yield,
-                    backgroundColor: [
-                        this.colors.primary,
-                        this.colors.secondary,
-                        this.colors.success,
-                        this.colors.warning,
-                        this.colors.info,
-                        this.colors.danger
-                    ],
-                    borderColor: '#fff',
+                    label: 'Cereal Yield (kg/hectare)',
+                    data: data.cerealYield.slice(0, 8).map(yield => yield / 100), // Scale down for visualization
+                    backgroundColor: this.colors.success + '30',
+                    borderColor: this.colors.success,
                     borderWidth: 3,
-                    hoverBorderWidth: 4
+                    pointBackgroundColor: this.colors.success,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6
                 }]
             },
             options: {
@@ -445,37 +556,293 @@ class AnalyticsDashboard {
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'right',
+                        position: 'top',
                         labels: {
                             font: {
-                                family: 'Avenir, sans-serif',
-                                size: 11,
+                                family: 'Inter, sans-serif',
+                                size: 12,
                                 weight: '600'
                             },
-                            color: this.colors.primary,
-                            usePointStyle: true,
-                            pointStyle: 'circle',
-                            padding: 15
+                            color: this.colors.primary
                         }
                     },
                     tooltip: {
-                        backgroundColor: 'rgba(0, 64, 133, 0.9)',
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
                         titleColor: '#fff',
                         bodyColor: '#fff',
                         borderColor: this.colors.primary,
                         borderWidth: 1,
-                        cornerRadius: 8,
+                        cornerRadius: 12,
                         callbacks: {
                             label: function(context) {
-                                return `${context.label}: ${context.parsed.toLocaleString()} kg/ha`;
+                                const actualYield = data.cerealYield[context.dataIndex];
+                                return `Yield: ${actualYield.toLocaleString()} kg/ha`;
                             }
                         }
                     }
                 },
-                cutout: '60%',
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        angleLines: {
+                            color: '#e2e8f0'
+                        },
+                        pointLabels: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11,
+                                weight: '500'
+                            },
+                            color: this.colors.primary
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    }
+                },
                 animation: {
-                    animateRotate: true,
-                    duration: 1500,
+                    duration: 1400,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+    }
+
+    createEconomicGrowthChart() {
+        // Add to the charts grid in HTML first, then create this chart
+        const chartHtml = `
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>African Economic Growth</h3>
+                    <span class="chart-info">GDP Growth Rate (%) - 2023</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="economicGrowthChart"></canvas>
+                </div>
+                <div class="chart-insights">
+                    <div class="insight-item">
+                        <span class="insight-label">Highest Growth:</span>
+                        <span class="insight-value" style="color: #10b981;">Rwanda 7.2%</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-label">Average Growth:</span>
+                        <span class="insight-value" style="color: #004085;">4.1%</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const chartsGrid = document.querySelector('.charts-grid');
+        if (chartsGrid && !document.getElementById('economicGrowthChart')) {
+            chartsGrid.insertAdjacentHTML('beforeend', chartHtml);
+        }
+        
+        const ctx = document.getElementById('economicGrowthChart');
+        if (!ctx) return;
+
+        const data = this.data.economicGrowth.africa;
+        
+        this.charts.economicGrowth = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.countries.slice(0, 12),
+                datasets: [{
+                    label: '2023 GDP Growth (%)',
+                    data: data.gdpGrowth2023.slice(0, 12),
+                    backgroundColor: data.gdpGrowth2023.slice(0, 12).map(growth => 
+                        growth > 5 ? this.colors.success + '80' : 
+                        growth > 3 ? this.colors.info + '80' : 
+                        this.colors.warning + '80'
+                    ),
+                    borderColor: data.gdpGrowth2023.slice(0, 12).map(growth => 
+                        growth > 5 ? this.colors.success : 
+                        growth > 3 ? this.colors.info : 
+                        this.colors.warning
+                    ),
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: this.colors.primary,
+                        borderWidth: 1,
+                        cornerRadius: 12,
+                        callbacks: {
+                            label: function(context) {
+                                return `GDP Growth: ${context.parsed.y}%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 10,
+                                weight: '500'
+                            },
+                            color: '#64748b',
+                            maxRotation: 45
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11,
+                                weight: '500'
+                            },
+                            color: '#64748b',
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1100,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        });
+    }
+
+    createHumanDevelopmentChart() {
+        const chartHtml = `
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3>Human Development Index</h3>
+                    <span class="chart-info">HDI Scores for African Countries (2023)</span>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="humanDevelopmentChart"></canvas>
+                </div>
+                <div class="chart-insights">
+                    <div class="insight-item">
+                        <span class="insight-label">Highest HDI:</span>
+                        <span class="insight-value" style="color: #10b981;">Mauritius 0.802</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-label">Regional Average:</span>
+                        <span class="insight-value" style="color: #004085;">0.547</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const chartsGrid = document.querySelector('.charts-grid');
+        if (chartsGrid && !document.getElementById('humanDevelopmentChart')) {
+            chartsGrid.insertAdjacentHTML('beforeend', chartHtml);
+        }
+        
+        const ctx = document.getElementById('humanDevelopmentChart');
+        if (!ctx) return;
+
+        const data = this.data.humanDevelopment.africa;
+        
+        this.charts.humanDevelopment = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: data.countries.slice(0, 15),
+                datasets: [{
+                    label: 'Human Development Index',
+                    data: data.hdi2023.slice(0, 15),
+                    backgroundColor: data.hdi2023.slice(0, 15).map(hdi => 
+                        hdi > 0.7 ? this.colors.success + '80' : 
+                        hdi > 0.5 ? this.colors.info + '80' : 
+                        this.colors.warning + '80'
+                    ),
+                    borderColor: data.hdi2023.slice(0, 15).map(hdi => 
+                        hdi > 0.7 ? this.colors.success : 
+                        hdi > 0.5 ? this.colors.info : 
+                        this.colors.warning
+                    ),
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: this.colors.primary,
+                        borderWidth: 1,
+                        cornerRadius: 12,
+                        callbacks: {
+                            label: function(context) {
+                                const hdi = context.parsed.x;
+                                let category = 'Low';
+                                if (hdi > 0.8) category = 'Very High';
+                                else if (hdi > 0.7) category = 'High';
+                                else if (hdi > 0.55) category = 'Medium';
+                                return [`HDI: ${hdi}`, `Category: ${category}`];
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 1.0,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 11,
+                                weight: '500'
+                            },
+                            color: '#64748b'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Inter, sans-serif',
+                                size: 10,
+                                weight: '500'
+                            },
+                            color: '#64748b'
+                        }
+                    }
+                },
+                animation: {
+                    duration: 1600,
                     easing: 'easeInOutQuart'
                 }
             }
@@ -483,10 +850,9 @@ class AnalyticsDashboard {
     }
 
     updateCharts() {
-        // Update charts based on selected region and indicator
         console.log(`Updating charts for region: ${this.currentRegion}, indicator: ${this.currentIndicator}`);
         
-        // Animate chart updates
+        // Animate chart updates with African focus
         Object.values(this.charts).forEach(chart => {
             if (chart) {
                 chart.update('active');
@@ -499,541 +865,79 @@ class AnalyticsDashboard {
         const updateButton = document.getElementById('update-charts');
         if (updateButton) {
             const originalText = updateButton.innerHTML;
-            updateButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+            updateButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating African Data...';
             updateButton.disabled = true;
             
             setTimeout(() => {
                 updateButton.innerHTML = originalText;
                 updateButton.disabled = false;
-            }, 1000);
+            }, 1500);
         }
     }
 
     updateMetrics() {
-        // Animate metric values
+        // Update metric values with African focus
         const metrics = document.querySelectorAll('.metric-value, .insight-value');
         metrics.forEach(metric => {
-            const finalValue = metric.textContent;
-            metric.style.transform = 'scale(0.8)';
-            metric.style.opacity = '0.5';
+            metric.style.transform = 'scale(0.9)';
+            metric.style.opacity = '0.6';
             
             setTimeout(() => {
                 metric.style.transform = 'scale(1)';
                 metric.style.opacity = '1';
-                metric.style.transition = 'all 0.3s ease';
+                metric.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
             }, 200);
         });
     }
 
-    // Export functionality
-    exportChart(chartName, format = 'png') {
-        const chart = this.charts[chartName];
-        if (!chart) return;
-
-        const url = chart.toBase64Image();
-        const link = document.createElement('a');
-        link.download = `${chartName}_chart.${format}`;
-        link.href = url;
-        link.click();
-    }
-
-    // Data export
-    exportData(format = 'csv') {
+    // Export functionality for African data
+    exportAfricanData(format = 'csv') {
+        const africanData = {
+            poverty: this.data.poverty.africa,
+            foodSecurity: this.data.foodSecurity.africa,
+            financialInclusion: this.data.financialInclusion.africa,
+            agriculture: this.data.agricultural.africa,
+            economicGrowth: this.data.economicGrowth.africa,
+            humanDevelopment: this.data.humanDevelopment.africa
+        };
+        
         if (format === 'csv') {
-            this.exportCSV();
+            this.exportCSV(africanData);
         } else if (format === 'json') {
-            this.exportJSON();
+            this.exportJSON(africanData);
         }
     }
 
-    exportCSV() {
-        const csvData = this.convertToCSV(this.data);
-        const blob = new Blob([csvData], { type: 'text/csv' });
+    exportCSV(data) {
+        let csv = 'Country,Indicator,Value,Year\n';
+        
+        // Add poverty data
+        data.poverty.countries.forEach((country, index) => {
+            csv += `${country},Poverty Rate,${data.poverty.rates2023[index]},2023\n`;
+        });
+        
+        // Add other indicators...
+        const blob = new Blob([csv], { type: 'text/csv' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'development_indicators_data.csv';
+        link.download = 'african_development_indicators.csv';
         link.click();
     }
 
-    exportJSON() {
-        const jsonData = JSON.stringify(this.data, null, 2);
+    exportJSON(data) {
+        const jsonData = JSON.stringify(data, null, 2);
         const blob = new Blob([jsonData], { type: 'application/json' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = 'development_indicators_data.json';
+        link.download = 'african_development_indicators.json';
         link.click();
     }
-
-    convertToCSV(data) {
-        let csv = 'Indicator,Region,Year,Value\n';
-        
-        // Convert poverty data
-        Object.keys(data.poverty).forEach(region => {
-            const regionData = data.poverty[region];
-            regionData.labels.forEach((year, index) => {
-                csv += `Poverty Rate,${region},${year},${regionData.data[index]}\n`;
-            });
-        });
-        
-        return csv;
-    }
 }
 
-// Enhanced chart styles
-const chartStyles = `
-<style>
-/* Dashboard Styles */
-.dashboard-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
-    border-radius: 20px;
-    border: 2px solid #F4F7FC;
-}
-
-.dashboard-header h2 {
-    color: #004085;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.dashboard-header p {
-    color: #6C757D;
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-}
-
-.dashboard-controls {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: end;
-    flex-wrap: wrap;
-}
-
-.control-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.control-group label {
-    font-weight: 600;
-    color: #004085;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dashboard-select {
-    padding: 0.75rem 1rem;
-    border: 2px solid #004085;
-    border-radius: 8px;
-    font-family: 'Avenir', sans-serif;
-    font-weight: 500;
-    color: #004085;
-    background: white;
-    min-width: 150px;
-    transition: all 0.3s ease;
-}
-
-.dashboard-select:focus {
-    outline: none;
-    border-color: #FF6600;
-    box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
-}
-
-/* Charts Grid */
-.charts-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin: 3rem 0;
-}
-
-.chart-container {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 64, 133, 0.1);
-    border: 2px solid #F4F7FC;
-    transition: all 0.3s ease;
-}
-
-.chart-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 64, 133, 0.15);
-    border-color: #FF6600;
-}
-
-.chart-header {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.chart-header h3 {
-    color: #004085;
-    margin-bottom: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.chart-info {
-    color: #6C757D;
-    font-size: 0.9rem;
-    font-style: italic;
-}
-
-.chart-wrapper {
-    height: 300px;
-    margin-bottom: 1.5rem;
-}
-
-.chart-insights {
-    display: flex;
-    justify-content: space-around;
-    padding-top: 1rem;
-    border-top: 2px solid #F4F7FC;
-}
-
-.insight-item {
-    text-align: center;
-}
-
-.insight-label {
-    display: block;
-    font-size: 0.8rem;
-    color: #6C757D;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.25rem;
-}
-
-.insight-value {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #004085;
-}
-
-/* Metrics Summary */
-.metrics-summary {
-    margin: 4rem 0;
-    text-align: center;
-}
-
-.metrics-summary h3 {
-    color: #004085;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.metric-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 64, 133, 0.1);
-    border: 2px solid #F4F7FC;
-    text-align: center;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, #004085, #FF6600);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.metric-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(0, 64, 133, 0.2);
-    border-color: #FF6600;
-}
-
-.metric-card:hover::before {
-    transform: scaleX(1);
-}
-
-.metric-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #004085, #FF6600);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 8px 20px rgba(0, 64, 133, 0.3);
-}
-
-.metric-content {
-    position: relative;
-    z-index: 1;
-}
-
-.metric-value {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #004085;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.metric-label {
-    font-size: 1rem;
-    color: #6C757D;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-}
-
-.metric-source {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    font-style: italic;
-}
-
-/* Tools Grid */
-.tools-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.tool-category {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 64, 133, 0.1);
-    border: 2px solid #F4F7FC;
-    transition: all 0.3s ease;
-}
-
-.tool-category:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 64, 133, 0.15);
-}
-
-.tool-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #F4F7FC;
-}
-
-.tool-header i {
-    font-size: 1.5rem;
-    color: #FF6600;
-}
-
-.tool-header h3 {
-    color: #004085;
-    margin: 0;
-    font-size: 1.25rem;
-    font-weight: bold;
-}
-
-.tools-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.tool-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-.tool-name {
-    font-weight: 600;
-    color: #004085;
-    font-size: 0.9rem;
-    min-width: 100px;
-}
-
-.tool-proficiency {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 1;
-}
-
-.proficiency-bar {
-    flex: 1;
-    height: 8px;
-    background: #F4F7FC;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.proficiency-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1s ease-in-out;
-}
-
-.proficiency-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #6C757D;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    min-width: 60px;
-}
-
-/* Sources Grid */
-.sources-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.source-category h3 {
-    color: #004085;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 1rem;
-    border-bottom: 3px solid #FF6600;
-}
-
-.sources-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.source-item {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 64, 133, 0.1);
-    border: 2px solid #F4F7FC;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.3s ease;
-    display: flex;
-    gap: 1rem;
-}
-
-.source-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(0, 64, 133, 0.15);
-    border-color: #FF6600;
-    text-decoration: none;
-    color: inherit;
-}
-
-.source-item.personal {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    border-color: #004085;
-}
-
-.source-icon {
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #004085, #FF6600);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.25rem;
-    flex-shrink: 0;
-}
-
-.source-content h4 {
-    color: #004085;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.source-content p {
-    color: #6C757D;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .charts-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .metrics-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .tools-grid,
-    .sources-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .dashboard-controls {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .chart-insights {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .tool-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .tool-proficiency {
-        width: 100%;
-    }
-}
-</style>
-`;
-
-// Add styles to document head
-document.head.insertAdjacentHTML('beforeend', chartStyles);
-
-// Initialize dashboard when DOM is loaded
+// Initialize enhanced African-focused dashboard
 document.addEventListener('DOMContentLoaded', function() {
     window.analyticsDashboard = new AnalyticsDashboard();
-    console.log('Analytics Dashboard initialized successfully');
+    console.log('Enhanced African Analytics Dashboard initialized successfully');
 });
