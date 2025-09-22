@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Patrice Mirindi - Senior Data Analyst & Economic Development Consultant specializing in financial resilience and sustainable growth">
     <meta name="keywords" content="data analyst, economic consultant, financial resilience, agricultural economics, Patrice Mirindi">
-    <title>Patrice Mirindi - Senior Data Analyst & Economic Consultant</title>
+    <title>Patrice Mirindi - Senior Data Analyst & Economic Development Consultant</title>
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="Patrice Mirindi - Senior Data Analyst & Economic Consultant">
+    <meta property="og:title" content="Patrice Mirindi - Senior Data Analyst & Economic Development Consultant">
     <meta property="og:description" content="Transforming data into sustainable impact across emerging markets">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/patricemirindi.jpg">
     
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -24,12 +29,15 @@
         "name": "Patrice Mirindi",
         "jobTitle": "Senior Data Analyst & Economic Development Consultant",
         "email": "patricemirindi@gmail.com",
+        "image": "assets/img/patricemirindi.jpg",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Winnipeg",
             "addressRegion": "MB",
             "addressCountry": "CA"
-        }
+        },
+        "alumniOf": "University of Manitoba",
+        "knowsAbout": ["Data Analytics", "Economic Development", "Financial Resilience", "Agricultural Economics"]
     }
     </script>
 </head>
@@ -47,8 +55,6 @@
                 <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
                 <li class="nav-item"><a href="key-projects.html" class="nav-link">Key Projects</a></li>
                 <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link">SDG Dashboard</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
             </ul>
             <div class="hamburger">
@@ -62,17 +68,27 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Profile Photo -->
     <section class="hero">
         <div class="hero-content">
+            <div class="hero-image">
+                <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Senior Data Analyst & Economic Development Consultant" class="profile-img" onerror="this.style.display='none'">
+                <div class="availability-badge">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Available for Projects</span>
+                    </div>
+                </div>
+            </div>
+            
             <div class="hero-text">
-                <h1>Patrice Mirindi</h1>
+                <h1>Patrice Mirindi, MSc</h1>
                 <h2 class="hero-subtitle">Senior Data Analyst & Economic Development Consultant</h2>
                 
                 <p class="hero-description">
-                    Transforming data into transformative insights that spark sustainable growth. 
-                    I design economic policies and implement high-impact projects that empower communities, 
-                    accelerate business potential, and reshape the future of emerging markets.
+                    I transform complex data into actionable strategies that drive sustainable growth and financial resilience. 
+                    With 8+ years of experience across 12+ countries, I design evidence-based policies and implement 
+                    high-impact projects that empower communities and reshape emerging economies.
                 </p>
                 
                 <!-- Statistics -->
@@ -107,20 +123,64 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Development Indicators Widgets -->
+    <section class="widgets-section">
+        <div class="container">
+            <h2 class="section-title">Global Development Indicators</h2>
+            <p class="section-subtitle">Key statistics that inform my economic development and policy work</p>
             
-            <div class="hero-image">
-                <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Senior Data Analyst" class="profile-img" onerror="this.style.display='none'">
-                <div class="availability-badge">
-                    <div class="status-indicator">
-                        <div class="status-dot"></div>
-                        <span>Available for Projects</span>
+            <div class="widgets-grid">
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="widget-content">
+                        <span class="widget-value" id="poverty-rate">8.5%</span>
+                        <span class="widget-label">Global Poverty Rate</span>
+                        <span class="widget-meta">World Bank 2024</span>
+                    </div>
+                </div>
+                
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="widget-content">
+                        <span class="widget-value" id="food-insecurity">2.3B</span>
+                        <span class="widget-label">Food Insecurity</span>
+                        <span class="widget-meta">FAO 2024</span>
+                    </div>
+                </div>
+                
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="widget-content">
+                        <span class="widget-value" id="financial-inclusion">76%</span>
+                        <span class="widget-label">Financial Inclusion</span>
+                        <span class="widget-meta">Global Findex 2021</span>
+                    </div>
+                </div>
+                
+                <div class="widget-card">
+                    <div class="widget-icon">
+                        <i class="fas fa-tractor"></i>
+                    </div>
+                    <div class="widget-content">
+                        <span class="widget-value" id="agri-gdp">4.4%</span>
+                        <span class="widget-label">Agriculture GDP</span>
+                        <span class="widget-meta">IFAD 2024</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Expertise Section -->
+    <!-- Core Expertise Section -->
     <section class="section">
         <div class="container">
             <h2 class="section-title">Core Expertise</h2>
@@ -195,8 +255,33 @@
         </div>
     </section>
 
+    <!-- Global Projects Map -->
+    <section class="map-section">
+        <div class="container">
+            <h2 class="section-title">Global Project Portfolio</h2>
+            <p class="section-subtitle">Interactive map showing my project locations across Africa and beyond</p>
+            
+            <div id="projects-map" class="projects-map"></div>
+            
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-marker active"></div>
+                    <span>Active Projects</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker completed"></div>
+                    <span>Completed Projects</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-marker research"></div>
+                    <span>Research & Policy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Current Role & Impact -->
-    <section class="section" style="background: var(--gray-50);">
+    <section class="section" style="background: #F4F7FC;">
         <div class="container">
             <h2 class="section-title">Current Role & Impact</h2>
             <p class="section-subtitle">Making a difference through data and strategic consulting</p>
@@ -210,18 +295,18 @@
                         <span class="card-badge">Current Role</span>
                     </div>
                     <h3>Senior Data Analyst</h3>
-                    <h4 style="color: var(--primary-blue); margin-bottom: var(--space-4);">Financial Resilience Institute</h4>
-                    <p style="margin-bottom: var(--space-4);">October 2024 - Present</p>
-                    <p>Leading complex data analyses and strategic consulting to advance financial resilience across Canada and globally. Developing frameworks and policies that enhance financial well-being for communities.</p>
+                    <h4 style="color: #004085; margin-bottom: 1rem;">Financial Resilience Institute</h4>
+                    <p style="margin-bottom: 1rem;">October 2024 - Present</p>
+                    <p>Leading research initiatives to develop evidence-based frameworks for measuring and enhancing financial resilience across diverse communities in Canada and internationally.</p>
                     
-                    <div class="project-metrics" style="margin-top: var(--space-6);">
+                    <div class="project-metrics" style="margin-top: 2rem;">
                         <div class="metric-item">
                             <span class="metric-number" data-stat="organizations">15+</span>
                             <span class="metric-label">Partner Organizations</span>
                         </div>
                         <div class="metric-item">
-                            <span class="metric-number">$2.1M</span>
-                            <span class="metric-label">Current Project Value</span>
+                            <span class="metric-number">5</span>
+                            <span class="metric-label">Research Publications</span>
                         </div>
                     </div>
                 </div>
@@ -231,20 +316,20 @@
                         <div class="card-icon">
                             <i class="fas fa-chart-bar"></i>
                         </div>
-                        <span class="card-badge">Featured Project</span>
+                        <span class="card-badge">Featured Research</span>
                     </div>
-                    <h3>Financial Resilience Framework</h3>
-                    <h4 style="color: var(--secondary-teal); margin-bottom: var(--space-4);">Research & Development</h4>
-                    <p style="margin-bottom: var(--space-4);">2024 - Ongoing</p>
-                    <p>Developing comprehensive framework to measure and improve financial well-being across Canadian communities and internationally.</p>
+                    <h3>Financial Resilience Assessment</h3>
+                    <h4 style="color: #FF6600; margin-bottom: 1rem;">Policy Development</h4>
+                    <p style="margin-bottom: 1rem;">2024 - Ongoing</p>
+                    <p>Developing comprehensive frameworks to measure and improve financial well-being across Canadian communities and internationally.</p>
                     
-                    <div class="progress-container" style="margin-top: var(--space-6);">
+                    <div class="progress-container" style="margin-top: 2rem;">
                         <div class="progress-label">
-                            <span>Project Progress</span>
+                            <span>Research Progress</span>
                             <span>75%</span>
                         </div>
                         <div class="progress-bar">
-                            <div class="progress-fill" style="width: 75%; background: var(--secondary-teal);"></div>
+                            <div class="progress-fill" style="width: 75%; background: #FF6600;"></div>
                         </div>
                     </div>
                 </div>
@@ -252,60 +337,16 @@
         </div>
     </section>
 
-    <!-- Key Statistics -->
-    <section class="section">
-        <div class="container">
-            <h2 class="section-title">Impact by the Numbers</h2>
-            <p class="section-subtitle">Measurable results across projects and initiatives</p>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <span class="stat-number" data-stat="total-project-value">$5.2M+</span>
-                    <span class="stat-label">Total Project Value</span>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <span class="stat-number" data-stat="projects-completed">20+</span>
-                    <span class="stat-label">Projects Completed</span>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <span class="stat-number" data-stat="lives-impacted">2,000+</span>
-                    <span class="stat-label">Lives Impacted</span>
-                </div>
-                
-                <div class="stat-card">
-                    <div class="stat-icon">
-                        <i class="fas fa-globe-americas"></i>
-                    </div>
-                    <span class="stat-number" data-stat="countries-worked">12+</span>
-                    <span class="stat-label">Countries</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
+    <!-- Testimonials with Initials -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">What Colleagues Say</h2>
-            <p class="section-subtitle">Professional recommendations from clients and team members</p>
+            <h2 class="section-title">Professional Recommendations</h2>
+            <p class="section-subtitle">What colleagues and clients say about working with me</p>
             
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Kerry Kyd" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA1NiA1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyOCIgY3k9IjI4IiByPSIyOCIgZmlsbD0iIzk0YTNhZiIvPjxjaXJjbGUgY3g9IjI4IiBjeT0iMjIiIHI9IjgiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTQwIDQwLjVjMC04LjI4NC02LjcxNi0xNS0xNS0xNXMtMTUgNi43MTYtMTUgMTUiIGZpbGw9IndoaXRlIi8+PC9zdmc+'">
-                        </div>
+                        <div class="testimonial-initials">KK</div>
                         <div class="testimonial-author">
                             <h4>Kerry Kyd</h4>
                             <p>Africa Sector & Business Development</p>
@@ -327,9 +368,7 @@
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Melanie van der Baaren-Haga" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA1NiA1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyOCIgY3k9IjI4IiByPSIyOCIgZmlsbD0iIzk0YTNhZiIvPjxjaXJjbGUgY3g9IjI4IiBjeT0iMjIiIHI9IjgiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTQwIDQwLjVjMC04LjI4NC02LjcxNi0xNS0xNS0xNXMtMTUgNi43MTYtMTUgMTUiIGZpbGw9IndoaXRlIi8+PC9zdmc+'">
-                        </div>
+                        <div class="testimonial-initials">MH</div>
                         <div class="testimonial-author">
                             <h4>Melanie van der Baaren-Haga</h4>
                             <p>CBI - Centre for the Promotion of Imports</p>
@@ -351,9 +390,7 @@
                 
                 <div class="testimonial-card">
                     <div class="testimonial-header">
-                        <div class="testimonial-avatar">
-                            <img src="assets/img/avatar-placeholder.png" alt="Tamara Flink" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNTYiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA1NiA1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyOCIgY3k9IjI4IiByPSIyOCIgZmlsbD0iIzk0YTNhZiIvPjxjaXJjbGUgY3g9IjI4IiBjeT0iMjIiIHI9IjgiIGZpbGw9IndoaXRlIi8+PHBhdGggZD0iTTQwIDQwLjVjMC04LjI4NC02LjcxNi0xNS0xNS0xNXMtMTUgNi43MTYtMTUgMTUiIGZpbGw9IndoaXRlIi8+PC9zdmc+'">
-                        </div>
+                        <div class="testimonial-initials">TF</div>
                         <div class="testimonial-author">
                             <h4>Tamara Flink</h4>
                             <p>Programme Manager CBI at Netherlands Enterprise Agency</p>
@@ -373,13 +410,6 @@
                     </div>
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: var(--space-12);">
-                <a href="https://linkedin.com/in/patricemirindi" target="_blank" class="btn btn-primary">
-                    <i class="fab fa-linkedin"></i>
-                    View All Recommendations
-                </a>
-            </div>
         </div>
     </section>
 
@@ -387,28 +417,28 @@
     <section class="section">
         <div class="container">
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <div style="margin-bottom: var(--space-6);">
-                    <i class="fas fa-rocket" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: var(--space-4);"></i>
+                <div style="margin-bottom: 2rem;">
+                    <i class="fas fa-rocket" style="font-size: 3rem; color: #004085; margin-bottom: 1rem;"></i>
                 </div>
                 <h2>Ready to Transform Your Data into Impact?</h2>
-                <p style="font-size: var(--text-lg); margin-bottom: var(--space-8);">Let's discuss how data-driven insights can accelerate your organization's growth and resilience.</p>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem;">Let's discuss how evidence-based insights can accelerate your organization's growth and resilience.</p>
                 
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-6); margin: var(--space-8) 0;">
-                    <div style="display: flex; align-items: center; gap: var(--space-2);">
-                        <i class="fas fa-clock" style="color: var(--secondary-teal);"></i>
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin: 2rem 0;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-clock" style="color: #FF6600;"></i>
                         <span>Available for immediate engagement</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2);">
-                        <i class="fas fa-handshake" style="color: var(--secondary-teal);"></i>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-handshake" style="color: #FF6600;"></i>
                         <span>Free 30-minute consultation</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: var(--space-2);">
-                        <i class="fas fa-globe" style="color: var(--secondary-teal);"></i>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-globe" style="color: #FF6600;"></i>
                         <span>Remote & on-site collaboration</span>
                     </div>
                 </div>
                 
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4);">
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
                     <a href="contact.html" class="btn btn-primary btn-large">
                         <i class="fas fa-envelope"></i>
                         Start a Conversation
@@ -434,7 +464,7 @@
                         <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://github.com/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                             <i class="fab fa-github"></i>
                         </a>
                         <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
@@ -478,129 +508,9 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
-    
-    <!-- Additional CSS for specific components -->
-    <style>
-        .availability-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--accent-green);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: var(--text-sm);
-            font-weight: 600;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: currentColor;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--space-4);
-        }
-        
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--primary-blue);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        
-        .card-badge {
-            background: var(--accent-green);
-            color: white;
-            padding: 4px 12px;
-            border-radius: var(--radius-full);
-            font-size: var(--text-xs);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .metric-item {
-            text-align: center;
-            padding: var(--space-4);
-        }
-        
-        .metric-number {
-            display: block;
-            font-size: var(--text-2xl);
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: var(--space-2);
-        }
-        
-        .metric-label {
-            font-size: var(--text-sm);
-            color: var(--gray-600);
-        }
-        
-        .project-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-4);
-        }
-        
-        .progress-container {
-            width: 100%;
-        }
-        
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--space-2);
-            font-size: var(--text-sm);
-            font-weight: 600;
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: var(--radius-full);
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-blue);
-            border-radius: var(--radius-full);
-            transition: width 1s ease-in-out;
-        }
-        
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--primary-blue);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            margin: 0 auto var(--space-4);
-        }
-    </style>
+    <script src="assets/js/map.js"></script>
 </body>
 </html>
