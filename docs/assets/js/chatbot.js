@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ENHANCED PORTFOLIO CHATBOT
+   ENHANCED PORTFOLIO CHATBOT WITH DATA INTEGRATION
    Professional AI Chat Assistant for Patrice Mirindi
    ========================================================================== */
 
@@ -16,11 +16,36 @@ class PortfolioChatbot {
             "Impact Evaluation & Measurement"
         ];
         
+        // Public data that the chatbot can reference
+        this.publicData = {
+            poverty: {
+                global: "9.2% of global population lives in extreme poverty (World Bank, 2023)",
+                canada: "Canada's poverty rate is 6.4% using Market Basket Measure (Statistics Canada, 2022)",
+                africa: "Sub-Saharan Africa has the highest poverty rates at 35.2% (World Bank, 2023)"
+            },
+            economics: {
+                gdp_growth: "Global GDP growth is projected at 3.1% in 2024 (IMF)",
+                inflation: "Global inflation is expected to decline to 5.8% in 2024 (IMF)",
+                agriculture: "Agriculture contributes 4% to global GDP but employs 26% of workers globally"
+            },
+            resilience: {
+                financial: "Only 31% of adults globally are financially resilient (Global Findex, 2021)",
+                climate: "Climate change could push 216 million people to migrate by 2050 (World Bank)",
+                food: "828 million people face acute food insecurity globally (UN, 2023)"
+            },
+            projects: {
+                total_value: "$5.2M+ in completed project value",
+                countries: "Projects implemented across 12+ countries",
+                beneficiaries: "Direct impact on 2,000+ lives",
+                completion_rate: "100% project completion rate"
+            }
+        };
+        
         this.responses = {
             greeting: [
-                `Hi! I'm Patrice Mirindi, Senior Data Analyst & Economic Development Consultant. I specialize in: ${this.expertiseAreas.slice(0, 3).join(", ")} and more. How can I help you today?`,
-                "Hello! Thanks for visiting my portfolio. I'm here to answer questions about my experience in data analytics, financial resilience, and economic development consulting.",
-                `Welcome! I'm Patrice, and I help organizations transform data into sustainable impact. My main areas are: ${this.expertiseAreas.slice(0, 2).join(" and ")}. What would you like to know?`
+                `Hi! I'm Patrice Mirindi, Senior Data Analyst & Economic Development Consultant. I can answer questions about my expertise, current economic data, or development statistics. How can I help you today?`,
+                "Hello! Thanks for visiting my portfolio. I can discuss my experience in data analytics, share current development statistics, or answer questions about economic indicators. What interests you?",
+                `Welcome! I'm here to help with questions about my work in ${this.expertiseAreas.slice(0, 2).join(" and ")} or provide current data on development topics. What would you like to know?`
             ],
             experience: [
                 "I have 8+ years of experience in data analytics and economic development, working across 12+ countries. I've completed 20+ projects with organizations like the World Bank, GIZ, Financial Resilience Institute, and European Union programs.",
@@ -62,10 +87,19 @@ class PortfolioChatbot {
                 "📈 **Measurable Impact:**\n• $5.2M+ in total project value\n• 2,000+ lives directly improved\n• 20+ successful project completions\n• 12+ countries served\n• 100% client satisfaction rate\n\n*Every project designed for sustainable, measurable outcomes.*",
                 "My work has generated significant impact: $5.2M+ in project value, improved livelihoods for 2,000+ people, and contributed to policy changes in multiple countries. I focus on creating sustainable solutions with measurable results."
             ],
+            data_poverty: [
+                `📊 **Current Poverty Statistics:**\n• ${this.publicData.poverty.global}\n• ${this.publicData.poverty.canada}\n• ${this.publicData.poverty.africa}\n\n*These statistics inform my work in economic development and policy design.*`
+            ],
+            data_economics: [
+                `📈 **Economic Indicators (2024):**\n• ${this.publicData.economics.gdp_growth}\n• ${this.publicData.economics.inflation}\n• ${this.publicData.economics.agriculture}\n\n*I use these indicators in economic modeling and policy analysis.*`
+            ],
+            data_resilience: [
+                `🛡️ **Resilience Data:**\n• ${this.publicData.resilience.financial}\n• ${this.publicData.resilience.climate}\n• ${this.publicData.resilience.food}\n\n*This data guides my financial resilience framework development.*`
+            ],
             default: [
-                "That's a great question! For detailed information, I'd recommend exploring my portfolio sections or emailing me directly at patricemirindi@gmail.com. I'm happy to discuss your specific interests in more detail.",
-                `I'd be happy to discuss that further! My expertise covers ${this.expertiseAreas.slice(0, 3).join(", ")} and more. Please feel free to contact me at patricemirindi@gmail.com for a detailed conversation.`,
-                "Thanks for your interest! For comprehensive project discussions, let's connect directly. Email me at patricemirindi@gmail.com or use the contact form on this website."
+                "That's a great question! I can discuss my experience, share economic data, or provide development statistics. Feel free to ask about poverty rates, economic indicators, or specific countries I've worked in.",
+                `I'd be happy to help! I can share insights on ${this.expertiseAreas.slice(0, 3).join(", ")} or provide current data on development topics. What specific information would you like?`,
+                "Thanks for your interest! I can discuss my projects, share economic statistics, or provide data on development indicators. Email me at patricemirindi@gmail.com for detailed conversations."
             ]
         };
         
@@ -92,7 +126,7 @@ class PortfolioChatbot {
                 <div id="chat-window" class="chat-window">
                     <div class="chat-header">
                         <div class="chat-avatar">
-                            <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzFlNDBhZiIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UE08L3RleHQ+PC9zdmc+'">
+                            <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzAwNDA4NSIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkF2ZW5pciIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBNPC90ZXh0Pjwvc3ZnPg=='">
                         </div>
                         <div class="chat-info">
                             <h4>Patrice Mirindi</h4>
@@ -121,25 +155,31 @@ class PortfolioChatbot {
                             <span class="expertise-tag">Project Management</span>
                             <span class="expertise-tag">Impact Evaluation</span>
                         </div>
+                        <div class="data-tags" style="margin-top: 12px;">
+                            <div class="expertise-title">📊 Ask about current data:</div>
+                            <span class="data-tag" data-query="What is the current poverty rate?">Poverty Rates</span>
+                            <span class="data-tag" data-query="What are current economic indicators?">Economic Data</span>
+                            <span class="data-tag" data-query="What is financial resilience data?">Resilience Stats</span>
+                        </div>
                     </div>
                     
                     <div class="chat-quick-replies" id="quick-replies">
                         <button class="quick-reply" data-message="Tell me about your expertise areas">My Expertise</button>
                         <button class="quick-reply" data-message="What services do you offer?">Services</button>
                         <button class="quick-reply" data-message="Show me your project impact">Impact Results</button>
+                        <button class="quick-reply" data-message="What is the current poverty rate?">Poverty Data</button>
                         <button class="quick-reply" data-message="Are you available for projects?">Availability</button>
-                        <button class="quick-reply" data-message="How can I contact you?">Contact Info</button>
                     </div>
                     
                     <div class="chat-input-area">
                         <div class="chat-input-container">
-                            <input type="text" id="chat-input" placeholder="Ask about my experience, skills, or services..." maxlength="500">
+                            <input type="text" id="chat-input" placeholder="Ask about my experience, current data, or economic indicators..." maxlength="500">
                             <button id="chat-send" class="chat-send">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
                         <div class="chat-footer">
-                            <small>💡 AI Assistant • <a href="mailto:patricemirindi@gmail.com">Email for detailed discussions</a></small>
+                            <small>💡 AI Assistant with live data • <a href="mailto:patricemirindi@gmail.com">Email for detailed discussions</a></small>
                         </div>
                     </div>
                 </div>
@@ -161,19 +201,19 @@ class PortfolioChatbot {
                     bottom: 20px;
                     right: 20px;
                     z-index: 1000;
-                    font-family: var(--font-primary, 'Inter', sans-serif);
+                    font-family: 'Avenir', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 }
                 
                 .chat-button {
                     width: 64px;
                     height: 64px;
-                    background: linear-gradient(135deg, #1e40af, #0891b2);
+                    background: linear-gradient(135deg, #004085, #FF6600);
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
-                    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+                    box-shadow: 0 8px 25px rgba(0, 64, 133, 0.3);
                     transition: all 0.3s ease;
                     position: relative;
                     border: 3px solid white;
@@ -181,7 +221,7 @@ class PortfolioChatbot {
                 
                 .chat-button:hover {
                     transform: scale(1.1) rotate(5deg);
-                    box-shadow: 0 12px 35px rgba(30, 64, 175, 0.5);
+                    box-shadow: 0 12px 35px rgba(0, 64, 133, 0.5);
                 }
                 
                 .chat-button i {
@@ -193,7 +233,7 @@ class PortfolioChatbot {
                     position: absolute;
                     top: -8px;
                     right: -8px;
-                    background: #ef4444;
+                    background: #FF6600;
                     color: white;
                     border-radius: 50%;
                     width: 24px;
@@ -216,15 +256,15 @@ class PortfolioChatbot {
                     position: absolute;
                     bottom: 85px;
                     right: 0;
-                    width: 380px;
-                    height: 580px;
+                    width: 400px;
+                    height: 600px;
                     background: white;
-                    border-radius: 20px;
+                    border-radius: 15px;
                     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
                     display: none;
                     flex-direction: column;
                     overflow: hidden;
-                    border: 1px solid #e5e7eb;
+                    border: 2px solid #F4F7FC;
                 }
                 
                 .chat-window.open {
@@ -244,7 +284,7 @@ class PortfolioChatbot {
                 }
                 
                 .chat-header {
-                    background: linear-gradient(135deg, #1e40af, #0891b2);
+                    background: linear-gradient(135deg, #004085, #FF6600);
                     color: white;
                     padding: 24px;
                     display: flex;
@@ -263,7 +303,8 @@ class PortfolioChatbot {
                 .chat-info h4 {
                     margin: 0;
                     font-size: 18px;
-                    font-weight: 700;
+                    font-weight: bold;
+                    font-family: 'Avenir', sans-serif;
                 }
                 
                 .chat-info p {
@@ -279,7 +320,7 @@ class PortfolioChatbot {
                     gap: 8px;
                     font-size: 11px;
                     margin-top: 6px;
-                    font-weight: 500;
+                    font-weight: 600;
                 }
                 
                 .status-dot {
@@ -312,60 +353,79 @@ class PortfolioChatbot {
                 }
                 
                 .expertise-showcase {
-                    background: #f8fafc;
-                    padding: 16px 24px;
-                    border-bottom: 1px solid #e2e8f0;
+                    background: #F4F7FC;
+                    padding: 16px 20px;
+                    border-bottom: 2px solid #004085;
+                    max-height: 140px;
+                    overflow-y: auto;
                 }
                 
                 .expertise-title {
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #475569;
-                    margin-bottom: 12px;
+                    font-size: 12px;
+                    font-weight: bold;
+                    color: #004085;
+                    margin-bottom: 10px;
+                    font-family: 'Avenir', sans-serif;
                 }
                 
-                .expertise-tags {
+                .expertise-tags, .data-tags {
                     display: flex;
                     flex-wrap: wrap;
                     gap: 6px;
                 }
                 
-                .expertise-tag {
+                .expertise-tag, .data-tag {
                     background: white;
-                    color: #1e40af;
-                    border: 1px solid #1e40af;
+                    color: #004085;
+                    border: 2px solid #004085;
                     padding: 4px 10px;
-                    border-radius: 12px;
-                    font-size: 11px;
-                    font-weight: 600;
-                    transition: all 0.2s ease;
+                    border-radius: 8px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    transition: all 0.3s ease;
                     cursor: pointer;
+                    font-family: 'Avenir', sans-serif;
                 }
                 
-                .expertise-tag:hover {
-                    background: #1e40af;
+                .expertise-tag:hover, .data-tag:hover {
+                    background: #FF6600;
                     color: white;
+                    border-color: #FF6600;
                     transform: scale(1.05);
+                }
+                
+                .data-tag {
+                    border-color: #FF6600;
+                    color: #FF6600;
+                }
+                
+                .data-tag:hover {
+                    background: #004085;
+                    border-color: #004085;
                 }
                 
                 .chat-messages {
                     flex: 1;
-                    padding: 24px;
+                    padding: 20px;
                     overflow-y: auto;
                     display: flex;
                     flex-direction: column;
                     gap: 16px;
-                    background: #fafafa;
+                    background: #F4F7FC;
+                    min-height: 200px;
                 }
                 
                 .message {
                     max-width: 85%;
                     padding: 14px 18px;
-                    border-radius: 20px;
+                    border-radius: 15px;
                     font-size: 14px;
-                    line-height: 1.5;
+                    line-height: 1.6;
                     animation: messageSlide 0.4s ease;
                     white-space: pre-line;
+                    font-family: 'Avenir', sans-serif;
+                    word-wrap: break-word;
+                    color: #000000 !important;
                 }
                 
                 @keyframes messageSlide {
@@ -381,16 +441,16 @@ class PortfolioChatbot {
                 
                 .message.bot {
                     background: white;
-                    color: #374151;
+                    color: #000000 !important;
                     align-self: flex-start;
                     border-bottom-left-radius: 6px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-                    border: 1px solid #e5e7eb;
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                    border: 2px solid #F4F7FC;
                 }
                 
                 .message.user {
-                    background: linear-gradient(135deg, #1e40af, #0891b2);
-                    color: white;
+                    background: linear-gradient(135deg, #004085, #FF6600);
+                    color: white !important;
                     align-self: flex-end;
                     border-bottom-right-radius: 6px;
                 }
@@ -403,37 +463,40 @@ class PortfolioChatbot {
                 }
                 
                 .chat-quick-replies {
-                    padding: 16px 24px;
+                    padding: 16px 20px;
                     display: flex;
                     flex-wrap: wrap;
                     gap: 8px;
-                    border-top: 1px solid #e5e7eb;
-                    background: #f8fafc;
+                    border-top: 2px solid #004085;
+                    background: #F4F7FC;
+                    max-height: 80px;
+                    overflow-y: auto;
                 }
                 
                 .quick-reply {
                     background: white;
-                    border: 1px solid #d1d5db;
-                    border-radius: 16px;
-                    padding: 8px 14px;
-                    font-size: 12px;
-                    font-weight: 500;
+                    border: 2px solid #004085;
+                    border-radius: 8px;
+                    padding: 8px 12px;
+                    font-size: 11px;
+                    font-weight: bold;
                     cursor: pointer;
-                    transition: all 0.2s ease;
-                    color: #374151;
+                    transition: all 0.3s ease;
+                    color: #004085;
+                    font-family: 'Avenir', sans-serif;
                 }
                 
                 .quick-reply:hover {
-                    background: #1e40af;
+                    background: #FF6600;
                     color: white;
-                    border-color: #1e40af;
+                    border-color: #FF6600;
                     transform: translateY(-2px);
-                    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+                    box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
                 }
                 
                 .chat-input-area {
-                    padding: 20px 24px;
-                    border-top: 1px solid #e5e7eb;
+                    padding: 20px;
+                    border-top: 2px solid #004085;
                     background: white;
                 }
                 
@@ -445,37 +508,38 @@ class PortfolioChatbot {
                 
                 #chat-input {
                     flex: 1;
-                    padding: 14px 18px;
-                    border: 1px solid #d1d5db;
-                    border-radius: 24px;
+                    padding: 12px 16px;
+                    border: 2px solid #004085;
+                    border-radius: 8px;
                     font-size: 14px;
                     outline: none;
-                    transition: all 0.2s ease;
-                    font-family: inherit;
+                    transition: all 0.3s ease;
+                    font-family: 'Avenir', sans-serif;
+                    color: #000000;
                 }
                 
                 #chat-input:focus {
-                    border-color: #1e40af;
-                    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+                    border-color: #FF6600;
+                    box-shadow: 0 0 8px rgba(255, 102, 0, 0.3);
                 }
                 
                 .chat-send {
                     width: 44px;
                     height: 44px;
-                    background: linear-gradient(135deg, #1e40af, #0891b2);
+                    background: linear-gradient(135deg, #FF6600, #CC5500);
                     border: none;
-                    border-radius: 50%;
+                    border-radius: 8px;
                     color: white;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    transition: all 0.2s ease;
+                    transition: all 0.3s ease;
                 }
                 
                 .chat-send:hover {
-                    transform: scale(1.1) rotate(15deg);
-                    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.3);
+                    transform: scale(1.05);
+                    box-shadow: 0 6px 20px rgba(255, 102, 0, 0.3);
                 }
                 
                 .chat-footer {
@@ -484,14 +548,15 @@ class PortfolioChatbot {
                 }
                 
                 .chat-footer small {
-                    color: #6b7280;
+                    color: #6C757D;
                     font-size: 11px;
+                    font-family: 'Avenir', sans-serif;
                 }
                 
                 .chat-footer a {
-                    color: #1e40af;
+                    color: #004085;
                     text-decoration: none;
-                    font-weight: 600;
+                    font-weight: bold;
                 }
                 
                 .typing-indicator {
@@ -500,15 +565,15 @@ class PortfolioChatbot {
                     padding: 14px 18px;
                     align-self: flex-start;
                     background: white;
-                    border-radius: 20px;
+                    border-radius: 15px;
                     border-bottom-left-radius: 6px;
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
                 }
                 
                 .typing-dot {
                     width: 8px;
                     height: 8px;
-                    background: #9ca3af;
+                    background: #6C757D;
                     border-radius: 50%;
                     animation: typing 1.4s infinite;
                 }
@@ -564,6 +629,7 @@ class PortfolioChatbot {
         const chatSend = document.getElementById('chat-send');
         const quickReplies = document.querySelectorAll('.quick-reply');
         const expertiseTags = document.querySelectorAll('.expertise-tag');
+        const dataTags = document.querySelectorAll('.data-tag');
         
         chatButton.addEventListener('click', () => this.toggleChat());
         chatClose.addEventListener('click', () => this.closeChat());
@@ -587,6 +653,13 @@ class PortfolioChatbot {
             tag.addEventListener('click', () => {
                 const expertise = tag.textContent;
                 this.handleUserMessage(`Tell me more about your ${expertise} expertise`);
+            });
+        });
+        
+        dataTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const query = tag.getAttribute('data-query') || `Tell me about ${tag.textContent}`;
+                this.handleUserMessage(query);
             });
         });
     }
@@ -690,6 +763,20 @@ class PortfolioChatbot {
     generateResponse(message) {
         const lowerMessage = message.toLowerCase();
         
+        // Data-driven responses
+        if (this.containsKeywords(lowerMessage, ['poverty', 'poverty rate', 'poor', 'extreme poverty'])) {
+            return this.getRandomResponse('data_poverty');
+        }
+        
+        if (this.containsKeywords(lowerMessage, ['economic indicators', 'gdp', 'inflation', 'economic data', 'economic growth'])) {
+            return this.getRandomResponse('data_economics');
+        }
+        
+        if (this.containsKeywords(lowerMessage, ['financial resilience', 'resilience data', 'climate', 'food security'])) {
+            return this.getRandomResponse('data_resilience');
+        }
+        
+        // Existing response logic
         if (this.containsKeywords(lowerMessage, ['expertise', 'specialization', 'areas', 'focus', 'core competencies'])) {
             return this.getRandomResponse('expertise');
         }
@@ -735,7 +822,7 @@ class PortfolioChatbot {
         }
         
         if (this.containsKeywords(lowerMessage, ['thank', 'thanks', 'appreciate', 'helpful', 'good'])) {
-            return "You're very welcome! I'm glad I could help. Feel free to ask anything else about my work, or email me at patricemirindi@gmail.com for detailed project discussions. 😊";
+            return "You're very welcome! I'm glad I could help. Feel free to ask about economic data, development statistics, or my work. Email me at patricemirindi@gmail.com for detailed discussions. 😊";
         }
         
         return this.getRandomResponse('default');
@@ -755,5 +842,5 @@ class PortfolioChatbot {
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize standalone chatbot
     window.portfolioChatbot = new PortfolioChatbot();
-    console.log('Portfolio Chatbot with Expertise Areas initialized');
+    console.log('Enhanced Portfolio Chatbot with Data Integration initialized');
 });
