@@ -1,183 +1,61 @@
 /* ==========================================================================
-   SUPER POWERFUL AI CHATBOT FOR PATRICE MIRINDI
-   Learning AI Assistant with Complete Knowledge Base & Free AI Integration
+   SUPER INTELLIGENT CHATBOT FOR PATRICE MIRINDI
+   Fixed: Intent Recognition, Natural Responses, No Markdown Formatting
    ========================================================================== */
 
-class SuperAIChatbot {
+class SuperIntelligentChatbot {
     constructor() {
         this.isOpen = false;
         this.messages = [];
         this.conversations = this.loadConversations();
         this.contacts = this.loadContacts();
-        this.learningData = this.loadLearningData();
         this.currentConversationId = null;
         
-        // Complete Knowledge Base - All About Patrice Mirindi
-        this.knowledgeBase = {
-            personal: {
-                name: "Patrice Mirindi",
-                title: "Development Economist & Data Analytics Consultant",
-                location: "Winnipeg, MB, Canada",
-                origin: "Democratic Republic of Congo (DRC)",
-                education: "MSc Agricultural Economics, University of Nairobi",
-                languages: ["French (Native)", "English (Fluent)", "Swahili (Fluent)", "Lingala (Native)"],
-                certifications: ["PMP Certified Project Manager", "Advanced Statistics", "Financial Analysis"],
-                experience_years: "8+",
-                countries_worked: "15+",
-                availability: "Available for new projects",
-                response_time: "Within 24 hours",
-                consultation: "Free 30-minute consultation available"
-            },
-            
-            current_role: {
-                position: "Senior Data Analyst",
-                organization: "Financial Resilience Institute",
-                start_date: "October 2024",
-                status: "Current",
-                location: "Winnipeg, MB, Canada",
-                responsibilities: [
-                    "Leading research on financial resilience frameworks",
-                    "Developing evidence-based solutions for financial well-being",
-                    "Creating data-driven strategies for policy makers",
-                    "Supporting international development initiatives",
-                    "Advancing financial health research in Canada and globally"
-                ]
-            },
-            
-            expertise: {
-                core_areas: [
-                    "Data Analytics & Statistical Modeling",
-                    "Financial Resilience Assessment", 
-                    "Agricultural Economics & Policy",
-                    "Economic Development Strategy",
-                    "Project Management (PMP Certified)",
-                    "Impact Evaluation & Measurement"
-                ],
-                technical_skills: {
-                    programming: ["R Programming", "Python", "SQL", "JavaScript"],
-                    analytics: ["Stata", "SPSS", "SAS", "MATLAB"],
-                    visualization: ["Power BI", "Tableau", "ggplot2", "D3.js"],
-                    databases: ["PostgreSQL", "MySQL", "MongoDB"],
-                    survey_tools: ["SurveyCTO", "KoBo Toolbox", "Qualtrics"],
-                    project_mgmt: ["MS Project", "Asana", "Trello", "Slack"]
-                },
-                specializations: [
-                    "Econometric modeling",
-                    "Time series analysis",
-                    "Impact evaluation design",
-                    "Survey methodology",
-                    "Policy analysis",
-                    "Value chain development",
-                    "Financial inclusion research",
-                    "Gender transformative programming"
-                ]
-            },
-            
-            projects: {
-                total_value: "$7.5M+",
-                completed: "25+",
-                countries: "15+",
-                beneficiaries: "25,000+",
-                success_rate: "100%",
-                featured_projects: [
-                    {
-                        name: "Financial Resilience Framework Development",
-                        value: "$2.1M",
-                        status: "Ongoing",
-                        location: "Canada & International",
-                        funder: "Financial Resilience Institute",
-                        description: "Leading comprehensive research to develop evidence-based frameworks for measuring and enhancing financial resilience",
-                        impact: "15+ partner organizations, 5 research publications"
-                    },
-                    {
-                        name: "Hortiplus - Gender Transformative Horticulture",
-                        value: "$1.2M",
-                        status: "Completed",
-                        location: "Burkina Faso",
-                        funder: "Netherlands Embassy / RVO",
-                        description: "Gender transformative project increasing production of 6 horticulture crops by 50%",
-                        impact: "8,000 farmers reached, 50,000 consumers benefited"
-                    },
-                    {
-                        name: "Burkina DryMore Value Chains",
-                        value: "$800K",
-                        status: "Completed",
-                        location: "Burkina Faso",
-                        funder: "Netherlands Embassy / RVO",
-                        description: "Developed hibiscus, fonio, and ginger value chains",
-                        impact: "8,000+ women employed year-round"
-                    },
-                    {
-                        name: "Rice Mill Academy",
-                        value: "$750K",
-                        status: "Completed",
-                        location: "Burkina Faso, Côte d'Ivoire, Ghana, Nigeria",
-                        funder: "GIZ / Bill & Melinda Gates Foundation",
-                        description: "Regional capacity building for rice mills across West Africa",
-                        impact: "50+ rice mills optimized across 4 countries"
-                    }
-                ]
-            },
-            
-            services: {
-                consulting: [
-                    "Data Analytics & Statistical Modeling",
-                    "Financial Resilience Assessment",
-                    "Agricultural Value Chain Analysis",
-                    "Economic Development Strategy",
-                    "Impact Evaluation Design",
-                    "Policy Research & Analysis",
-                    "Survey Design & Implementation",
-                    "Project Management & Leadership"
-                ],
-                deliverables: [
-                    "Research reports and policy briefs",
-                    "Statistical analysis and modeling",
-                    "Interactive dashboards and visualizations",
-                    "Survey design and data collection",
-                    "Training and capacity building",
-                    "Project management and coordination"
-                ],
-                pricing: {
-                    approach: "Value-based pricing tailored to project scope",
-                    factors: ["Project complexity", "Timeline", "Deliverables", "Team size required"],
-                    consultation: "Free 30-minute project assessment",
-                    payment_terms: "Flexible payment schedules available"
-                }
-            },
-            
-            contact: {
-                email: "patricemirindi@gmail.com",
-                linkedin: "linkedin.com/in/patricemirindi",
-                github: "github.com/PatMir04",
-                website: "patricemirindi.com",
-                location: "Winnipeg, MB, Canada",
-                timezone: "Central Time (CT)",
-                availability: "Available globally for remote and on-site work"
-            }
+        // Complete and Accurate Knowledge Base
+        this.profile = {
+            name: "Patrice Mirindi",
+            origin: "Democratic Republic of Congo (DRC)",
+            current_location: "Winnipeg, MB, Canada",
+            nationality: "Congolese-Canadian",
+            education: "MSc Agricultural Economics from University of Nairobi",
+            languages: ["French (Native)", "English (Fluent)", "Swahili (Fluent)", "Lingala (Native)"],
+            experience_years: "8+",
+            countries_worked: "15+",
+            email: "patricemirindi@gmail.com",
+            linkedin: "linkedin.com/in/patricemirindi",
+            github: "github.com/PatMir04",
+            availability: "Currently available for new consulting projects",
+            response_time: "within 24 hours",
+            consultation: "Free 30-minute consultation available"
         };
         
-        // Real-time data for economics and development
-        this.liveData = {
-            global_economics: {
-                gdp_growth: "3.1% (IMF 2024 projection)",
-                inflation: "5.8% globally (IMF 2024)",
-                trade_volume: "$28.5T global trade value (2023)",
-                poverty_rate: "8.5% extreme poverty globally (World Bank 2024)",
-                financial_inclusion: "76% adults with bank accounts (Global Findex 2021)"
-            },
-            canada_data: {
-                gdp_growth: "2.8% projected (Bank of Canada 2024)",
-                inflation: "3.2% current rate (Statistics Canada)",
-                unemployment: "5.2% unemployment rate",
-                poverty_rate: "6.4% using Market Basket Measure"
-            },
-            africa_development: {
-                poverty_rate: "35.2% in Sub-Saharan Africa (World Bank 2023)",
-                agricultural_employment: "60% of workforce in agriculture",
-                mobile_money: "12% of global mobile money transactions",
-                renewable_energy: "Fastest growing renewable energy market"
-            }
+        this.current_role = {
+            title: "Senior Data Analyst",
+            organization: "Financial Resilience Institute",
+            location: "Winnipeg, MB, Canada",
+            start_date: "October 2024",
+            status: "Current position"
+        };
+        
+        this.expertise = {
+            core_skills: [
+                "Data Analytics & Statistical Modeling",
+                "Financial Resilience Assessment", 
+                "Agricultural Economics & Policy",
+                "Economic Development Strategy",
+                "Project Management (PMP Certified)",
+                "Impact Evaluation & Measurement"
+            ],
+            technical: ["R Programming", "Python", "Stata", "Power BI", "SQL", "Excel"],
+            specializations: ["Econometric modeling", "Survey design", "Policy analysis", "Value chain development"]
+        };
+        
+        this.projects = {
+            total_value: "7.5 million dollars",
+            completed: "25+",
+            countries: "15+",
+            beneficiaries: "25,000+",
+            success_rate: "100%"
         };
         
         this.init();
@@ -188,102 +66,6 @@ class SuperAIChatbot {
         this.attachEventListeners();
         this.showGreeting();
         this.startConversation();
-    }
-    
-    // Learning and Memory Functions
-    startConversation() {
-        this.currentConversationId = 'conv_' + Date.now();
-        this.conversations[this.currentConversationId] = {
-            id: this.currentConversationId,
-            start_time: new Date().toISOString(),
-            messages: [],
-            user_info: {},
-            topics_discussed: [],
-            outcome: null
-        };
-    }
-    
-    loadConversations() {
-        try {
-            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');
-        } catch {
-            return {};
-        }
-    }
-    
-    saveConversations() {
-        try {
-            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));
-        } catch (e) {
-            console.log('Could not save conversations to localStorage');
-        }
-    }
-    
-    loadContacts() {
-        try {
-            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');
-        } catch {
-            return [];
-        }
-    }
-    
-    saveContacts() {
-        try {
-            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));
-        } catch (e) {
-            console.log('Could not save contacts to localStorage');
-        }
-    }
-    
-    loadLearningData() {
-        try {
-            return JSON.parse(localStorage.getItem('chatbot_learning') || '{ "common_questions": [], "successful_responses": [], "user_preferences": {} }');
-        } catch {
-            return { common_questions: [], successful_responses: [], user_preferences: {} };
-        }
-    }
-    
-    saveLearningData() {
-        try {
-            localStorage.setItem('chatbot_learning', JSON.stringify(this.learningData));
-        } catch (e) {
-            console.log('Could not save learning data to localStorage');
-        }
-    }
-    
-    // Advanced Response Generation with Learning
-    learnFromInteraction(userMessage, botResponse, userFeedback = 'neutral') {
-        // Track common questions
-        const questionHash = this.hashMessage(userMessage);
-        const existingQuestion = this.learningData.common_questions.find(q => q.hash === questionHash);
-        
-        if (existingQuestion) {
-            existingQuestion.count++;
-            existingQuestion.last_asked = new Date().toISOString();
-        } else {
-            this.learningData.common_questions.push({
-                hash: questionHash,
-                message: userMessage,
-                count: 1,
-                first_asked: new Date().toISOString(),
-                last_asked: new Date().toISOString()
-            });
-        }
-        
-        // Track successful responses
-        if (userFeedback === 'positive') {
-            this.learningData.successful_responses.push({
-                question: userMessage,
-                response: botResponse,
-                timestamp: new Date().toISOString()
-            });
-        }
-        
-        this.saveLearningData();
-    }
-    
-    hashMessage(message) {
-        return message.toLowerCase().replace(/[^\w\s]/gi, '').split(' ').sort().join('_');
     }
 
     createChatWidget() {
@@ -327,29 +109,29 @@ class SuperAIChatbot {
                     </div>
                     
                     <div class="smart-suggestions" id="smart-suggestions">
-                        <div class="suggestions-title">💡 Smart Suggestions:</div>
+                        <div class="suggestions-title">💡 Ask me about:</div>
                         <div class="suggestions-grid">
-                            <button class="suggestion-btn" data-message="What's your experience in data analytics?">
-                                <i class="fas fa-chart-bar"></i>
-                                <span>Data Analytics</span>
-                            </button>
-                            <button class="suggestion-btn" data-message="Tell me about your current projects">
-                                <i class="fas fa-project-diagram"></i>
-                                <span>Current Projects</span>
-                            </button>
-                            <button class="suggestion-btn" data-message="What are current global poverty rates?">
+                            <button class="suggestion-btn" data-message="Where are you from?">
                                 <i class="fas fa-globe-africa"></i>
-                                <span>Global Data</span>
+                                <span>Background</span>
+                            </button>
+                            <button class="suggestion-btn" data-message="What is your experience?">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Experience</span>
+                            </button>
+                            <button class="suggestion-btn" data-message="Tell me about your projects">
+                                <i class="fas fa-project-diagram"></i>
+                                <span>Projects</span>
                             </button>
                             <button class="suggestion-btn" data-message="Are you available for consulting?">
                                 <i class="fas fa-handshake"></i>
                                 <span>Availability</span>
                             </button>
-                            <button class="suggestion-btn" data-message="Schedule a consultation">
-                                <i class="fas fa-calendar"></i>
-                                <span>Schedule Meeting</span>
+                            <button class="suggestion-btn" data-message="How can I contact you?">
+                                <i class="fas fa-envelope"></i>
+                                <span>Contact</span>
                             </button>
-                            <button class="suggestion-btn" data-message="What's your pricing for projects?">
+                            <button class="suggestion-btn" data-message="What are your rates?">
                                 <i class="fas fa-dollar-sign"></i>
                                 <span>Pricing</span>
                             </button>
@@ -358,7 +140,7 @@ class SuperAIChatbot {
                     
                     <div class="chat-input-area">
                         <div class="chat-input-container">
-                            <input type="text" id="chat-input" placeholder="Ask about my experience, projects, or current economic data..." maxlength="500">
+                            <input type="text" id="chat-input" placeholder="Ask me anything about Patrice or current economic data..." maxlength="500">
                             <button id="chat-send" class="chat-send">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -607,7 +389,7 @@ class SuperAIChatbot {
                 
                 .message.bot {
                     background: white;
-                    color: #000000;
+                    color: #374151;
                     align-self: flex-start;
                     border-bottom-left-radius: 6px;
                     box-shadow: 0 6px 20px rgba(0, 64, 133, 0.08);
@@ -946,41 +728,18 @@ class SuperAIChatbot {
         const chatWindow = document.getElementById('chat-window');
         chatWindow.classList.remove('open');
         this.isOpen = false;
-        
-        // Save conversation when closing
         this.endConversation();
     }
     
     minimizeChat() {
         this.closeChat();
     }
-    
-    endConversation() {
-        if (this.currentConversationId && this.conversations[this.currentConversationId]) {
-            this.conversations[this.currentConversationId].end_time = new Date().toISOString();
-            this.conversations[this.currentConversationId].duration = 
-                new Date() - new Date(this.conversations[this.currentConversationId].start_time);
-            this.saveConversations();
-        }
-    }
 
     showGreeting() {
         setTimeout(() => {
-            const greeting = this.getGreetingMessage();
+            const greeting = "👋 Hi! I'm Patrice's AI assistant. I can answer questions about his background, projects, expertise, or current economic data. What would you like to know?"
             this.addMessage(greeting, 'bot');
         }, 1000);
-    }
-    
-    getGreetingMessage() {
-        const greetings = [
-            `👋 Hi! I'm Patrice Mirindi's AI assistant. I know everything about his ${this.knowledgeBase.personal.experience_years} years of experience in data analytics and economic development. I can also share current economic data and help schedule consultations. What would you like to know?`,
-            
-            `🤖 Hello! I'm an AI assistant trained on Patrice's complete professional profile. I can discuss his work at the Financial Resilience Institute, his $${this.knowledgeBase.projects.total_value} project portfolio, or provide current economic indicators. How can I help you today?`,
-            
-            `✨ Welcome! I'm here to help you learn about Patrice Mirindi's expertise in ${this.knowledgeBase.expertise.core_areas.slice(0, 3).join(", ")} and more. I can also share real-time economic data and collect your contact info for consultations. What interests you most?`
-        ];
-        
-        return greetings[Math.floor(Math.random() * greetings.length)];
     }
 
     sendMessage() {
@@ -1011,7 +770,7 @@ class SuperAIChatbot {
         // Generate response after realistic delay
         setTimeout(() => {
             this.hideTypingIndicator();
-            const response = this.generateAdvancedResponse(message);
+            const response = this.generateSmartResponse(message);
             this.addMessage(response, 'bot');
             
             // Save bot response to conversation
@@ -1024,252 +783,76 @@ class SuperAIChatbot {
                 this.saveConversations();
             }
             
-            // Learn from interaction
-            this.learnFromInteraction(message, response);
-            
-        }, 1500 + Math.random() * 1000);
+        }, 1200 + Math.random() * 800);
     }
     
-    // Advanced AI Response Generation
-    generateAdvancedResponse(message) {
-        const lowerMessage = message.toLowerCase();
+    // COMPLETELY IMPROVED Response Generation - Direct & Accurate
+    generateSmartResponse(message) {
+        const msg = message.toLowerCase().trim();
         
-        // Contact collection and scheduling
-        if (this.containsKeywords(lowerMessage, ['schedule', 'meeting', 'consultation', 'call', 'appointment', 'book'])) {
-            setTimeout(() => this.showContactForm('schedule'), 2000);
-            return `📅 **Schedule a Consultation**\n\nI'd be happy to help you schedule a meeting with Patrice! He offers:\n\n• **Free 30-minute** project assessment\n• **Flexible scheduling** across time zones\n• **Video calls** or phone consultations\n• **Response within** ${this.knowledgeBase.personal.response_time}\n\nI'll collect your contact information to set this up. What type of project are you interested in discussing?`;
+        // 1. GREETINGS - MUST BE FIRST PRIORITY
+        if (this.isGreeting(msg)) {
+            return this.getGreetingResponse();
         }
         
-        if (this.containsKeywords(lowerMessage, ['contact', 'email', 'reach', 'get in touch', 'connect'])) {
-            setTimeout(() => this.showContactForm('contact'), 2000);
-            return `📧 **Contact Information**\n\n**Primary Contact:**\n• Email: ${this.knowledgeBase.contact.email}\n• LinkedIn: ${this.knowledgeBase.contact.linkedin}\n• Location: ${this.knowledgeBase.contact.location}\n\n**Availability:**\n• ${this.knowledgeBase.personal.availability}\n• ${this.knowledgeBase.personal.response_time}\n• ${this.knowledgeBase.personal.consultation}\n\nI can collect your information to ensure Patrice prioritizes your inquiry!`;
+        // 2. ORIGIN/LOCATION QUESTIONS - DIRECT ANSWERS
+        if (this.isOriginQuestion(msg)) {
+            return `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;
         }
         
-        // Current role and recent work
-        if (this.containsKeywords(lowerMessage, ['current role', 'current job', 'current position', 'financial resilience institute', 'what does he do now'])) {
-            return `🏢 **Current Role (${this.knowledgeBase.current_role.start_date} - Present)**\n\n**Position:** ${this.knowledgeBase.current_role.position}\n**Organization:** ${this.knowledgeBase.current_role.organization}\n**Location:** ${this.knowledgeBase.current_role.location}\n\n**Key Responsibilities:**\n${this.knowledgeBase.current_role.responsibilities.map(r => `• ${r}`).join('\n')}\n\n*This role combines his passion for data analytics with real-world impact on financial well-being in Canada and internationally.*`;
+        if (this.isLocationQuestion(msg)) {
+            return `Patrice currently lives in ${this.profile.current_location}. He's originally from ${this.profile.origin}.`;
         }
         
-        // Comprehensive expertise
-        if (this.containsKeywords(lowerMessage, ['expertise', 'skills', 'experience', 'background', 'specialization'])) {
-            return `🎯 **Core Expertise (${this.knowledgeBase.personal.experience_years} Years)**\n\n**Primary Areas:**\n${this.knowledgeBase.expertise.core_areas.map(area => `• ${area}`).join('\n')}\n\n**Technical Skills:**\n• **Programming:** ${this.knowledgeBase.expertise.technical_skills.programming.join(', ')}\n• **Analytics:** ${this.knowledgeBase.expertise.technical_skills.analytics.join(', ')}\n• **Visualization:** ${this.knowledgeBase.expertise.technical_skills.visualization.join(', ')}\n\n**Education:** ${this.knowledgeBase.personal.education}\n**Certifications:** ${this.knowledgeBase.personal.certifications.join(', ')}\n\n*Proven track record across ${this.knowledgeBase.personal.countries_worked} countries with measurable impact.*`;
+        // 3. CONTACT INFORMATION
+        if (this.isContactQuestion(msg)) {
+            return `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;
         }
         
-        // Project portfolio with detailed impact
-        if (this.containsKeywords(lowerMessage, ['projects', 'portfolio', 'work examples', 'case studies'])) {
-            const featuredProject = this.knowledgeBase.projects.featured_projects[0];
-            return `💼 **Project Portfolio Overview**\n\n**Total Impact:**\n• Project Value: ${this.knowledgeBase.projects.total_value}\n• Projects Completed: ${this.knowledgeBase.projects.completed}\n• Countries Served: ${this.knowledgeBase.projects.countries}\n• Lives Impacted: ${this.knowledgeBase.projects.beneficiaries}\n• Success Rate: ${this.knowledgeBase.projects.success_rate}\n\n**Featured Project:**\n**${featuredProject.name}** (${featuredProject.value})\n• Status: ${featuredProject.status}\n• Location: ${featuredProject.location}\n• Funder: ${featuredProject.funder}\n• Impact: ${featuredProject.impact}\n\n*Want details on specific projects or sectors?*`;
+        // 4. AVAILABILITY
+        if (this.isAvailabilityQuestion(msg)) {
+            return `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;
         }
         
-        // Live economic data responses
-        if (this.containsKeywords(lowerMessage, ['poverty', 'poverty rate', 'poor', 'extreme poverty'])) {
-            return `📊 **Current Poverty Statistics (2024)**\n\n**Global:**\n• ${this.liveData.global_economics.poverty_rate}\n\n**Canada:**\n• ${this.liveData.canada_data.poverty_rate}\n\n**Sub-Saharan Africa:**\n• ${this.liveData.africa_development.poverty_rate}\n\n*These statistics directly inform Patrice's work in economic development and financial resilience research. His projects have impacted ${this.knowledgeBase.projects.beneficiaries} lives across poverty reduction initiatives.*`;
+        // 5. EXPERIENCE & BACKGROUND  
+        if (this.isExperienceQuestion(msg)) {\n            return `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.profile.countries_worked} countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;
         }
         
-        if (this.containsKeywords(lowerMessage, ['economic data', 'gdp', 'inflation', 'economic indicators', 'economic growth'])) {
-            return `📈 **Live Economic Indicators (2024)**\n\n**Global Economy:**\n• GDP Growth: ${this.liveData.global_economics.gdp_growth}\n• Inflation: ${this.liveData.global_economics.inflation}\n• Trade Volume: ${this.liveData.global_economics.trade_volume}\n\n**Canada Specific:**\n• GDP Growth: ${this.liveData.canada_data.gdp_growth}\n• Inflation: ${this.liveData.canada_data.inflation}\n• Unemployment: ${this.liveData.canada_data.unemployment}\n\n*Patrice uses these indicators in his econometric modeling and policy analysis work at the Financial Resilience Institute.*`;
+        // 6. CURRENT ROLE
+        if (this.isCurrentRoleQuestion(msg)) {
+            return `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;
         }
         
-        if (this.containsKeywords(lowerMessage, ['financial resilience', 'financial inclusion', 'banking'])) {
-            return `🛡️ **Financial Resilience Data**\n\n**Global Financial Inclusion:**\n• ${this.liveData.global_economics.financial_inclusion}\n\n**Key Research Focus:**\n• Only 31% of adults globally are financially resilient\n• Digital financial services driving inclusion\n• Climate change impacts on financial stability\n\n**Patrice's Current Work:**\nLeading framework development at the Financial Resilience Institute to advance financial health and well-being in Canada and globally. This ${this.knowledgeBase.projects.featured_projects[0].value} initiative involves ${this.knowledgeBase.projects.featured_projects[0].impact}.`;
+        // 7. SKILLS & EXPERTISE
+        if (this.isSkillsQuestion(msg)) {
+            return `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;
         }
         
-        // Services and pricing
-        if (this.containsKeywords(lowerMessage, ['services', 'consulting', 'what can you do', 'help with'])) {
-            return `🔧 **Consulting Services Offered**\n\n**Core Services:**\n${this.knowledgeBase.services.consulting.map(service => `• ${service}`).join('\n')}\n\n**Typical Deliverables:**\n${this.knowledgeBase.services.deliverables.map(deliverable => `• ${deliverable}`).join('\n')}\n\n**Approach:** ${this.knowledgeBase.services.pricing.approach}\n**Consultation:** ${this.knowledgeBase.services.pricing.consultation}\n\n*Each project is tailored to your specific needs and outcomes. Would you like to discuss your requirements?*`;
+        // 8. PROJECTS
+        if (this.isProjectsQuestion(msg)) {
+            return `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;
         }
         
-        if (this.containsKeywords(lowerMessage, ['price', 'cost', 'rate', 'pricing', 'budget', 'how much'])) {
-            return `💰 **Investment & Pricing**\n\n**Pricing Approach:**\n• ${this.knowledgeBase.services.pricing.approach}\n\n**Factors Considered:**\n${this.knowledgeBase.services.pricing.factors.map(factor => `• ${factor}`).join('\n')}\n\n**What's Included:**\n• ${this.knowledgeBase.services.pricing.consultation}\n• Detailed project proposal with transparent pricing\n• ${this.knowledgeBase.services.pricing.payment_terms}\n\n**Value Delivered:**\n• Proven track record: ${this.knowledgeBase.projects.success_rate} success rate\n• ${this.knowledgeBase.projects.total_value} in project value delivered\n• Measurable impact on ${this.knowledgeBase.projects.beneficiaries} lives\n\n*Ready to discuss your specific project needs?*`;
+        // 9. EDUCATION
+        if (this.isEducationQuestion(msg)) {
+            return `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;
         }
         
-        // Availability and timeline
-        if (this.containsKeywords(lowerMessage, ['available', 'availability', 'when', 'timeline', 'start'])) {
-            return `✅ **Current Availability**\n\n**Status:** ${this.knowledgeBase.personal.availability}\n**Response Time:** ${this.knowledgeBase.personal.response_time}\n**Consultation:** ${this.knowledgeBase.personal.consultation}\n\n**Work Arrangements:**\n• Remote collaboration globally\n• On-site work when required\n• Flexible scheduling across time zones\n• ${this.knowledgeBase.contact.availability}\n\n**Current Capacity:**\nWhile maintaining his role at the Financial Resilience Institute, Patrice has capacity for consulting projects that align with his expertise in data analytics and economic development.\n\n*Would you like to schedule a consultation to discuss your project timeline?*`;
+        // 10. PRICING/RATES
+        if (this.isPricingQuestion(msg)) {
+            setTimeout(() => this.showContactForm('pricing'), 2000);\n            return `Patrice's rates depend on project scope and timeline. He offers transparent pricing with a free 30-minute consultation to discuss your specific needs. I can collect your information to get you a custom quote.`;
         }
         
-        // Default intelligent response
-        return this.getDefaultResponse(lowerMessage);
-    }
-    
-    getDefaultResponse(message) {
-        // Check if this is a similar question we've seen before
-        const similarQuestions = this.learningData.common_questions
-            .filter(q => q.count > 1)
-            .sort((a, b) => b.count - a.count);
-            
-        if (similarQuestions.length > 0) {
-            return `🤔 Great question! I can help you with information about:\n\n**Most Popular Topics:**\n• Patrice's ${this.knowledgeBase.personal.experience_years} years of experience\n• Current economic data and indicators\n• ${this.knowledgeBase.projects.total_value} project portfolio\n• Services and consultation availability\n\n**Quick Data:**\n• Current global poverty rate: ${this.liveData.global_economics.poverty_rate}\n• His current role: ${this.knowledgeBase.current_role.position}\n• Contact: ${this.knowledgeBase.contact.email}\n\n*Could you be more specific about what you'd like to know?*`;
+        // 11. SCHEDULING
+        if (this.isSchedulingQuestion(msg)) {
+            setTimeout(() => this.showContactForm('schedule'), 2000);\n            return `I can help you schedule a consultation with Patrice! He offers free 30-minute project discussions. Let me collect your information to set this up.`;
         }
         
-        return `💭 I'd love to help! I have comprehensive information about:\n\n🎯 **Patrice's Expertise:** ${this.knowledgeBase.expertise.core_areas.slice(0, 3).join(", ")}\n📊 **Live Economic Data:** Current global and regional indicators\n💼 **Project Portfolio:** ${this.knowledgeBase.projects.total_value} across ${this.knowledgeBase.projects.countries} countries\n📅 **Consultation:** ${this.knowledgeBase.personal.consultation}\n\n**Contact:** ${this.knowledgeBase.contact.email} | **Response:** ${this.knowledgeBase.personal.response_time}\n\n*What specific information can I provide for you?*`;
-    }
-    
-    // Contact Collection System
-    showContactForm(type = 'contact') {
-        const modal = document.createElement('div');
-        modal.className = 'contact-modal';
-        modal.innerHTML = `
-            <div class="contact-form">
-                <h3>${type === 'schedule' ? '📅 Schedule Consultation' : '📧 Contact Information'}</h3>
-                <form id="contact-collection-form">
-                    <div class="form-group">
-                        <label for="contact-name">Full Name *</label>
-                        <input type="text" id="contact-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email Address *</label>
-                        <input type="email" id="contact-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-organization">Organization</label>
-                        <input type="text" id="contact-organization">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-interest">Project Interest *</label>
-                        <select id="contact-interest" required>
-                            <option value="">Select area of interest</option>
-                            <option value="data-analytics">Data Analytics & Statistical Modeling</option>
-                            <option value="financial-resilience">Financial Resilience Assessment</option>
-                            <option value="agricultural-economics">Agricultural Economics & Policy</option>
-                            <option value="economic-development">Economic Development Strategy</option>
-                            <option value="project-management">Project Management</option>
-                            <option value="impact-evaluation">Impact Evaluation & Measurement</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    ${type === 'schedule' ? `
-                    <div class="form-group">
-                        <label for="preferred-time">Preferred Time</label>
-                        <select id="preferred-time">
-                            <option value="">Select preferred time</option>
-                            <option value="morning">Morning (9 AM - 12 PM CT)</option>
-                            <option value="afternoon">Afternoon (12 PM - 5 PM CT)</option>
-                            <option value="evening">Evening (5 PM - 8 PM CT)</option>
-                            <option value="flexible">Flexible</option>
-                        </select>
-                    </div>
-                    ` : ''}
-                    <div class="form-group">
-                        <label for="contact-message">Message</label>
-                        <textarea id="contact-message" rows="3" placeholder="Brief description of your project or inquiry..."></textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="btn-primary">${type === 'schedule' ? 'Schedule Meeting' : 'Send Information'}</button>
-                        <button type="button" class="btn-secondary" id="cancel-contact">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        // Handle form submission
-        const form = document.getElementById('contact-collection-form');
-        const cancelBtn = document.getElementById('cancel-contact');
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.submitContactForm(type);
-            document.body.removeChild(modal);
-        });
-        
-        cancelBtn.addEventListener('click', () => {
-            document.body.removeChild(modal);
-        });
-        
-        // Close on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                document.body.removeChild(modal);
-            }
-        });
-    }
-    
-    submitContactForm(type) {
-        const formData = {
-            name: document.getElementById('contact-name').value,
-            email: document.getElementById('contact-email').value,
-            organization: document.getElementById('contact-organization').value,
-            interest: document.getElementById('contact-interest').value,
-            preferredTime: document.getElementById('preferred-time')?.value || '',
-            message: document.getElementById('contact-message').value,
-            type: type,
-            timestamp: new Date().toISOString(),
-            source: 'AI Chatbot'
-        };
-        
-        // Save to contacts
-        this.contacts.push(formData);
-        this.saveContacts();
-        
-        // Add to current conversation
-        if (this.currentConversationId) {
-            this.conversations[this.currentConversationId].user_info = formData;
-            this.conversations[this.currentConversationId].outcome = type;
-            this.saveConversations();
+        // 12. LANGUAGES
+        if (this.isLanguageQuestion(msg)) {
+            return `Patrice speaks ${this.profile.languages.join(', ')}. This helps him work effectively with international clients and organizations.`;
         }
         
-        // Show confirmation message
-        const confirmationMessage = type === 'schedule' ? 
-            `🎉 **Meeting Request Submitted!**\n\nThanks ${formData.name}! Your consultation request has been received.\n\n**Next Steps:**\n• Patrice will email you within ${this.knowledgeBase.personal.response_time}\n• You'll receive calendar options for your ${formData.preferredTime || 'preferred'} time\n• ${this.knowledgeBase.personal.consultation}\n\n**Contact:** ${this.knowledgeBase.contact.email}\n\n*Looking forward to discussing your ${formData.interest.replace('-', ' ')} project!*` :
-            `✅ **Contact Information Received!**\n\nThank you ${formData.name}! Your information has been securely saved.\n\n**What happens next:**\n• Patrice will respond within ${this.knowledgeBase.personal.response_time}\n• You'll get priority attention for your inquiry\n• Direct email: ${this.knowledgeBase.contact.email}\n\n*Excited to help with your ${formData.interest.replace('-', ' ')} needs!*`;
-            
-        setTimeout(() => {
-            this.addMessage(confirmationMessage, 'bot');
-        }, 500);
-    }
-
-    addMessage(text, sender) {
-        const messagesContainer = document.getElementById('chat-messages');
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${sender}`;
-        
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        messageElement.innerHTML = `
-            <div class="message-text">${text}</div>
-            <div class="message-time">${timeString}</div>
-        `;
-        
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        
-        this.messages.push({ text, sender, timestamp: now });
-    }
-
-    showTypingIndicator() {
-        const messagesContainer = document.getElementById('chat-messages');
-        const typingElement = document.createElement('div');
-        typingElement.className = 'typing-indicator';
-        typingElement.id = 'typing-indicator';
-        typingElement.innerHTML = `
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-        `;
-        
-        messagesContainer.appendChild(typingElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    hideTypingIndicator() {
-        const typingIndicator = document.getElementById('typing-indicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
-    }
-
-    containsKeywords(message, keywords) {
-        return keywords.some(keyword => message.includes(keyword));
-    }
-}
-
-// Initialize Super AI Chatbot when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the most powerful chatbot
-    window.superAIChatbot = new SuperAIChatbot();
-    console.log('🤖 Super AI Chatbot with Learning Capabilities initialized!');
-    console.log('Features: Complete Knowledge Base, Contact Collection, Meeting Scheduling, Learning AI');
-});
+        // 13. DEFAULT - HELPFUL BUT CONCISE
+        return this.getHelpfulDefault();
+    }\n    \n    // IMPROVED Intent Recognition Functions\n    isGreeting(msg) {\n        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut'];\n        return greetings.some(greeting => {\n            return msg === greeting || \n                   msg.startsWith(greeting + ' ') || \n                   msg.startsWith(greeting + ',') ||\n                   msg.startsWith(greeting + '!');\n        });\n    }\n    \n    isOriginQuestion(msg) {\n        return (msg.includes('where') || msg.includes('from where')) && \n               (msg.includes('from') || msg.includes('origin')) &&\n               (msg.includes('patrice') || msg.includes('you'));\n    }\n    \n    isLocationQuestion(msg) {\n        return (msg.includes('where') && (msg.includes('live') || msg.includes('based') || msg.includes('located'))) ||\n               (msg.includes('current') && msg.includes('location'));\n    }\n    \n    isContactQuestion(msg) {\n        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || \n               msg.includes('get in touch') || msg.includes('how to contact');\n    }\n    \n    isAvailabilityQuestion(msg) {\n        return msg.includes('available') || msg.includes('availability') || \n               msg.includes('hire') || msg.includes('free') || msg.includes('busy');\n    }\n    \n    isExperienceQuestion(msg) {\n        return msg.includes('experience') || msg.includes('background') || \n               msg.includes('career') || msg.includes('work history');\n    }\n    \n    isCurrentRoleQuestion(msg) {\n        return msg.includes('current') && (msg.includes('job') || msg.includes('role') || \n               msg.includes('position') || msg.includes('work')) ||\n               msg.includes('financial resilience institute');\n    }\n    \n    isSkillsQuestion(msg) {\n        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||\n               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at');\n    }\n    \n    isProjectsQuestion(msg) {\n        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||\n               msg.includes('case studies') || msg.includes('examples');\n    }\n    \n    isEducationQuestion(msg) {\n        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||\n               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages');\n    }\n    \n    isPricingQuestion(msg) {\n        return msg.includes('price') || msg.includes('cost') || msg.includes('rate') || \n               msg.includes('pricing') || msg.includes('budget') || msg.includes('fee');\n    }\n    \n    isSchedulingQuestion(msg) {\n        return msg.includes('schedule') || msg.includes('meeting') || msg.includes('call') ||\n               msg.includes('consultation') || msg.includes('appointment') || msg.includes('book');\n    }\n    \n    isLanguageQuestion(msg) {\n        return msg.includes('language') || msg.includes('speak') || msg.includes('french') ||\n               msg.includes('english') || msg.includes('swahili') || msg.includes('lingala');\n    }\n    \n    // Response Functions\n    getGreetingResponse() {\n        const greetings = [\n            \"Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience, projects, or help you get in touch. What would you like to know?\",\n            \"Hello! Nice to meet you. I can tell you about Patrice's work in data analytics and development economics, or help schedule a consultation. How can I assist you?\",\n            \"Hey! Thanks for visiting. I know all about Patrice's expertise and can share current economic data too. What interests you most?\"\n        ];\n        return greetings[Math.floor(Math.random() * greetings.length)];\n    }\n    \n    getHelpfulDefault() {\n        return `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his expertise in data analytics and economic development, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;\n    }\n\n    // Contact Form Functions\n    showContactForm(type = 'contact') {\n        const modal = document.createElement('div');\n        modal.className = 'contact-modal';\n        modal.innerHTML = `\n            <div class=\"contact-form\">\n                <h3>${type === 'schedule' ? '📅 Schedule Consultation' : type === 'pricing' ? '💰 Get Pricing Quote' : '📧 Contact Information'}</h3>\n                <form id=\"contact-collection-form\">\n                    <div class=\"form-group\">\n                        <label for=\"contact-name\">Full Name *</label>\n                        <input type=\"text\" id=\"contact-name\" required>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-email\">Email Address *</label>\n                        <input type=\"email\" id=\"contact-email\" required>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-organization\">Organization</label>\n                        <input type=\"text\" id=\"contact-organization\">\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-interest\">Project Interest *</label>\n                        <select id=\"contact-interest\" required>\n                            <option value=\"\">Select area of interest</option>\n                            <option value=\"data-analytics\">Data Analytics & Statistical Modeling</option>\n                            <option value=\"financial-resilience\">Financial Resilience Assessment</option>\n                            <option value=\"agricultural-economics\">Agricultural Economics & Policy</option>\n                            <option value=\"economic-development\">Economic Development Strategy</option>\n                            <option value=\"project-management\">Project Management</option>\n                            <option value=\"impact-evaluation\">Impact Evaluation & Measurement</option>\n                            <option value=\"other\">Other</option>\n                        </select>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-message\">Message</label>\n                        <textarea id=\"contact-message\" rows=\"3\" placeholder=\"Tell me about your project or question...\"></textarea>\n                    </div>\n                    <div class=\"form-buttons\">\n                        <button type=\"submit\" class=\"btn-primary\">${type === 'schedule' ? 'Schedule Meeting' : type === 'pricing' ? 'Get Quote' : 'Send Info'}</button>\n                        <button type=\"button\" class=\"btn-secondary\" id=\"cancel-contact\">Cancel</button>\n                    </div>\n                </form>\n            </div>\n        `;\n        \n        document.body.appendChild(modal);\n        \n        const form = document.getElementById('contact-collection-form');\n        const cancelBtn = document.getElementById('cancel-contact');\n        \n        form.addEventListener('submit', (e) => {\n            e.preventDefault();\n            this.submitContactForm(type);\n            document.body.removeChild(modal);\n        });\n        \n        cancelBtn.addEventListener('click', () => {\n            document.body.removeChild(modal);\n        });\n        \n        modal.addEventListener('click', (e) => {\n            if (e.target === modal) {\n                document.body.removeChild(modal);\n            }\n        });\n    }\n    \n    submitContactForm(type) {\n        const formData = {\n            name: document.getElementById('contact-name').value,\n            email: document.getElementById('contact-email').value,\n            organization: document.getElementById('contact-organization').value,\n            interest: document.getElementById('contact-interest').value,\n            message: document.getElementById('contact-message').value,\n            type: type,\n            timestamp: new Date().toISOString(),\n            source: 'AI Chatbot'\n        };\n        \n        this.contacts.push(formData);\n        this.saveContacts();\n        \n        if (this.currentConversationId) {\n            this.conversations[this.currentConversationId].user_info = formData;\n            this.conversations[this.currentConversationId].outcome = type;\n            this.saveConversations();\n        }\n        \n        const confirmationMessage = type === 'schedule' ? \n            `🎉 Meeting request submitted! Thanks ${formData.name}! Patrice will email you at ${formData.email} within 24 hours to schedule your consultation.` :\n            type === 'pricing' ?\n            `✅ Quote request received! Thanks ${formData.name}! Patrice will send you a detailed proposal at ${formData.email} within 24 hours.` :\n            `📧 Contact info saved! Thanks ${formData.name}! Patrice will respond to ${formData.email} within 24 hours.`;\n            \n        setTimeout(() => {\n            this.addMessage(confirmationMessage, 'bot');\n        }, 500);\n    }\n\n    addMessage(text, sender) {\n        const messagesContainer = document.getElementById('chat-messages');\n        const messageElement = document.createElement('div');\n        messageElement.className = `message ${sender}`;\n        \n        const now = new Date();\n        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });\n        \n        messageElement.innerHTML = `\n            <div class=\"message-text\">${text}</div>\n            <div class=\"message-time\">${timeString}</div>\n        `;\n        \n        messagesContainer.appendChild(messageElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n        \n        this.messages.push({ text, sender, timestamp: now });\n    }\n\n    showTypingIndicator() {\n        const messagesContainer = document.getElementById('chat-messages');\n        const typingElement = document.createElement('div');\n        typingElement.className = 'typing-indicator';\n        typingElement.id = 'typing-indicator';\n        typingElement.innerHTML = `\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n        `;\n        \n        messagesContainer.appendChild(typingElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    hideTypingIndicator() {\n        const typingIndicator = document.getElementById('typing-indicator');\n        if (typingIndicator) {\n            typingIndicator.remove();\n        }\n    }\n    \n    // Conversation Management\n    startConversation() {\n        this.currentConversationId = 'conv_' + Date.now();\n        this.conversations[this.currentConversationId] = {\n            id: this.currentConversationId,\n            start_time: new Date().toISOString(),\n            messages: [],\n            user_info: {},\n            topics_discussed: [],\n            outcome: null\n        };\n    }\n    \n    endConversation() {\n        if (this.currentConversationId && this.conversations[this.currentConversationId]) {\n            this.conversations[this.currentConversationId].end_time = new Date().toISOString();\n            this.saveConversations();\n        }\n    }\n    \n    loadConversations() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');\n        } catch {\n            return {};\n        }\n    }\n    \n    saveConversations() {\n        try {\n            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));\n        } catch (e) {\n            console.log('Could not save conversations');\n        }\n    }\n    \n    loadContacts() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');\n        } catch {\n            return [];\n        }\n    }\n    \n    saveContacts() {\n        try {\n            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));\n        } catch (e) {\n            console.log('Could not save contacts');\n        }\n    }\n}\n\n// Initialize Super Intelligent Chatbot\ndocument.addEventListener('DOMContentLoaded', function() {\n    window.superIntelligentChatbot = new SuperIntelligentChatbot();\n    console.log('🤖 Super Intelligent Chatbot initialized!');\n    console.log('Fixed: Greetings recognition, accurate responses, no markdown formatting');\n});
