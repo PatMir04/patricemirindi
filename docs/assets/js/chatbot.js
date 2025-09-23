@@ -1,6 +1,6 @@
 /* ==========================================================================
-   SUPER INTELLIGENT CHATBOT FOR PATRICE MIRINDI
-   Fixed: Intent Recognition, Natural Responses, No Markdown Formatting
+   SUPER INTELLIGENT BILINGUAL CHATBOT FOR PATRICE MIRINDI
+   Enhanced: Profile Photo Button, Full French Support, Smart Intent Recognition
    ========================================================================== */
 
 class SuperIntelligentChatbot {
@@ -71,13 +71,14 @@ class SuperIntelligentChatbot {
     createChatWidget() {
         const chatHTML = `
             <div id="super-chatbot" class="super-chatbot-widget">
-                <!-- Chat Button -->
+                <!-- Chat Button with Profile Photo -->
                 <div id="chat-button" class="chat-button">
-                    <div class="button-content">
-                        <i class="fas fa-robot"></i>
-                        <div class="ai-indicator">AI</div>
+                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" class="profile-button-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="fallback-button" style="display: none;">
+                        <i class="fas fa-user"></i>
+                        <div class="pm-indicator">PM</div>
                     </div>
-                    <div class="chat-badge">🤖</div>
+                    <div class="chat-badge">💬</div>
                 </div>
                 
                 <!-- Chat Window -->
@@ -189,21 +190,35 @@ class SuperIntelligentChatbot {
                     box-shadow: 0 15px 40px rgba(0, 64, 133, 0.5);
                 }
                 
-                .button-content {
+                /* Profile Photo in Button */
+                .profile-button-image {
+                    width: 64px;
+                    height: 64px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid white;
+                    transition: all 0.3s ease;
+                }
+                
+                .chat-button:hover .profile-button-image {
+                    transform: scale(1.05);
+                }
+                
+                /* Fallback Button Style */
+                .fallback-button {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 2px;
+                    color: white;
                 }
                 
-                .chat-button i {
-                    color: white;
+                .fallback-button i {
                     font-size: 28px;
                 }
                 
-                .ai-indicator {
-                    color: white;
-                    font-size: 8px;
+                .pm-indicator {
+                    font-size: 10px;
                     font-weight: bold;
                     letter-spacing: 1px;
                 }
@@ -669,6 +684,11 @@ class SuperIntelligentChatbot {
                         height: 60px;
                     }
                     
+                    .profile-button-image {
+                        width: 54px;
+                        height: 54px;
+                    }
+                    
                     .suggestions-grid {
                         grid-template-columns: repeat(2, 1fr);
                     }
@@ -786,73 +806,411 @@ class SuperIntelligentChatbot {
         }, 1200 + Math.random() * 800);
     }
     
-    // COMPLETELY IMPROVED Response Generation - Direct & Accurate
+    // SMART Response Generation with Full Bilingual Support
     generateSmartResponse(message) {
         const msg = message.toLowerCase().trim();
         
-        // 1. GREETINGS - MUST BE FIRST PRIORITY
+        // Detect language (French vs English)
+        const isFrench = this.detectFrench(msg);
+        
+        // 1. GREETINGS - BOTH LANGUAGES
         if (this.isGreeting(msg)) {
-            return this.getGreetingResponse();
+            return this.getGreetingResponse(isFrench);
         }
         
-        // 2. ORIGIN/LOCATION QUESTIONS - DIRECT ANSWERS
+        // 2. ORIGIN/LOCATION QUESTIONS
         if (this.isOriginQuestion(msg)) {
-            return `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;
-        }
-        
-        if (this.isLocationQuestion(msg)) {
-            return `Patrice currently lives in ${this.profile.current_location}. He's originally from ${this.profile.origin}.`;
+            return isFrench ? 
+                `Patrice est originaire de la République Démocratique du Congo (RDC) et vit actuellement à ${this.profile.current_location}.` :
+                `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;
         }
         
         // 3. CONTACT INFORMATION
         if (this.isContactQuestion(msg)) {
-            return `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;
+            return isFrench ?
+                `Vous pouvez contacter Patrice à ${this.profile.email}. Il répond généralement ${this.profile.response_time} et offre une consultation gratuite de 30 minutes.` :
+                `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;
         }
         
         // 4. AVAILABILITY
         if (this.isAvailabilityQuestion(msg)) {
-            return `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;
+            return isFrench ?
+                `Oui! Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour discuter de vos besoins.` :
+                `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;
         }
         
         // 5. EXPERIENCE & BACKGROUND  
-        if (this.isExperienceQuestion(msg)) {\n            return `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.profile.countries_worked} countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;
+        if (this.isExperienceQuestion(msg)) {
+            return isFrench ?
+                `Patrice a plus de ${this.profile.experience_years} années d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.profile.countries_worked} pays et a complété ${this.projects.completed} projets d'une valeur de plus de ${this.projects.total_value}.` :
+                `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.profile.countries_worked} countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;
         }
         
         // 6. CURRENT ROLE
         if (this.isCurrentRoleQuestion(msg)) {
-            return `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;
+            return isFrench ?
+                `Patrice travaille actuellement comme ${this.current_role.title} à ${this.current_role.organization} à ${this.current_role.location}. Il a commencé ce poste en ${this.current_role.start_date}.` :
+                `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;
         }
         
         // 7. SKILLS & EXPERTISE
         if (this.isSkillsQuestion(msg)) {
-            return `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;
+            return isFrench ?
+                `Patrice se spécialise dans ${this.expertise.core_skills.slice(0, 3).join(', ')} et plus. Ses compétences techniques incluent ${this.expertise.technical.slice(0, 4).join(', ')}. Il détient une ${this.profile.education}.` :
+                `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;
         }
         
         // 8. PROJECTS
         if (this.isProjectsQuestion(msg)) {
-            return `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;
+            return isFrench ?
+                `Patrice a géré ${this.projects.completed} projets d'une valeur totale de ${this.projects.total_value}. Son travail a impacté ${this.projects.beneficiaries} vies dans ${this.projects.countries} pays avec un taux de succès de ${this.projects.success_rate}.` :
+                `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;
         }
         
         // 9. EDUCATION
         if (this.isEducationQuestion(msg)) {
-            return `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;
+            return isFrench ?
+                `Patrice détient une ${this.profile.education}. Il parle ${this.profile.languages.join(', ')}.` :
+                `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;
         }
         
         // 10. PRICING/RATES
         if (this.isPricingQuestion(msg)) {
-            setTimeout(() => this.showContactForm('pricing'), 2000);\n            return `Patrice's rates depend on project scope and timeline. He offers transparent pricing with a free 30-minute consultation to discuss your specific needs. I can collect your information to get you a custom quote.`;
+            setTimeout(() => this.showContactForm('pricing'), 2000);
+            return isFrench ?
+                `Les tarifs de Patrice dépendent de la portée et de la chronologie du projet. Il offre une tarification transparente avec une consultation gratuite de 30 minutes pour discuter de vos besoins spécifiques. Je peux collecter vos informations pour obtenir un devis personnalisé.` :
+                `Patrice's rates depend on project scope and timeline. He offers transparent pricing with a free 30-minute consultation to discuss your specific needs. I can collect your information to get you a custom quote.`;
         }
         
         // 11. SCHEDULING
         if (this.isSchedulingQuestion(msg)) {
-            setTimeout(() => this.showContactForm('schedule'), 2000);\n            return `I can help you schedule a consultation with Patrice! He offers free 30-minute project discussions. Let me collect your information to set this up.`;
+            setTimeout(() => this.showContactForm('schedule'), 2000);
+            return isFrench ?
+                `Je peux vous aider à planifier une consultation avec Patrice! Il offre des discussions de projet gratuites de 30 minutes. Laissez-moi collecter vos informations pour organiser cela.` :
+                `I can help you schedule a consultation with Patrice! He offers free 30-minute project discussions. Let me collect your information to set this up.`;
         }
         
         // 12. LANGUAGES
         if (this.isLanguageQuestion(msg)) {
-            return `Patrice speaks ${this.profile.languages.join(', ')}. This helps him work effectively with international clients and organizations.`;
+            return isFrench ?
+                `Patrice parle ${this.profile.languages.join(', ')}. Cela l'aide à travailler efficacement avec des clients et organisations internationaux.` :
+                `Patrice speaks ${this.profile.languages.join(', ')}. This helps him work effectively with international clients and organizations.`;
         }
         
         // 13. DEFAULT - HELPFUL BUT CONCISE
-        return this.getHelpfulDefault();
-    }\n    \n    // IMPROVED Intent Recognition Functions\n    isGreeting(msg) {\n        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut'];\n        return greetings.some(greeting => {\n            return msg === greeting || \n                   msg.startsWith(greeting + ' ') || \n                   msg.startsWith(greeting + ',') ||\n                   msg.startsWith(greeting + '!');\n        });\n    }\n    \n    isOriginQuestion(msg) {\n        return (msg.includes('where') || msg.includes('from where')) && \n               (msg.includes('from') || msg.includes('origin')) &&\n               (msg.includes('patrice') || msg.includes('you'));\n    }\n    \n    isLocationQuestion(msg) {\n        return (msg.includes('where') && (msg.includes('live') || msg.includes('based') || msg.includes('located'))) ||\n               (msg.includes('current') && msg.includes('location'));\n    }\n    \n    isContactQuestion(msg) {\n        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || \n               msg.includes('get in touch') || msg.includes('how to contact');\n    }\n    \n    isAvailabilityQuestion(msg) {\n        return msg.includes('available') || msg.includes('availability') || \n               msg.includes('hire') || msg.includes('free') || msg.includes('busy');\n    }\n    \n    isExperienceQuestion(msg) {\n        return msg.includes('experience') || msg.includes('background') || \n               msg.includes('career') || msg.includes('work history');\n    }\n    \n    isCurrentRoleQuestion(msg) {\n        return msg.includes('current') && (msg.includes('job') || msg.includes('role') || \n               msg.includes('position') || msg.includes('work')) ||\n               msg.includes('financial resilience institute');\n    }\n    \n    isSkillsQuestion(msg) {\n        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||\n               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at');\n    }\n    \n    isProjectsQuestion(msg) {\n        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||\n               msg.includes('case studies') || msg.includes('examples');\n    }\n    \n    isEducationQuestion(msg) {\n        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||\n               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages');\n    }\n    \n    isPricingQuestion(msg) {\n        return msg.includes('price') || msg.includes('cost') || msg.includes('rate') || \n               msg.includes('pricing') || msg.includes('budget') || msg.includes('fee');\n    }\n    \n    isSchedulingQuestion(msg) {\n        return msg.includes('schedule') || msg.includes('meeting') || msg.includes('call') ||\n               msg.includes('consultation') || msg.includes('appointment') || msg.includes('book');\n    }\n    \n    isLanguageQuestion(msg) {\n        return msg.includes('language') || msg.includes('speak') || msg.includes('french') ||\n               msg.includes('english') || msg.includes('swahili') || msg.includes('lingala');\n    }\n    \n    // Response Functions\n    getGreetingResponse() {\n        const greetings = [\n            \"Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience, projects, or help you get in touch. What would you like to know?\",\n            \"Hello! Nice to meet you. I can tell you about Patrice's work in data analytics and development economics, or help schedule a consultation. How can I assist you?\",\n            \"Hey! Thanks for visiting. I know all about Patrice's expertise and can share current economic data too. What interests you most?\"\n        ];\n        return greetings[Math.floor(Math.random() * greetings.length)];\n    }\n    \n    getHelpfulDefault() {\n        return `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his expertise in data analytics and economic development, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;\n    }\n\n    // Contact Form Functions\n    showContactForm(type = 'contact') {\n        const modal = document.createElement('div');\n        modal.className = 'contact-modal';\n        modal.innerHTML = `\n            <div class=\"contact-form\">\n                <h3>${type === 'schedule' ? '📅 Schedule Consultation' : type === 'pricing' ? '💰 Get Pricing Quote' : '📧 Contact Information'}</h3>\n                <form id=\"contact-collection-form\">\n                    <div class=\"form-group\">\n                        <label for=\"contact-name\">Full Name *</label>\n                        <input type=\"text\" id=\"contact-name\" required>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-email\">Email Address *</label>\n                        <input type=\"email\" id=\"contact-email\" required>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-organization\">Organization</label>\n                        <input type=\"text\" id=\"contact-organization\">\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-interest\">Project Interest *</label>\n                        <select id=\"contact-interest\" required>\n                            <option value=\"\">Select area of interest</option>\n                            <option value=\"data-analytics\">Data Analytics & Statistical Modeling</option>\n                            <option value=\"financial-resilience\">Financial Resilience Assessment</option>\n                            <option value=\"agricultural-economics\">Agricultural Economics & Policy</option>\n                            <option value=\"economic-development\">Economic Development Strategy</option>\n                            <option value=\"project-management\">Project Management</option>\n                            <option value=\"impact-evaluation\">Impact Evaluation & Measurement</option>\n                            <option value=\"other\">Other</option>\n                        </select>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"contact-message\">Message</label>\n                        <textarea id=\"contact-message\" rows=\"3\" placeholder=\"Tell me about your project or question...\"></textarea>\n                    </div>\n                    <div class=\"form-buttons\">\n                        <button type=\"submit\" class=\"btn-primary\">${type === 'schedule' ? 'Schedule Meeting' : type === 'pricing' ? 'Get Quote' : 'Send Info'}</button>\n                        <button type=\"button\" class=\"btn-secondary\" id=\"cancel-contact\">Cancel</button>\n                    </div>\n                </form>\n            </div>\n        `;\n        \n        document.body.appendChild(modal);\n        \n        const form = document.getElementById('contact-collection-form');\n        const cancelBtn = document.getElementById('cancel-contact');\n        \n        form.addEventListener('submit', (e) => {\n            e.preventDefault();\n            this.submitContactForm(type);\n            document.body.removeChild(modal);\n        });\n        \n        cancelBtn.addEventListener('click', () => {\n            document.body.removeChild(modal);\n        });\n        \n        modal.addEventListener('click', (e) => {\n            if (e.target === modal) {\n                document.body.removeChild(modal);\n            }\n        });\n    }\n    \n    submitContactForm(type) {\n        const formData = {\n            name: document.getElementById('contact-name').value,\n            email: document.getElementById('contact-email').value,\n            organization: document.getElementById('contact-organization').value,\n            interest: document.getElementById('contact-interest').value,\n            message: document.getElementById('contact-message').value,\n            type: type,\n            timestamp: new Date().toISOString(),\n            source: 'AI Chatbot'\n        };\n        \n        this.contacts.push(formData);\n        this.saveContacts();\n        \n        if (this.currentConversationId) {\n            this.conversations[this.currentConversationId].user_info = formData;\n            this.conversations[this.currentConversationId].outcome = type;\n            this.saveConversations();\n        }\n        \n        const confirmationMessage = type === 'schedule' ? \n            `🎉 Meeting request submitted! Thanks ${formData.name}! Patrice will email you at ${formData.email} within 24 hours to schedule your consultation.` :\n            type === 'pricing' ?\n            `✅ Quote request received! Thanks ${formData.name}! Patrice will send you a detailed proposal at ${formData.email} within 24 hours.` :\n            `📧 Contact info saved! Thanks ${formData.name}! Patrice will respond to ${formData.email} within 24 hours.`;\n            \n        setTimeout(() => {\n            this.addMessage(confirmationMessage, 'bot');\n        }, 500);\n    }\n\n    addMessage(text, sender) {\n        const messagesContainer = document.getElementById('chat-messages');\n        const messageElement = document.createElement('div');\n        messageElement.className = `message ${sender}`;\n        \n        const now = new Date();\n        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });\n        \n        messageElement.innerHTML = `\n            <div class=\"message-text\">${text}</div>\n            <div class=\"message-time\">${timeString}</div>\n        `;\n        \n        messagesContainer.appendChild(messageElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n        \n        this.messages.push({ text, sender, timestamp: now });\n    }\n\n    showTypingIndicator() {\n        const messagesContainer = document.getElementById('chat-messages');\n        const typingElement = document.createElement('div');\n        typingElement.className = 'typing-indicator';\n        typingElement.id = 'typing-indicator';\n        typingElement.innerHTML = `\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n        `;\n        \n        messagesContainer.appendChild(typingElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    hideTypingIndicator() {\n        const typingIndicator = document.getElementById('typing-indicator');\n        if (typingIndicator) {\n            typingIndicator.remove();\n        }\n    }\n    \n    // Conversation Management\n    startConversation() {\n        this.currentConversationId = 'conv_' + Date.now();\n        this.conversations[this.currentConversationId] = {\n            id: this.currentConversationId,\n            start_time: new Date().toISOString(),\n            messages: [],\n            user_info: {},\n            topics_discussed: [],\n            outcome: null\n        };\n    }\n    \n    endConversation() {\n        if (this.currentConversationId && this.conversations[this.currentConversationId]) {\n            this.conversations[this.currentConversationId].end_time = new Date().toISOString();\n            this.saveConversations();\n        }\n    }\n    \n    loadConversations() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');\n        } catch {\n            return {};\n        }\n    }\n    \n    saveConversations() {\n        try {\n            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));\n        } catch (e) {\n            console.log('Could not save conversations');\n        }\n    }\n    \n    loadContacts() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');\n        } catch {\n            return [];\n        }\n    }\n    \n    saveContacts() {\n        try {\n            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));\n        } catch (e) {\n            console.log('Could not save contacts');\n        }\n    }\n}\n\n// Initialize Super Intelligent Chatbot\ndocument.addEventListener('DOMContentLoaded', function() {\n    window.superIntelligentChatbot = new SuperIntelligentChatbot();\n    console.log('🤖 Super Intelligent Chatbot initialized!');\n    console.log('Fixed: Greetings recognition, accurate responses, no markdown formatting');\n});
+        return this.getHelpfulDefault(isFrench);
+    }
+    
+    // Language Detection and Intent Recognition Functions
+    detectFrench(msg) {
+        const frenchWords = ['bonjour', 'salut', 'bonsoir', 'comment', 'quelles', 'sont', 'ses', 'où', 'vient', 'patrice', 'disponible', 'est-il', 'compétences', 'projets', 'contacter'];
+        return frenchWords.some(word => msg.includes(word));
+    }
+    
+    isGreeting(msg) {
+        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut', 'bonsoir', 'ça va'];
+        return greetings.some(greeting => {
+            return msg === greeting || 
+                   msg.startsWith(greeting + ' ') || 
+                   msg.startsWith(greeting + ',') ||
+                   msg.startsWith(greeting + '!');
+        });
+    }
+    
+    isOriginQuestion(msg) {
+        return (msg.includes('where') || msg.includes('où')) && 
+               (msg.includes('from') || msg.includes('vient') || msg.includes('origin')) &&
+               (msg.includes('patrice') || msg.includes('you') || msg.includes('il'));
+    }
+    
+    isLocationQuestion(msg) {
+        return (msg.includes('where') && (msg.includes('live') || msg.includes('based') || msg.includes('located'))) ||
+               (msg.includes('current') && msg.includes('location')) ||
+               (msg.includes('où') && msg.includes('vit'));
+    }
+    
+    isContactQuestion(msg) {
+        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || 
+               msg.includes('get in touch') || msg.includes('how to contact') ||
+               msg.includes('contacter') || msg.includes('comment le joindre');
+    }
+    
+    isAvailabilityQuestion(msg) {
+        return msg.includes('available') || msg.includes('availability') || 
+               msg.includes('hire') || msg.includes('free') || msg.includes('busy') ||
+               msg.includes('disponible') || msg.includes('libre');
+    }
+    
+    isExperienceQuestion(msg) {
+        return msg.includes('experience') || msg.includes('background') || 
+               msg.includes('career') || msg.includes('work history') ||
+               msg.includes('expérience') || msg.includes('parcours');
+    }
+    
+    isCurrentRoleQuestion(msg) {
+        return msg.includes('current') && (msg.includes('job') || msg.includes('role') || 
+               msg.includes('position') || msg.includes('work')) ||
+               msg.includes('financial resilience institute') ||
+               msg.includes('poste actuel') || msg.includes('travail actuel');
+    }
+    
+    isSkillsQuestion(msg) {
+        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||
+               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at') ||
+               msg.includes('compétences') || msg.includes('spécialisation');
+    }
+    
+    isProjectsQuestion(msg) {
+        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||
+               msg.includes('case studies') || msg.includes('examples') ||
+               msg.includes('projets') || msg.includes('travaux');
+    }
+    
+    isEducationQuestion(msg) {
+        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||
+               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages') ||
+               msg.includes('éducation') || msg.includes('diplôme') || msg.includes('université') ||
+               msg.includes('langues');
+    }
+    
+    isPricingQuestion(msg) {
+        return msg.includes('price') || msg.includes('cost') || msg.includes('rate') || 
+               msg.includes('pricing') || msg.includes('budget') || msg.includes('fee') ||
+               msg.includes('prix') || msg.includes('tarif') || msg.includes('coût');
+    }
+    
+    isSchedulingQuestion(msg) {
+        return msg.includes('schedule') || msg.includes('meeting') || msg.includes('call') ||
+               msg.includes('consultation') || msg.includes('appointment') || msg.includes('book') ||
+               msg.includes('planifier') || msg.includes('rendez-vous') || msg.includes('réunion');
+    }
+    
+    isLanguageQuestion(msg) {
+        return msg.includes('language') || msg.includes('speak') || msg.includes('french') ||
+               msg.includes('english') || msg.includes('swahili') || msg.includes('lingala') ||
+               msg.includes('langues') || msg.includes('parle') || msg.includes('français');
+    }
+    
+    // Response Functions
+    getGreetingResponse(isFrench = false) {
+        const englishGreetings = [
+            "Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience, projects, or help you get in touch. What would you like to know?",
+            "Hello! Nice to meet you. I can tell you about Patrice's work in data analytics and development economics, or help schedule a consultation. How can I assist you?",
+            "Hey! Thanks for visiting. I know all about Patrice's expertise and can share current economic data too. What interests you most?"
+        ];
+        
+        const frenchGreetings = [
+            "Bonjour! Je suis l'assistant virtuel de Patrice. Je peux répondre à vos questions sur son parcours, son expérience, ses projets, ou vous aider à le contacter. Que souhaitez-vous savoir?",
+            "Salut! Ravi de vous rencontrer. Je peux vous parler du travail de Patrice en analyse de données et économie du développement, ou vous aider à planifier une consultation. Comment puis-je vous aider?",
+            "Bonjour! Merci de votre visite. Je connais toute l'expertise de Patrice et peux aussi partager des données économiques actuelles. Qu'est-ce qui vous intéresse le plus?"
+        ];
+        
+        const greetings = isFrench ? frenchGreetings : englishGreetings;
+        return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+    
+    getHelpfulDefault(isFrench = false) {
+        return isFrench ?
+            `Je peux vous aider à en apprendre plus sur le parcours de Patrice (il vient de ${this.profile.origin}), son expertise en analyse de données et développement économique, son portfolio de projets, ou sa disponibilité actuelle. Vous pouvez aussi le contacter directement à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :
+            `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his expertise in data analytics and economic development, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;
+    }
+
+    // Contact Form Functions
+    showContactForm(type = 'contact') {
+        const modal = document.createElement('div');
+        modal.className = 'contact-modal';
+        modal.innerHTML = `
+            <div class="contact-form">
+                <h3>${type === 'schedule' ? '📅 Schedule Consultation' : type === 'pricing' ? '💰 Get Pricing Quote' : '📧 Contact Information'}</h3>
+                <form id="contact-collection-form">
+                    <div class="form-group">
+                        <label for="contact-name">Full Name *</label>
+                        <input type="text" id="contact-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email Address *</label>
+                        <input type="email" id="contact-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-organization">Organization</label>
+                        <input type="text" id="contact-organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-interest">Project Interest *</label>
+                        <select id="contact-interest" required>
+                            <option value="">Select area of interest</option>
+                            <option value="data-analytics">Data Analytics & Statistical Modeling</option>
+                            <option value="financial-resilience">Financial Resilience Assessment</option>
+                            <option value="agricultural-economics">Agricultural Economics & Policy</option>
+                            <option value="economic-development">Economic Development Strategy</option>
+                            <option value="project-management">Project Management</option>
+                            <option value="impact-evaluation">Impact Evaluation & Measurement</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" rows="3" placeholder="Tell me about your project or question..."></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn-primary">${type === 'schedule' ? 'Schedule Meeting' : type === 'pricing' ? 'Get Quote' : 'Send Info'}</button>
+                        <button type="button" class="btn-secondary" id="cancel-contact">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        const form = document.getElementById('contact-collection-form');
+        const cancelBtn = document.getElementById('cancel-contact');
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.submitContactForm(type);
+            document.body.removeChild(modal);
+        });
+        
+        cancelBtn.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+    }
+    
+    submitContactForm(type) {
+        const formData = {
+            name: document.getElementById('contact-name').value,
+            email: document.getElementById('contact-email').value,
+            organization: document.getElementById('contact-organization').value,
+            interest: document.getElementById('contact-interest').value,
+            message: document.getElementById('contact-message').value,
+            type: type,
+            timestamp: new Date().toISOString(),
+            source: 'AI Chatbot'
+        };
+        
+        this.contacts.push(formData);
+        this.saveContacts();
+        
+        if (this.currentConversationId) {
+            this.conversations[this.currentConversationId].user_info = formData;
+            this.conversations[this.currentConversationId].outcome = type;
+            this.saveConversations();
+        }
+        
+        const confirmationMessage = type === 'schedule' ? 
+            `🎉 Meeting request submitted! Thanks ${formData.name}! Patrice will email you at ${formData.email} within 24 hours to schedule your consultation.` :
+            type === 'pricing' ?
+            `✅ Quote request received! Thanks ${formData.name}! Patrice will send you a detailed proposal at ${formData.email} within 24 hours.` :
+            `📧 Contact info saved! Thanks ${formData.name}! Patrice will respond to ${formData.email} within 24 hours.`;
+            
+        setTimeout(() => {
+            this.addMessage(confirmationMessage, 'bot');
+        }, 500);
+    }
+
+    addMessage(text, sender) {
+        const messagesContainer = document.getElementById('chat-messages');
+        const messageElement = document.createElement('div');
+        messageElement.className = `message ${sender}`;
+        
+        const now = new Date();
+        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        messageElement.innerHTML = `
+            <div class="message-text">${text}</div>
+            <div class="message-time">${timeString}</div>
+        `;
+        
+        messagesContainer.appendChild(messageElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        this.messages.push({ text, sender, timestamp: now });
+    }
+
+    showTypingIndicator() {
+        const messagesContainer = document.getElementById('chat-messages');
+        const typingElement = document.createElement('div');
+        typingElement.className = 'typing-indicator';
+        typingElement.id = 'typing-indicator';
+        typingElement.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        `;
+        
+        messagesContainer.appendChild(typingElement);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    hideTypingIndicator() {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Conversation Management
+    startConversation() {
+        this.currentConversationId = 'conv_' + Date.now();
+        this.conversations[this.currentConversationId] = {
+            id: this.currentConversationId,
+            start_time: new Date().toISOString(),
+            messages: [],
+            user_info: {},
+            topics_discussed: [],
+            outcome: null
+        };
+    }
+    
+    endConversation() {
+        if (this.currentConversationId && this.conversations[this.currentConversationId]) {
+            this.conversations[this.currentConversationId].end_time = new Date().toISOString();
+            this.saveConversations();
+        }
+    }
+    
+    loadConversations() {
+        try {
+            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');
+        } catch {
+            return {};
+        }
+    }
+    
+    saveConversations() {
+        try {
+            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));
+        } catch (e) {
+            console.log('Could not save conversations');
+        }
+    }
+    
+    loadContacts() {
+        try {
+            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');
+        } catch {
+            return [];
+        }
+    }
+    
+    saveContacts() {
+        try {
+            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));
+        } catch (e) {
+            console.log('Could not save contacts');
+        }
+    }
+}
+
+// Initialize Super Intelligent Chatbot
+document.addEventListener('DOMContentLoaded', function() {
+    window.superIntelligentChatbot = new SuperIntelligentChatbot();
+    console.log('🤖 Super Intelligent Bilingual Chatbot initialized!');
+    console.log('✅ Profile photo button, French support, smart intent recognition');
+});
