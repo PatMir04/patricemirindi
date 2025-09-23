@@ -113,7 +113,7 @@
       {
         "sector": "Agricultural Economics",
         "description": "Value chain analysis, market research, and agricultural policy development",
-        "countries": ["Ghana", "Nigeria", "Senegal", "Burkina Faso", "Benin"]
+        "countries": ["Ghana", "Nigeria", "Senegal", "Burkina Faso", "Benin", "Côte d'Ivoire"]
       },
       {
         "sector": "Financial Resilience",
@@ -134,52 +134,156 @@
   },
   "projects": [
     {
-      "name": "FAO Agricultural Market Analysis",
-      "organization": "Food and Agriculture Organization (FAO)",
-      "description": "Comprehensive market analysis and trend visualization for agricultural commodities across West Africa",
-      "tools_used": ["Tableau", "SPSS", "Excel"],
-      "methodologies": ["Market analysis", "Time series forecasting", "Data visualization"],
-      "countries": ["Ghana", "Nigeria", "Senegal"],
-      "impact": "Informed policy decisions affecting 500,000+ farmers",
-      "duration": "12 months"
+      "category": "Agribusiness & Market Development",
+      "name": "Business Advisor Expert – Rice Mills Academy",
+      "organization": "GIZ – MOVE Project",
+      "period": "Mar 2023 – Aug 2024",
+      "location": "Burkina Faso, Côte d'Ivoire, Ghana & Nigeria",
+      "description": "Delivered business advisory and coaching support to rice mills across West Africa. Designed and facilitated capacity-building programs using data analytics to strengthen market-oriented value chains under ECOWAS.",
+      "tools_used": ["Excel", "Power BI", "Statistical Analysis"],
+      "methodologies": ["Value chain analysis", "Market research", "Capacity building"],
+      "impact": "Strengthened rice mills operations across 4 West African countries",
+      "duration": "17 months"
     },
     {
-      "name": "Financial Resilience Assessment Framework",
-      "organization": "Financial Resilience Institute",
-      "description": "Development of comprehensive framework for assessing financial health and resilience",
-      "tools_used": ["R", "Python", "Power BI"],
-      "methodologies": ["Statistical modeling", "Risk assessment", "Dashboard development"],
-      "countries": ["Canada"],
-      "impact": "Framework adopted for national financial wellness assessment",
-      "duration": "Ongoing"
+      "category": "Agribusiness & Market Development",
+      "name": "Project Manager – Hortiplus Project",
+      "organization": "Sense / Netherlands Embassy – RVO",
+      "period": "Jan 2023 – Aug 2024",
+      "location": "Burkina Faso",
+      "description": "Led a 4-year diversification program for horticulture, improving food and nutrition security. Increased production of 4 horticulture crops by 50% and improved climate resilience for 8,000 farmers. Enhanced business performance of 7 cooperatives and 120 SMEs; improved diet diversity for 50,000 consumers.",
+      "tools_used": ["Project Management Tools", "Data Analytics", "Impact Measurement"],
+      "methodologies": ["Project management", "Impact evaluation", "Farmer capacity building"],
+      "impact": "50% increase in production, 8,000 farmers supported, 50,000 consumers benefited",
+      "duration": "20 months"
     },
     {
-      "name": "Urban Development Impact Study",
-      "organization": "World Bank",
-      "description": "Econometric analysis of urbanization impacts on economic development in Central Africa",
-      "tools_used": ["Stata", "R", "SPSS"],
-      "methodologies": ["Econometric modeling", "Impact evaluation", "Geospatial analysis"],
-      "countries": ["DRC", "Rwanda", "Burundi"],
-      "impact": "Policy recommendations implemented in 3 countries",
-      "duration": "18 months"
+      "category": "Agribusiness & Market Development",
+      "name": "Consultant Development – Burkina DryMore",
+      "organization": "Netherlands Embassy – RVO",
+      "period": "Oct 2021 – Aug 2024",
+      "location": "Burkina Faso",
+      "description": "Developed hibiscus, fonio, ginger, and dried meat value chains. Conducted market research, created partnerships with importers, and provided farmer/processor training. Boosted factory utilization year-round and enhanced product development.",
+      "tools_used": ["Market Research Tools", "Value Chain Analysis", "Training Modules"],
+      "methodologies": ["Value chain development", "Market linkage", "Capacity building"],
+      "impact": "Year-round factory utilization improvement, enhanced product development",
+      "duration": "35 months"
     },
     {
-      "name": "Agricultural Value Chain Development",
-      "organization": "CBI Netherlands",
-      "description": "Market research and value chain analysis for agricultural export development",
-      "tools_used": ["Excel", "Tableau", "SQL"],
-      "methodologies": ["Value chain analysis", "Market research", "Export potential assessment"],
-      "countries": ["Burkina Faso", "Côte d'Ivoire", "Benin"],
-      "impact": "$2M+ in new export opportunities identified",
-      "duration": "8 months"
+      "category": "Export Value Chains & Coaching",
+      "name": "Senior Consultant – Expert Dried Fruit",
+      "organization": "CBI – Netherlands MFA",
+      "period": "Feb 2023 – Jun 2023",
+      "location": "Benin",
+      "description": "Evaluated the pineapple drying sector for EU export readiness. Strengthened women's participation in the dried pineapple value chain (+25%).",
+      "tools_used": ["Market Analysis", "Export Assessment Tools", "Gender Analysis"],
+      "methodologies": ["Export readiness assessment", "Gender inclusion strategies", "Market evaluation"],
+      "impact": "25% increase in women's participation in dried pineapple value chain",
+      "duration": "5 months"
+    },
+    {
+      "category": "Export Value Chains & Coaching",
+      "name": "Export Business Coaching – Dried Mango",
+      "organization": "CBI – Netherlands MFA",
+      "period": "May 2022 – Aug 2024",
+      "location": "Burkina Faso",
+      "description": "Coached 8 factories to improve EU and regional exports of dried mango. Increased export volumes and factory capacity by 30%.",
+      "tools_used": ["Business Coaching Tools", "Export Analytics", "Capacity Assessment"],
+      "methodologies": ["Business coaching", "Export development", "Factory optimization"],
+      "impact": "30% increase in export volumes and factory capacity",
+      "duration": "27 months"
+    },
+    {
+      "category": "Food Security & Systems Analysis",
+      "name": "Project Manager – Youth Pro-Emploi Compost",
+      "organization": "GIZ",
+      "period": "May 2022 – Mar 2023",
+      "location": "Burkina Faso",
+      "description": "Established 15 youth-led compost enterprises, providing composting equipment to 10 firms. Increased production efficiency by 30% and supported sustainable waste management in the mango sector.",
+      "tools_used": ["Project Management", "Efficiency Analytics", "Youth Development Tools"],
+      "methodologies": ["Youth entrepreneurship", "Waste management", "Efficiency improvement"],
+      "impact": "15 youth enterprises established, 30% efficiency increase",
+      "duration": "10 months"
+    },
+    {
+      "category": "Food Security & Systems Analysis",
+      "name": "Consultant – Dairy Feasibility Study",
+      "organization": "IFC – World Bank",
+      "period": "Sep – Oct 2022",
+      "location": "Burundi",
+      "description": "Conducted market demand and supply analysis for dairy. Identified $2M investment opportunities and developed a blueprint to expand dairy supply chains.",
+      "tools_used": ["Market Analysis", "Financial Modeling", "Supply Chain Analysis"],
+      "methodologies": ["Feasibility analysis", "Market research", "Investment assessment"],
+      "impact": "$2M investment opportunities identified",
+      "duration": "2 months"
+    },
+    {
+      "category": "Food Security & Systems Analysis",
+      "name": "Food Environment Expert – Poultry Sector",
+      "organization": "TANAGER",
+      "period": "Apr – Jun 2022",
+      "location": "Burkina Faso",
+      "description": "Assessed the chicken sector and food environment. Recommended policy measures to improve nutrition and sector sustainability.",
+      "tools_used": ["Sector Analysis", "Nutrition Assessment", "Policy Analysis"],
+      "methodologies": ["Food systems analysis", "Policy recommendation", "Sustainability assessment"],
+      "impact": "Policy recommendations for nutrition improvement and sector sustainability",
+      "duration": "3 months"
+    },
+    {
+      "category": "Youth & Entrepreneurship Development",
+      "name": "Portfolio Manager – Anzisha Prize",
+      "organization": "African Leadership Academy & Mastercard Foundation",
+      "period": "Jan 2020 – Sep 2021",
+      "location": "South Africa",
+      "description": "Designed and managed a 3-year support program for young entrepreneurs. Supported 50+ ventures, leading to a 40% increase in sustainability and job creation.",
+      "tools_used": ["Portfolio Management", "Impact Tracking", "Entrepreneurship Analytics"],
+      "methodologies": ["Portfolio management", "Entrepreneurship development", "Impact measurement"],
+      "impact": "50+ ventures supported, 40% increase in sustainability and job creation",
+      "duration": "21 months"
+    },
+    {
+      "category": "Youth & Entrepreneurship Development",
+      "name": "Consultant – Women in Agriculture Market Study",
+      "organization": "Root Capital",
+      "period": "Oct 2020 – Jan 2021",
+      "location": "DRC, Kenya, Rwanda & Uganda",
+      "description": "Analyzed women's participation in coffee, sorghum, and macadamia value chains. Recommended strategies to increase gender inclusion in East African agribusiness.",
+      "tools_used": ["Gender Analysis", "Market Research", "Value Chain Analysis"],
+      "methodologies": ["Gender inclusion analysis", "Market study", "Strategic recommendations"],
+      "impact": "Strategic recommendations for gender inclusion in East African agribusiness",
+      "duration": "4 months"
+    },
+    {
+      "category": "Research & Early Career",
+      "name": "Researcher – Socio-Economic Food Systems",
+      "organization": "African Economic Research Consortium",
+      "period": "Sep 2017 – Dec 2019",
+      "location": "Kenya/DRC",
+      "description": "Conducted micro and macro-level research on food environments in the DRC. Produced evidence-based insights into socio-economic factors shaping nutrition.",
+      "tools_used": ["Research Analytics", "Statistical Software", "Survey Tools"],
+      "methodologies": ["Socio-economic research", "Food systems analysis", "Evidence-based insights"],
+      "impact": "Evidence-based insights into socio-economic factors shaping nutrition in DRC",
+      "duration": "28 months"
+    },
+    {
+      "category": "Research & Early Career",
+      "name": "Agronomist – Head of Agriculture Department",
+      "organization": "Cellule d'Appui Technique",
+      "period": "Dec 2013 – Jun 2015",
+      "location": "DRC",
+      "description": "Designed and implemented strategies to improve farmer livelihoods in Plaine de la Ruzizi. Strengthened household nutrition and built farmer capacity in sustainable practices.",
+      "tools_used": ["Agricultural Planning", "Nutrition Assessment", "Farmer Training"],
+      "methodologies": ["Agricultural development", "Capacity building", "Sustainable practices"],
+      "impact": "Improved farmer livelihoods and household nutrition in Plaine de la Ruzizi",
+      "duration": "19 months"
     }
   ],
   "countries_worked": [
     {
       "country": "Democratic Republic of Congo",
       "projects": 5,
-      "sectors": ["Economic policy", "Urban development", "Financial resilience"],
-      "duration": "2018-2024"
+      "sectors": ["Economic policy", "Urban development", "Financial resilience", "Agriculture"],
+      "duration": "2013-2024"
     },
     {
       "country": "Canada",
@@ -190,32 +294,62 @@
     {
       "country": "Ghana",
       "projects": 4,
-      "sectors": ["Agricultural economics", "Market analysis"],
-      "duration": "2020-2023"
+      "sectors": ["Agricultural economics", "Market analysis", "Rice value chains"],
+      "duration": "2020-2024"
     },
     {
       "country": "Nigeria",
       "projects": 3,
-      "sectors": ["Agricultural economics", "Value chain development"],
+      "sectors": ["Agricultural economics", "Value chain development", "Rice mills"],
+      "duration": "2021-2024"
+    },
+    {
+      "country": "Burkina Faso",
+      "projects": 6,
+      "sectors": ["Agricultural value chains", "Export development", "Youth entrepreneurship", "Horticulture"],
+      "duration": "2021-2024"
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "projects": 2,
+      "sectors": ["Agricultural value chains", "Rice mills"],
+      "duration": "2023-2024"
+    },
+    {
+      "country": "Benin",
+      "projects": 2,
+      "sectors": ["Agricultural economics", "Dried fruit exports"],
       "duration": "2021-2023"
     },
     {
       "country": "Rwanda",
       "projects": 2,
-      "sectors": ["Urban development", "Economic policy"],
+      "sectors": ["Urban development", "Economic policy", "Women in agriculture"],
       "duration": "2019-2022"
     },
     {
       "country": "Kenya",
-      "projects": 2,
-      "sectors": ["Agricultural economics", "Financial resilience"],
-      "duration": "2020-2022"
+      "projects": 3,
+      "sectors": ["Agricultural economics", "Financial resilience", "Women in agriculture", "Food systems research"],
+      "duration": "2017-2022"
     },
     {
       "country": "Uganda",
       "projects": 2,
-      "sectors": ["Urban development", "Economic analysis"],
+      "sectors": ["Urban development", "Economic analysis", "Women in agriculture"],
       "duration": "2019-2021"
+    },
+    {
+      "country": "Burundi",
+      "projects": 2,
+      "sectors": ["Economic development", "Policy analysis", "Dairy sector"],
+      "duration": "2019-2022"
+    },
+    {
+      "country": "South Africa",
+      "projects": 2,
+      "sectors": ["Urban development analysis", "Youth entrepreneurship"],
+      "duration": "2020-2021"
     },
     {
       "country": "Senegal",
@@ -224,40 +358,10 @@
       "duration": "2020-2022"
     },
     {
-      "country": "Burkina Faso",
-      "projects": 2,
-      "sectors": ["Agricultural value chains", "Export development"],
-      "duration": "2021-2022"
-    },
-    {
-      "country": "Benin",
-      "projects": 2,
-      "sectors": ["Agricultural economics", "Market analysis"],
-      "duration": "2021-2022"
-    },
-    {
-      "country": "Côte d'Ivoire",
-      "projects": 2,
-      "sectors": ["Agricultural value chains", "Export potential"],
-      "duration": "2021-2022"
-    },
-    {
-      "country": "Burundi",
-      "projects": 2,
-      "sectors": ["Economic development", "Policy analysis"],
-      "duration": "2019-2020"
-    },
-    {
       "country": "Eritrea",
       "projects": 1,
       "sectors": ["Economic assessment"],
       "duration": "2020"
-    },
-    {
-      "country": "South Africa",
-      "projects": 1,
-      "sectors": ["Urban development analysis"],
-      "duration": "2021"
     }
   ],
   "current_role": {
@@ -274,11 +378,11 @@
     ]
   },
   "achievements": {
-    "total_projects": "25+",
-    "project_value": "$7.5 million+",
+    "total_projects": "30+",
+    "project_value": "$15+ million",
     "countries": "14",
-    "beneficiaries": "25,000+",
+    "beneficiaries": "100,000+",
     "success_rate": "100%",
-    "organizations": ["FAO", "World Bank", "CBI Netherlands", "Financial Resilience Institute", "Various NGOs"]
+    "organizations": ["GIZ", "World Bank/IFC", "CBI Netherlands", "Financial Resilience Institute", "African Leadership Academy", "Mastercard Foundation", "Root Capital", "TANAGER", "African Economic Research Consortium"]
   }
 }
