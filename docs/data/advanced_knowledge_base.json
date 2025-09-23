@@ -1,0 +1,286 @@
+{
+  "meta": {
+    "version": "3.0",
+    "last_updated": "2025-09-23",
+    "knowledge_type": "advanced_professional",
+    "ai_model": "semantic_enhanced"
+  },
+  "personal": {
+    "full_name": "Patrice Mirindi",
+    "professional_title": "Senior Development Economist & Data Analytics Consultant",
+    "tagline": "Transforming data into sustainable development impact",
+    "origin_story": "Born in Democratic Republic of Congo, moved to Kenya for advanced education, now based in Canada driving global economic development",
+    "core_mission": "Bridging the gap between complex data and actionable development solutions",
+    "unique_value_proposition": "Multilingual economist with deep African market knowledge and North American analytical rigor"
+  },
+  "expertise_matrix": {
+    "data_analytics": {
+      "tools": [
+        {
+          "name": "Excel",
+          "proficiency": 95,
+          "years_experience": 8,
+          "specializations": ["Financial modeling", "Econometric analysis", "VBA automation", "Advanced formulas"],
+          "project_examples": ["World Bank economic models", "FAO agricultural forecasting", "Financial resilience calculations"],
+          "certifications": ["Microsoft Excel Expert", "Advanced Financial Modeling"],
+          "unique_applications": ["Built 50+ economic models", "Created automated reporting systems", "Developed custom analytics dashboards"]
+        },
+        {
+          "name": "SPSS",
+          "proficiency": 90,
+          "years_experience": 6,
+          "specializations": ["Survey analysis", "Demographic modeling", "Policy impact assessment", "Regression analysis"],
+          "project_examples": ["Demographic studies in 8 African countries", "Policy evaluation for World Bank", "Agricultural survey analysis"],
+          "certifications": ["SPSS Advanced Statistics", "Statistical Analysis Specialist"],
+          "unique_applications": ["Analyzed data from 25,000+ survey respondents", "Built predictive models for policy outcomes"]
+        },
+        {
+          "name": "R",
+          "proficiency": 80,
+          "years_experience": 4,
+          "specializations": ["Econometric modeling", "Time series analysis", "Data visualization", "Statistical computing"],
+          "project_examples": ["Agricultural price forecasting", "Economic trend analysis", "Geospatial analysis"],
+          "certifications": ["R Programming Certification", "Advanced Econometrics"],
+          "unique_applications": ["Built economic forecasting models", "Created automated data pipelines"]
+        },
+        {
+          "name": "Python",
+          "proficiency": 75,
+          "years_experience": 3,
+          "specializations": ["Data processing", "Automation", "API integration", "Machine learning basics"],
+          "project_examples": ["Large dataset processing", "Automated report generation", "Web scraping for market data"],
+          "certifications": ["Python for Data Science"],
+          "unique_applications": ["Processed datasets with 1M+ records", "Built automated monitoring systems"]
+        },
+        {
+          "name": "Tableau",
+          "proficiency": 85,
+          "years_experience": 5,
+          "specializations": ["Interactive dashboards", "Data storytelling", "Stakeholder presentations", "Real-time monitoring"],
+          "project_examples": ["FAO agricultural dashboards", "World Bank poverty visualization", "NGO impact tracking"],
+          "certifications": ["Tableau Desktop Specialist"],
+          "unique_applications": ["Created 100+ professional dashboards", "Trained 50+ stakeholders on data interpretation"]
+        },
+        {
+          "name": "Power BI",
+          "proficiency": 80,
+          "years_experience": 3,
+          "specializations": ["Business intelligence", "KPI monitoring", "Automated reporting", "Data modeling"],
+          "project_examples": ["Financial Resilience Institute dashboards", "Economic monitoring systems"],
+          "certifications": ["Power BI Data Analyst Associate"],
+          "unique_applications": ["Built real-time economic monitoring systems"]
+        },
+        {
+          "name": "Stata",
+          "proficiency": 88,
+          "years_experience": 5,
+          "specializations": ["Econometric analysis", "Causal inference", "Policy evaluation", "Impact assessment"],
+          "project_examples": ["Policy impact studies", "Development program evaluation", "Economic research"],
+          "certifications": ["Advanced Stata Programming"],
+          "unique_applications": ["Conducted impact evaluations for $5M+ development programs"]
+        }
+      ],
+      "programming_languages": ["R", "Python", "SQL", "VBA", "Stata scripting"],
+      "databases": ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
+      "cloud_platforms": ["AWS", "Google Cloud", "Microsoft Azure"],
+      "specialized_software": ["ArcGIS", "QGIS", "EViews", "SAS", "Minitab"]
+    },
+    "economic_development": {
+      "sectors": [
+        {
+          "name": "Agricultural Economics",
+          "years_experience": 8,
+          "countries": ["Ghana", "Nigeria", "Senegal", "Burkina Faso", "Benin", "C\u00f4te d'Ivoire", "Kenya"],
+          "specializations": ["Value chain analysis", "Market research", "Export development", "Food security", "Commodity pricing"],
+          "major_projects": ["FAO West Africa Market Analysis", "CBI Export Development Program", "Agricultural Policy Impact Studies"],
+          "impact_metrics": {"farmers_reached": 15000, "market_value_analyzed": "$50M+", "policy_recommendations": 25}
+        },
+        {
+          "name": "Financial Resilience",
+          "years_experience": 3,
+          "countries": ["Canada", "DRC", "Rwanda"],
+          "specializations": ["Financial health assessment", "Risk modeling", "Policy framework development", "Vulnerability analysis"],
+          "major_projects": ["Financial Resilience Institute Framework", "DRC Financial Inclusion Study", "Canadian Financial Wellness Assessment"],
+          "impact_metrics": {"households_assessed": 10000, "policy_frameworks": 3, "research_publications": 8}
+        },
+        {
+          "name": "Urban Development Economics",
+          "years_experience": 4,
+          "countries": ["DRC", "Uganda", "Rwanda", "South Africa"],
+          "specializations": ["Urbanization impact analysis", "Infrastructure economics", "City planning analytics", "Migration studies"],
+          "major_projects": ["World Bank Urban Development Impact Study", "DRC Urbanization Policy Analysis"],
+          "impact_metrics": {"cities_analyzed": 12, "policy_recommendations": 15, "urban_population_studied": 500000}
+        }
+      ],
+      "methodologies": [
+        {
+          "name": "Randomized Controlled Trials (RCT)",
+          "description": "Gold standard for impact evaluation in development projects",
+          "applications": ["Agricultural intervention assessment", "Financial inclusion programs", "Policy impact studies"],
+          "projects_applied": 8
+        },
+        {
+          "name": "Difference-in-Difference Analysis",
+          "description": "Causal inference technique for policy evaluation",
+          "applications": ["Policy impact assessment", "Program effectiveness studies"],
+          "projects_applied": 12
+        },
+        {
+          "name": "Propensity Score Matching",
+          "description": "Statistical technique for reducing selection bias",
+          "applications": ["Development program evaluation", "Impact assessment"],
+          "projects_applied": 6
+        }
+      ]
+    },
+    "ai_integration": {
+      "current_learning": [
+        "Machine Learning for Development Economics",
+        "Natural Language Processing for Survey Analysis",
+        "AI-Driven Policy Recommendation Systems",
+        "Automated Economic Forecasting"
+      ],
+      "ai_tools_explored": ["TensorFlow", "scikit-learn", "OpenAI API", "Hugging Face Transformers"],
+      "future_applications": [
+        "AI-powered agricultural price prediction",
+        "Automated policy impact assessment",
+        "Natural language survey analysis",
+        "Real-time economic monitoring systems"
+      ]
+    }
+  },
+  "project_portfolio": {
+    "flagship_projects": [
+      {
+        "id": "fao_market_analysis",
+        "name": "FAO West Africa Agricultural Market Analysis",
+        "organization": "Food and Agriculture Organization (FAO)",
+        "value": "$2.1M",
+        "duration": "18 months",
+        "countries": ["Ghana", "Nigeria", "Senegal", "Burkina Faso"],
+        "team_size": 8,
+        "role": "Lead Data Analyst",
+        "tools_used": ["Tableau", "SPSS", "Excel", "R"],
+        "methodologies": ["Market analysis", "Price forecasting", "Supply chain modeling"],
+        "key_deliverables": [
+          "Interactive market intelligence dashboard",
+          "Quarterly price forecasting reports",
+          "Policy recommendation framework",
+          "Training materials for local analysts"
+        ],
+        "impact": {
+          "farmers_benefited": 12000,
+          "market_efficiency_improvement": "25%",
+          "policy_adoption_rate": "80%",
+          "revenue_increase": "$5M+ for smallholder farmers"
+        },
+        "testimonial": "Outstanding analytical work that transformed our market intelligence capabilities",
+        "success_metrics": {
+          "forecast_accuracy": "92%",
+          "stakeholder_satisfaction": "98%",
+          "on_time_delivery": "100%"
+        }
+      },
+      {
+        "id": "financial_resilience_framework",
+        "name": "Canadian Financial Resilience Assessment Framework",
+        "organization": "Financial Resilience Institute",
+        "value": "$1.8M",
+        "duration": "Ongoing (12 months+)",
+        "countries": ["Canada"],
+        "team_size": 6,
+        "role": "Senior Data Analyst & Framework Developer",
+        "tools_used": ["R", "Python", "Power BI", "SQL"],
+        "methodologies": ["Risk assessment modeling", "Survey design", "Statistical validation"],
+        "key_deliverables": [
+          "Comprehensive resilience measurement framework",
+          "Real-time monitoring dashboard",
+          "Policy recommendation engine",
+          "National assessment protocol"
+        ],
+        "impact": {
+          "households_assessed": 8000,
+          "financial_institutions_engaged": 25,
+          "policy_frameworks_developed": 1,
+          "research_publications": 4
+        },
+        "current_status": "Active development and implementation"
+      }
+    ],
+    "statistics": {
+      "total_projects": 28,
+      "total_value": "$7.8M",
+      "success_rate": "100%",
+      "average_project_duration": "14 months",
+      "client_retention_rate": "95%",
+      "countries_active": 14,
+      "sectors_covered": 8,
+      "tools_mastered": 15
+    }
+  },
+  "lead_qualification_matrix": {
+    "ideal_client_profile": {
+      "organization_types": ["International NGOs", "Government agencies", "Development banks", "Research institutions", "Consulting firms"],
+      "project_values": ["$50K+", "$100K+", "$500K+"],
+      "sectors": ["Economic development", "Agricultural economics", "Financial inclusion", "Urban development", "Policy analysis"],
+      "geographic_focus": ["Sub-Saharan Africa", "North America", "Global development"]
+    },
+    "qualifying_questions": [
+      {
+        "trigger": "project budget",
+        "questions": ["What's your project timeline?", "What's the expected budget range?", "Which countries are involved?"],
+        "follow_up": "I have extensive experience with projects in this range and region."
+      },
+      {
+        "trigger": "data analytics",
+        "questions": ["What type of data are you working with?", "What are your key analytical challenges?", "Do you need ongoing support or one-time analysis?"],
+        "follow_up": "I can help design a comprehensive analytical approach for your needs."
+      }
+    ],
+    "conversion_triggers": [
+      "After 5 meaningful exchanges",
+      "When specific expertise is mentioned",
+      "When project details are discussed",
+      "When tool capabilities are explored"
+    ]
+  },
+  "real_time_context": {
+    "economic_indicators": {
+      "global_gdp_growth": "3.1%",
+      "sub_saharan_africa_growth": "3.8%",
+      "inflation_trends": "Moderating globally",
+      "development_funding": "$180B annually"
+    },
+    "industry_trends": [
+      "AI integration in development economics",
+      "Digital financial inclusion acceleration",
+      "Climate-resilient agriculture focus",
+      "Data-driven policy making expansion"
+    ],
+    "current_opportunities": [
+      "Financial resilience assessment demand increasing",
+      "Agricultural technology adoption studies needed",
+      "Urban development data analytics growing",
+      "Climate adaptation economic analysis expanding"
+    ]
+  },
+  "conversation_intelligence": {
+    "sentiment_analysis": {
+      "positive_indicators": ["interested", "impressive", "experienced", "qualified"],
+      "urgency_indicators": ["urgent", "immediately", "asap", "deadline"],
+      "budget_indicators": ["budget", "cost", "price", "investment", "funding"]
+    },
+    "intent_classification": {
+      "information_seeking": 0.3,
+      "service_inquiry": 0.5,
+      "immediate_need": 0.8,
+      "casual_browsing": 0.1
+    },
+    "response_personalization": {
+      "academic_tone": "for researchers and academics",
+      "business_tone": "for corporate clients",
+      "technical_tone": "for data professionals",
+      "casual_tone": "for general inquiries"
+    }
+  }
+}
