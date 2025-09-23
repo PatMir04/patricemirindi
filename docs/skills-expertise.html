@@ -52,7 +52,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Matching Homepage/About Style -->
+    <!-- Hero Section - EXACT Same as About Page (Light Blue Background) -->
     <section class="skills-hero">
         <div class="hero-background">
             <div class="hero-gradient"></div>
@@ -62,7 +62,7 @@
         <div class="container">
             <div class="skills-hero-content">
                 <div class="hero-photo-section">
-                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist" class="profile-photo">
+                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist" class="skills-profile-photo">
                     <div class="availability-badge">
                         <div class="status-dot"></div>
                         <span>Available for Projects</span>
@@ -70,8 +70,8 @@
                 </div>
                 
                 <div class="hero-text-section">
-                    <h1>Patrice Mirindi, MSc</h1>
-                    <h2>Advanced Analytics & Strategic Consulting Capabilities</h2>
+                    <h1>Patrice Mirindi</h1>
+                    <h2>Development Economist & Data Analytics Consultant</h2>
                     <p class="hero-tagline">Comprehensive technical toolkit combined with strategic thinking and international development expertise</p>
                     
                     <div class="hero-credentials">
@@ -87,17 +87,6 @@
                             <i class="fas fa-language"></i>
                             <span>Multilingual<br><small>4 Languages</small></span>
                         </div>
-                    </div>
-                    
-                    <div class="hero-buttons">
-                        <a href="contact.html" class="btn btn-primary btn-large">
-                            <i class="fas fa-envelope"></i>
-                            Discuss Your Project
-                        </a>
-                        <a href="data-analytics.html" class="btn btn-secondary btn-large">
-                            <i class="fas fa-chart-bar"></i>
-                            View Analytics Platform
-                        </a>
                     </div>
                 </div>
             </div>
@@ -573,13 +562,12 @@
         </div>
     </footer>
 
-    <!-- Skills Page - Enhanced Styling to Match Home/About -->
+    <!-- Skills Page - EXACT Same Styling as About Page (Light Blue Background) -->
     <style>
-    /* Skills Hero Section - Exact Same as Homepage/About -->
+    /* Skills Hero Section - EXACT Same as About Page (Light Blue Background) */
     .skills-hero {
-        background: linear-gradient(135deg, #004085 0%, #0056b3 50%, #007bff 100%);
-        color: white;
-        padding: 5rem 1rem;
+        background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
+        padding: 120px 0 80px;
         position: relative;
         overflow: hidden;
     }
@@ -608,7 +596,7 @@
         right: 0;
         width: 40%;
         height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23004085" opacity="0.08"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.08"/><circle cx="40" cy="80" r="2" fill="%23004085" opacity="0.08"/></svg>');
         opacity: 0.4;
     }
     
@@ -627,32 +615,34 @@
         text-align: center;
     }
     
-    .profile-photo {
+    /* EXACT Same Photo Styling as About Page */
+    .skills-profile-photo {
         width: 280px;
         height: 280px;
         border-radius: 50%;
         object-fit: cover;
-        border: 8px solid rgba(255, 255, 255, 0.9);
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        border: 8px solid white;
+        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.2);
         margin-bottom: 1.5rem;
         transition: transform 0.3s ease;
     }
     
-    .profile-photo:hover {
+    .skills-profile-photo:hover {
         transform: scale(1.05);
-        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 25px 70px rgba(0, 64, 133, 0.25);
     }
     
     .availability-badge {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        padding: 0.75rem 1.5rem;
-        border-radius: 25px;
         display: inline-flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #FF6600, #e55100);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
         font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 0.875rem;
+        box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
     }
     
     .status-dot {
@@ -672,6 +662,7 @@
     .hero-text-section h1 {
         font-size: 3.5rem;
         font-weight: 800;
+        color: #004085;
         margin-bottom: 0.5rem;
         line-height: 1.1;
     }
@@ -686,16 +677,15 @@
     .hero-tagline {
         font-size: 1.25rem;
         line-height: 1.6;
+        color: #374151;
         margin-bottom: 2rem;
         font-style: italic;
-        color: rgba(255, 255, 255, 0.9);
     }
     
     .hero-credentials {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
-        margin-bottom: 2.5rem;
     }
     
     .credential-item {
@@ -703,14 +693,15 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.8);
         border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(0, 64, 133, 0.1);
         transition: all 0.3s ease;
     }
     
     .credential-item:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(0, 64, 133, 0.05);
+        border-color: #FF6600;
         transform: translateY(-2px);
     }
     
@@ -720,17 +711,11 @@
         width: 24px;
         text-align: center;
     }
-    
-    .hero-buttons {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-    }
 
     /* Technical Competency Overview */
     .competency-overview {
-        padding: 4rem 1rem;
-        background: #f8fbff;
+        padding: 5rem 0;
+        background: white;
     }
     
     .competency-grid {
@@ -808,8 +793,8 @@
 
     /* Skills Showcase */
     .skills-showcase {
-        padding: 5rem 1rem;
-        background: white;
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
     }
     
     .skills-grid {
@@ -820,7 +805,7 @@
     }
     
     .skill-category {
-        background: #f8fbff;
+        background: white;
         padding: 2.5rem;
         border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
@@ -984,7 +969,7 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
-        background: white;
+        background: #f8fbff;
         border-radius: 12px;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
@@ -1024,7 +1009,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem;
-        background: white;
+        background: #f8fbff;
         border-radius: 12px;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
@@ -1045,8 +1030,8 @@
 
     /* Certifications Showcase */
     .certifications-showcase {
-        padding: 5rem 1rem;
-        background: #f8fbff;
+        padding: 5rem 0;
+        background: white;
     }
     
     .certifications-grid {
@@ -1057,7 +1042,7 @@
     }
     
     .certification-card {
-        background: white;
+        background: #f8fbff;
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
@@ -1138,8 +1123,8 @@
 
     /* Language Skills */
     .language-skills {
-        padding: 5rem 1rem;
-        background: white;
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
     }
     
     .languages-grid {
@@ -1150,7 +1135,7 @@
     }
     
     .language-card {
-        background: #f8fbff;
+        background: white;
         padding: 2rem;
         border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
@@ -1207,9 +1192,9 @@
         font-size: 0.9rem;
     }
 
-    /* Skills CTA - Same style as Homepage */
+    /* Skills CTA - Same as About Page */
     .skills-cta {
-        padding: 5rem 1rem;
+        padding: 5rem 0;
         background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
         color: white;
     }
@@ -1231,7 +1216,6 @@
         font-size: 1.25rem;
         margin-bottom: 3rem;
         color: rgba(255, 255, 255, 0.9);
-        line-height: 1.6;
     }
     
     .cta-features {
@@ -1249,23 +1233,11 @@
         background: rgba(255, 255, 255, 0.1);
         border-radius: 1rem;
         border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .cta-feature:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-2px);
     }
     
     .cta-feature i {
         color: #FF6600;
         font-size: 1.25rem;
-        width: 24px;
-        text-align: center;
-    }
-    
-    .cta-feature span {
-        font-weight: 600;
     }
     
     .cta-buttons {
@@ -1283,17 +1255,13 @@
             gap: 2rem;
         }
         
-        .profile-photo {
+        .skills-profile-photo {
             width: 220px;
             height: 220px;
         }
         
         .hero-text-section h1 {
             font-size: 2.5rem;
-        }
-        
-        .hero-text-section h2 {
-            font-size: 1.3rem;
         }
         
         .competency-grid {
