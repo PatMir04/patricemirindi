@@ -42,7 +42,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Matching Other Pages -->
+    <!-- Hero Section - Matching Homepage/About Style -->
     <section class="projects-hero">
         <div class="hero-background">
             <div class="hero-gradient"></div>
@@ -50,47 +50,44 @@
         </div>
         
         <div class="container">
-            <div class="hero-content">
-                <h1>Key Projects Portfolio</h1>
-                <p class="hero-subtitle">Interactive Global Impact Map & Project Showcase</p>
-                <p class="hero-description">Comprehensive portfolio of $7.5M+ in development projects across 15+ countries. From gender transformative agricultural initiatives to youth employment programs, each project delivers measurable impact for sustainable development.</p>
+            <div class="projects-hero-content">
+                <div class="hero-photo-section">
+                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist" class="profile-photo">
+                    <div class="availability-badge">
+                        <div class="status-dot"></div>
+                        <span>Available for Projects</span>
+                    </div>
+                </div>
                 
-                <div class="portfolio-highlights">
-                    <div class="highlight-item">
-                        <div class="highlight-icon">
+                <div class="hero-text-section">
+                    <h1>Patrice Mirindi, MSc</h1>
+                    <h2>Key Projects Portfolio - $7.5M+ Global Impact</h2>
+                    <p class="hero-tagline">Interactive showcase of development projects across 15+ countries delivering measurable impact for sustainable development</p>
+                    
+                    <div class="hero-credentials">
+                        <div class="credential-item">
                             <i class="fas fa-dollar-sign"></i>
+                            <span>$7.5M+ Portfolio<br><small>Project Value</small></span>
                         </div>
-                        <div class="highlight-content">
-                            <span class="highlight-value">$7.5M+</span>
-                            <span class="highlight-label">Portfolio Value</span>
-                        </div>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon">
+                        <div class="credential-item">
                             <i class="fas fa-users"></i>
+                            <span>25,000+ Lives<br><small>Directly Impacted</small></span>
                         </div>
-                        <div class="highlight-content">
-                            <span class="highlight-value">25,000+</span>
-                            <span class="highlight-label">Lives Impacted</span>
-                        </div>
-                    </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon">
+                        <div class="credential-item">
                             <i class="fas fa-globe-africa"></i>
-                        </div>
-                        <div class="highlight-content">
-                            <span class="highlight-value">15+</span>
-                            <span class="highlight-label">Countries</span>
+                            <span>15+ Countries<br><small>Global Reach</small></span>
                         </div>
                     </div>
-                    <div class="highlight-item">
-                        <div class="highlight-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="highlight-content">
-                            <span class="highlight-value">85+</span>
-                            <span class="highlight-label">Enterprises</span>
-                        </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="contact.html" class="btn btn-primary btn-large">
+                            <i class="fas fa-envelope"></i>
+                            Discuss Your Project
+                        </a>
+                        <a href="data-analytics.html" class="btn btn-secondary btn-large">
+                            <i class="fas fa-chart-bar"></i>
+                            View Analytics Platform
+                        </a>
                     </div>
                 </div>
             </div>
@@ -577,7 +574,7 @@
         <div class="container">
             <div class="cta-content">
                 <h2>Ready to Launch Your Next Development Project?</h2>
-                <p>Let's collaborate to create evidence-based solutions that generate lasting positive impact for your organization and the communities you serve. From project design to impact evaluation, I deliver results.</p>
+                <p>Let's collaborate to create evidence-based solutions that generate lasting positive impact for your organization and the communities you serve.</p>
                 <div class="cta-buttons">
                     <a href="contact.html" class="btn btn-primary btn-large">
                         <i class="fas fa-envelope"></i>
@@ -648,202 +645,13 @@
         </div>
     </footer>
 
-    <!-- Enhanced Projects Page CSS - IMPROVED HEADINGS -->
+    <!-- Projects Page - Enhanced Styling to Match Home/About -->
     <style>
-    /* === IMPROVED TYPOGRAPHY & HEADINGS === */
-    
-    /* Main Hero Section Heading - Enhanced */
-    .projects-hero h1 {
-        font-size: 4rem !important;
-        font-weight: 900 !important;
-        letter-spacing: -0.02em !important;
-        line-height: 1.1 !important;
-        margin-bottom: 1rem !important;
-        color: white !important;
-        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%) !important;
-        background-clip: text !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        text-align: center !important;
-    }
-    
-    /* Hero Subtitle - Enhanced */
-    .hero-subtitle {
-        font-size: 1.75rem !important;
-        font-weight: 700 !important;
-        color: #FF6600 !important;
-        margin-bottom: 1.5rem !important;
-        letter-spacing: 0.01em !important;
-        line-height: 1.3 !important;
-        text-shadow: 0 2px 8px rgba(255, 102, 0, 0.2) !important;
-    }
-    
-    /* Section Titles - Major Improvement */
-    .section-title {
-        font-size: 3rem !important;
-        font-weight: 800 !important;
-        color: #004085 !important;
-        margin-bottom: 1rem !important;
-        text-align: center !important;
-        letter-spacing: -0.01em !important;
-        line-height: 1.2 !important;
-        background: linear-gradient(135deg, #004085 0%, #0056b3 100%) !important;
-        background-clip: text !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        text-shadow: 0 2px 6px rgba(0, 64, 133, 0.1) !important;
-        position: relative !important;
-    }
-    
-    /* Section Title Underline Effect */
-    .section-title::after {
-        content: '' !important;
-        position: absolute !important;
-        bottom: -0.5rem !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 80px !important;
-        height: 4px !important;
-        background: linear-gradient(135deg, #FF6600, #e55100) !important;
-        border-radius: 2px !important;
-    }
-    
-    /* Section Subtitles - Enhanced */
-    .section-subtitle {
-        font-size: 1.25rem !important;
-        font-weight: 600 !important;
-        color: #6B7280 !important;
-        text-align: center !important;
-        margin-bottom: 3rem !important;
-        line-height: 1.5 !important;
-        max-width: 800px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-    
-    /* Project Card Headings - Enhanced */
-    .project-content h3 {
-        color: #004085 !important;
-        font-size: 1.5rem !important;
-        font-weight: 800 !important;
-        margin-bottom: 1.25rem !important;
-        line-height: 1.3 !important;
-        letter-spacing: -0.01em !important;
-        text-shadow: 0 1px 3px rgba(0, 64, 133, 0.1) !important;
-    }
-    
-    /* Summary Card Headings - Enhanced */
-    .summary-header h4 {
-        color: #004085 !important;
-        font-weight: 800 !important;
-        font-size: 1.25rem !important;
-        margin: 0 !important;
-        line-height: 1.3 !important;
-        letter-spacing: -0.005em !important;
-    }
-    
-    /* Testimonial Author Names - Enhanced */
-    .author-info h4 {
-        color: #004085 !important;
-        font-weight: 800 !important;
-        font-size: 1.1rem !important;
-        margin-bottom: 0.25rem !important;
-        letter-spacing: -0.005em !important;
-    }
-    
-    /* CTA Section Heading - Enhanced */
-    .projects-cta h2 {
-        font-size: 3rem !important;
-        font-weight: 900 !important;
-        margin-bottom: 1.5rem !important;
-        color: white !important;
-        text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
-        letter-spacing: -0.02em !important;
-        line-height: 1.1 !important;
-    }
-    
-    /* Footer Section Headings - Enhanced */
-    .footer-section h3 {
-        color: #004085 !important;
-        font-weight: 800 !important;
-        font-size: 1.4rem !important;
-        margin-bottom: 1rem !important;
-        letter-spacing: -0.01em !important;
-    }
-    
-    .footer-section h4 {
-        color: #004085 !important;
-        font-weight: 700 !important;
-        font-size: 1.1rem !important;
-        margin-bottom: 1rem !important;
-        letter-spacing: -0.005em !important;
-    }
-    
-    /* Map Legend Heading - Enhanced */
-    .map-legend h4 {
-        color: #004085 !important;
-        font-weight: 800 !important;
-        font-size: 1.1rem !important;
-        margin-bottom: 1rem !important;
-        text-align: center !important;
-        letter-spacing: -0.005em !important;
-        text-shadow: 0 1px 3px rgba(0, 64, 133, 0.1) !important;
-    }
-    
-    /* === MOBILE RESPONSIVE HEADINGS === */
-    @media (max-width: 768px) {
-        .projects-hero h1 {
-            font-size: 2.75rem !important;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.4rem !important;
-        }
-        
-        .section-title {
-            font-size: 2.25rem !important;
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem !important;
-        }
-        
-        .project-content h3 {
-            font-size: 1.3rem !important;
-        }
-        
-        .projects-cta h2 {
-            font-size: 2.25rem !important;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .projects-hero h1 {
-            font-size: 2.25rem !important;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem !important;
-        }
-        
-        .section-title {
-            font-size: 1.9rem !important;
-        }
-        
-        .projects-cta h2 {
-            font-size: 1.9rem !important;
-        }
-    }
-    
-    /* === END IMPROVED HEADINGS === */
-    
-    /* Hero Section - Matching Other Pages */
+    /* Projects Hero Section - Exact Same as Homepage/About -->
     .projects-hero {
         background: linear-gradient(135deg, #004085 0%, #0056b3 50%, #007bff 100%);
         color: white;
         padding: 5rem 1rem;
-        text-align: center;
         position: relative;
         overflow: hidden;
     }
@@ -876,79 +684,121 @@
         opacity: 0.4;
     }
     
-    .hero-content {
+    .projects-hero-content {
         position: relative;
         z-index: 2;
-        max-width: 1000px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4rem;
+        align-items: center;
+        max-width: 1200px;
         margin: 0 auto;
     }
     
-    .hero-description {
+    .hero-photo-section {
+        text-align: center;
+    }
+    
+    .profile-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    }
+    
+    .availability-badge {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        background: #00ff88;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+    }
+    
+    .hero-text-section h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+    }
+    
+    .hero-text-section h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #FF6600;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-tagline {
         font-size: 1.25rem;
         line-height: 1.6;
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
+        font-style: italic;
         color: rgba(255, 255, 255, 0.9);
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 3rem;
     }
     
-    .portfolio-highlights {
+    .hero-credentials {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        max-width: 900px;
-        margin: 0 auto;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
     }
     
-    .highlight-item {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 2rem 1.5rem;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
+    .credential-item {
         display: flex;
         align-items: center;
         gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
     }
     
-    .highlight-item:hover {
+    .credential-item:hover {
         background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-4px);
+        transform: translateY(-2px);
     }
     
-    .highlight-icon {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #FF6600, #e55100);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
+    .credential-item i {
+        color: #FF6600;
         font-size: 1.5rem;
+        width: 24px;
+        text-align: center;
     }
     
-    .highlight-content {
+    .hero-buttons {
         display: flex;
-        flex-direction: column;
+        gap: 1.5rem;
+        flex-wrap: wrap;
     }
-    
-    .highlight-value {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: white;
-        line-height: 1;
-        margin-bottom: 0.25rem;
-    }
-    
-    .highlight-label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.8);
-    }
-    
+
     /* Interactive Map Section */
     .project-map-section {
         padding: 5rem 1rem;
@@ -1011,7 +861,7 @@
     .legend-marker.trade { background: #f59e0b; }
     .legend-marker.youth { background: #8b5cf6; }
     .legend-marker.evaluation { background: #ef4444; }
-    
+
     /* Featured Projects */
     .featured-projects {
         padding: 5rem 1rem;
@@ -1028,9 +878,9 @@
     .project-card {
         background: #f8fbff;
         padding: 2rem;
-        border-radius: 20px;
+        border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
     }
     
@@ -1041,7 +891,6 @@
     
     .project-card.featured {
         border: 2px solid #FF6600;
-        background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
     }
     
     .project-header {
@@ -1101,6 +950,13 @@
         font-weight: 700;
     }
     
+    .project-content h3 {
+        color: #004085;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
     .project-details {
         display: flex;
         gap: 2rem;
@@ -1130,10 +986,6 @@
         font-size: 1rem;
     }
     
-    .project-impact {
-        margin-bottom: 1.5rem;
-    }
-    
     .impact-metrics {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -1142,6 +994,7 @@
         background: white;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0, 64, 133, 0.05);
+        margin-bottom: 1.5rem;
     }
     
     .metric {
@@ -1177,7 +1030,7 @@
         font-weight: 600;
         border: 1px solid rgba(0, 64, 133, 0.2);
     }
-    
+
     /* Additional Projects Summary */
     .additional-projects {
         padding: 4rem 1rem;
@@ -1217,6 +1070,12 @@
         font-size: 2rem;
     }
     
+    .summary-header h4 {
+        color: #004085;
+        font-weight: 700;
+        margin: 0;
+    }
+    
     .summary-details p {
         margin-bottom: 0.5rem;
         color: #374151;
@@ -1226,7 +1085,7 @@
     .summary-details strong {
         color: #004085;
     }
-    
+
     /* Testimonials */
     .testimonials-section {
         padding: 4rem 1rem;
@@ -1264,7 +1123,6 @@
     
     .testimonial-rating i {
         color: #f59e0b;
-        font-size: 1rem;
     }
     
     .testimonial-content p {
@@ -1294,6 +1152,12 @@
         font-size: 1.1rem;
     }
     
+    .author-info h4 {
+        color: #004085;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+    
     .author-info p {
         color: #6B7280;
         font-size: 0.9rem;
@@ -1308,24 +1172,32 @@
         font-size: 0.75rem;
         font-weight: 600;
     }
-    
+
     /* Projects CTA */
     .projects-cta {
-        padding: 4rem 1rem;
+        padding: 5rem 1rem;
         background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
         color: white;
         text-align: center;
     }
     
     .cta-content {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
+    }
+    
+    .cta-content h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
     }
     
     .cta-content p {
         font-size: 1.25rem;
         margin-bottom: 2rem;
         color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
     }
     
     .cta-buttons {
@@ -1334,26 +1206,26 @@
         justify-content: center;
         flex-wrap: wrap;
     }
-    
+
     /* Mobile Responsive */
     @media (max-width: 768px) {
-        .projects-hero {
-            padding: 3rem 1rem;
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-        }
-        
-        .portfolio-highlights {
+        .projects-hero-content {
             grid-template-columns: 1fr;
-            gap: 1rem;
+            text-align: center;
+            gap: 2rem;
         }
         
-        .highlight-item {
-            flex-direction: column;
-            text-align: center;
-            padding: 1.5rem;
+        .profile-photo {
+            width: 220px;
+            height: 220px;
+        }
+        
+        .hero-text-section h1 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-text-section h2 {
+            font-size: 1.3rem;
         }
         
         .interactive-map {
@@ -1368,15 +1240,6 @@
         
         .projects-grid {
             grid-template-columns: 1fr;
-        }
-        
-        .project-header {
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .project-meta {
-            text-align: left;
         }
         
         .impact-metrics {
@@ -1398,6 +1261,10 @@
     }
     
     @media (max-width: 480px) {
+        .hero-text-section h1 {
+            font-size: 2rem;
+        }
+        
         .project-card {
             padding: 1.5rem;
         }
@@ -1405,10 +1272,6 @@
         .project-details {
             flex-direction: column;
             gap: 0.5rem;
-        }
-        
-        .tech-stack {
-            justify-content: center;
         }
     }
     </style>
