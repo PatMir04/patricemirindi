@@ -1,6 +1,6 @@
 /*
- * PATRICE MIRINDI - PROFESSIONAL CHAT WIDGET
- * Simple, robust implementation for professional consultation website
+ * PATRICE MIRINDI - ENHANCED PROFESSIONAL CHAT WIDGET
+ * Intelligent chatbot with comprehensive knowledge base integration
  */
 
 class ProfessionalChatWidget {
@@ -8,8 +8,10 @@ class ProfessionalChatWidget {
         this.isOpen = false;
         this.messages = [];
         this.userLanguage = 'en';
+        this.knowledgeBase = null;
+        this.initialized = false;
         
-        // Professional knowledge base
+        // Basic profile info (fallback)
         this.profile = {
             name: "Patrice Mirindi",
             email: "patricemirindi@gmail.com",
@@ -29,16 +31,53 @@ class ProfessionalChatWidget {
         this.init();
     }
 
-    init() {
+    async init() {
         try {
+            await this.loadProfessionalKnowledge();
             this.createWidget();
             this.attachEvents();
             setTimeout(() => this.showWelcome(), 2000);
-            console.log('✅ Professional chat widget initialized');
+            this.initialized = true;
+            console.log('✅ Enhanced professional chat widget initialized');
         } catch (error) {
             console.error('❌ Chat widget failed:', error);
             this.showFallback();
         }
+    }
+
+    async loadProfessionalKnowledge() {
+        try {
+            console.log('🔄 Loading professional knowledge base...');
+            const response = await fetch('./data/professional_profile.json');
+            
+            if (response.ok) {
+                this.knowledgeBase = await response.json();
+                console.log('✅ Professional knowledge loaded successfully');
+                console.log('📊 Tools available:', this.knowledgeBase.skills?.data_analytics_tools?.length || 0);
+                console.log('🌍 Countries available:', this.knowledgeBase.countries_worked?.length || 0);
+            } else {
+                console.warn('⚠️ Professional profile not found, using fallback knowledge');
+                this.knowledgeBase = this.getFallbackKnowledge();
+            }
+        } catch (error) {
+            console.warn('⚠️ Failed to load knowledge base:', error);
+            this.knowledgeBase = this.getFallbackKnowledge();
+        }
+    }
+
+    getFallbackKnowledge() {
+        return {
+            skills: {
+                data_analytics_tools: [
+                    {name: "Excel", proficiency: "expert", description: "Advanced economic modeling and analysis"},
+                    {name: "SPSS", proficiency: "advanced", description: "Statistical analysis for development projects"},
+                    {name: "R", proficiency: "intermediate", description: "Econometric modeling and forecasting"},
+                    {name: "Python", proficiency: "intermediate", description: "Data processing and automation"},
+                    {name: "Tableau", proficiency: "intermediate", description: "Data visualization and dashboards"},
+                    {name: "Power BI", proficiency: "intermediate", description: "Business intelligence reporting"}
+                ]
+            }
+        };
     }
 
     createWidget() {
@@ -80,16 +119,18 @@ class ProfessionalChatWidget {
                     </div>
                     
                     <div class="quick-actions">
+                        <button class="quick-btn" data-msg="What data analytics tools do you use?">🛠️ Tools</button>
                         <button class="quick-btn" data-msg="What countries have you worked in?">🌍 Countries</button>
                         <button class="quick-btn" data-msg="What is your experience?">💼 Experience</button>
-                        <button class="quick-btn" data-msg="Are you available?">✅ Availability</button>
-                        <button class="quick-btn" data-msg="How to contact you?">📧 Contact</button>
+                        <button class="quick-btn" data-msg="Are you available for consulting?">✅ Availability</button>
+                        <button class="quick-btn" data-msg="Tell me about your projects">📊 Projects</button>
+                        <button class="quick-btn" data-msg="How can I contact you?">📧 Contact</button>
                     </div>
                     
                     <div class="chat-input-section">
                         <input type="text" 
                                id="chat-input" 
-                               placeholder="Ask about my background, projects, or expertise..." 
+                               placeholder="Ask about tools, experience, projects, or expertise..." 
                                maxlength="300">
                         <button id="chat-send">📤</button>
                     </div>
@@ -187,8 +228,8 @@ class ProfessionalChatWidget {
                 position: absolute;
                 bottom: 80px;
                 right: 0;
-                width: 380px;
-                height: 500px;
+                width: 420px;
+                height: 550px;
                 background: white;
                 border-radius: 16px;
                 box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
@@ -276,15 +317,17 @@ class ProfessionalChatWidget {
                 display: flex;
                 flex-direction: column;
                 gap: 12px;
+                min-height: 200px;
             }
             
             .message {
-                max-width: 80%;
+                max-width: 85%;
                 padding: 12px 16px;
                 border-radius: 16px;
                 font-size: 14px;
-                line-height: 1.4;
+                line-height: 1.5;
                 animation: fadeIn 0.3s ease;
+                word-wrap: break-word;
             }
             
             .message.bot {
@@ -293,12 +336,14 @@ class ProfessionalChatWidget {
                 align-self: flex-start;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
                 border: 1px solid #e1e5e9;
+                border-radius: 16px 16px 16px 4px;
             }
             
             .message.user {
                 background: linear-gradient(135deg, #004085, #FF6600);
                 color: white;
                 align-self: flex-end;
+                border-radius: 16px 16px 4px 16px;
             }
             
             @keyframes fadeIn {
@@ -311,7 +356,7 @@ class ProfessionalChatWidget {
                 background: white;
                 border-top: 1px solid #e1e5e9;
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
             
@@ -319,17 +364,19 @@ class ProfessionalChatWidget {
                 background: #f8fafc;
                 border: 1px solid #e1e5e9;
                 border-radius: 8px;
-                padding: 8px 12px;
-                font-size: 12px;
+                padding: 8px 10px;
+                font-size: 11px;
                 cursor: pointer;
                 transition: all 0.2s;
                 text-align: center;
+                font-weight: 500;
             }
             
             .quick-btn:hover {
                 background: #004085;
                 color: white;
                 border-color: #004085;
+                transform: translateY(-1px);
             }
             
             .chat-input-section {
@@ -349,6 +396,7 @@ class ProfessionalChatWidget {
                 outline: none;
                 font-size: 14px;
                 background: #f8fafc;
+                color: #000;
             }
             
             #chat-input:focus {
@@ -381,7 +429,7 @@ class ProfessionalChatWidget {
                 gap: 4px;
                 padding: 12px 16px;
                 background: white;
-                border-radius: 16px;
+                border-radius: 16px 16px 16px 4px;
                 align-self: flex-start;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             }
@@ -412,7 +460,7 @@ class ProfessionalChatWidget {
                 
                 .chat-window {
                     width: calc(100vw - 32px);
-                    height: 400px;
+                    height: 70vh;
                     right: -8px;
                 }
                 
@@ -491,7 +539,7 @@ class ProfessionalChatWidget {
     }
 
     showWelcome() {
-        const welcome = "👋 Hi! I'm Patrice's assistant. Ask me about his background, the countries he's worked in, or how to get in touch for consulting projects.";
+        const welcome = "👋 Hi! I'm Patrice's AI assistant. I have detailed knowledge about his analytics tools, project experience across 14 countries, and professional expertise. What would you like to know?";
         this.addMessage(welcome, 'bot');
     }
 
@@ -510,62 +558,216 @@ class ProfessionalChatWidget {
         
         setTimeout(() => {
             this.hideTyping();
-            const response = this.getResponse(message);
+            const response = this.getIntelligentResponse(message);
             this.addMessage(response, 'bot');
-        }, 1000 + Math.random() * 1000);
+        }, 1000 + Math.random() * 800);
     }
 
-    getResponse(message) {
-        const msg = message.toLowerCase();
-        const isFrench = this.detectFrench(msg);
-        
-        // Countries question
-        if ((msg.includes('countries') || msg.includes('country') || msg.includes('pays')) && 
-            (msg.includes('work') || msg.includes('experience') || msg.includes('travail'))) {
-            const countries = this.countries.join(', ');
-            return isFrench ? 
-                `Patrice a travaillé dans ${this.countries.length} pays: ${countries}. Il se spécialise en développement économique et analyse de données.` :
-                `Patrice has worked in ${this.countries.length} countries: ${countries}. He specializes in economic development and data analytics.`;
+    getIntelligentResponse(message) {
+        try {
+            const msg = message.toLowerCase();
+            const isFrench = this.detectFrench(msg);
+            
+            // Enhanced tool-specific responses
+            if (this.isToolsQuestion(msg)) {
+                return this.getToolsResponse(msg, isFrench);
+            }
+            
+            // Project-specific responses
+            if (this.isProjectsQuestion(msg)) {
+                return this.getProjectsResponse(isFrench);
+            }
+            
+            // Methodology responses
+            if (this.isMethodologyQuestion(msg)) {
+                return this.getMethodologyResponse(isFrench);
+            }
+            
+            // Countries question with enhanced context
+            if (this.isCountriesQuestion(msg)) {
+                return this.getCountriesResponse(isFrench);
+            }
+            
+            // Education and background
+            if (this.isEducationQuestion(msg)) {
+                return this.getEducationResponse(isFrench);
+            }
+            
+            // Contact/availability
+            if (this.isContactQuestion(msg)) {
+                return this.getContactResponse(isFrench);
+            }
+            
+            // Experience
+            if (this.isExperienceQuestion(msg)) {
+                return this.getExperienceResponse(isFrench);
+            }
+            
+            // Greetings
+            if (this.isGreeting(msg)) {
+                return this.getGreetingResponse(isFrench);
+            }
+            
+            // Default intelligent response
+            return this.getDefaultResponse(isFrench);
+        } catch (error) {
+            console.error('Error generating response:', error);
+            return "I'm sorry, I encountered an error. Please contact Patrice directly at patricemirindi@gmail.com for assistance.";
         }
-        
-        // Contact/availability
-        if (msg.includes('contact') || msg.includes('available') || msg.includes('hire') || 
-            msg.includes('contacter') || msg.includes('disponible')) {
+    }
+
+    isToolsQuestion(msg) {
+        return msg.includes('tool') || msg.includes('software') || msg.includes('analytics') ||
+               msg.includes('excel') || msg.includes('spss') || msg.includes('tableau') ||
+               msg.includes('python') || msg.includes('power bi') || msg.includes('stata') ||
+               msg.includes('technologies') || msg.includes('programs');
+    }
+
+    getToolsResponse(msg, isFrench = false) {
+        if (!this.knowledgeBase?.skills?.data_analytics_tools) {
             return isFrench ?
-                `Patrice est actuellement disponible pour de nouveaux projets. Contactez-le à ${this.profile.email} pour une consultation gratuite de 30 minutes.` :
-                `Patrice is currently available for new projects. Contact him at ${this.profile.email} for a free 30-minute consultation.`;
+                "Patrice utilise Excel, SPSS, R, Python, Tableau, et Power BI pour ses analyses de données en développement économique." :
+                "Patrice uses Excel, SPSS, R, Python, Tableau, and Power BI for data analytics in economic development.";
         }
         
-        // Experience
-        if (msg.includes('experience') || msg.includes('background') || msg.includes('expérience')) {
+        const tools = this.knowledgeBase.skills.data_analytics_tools;
+        
+        // Check for specific tool mentioned
+        const specificTool = tools.find(tool => 
+            msg.includes(tool.name.toLowerCase())
+        );
+        
+        if (specificTool) {
             return isFrench ?
-                `Patrice a ${this.profile.experience} d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.countries.length} pays.` :
-                `Patrice has ${this.profile.experience} of experience in development economics and data analytics. He's worked across ${this.countries.length} countries.`;
+                `Patrice utilise ${specificTool.name} avec un niveau ${specificTool.proficiency}. ${specificTool.description || 'Outil essentiel pour ses projets de développement économique.'}` :
+                `Patrice uses ${specificTool.name} at ${specificTool.proficiency} level. ${specificTool.description || 'Essential tool for economic development projects.'}. ${specificTool.use_cases ? 'Use cases include: ' + specificTool.use_cases.join(', ') + '.' : ''}`;
         }
         
-        // Origin
-        if ((msg.includes('where') || msg.includes('où')) && 
-            (msg.includes('from') || msg.includes('vient'))) {
-            return isFrench ?
-                `Patrice vient de ${this.profile.origin} et vit maintenant à ${this.profile.location}.` :
-                `Patrice is from ${this.profile.origin} and currently lives in ${this.profile.location}.`;
-        }
+        // General tools overview
+        const toolsList = tools.map(t => `${t.name} (${t.proficiency})`).join(', ');
         
-        // Greetings
-        if (msg.match(/^(hi|hello|hey|bonjour|salut)\b/)) {
-            return isFrench ?
-                "Bonjour! Je peux vous renseigner sur l'expertise de Patrice, les pays où il a travaillé, ou vous aider à le contacter. Que souhaitez-vous savoir?" :
-                "Hello! I can tell you about Patrice's expertise, the countries he's worked in, or help you get in touch. What would you like to know?";
-        }
-        
-        // Default helpful response
         return isFrench ?
-            `Je peux vous parler de l'expertise de Patrice (développement économique, ${this.countries.length} pays), ou vous aider à le contacter à ${this.profile.email}. Quelle information souhaitez-vous?` :
-            `I can tell you about Patrice's expertise (economic development, ${this.countries.length} countries), or help you contact him at ${this.profile.email}. What would you like to know?`;
+            `Patrice utilise une gamme complète d'outils d'analyse de données: ${toolsList}. Par exemple, Excel pour la modélisation économique avancée, SPSS pour l'analyse démographique, et Tableau pour la visualisation interactive. Souhaitez-vous des détails sur un outil spécifique?` :
+            `Patrice uses a comprehensive suite of data analytics tools: ${toolsList}. For example, Excel for advanced economic modeling, SPSS for demographic analysis, and Tableau for interactive visualizations. Would you like details about a specific tool?`;
+    }
+
+    isProjectsQuestion(msg) {
+        return msg.includes('project') || msg.includes('work') || msg.includes('experience') ||
+               msg.includes('portfolio') || msg.includes('examples');
+    }
+
+    getProjectsResponse(isFrench = false) {
+        if (!this.knowledgeBase?.projects) {
+            return isFrench ?
+                "Patrice a géré 25+ projets d'une valeur de $7.5M+ dans 14 pays. Contactez-le pour des exemples détaillés." :
+                "Patrice has managed 25+ projects worth $7.5M+ across 14 countries. Contact him for detailed examples.";
+        }
+        
+        const projects = this.knowledgeBase.projects.slice(0, 2); // Show top 2 projects
+        const projectDescriptions = projects.map(p => 
+            `${p.name} (${p.organization}): ${p.description.substring(0, 100)}...`
+        ).join('\n\n');
+        
+        return isFrench ?
+            `Voici quelques projets clés de Patrice:\n\n${projectDescriptions}\n\nAu total, il a géré ${this.knowledgeBase.achievements?.total_projects || '25+'} projets d'une valeur de ${this.knowledgeBase.achievements?.project_value || '$7.5M+'}.` :
+            `Here are some of Patrice's key projects:\n\n${projectDescriptions}\n\nIn total, he has managed ${this.knowledgeBase.achievements?.total_projects || '25+'} projects worth ${this.knowledgeBase.achievements?.project_value || '$7.5M+'}.`;
+    }
+
+    isMethodologyQuestion(msg) {
+        return msg.includes('method') || msg.includes('approach') || msg.includes('analysis') ||
+               msg.includes('statistical') || msg.includes('econometric') || msg.includes('regression');
+    }
+
+    getMethodologyResponse(isFrench = false) {
+        const methodologies = this.knowledgeBase?.skills?.methodologies || [
+            'Regression Analysis', 'Time Series Forecasting', 'Impact Evaluation', 'Survey Design'
+        ];
+        
+        const methodsList = methodologies.map(m => 
+            typeof m === 'object' ? m.name : m
+        ).join(', ');
+        
+        return isFrench ?
+            `Patrice emploie diverses méthodologies analytiques: ${methodsList}. Il se spécialise dans la modélisation économétrique pour l'évaluation des politiques et l'analyse d'impact des projets de développement.` :
+            `Patrice employs various analytical methodologies: ${methodsList}. He specializes in econometric modeling for policy evaluation and development project impact analysis.`;
+    }
+
+    isCountriesQuestion(msg) {
+        return (msg.includes('countries') || msg.includes('country') || msg.includes('pays')) &&
+               (msg.includes('work') || msg.includes('experience') || msg.includes('travail'));
+    }
+
+    getCountriesResponse(isFrench = false) {
+        const countries = this.knowledgeBase?.countries_worked || this.countries;
+        const countryList = Array.isArray(countries) ? 
+            countries.map(c => typeof c === 'object' ? c.country : c).join(', ') :
+            this.countries.join(', ');
+        
+        return isFrench ?
+            `Patrice a travaillé dans ${countries.length || 14} pays: ${countryList}. Son expertise couvre l'Afrique subsaharienne et l'Amérique du Nord, avec des projets en économie agricole, développement urbain, et résilience financière.` :
+            `Patrice has worked in ${countries.length || 14} countries: ${countryList}. His expertise spans Sub-Saharan Africa and North America, with projects in agricultural economics, urban development, and financial resilience.`;
+    }
+
+    isEducationQuestion(msg) {
+        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||
+               msg.includes('background') || msg.includes('qualification');
+    }
+
+    getEducationResponse(isFrench = false) {
+        const education = this.knowledgeBase?.education;
+        
+        if (education) {
+            return isFrench ?
+                `Patrice détient un ${education.primary_degree} de ${education.institution}. Il se spécialise en ${education.specialization}. Il parle couramment ${education.languages?.map(l => l.language).join(', ')}.` :
+                `Patrice holds an ${education.primary_degree} from ${education.institution}. He specializes in ${education.specialization}. He is fluent in ${education.languages?.map(l => l.language).join(', ')}.`;
+        }
+        
+        return isFrench ?
+            "Patrice détient une Maîtrise en Économie Agricole de l'Université de Nairobi et parle français, anglais, swahili et lingala." :
+            "Patrice holds an MSc in Agricultural Economics from University of Nairobi and speaks French, English, Swahili, and Lingala.";
+    }
+
+    isContactQuestion(msg) {
+        return msg.includes('contact') || msg.includes('available') || msg.includes('hire') ||
+               msg.includes('email') || msg.includes('reach');
+    }
+
+    getContactResponse(isFrench = false) {
+        return isFrench ?
+            `Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour une consultation gratuite de 30 minutes. Il répond généralement dans les 24 heures.` :
+            `Patrice is currently available for new consulting projects. Contact him at ${this.profile.email} for a free 30-minute consultation. He typically responds within 24 hours.`;
+    }
+
+    isExperienceQuestion(msg) {
+        return msg.includes('experience') || msg.includes('background') || msg.includes('career');
+    }
+
+    getExperienceResponse(isFrench = false) {
+        const achievements = this.knowledgeBase?.achievements;
+        
+        return isFrench ?
+            `Patrice a ${this.profile.experience} d'expérience en économie du développement. Il a géré ${achievements?.total_projects || '25+'} projets d'une valeur de ${achievements?.project_value || '$7.5M+'} dans ${achievements?.countries || '14'} pays, impactant ${achievements?.beneficiaries || '25,000+'} vies.` :
+            `Patrice has ${this.profile.experience} of experience in development economics. He has managed ${achievements?.total_projects || '25+'} projects worth ${achievements?.project_value || '$7.5M+'} across ${achievements?.countries || '14'} countries, impacting ${achievements?.beneficiaries || '25,000+'} lives.`;
+    }
+
+    isGreeting(msg) {
+        return msg.match(/^(hi|hello|hey|bonjour|salut)\b/);
+    }
+
+    getGreetingResponse(isFrench = false) {
+        return isFrench ?
+            "Bonjour! Je suis l'assistant IA de Patrice. J'ai des connaissances détaillées sur ses outils d'analyse, son expérience dans 14 pays, et son expertise professionnelle. Que souhaitez-vous savoir?" :
+            "Hello! I'm Patrice's AI assistant. I have detailed knowledge about his analytics tools, experience across 14 countries, and professional expertise. What would you like to know?";
+    }
+
+    getDefaultResponse(isFrench = false) {
+        return isFrench ?
+            `Je peux vous renseigner sur l'expertise de Patrice en analyse de données (Excel, SPSS, R, Python, Tableau), ses projets dans ${this.countries.length} pays, ou vous aider à le contacter à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :
+            `I can tell you about Patrice's data analytics expertise (Excel, SPSS, R, Python, Tableau), his projects across ${this.countries.length} countries, or help you contact him at ${this.profile.email}. What specific information would you like?`;
     }
 
     detectFrench(message) {
-        const frenchWords = ['bonjour', 'salut', 'où', 'comment', 'dans', 'quels', 'pays', 'travaillé', 'expérience', 'contacter'];
+        const frenchWords = ['bonjour', 'salut', 'où', 'comment', 'dans', 'quels', 'pays', 'travaillé', 'expérience', 'contacter', 'outils', 'projets'];
         return frenchWords.some(word => message.includes(word));
     }
 
