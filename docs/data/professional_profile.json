@@ -1,0 +1,284 @@
+{
+  "personal_info": {
+    "name": "Patrice Mirindi",
+    "title": "Development Economist & Data Analytics Consultant",
+    "origin": "Democratic Republic of Congo (DRC)",
+    "current_location": "Winnipeg, MB, Canada",
+    "email": "patricemirindi@gmail.com",
+    "linkedin": "linkedin.com/in/patricemirindi",
+    "github": "github.com/PatMir04",
+    "experience_years": "8+",
+    "availability": "Currently available for new consulting projects",
+    "response_time": "within 24 hours",
+    "consultation": "Free 30-minute consultation available"
+  },
+  "education": {
+    "primary_degree": "MSc Agricultural Economics",
+    "institution": "University of Nairobi",
+    "specialization": "Data Analytics, Econometrics, Agricultural Policy",
+    "certifications": [
+      "PMP Certified Project Manager",
+      "Advanced Statistical Analysis",
+      "Data Visualization Specialist"
+    ],
+    "languages": [
+      {"language": "French", "proficiency": "Native"},
+      {"language": "English", "proficiency": "Fluent"},
+      {"language": "Swahili", "proficiency": "Fluent"},
+      {"language": "Lingala", "proficiency": "Native"}
+    ]
+  },
+  "skills": {
+    "data_analytics_tools": [
+      {
+        "name": "Excel",
+        "proficiency": "expert",
+        "description": "Advanced financial modeling, econometric analysis, and complex calculations for economic development projects",
+        "use_cases": ["Economic modeling", "Financial analysis", "Statistical calculations", "Dashboard creation"]
+      },
+      {
+        "name": "SPSS",
+        "proficiency": "advanced",
+        "description": "Statistical analysis for demographic studies, policy impact assessment, and survey data analysis",
+        "use_cases": ["Survey analysis", "Demographic studies", "Policy evaluation", "Regression analysis"]
+      },
+      {
+        "name": "R",
+        "proficiency": "intermediate",
+        "description": "Econometric modeling, time series analysis, and statistical computing for development economics",
+        "use_cases": ["Econometric modeling", "Time series forecasting", "Statistical analysis", "Data visualization"]
+      },
+      {
+        "name": "Python",
+        "proficiency": "intermediate",
+        "description": "Data processing, automation, and analysis for large-scale development datasets",
+        "use_cases": ["Data processing", "Automation scripts", "Machine learning", "API integration"]
+      },
+      {
+        "name": "Tableau",
+        "proficiency": "intermediate",
+        "description": "Interactive dashboards and data visualization for stakeholder communication and reporting",
+        "use_cases": ["Interactive dashboards", "Data storytelling", "Stakeholder presentations", "Trend visualization"]
+      },
+      {
+        "name": "Power BI",
+        "proficiency": "intermediate",
+        "description": "Business intelligence dashboards and real-time monitoring for development projects",
+        "use_cases": ["Business intelligence", "Real-time monitoring", "KPI dashboards", "Performance tracking"]
+      },
+      {
+        "name": "Stata",
+        "proficiency": "advanced",
+        "description": "Specialized statistical software for econometric analysis and policy research",
+        "use_cases": ["Econometric analysis", "Policy research", "Impact evaluation", "Causal inference"]
+      },
+      {
+        "name": "SQL",
+        "proficiency": "intermediate",
+        "description": "Database querying and data extraction for large-scale development datasets",
+        "use_cases": ["Database queries", "Data extraction", "Data cleaning", "Report generation"]
+      }
+    ],
+    "methodologies": [
+      {
+        "name": "Regression Analysis",
+        "description": "Linear and non-linear regression for economic modeling and policy impact assessment"
+      },
+      {
+        "name": "Time Series Forecasting",
+        "description": "Predictive modeling for economic trends and agricultural market analysis"
+      },
+      {
+        "name": "Geospatial Mapping",
+        "description": "GIS analysis for agricultural and urban development project planning"
+      },
+      {
+        "name": "Survey Design and Data Cleaning",
+        "description": "Primary data collection methodology and quality assurance processes"
+      },
+      {
+        "name": "Econometric Modeling",
+        "description": "Advanced statistical techniques for economic policy analysis and impact evaluation"
+      },
+      {
+        "name": "Impact Evaluation",
+        "description": "Rigorous assessment of development program effectiveness using quantitative methods"
+      },
+      {
+        "name": "Financial Risk Assessment",
+        "description": "Quantitative analysis of financial resilience and vulnerability factors"
+      }
+    ],
+    "sector_expertise": [
+      {
+        "sector": "Agricultural Economics",
+        "description": "Value chain analysis, market research, and agricultural policy development",
+        "countries": ["Ghana", "Nigeria", "Senegal", "Burkina Faso", "Benin"]
+      },
+      {
+        "sector": "Financial Resilience",
+        "description": "Financial health assessment and policy framework development",
+        "countries": ["Canada", "DRC", "Rwanda", "Kenya"]
+      },
+      {
+        "sector": "Urban Development",
+        "description": "Economic impact analysis for urbanization and infrastructure projects",
+        "countries": ["DRC", "Uganda", "South Africa"]
+      },
+      {
+        "sector": "Economic Development Policy",
+        "description": "Policy analysis and strategic planning for sustainable development",
+        "countries": ["All 14 countries"]
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "FAO Agricultural Market Analysis",
+      "organization": "Food and Agriculture Organization (FAO)",
+      "description": "Comprehensive market analysis and trend visualization for agricultural commodities across West Africa",
+      "tools_used": ["Tableau", "SPSS", "Excel"],
+      "methodologies": ["Market analysis", "Time series forecasting", "Data visualization"],
+      "countries": ["Ghana", "Nigeria", "Senegal"],
+      "impact": "Informed policy decisions affecting 500,000+ farmers",
+      "duration": "12 months"
+    },
+    {
+      "name": "Financial Resilience Assessment Framework",
+      "organization": "Financial Resilience Institute",
+      "description": "Development of comprehensive framework for assessing financial health and resilience",
+      "tools_used": ["R", "Python", "Power BI"],
+      "methodologies": ["Statistical modeling", "Risk assessment", "Dashboard development"],
+      "countries": ["Canada"],
+      "impact": "Framework adopted for national financial wellness assessment",
+      "duration": "Ongoing"
+    },
+    {
+      "name": "Urban Development Impact Study",
+      "organization": "World Bank",
+      "description": "Econometric analysis of urbanization impacts on economic development in Central Africa",
+      "tools_used": ["Stata", "R", "SPSS"],
+      "methodologies": ["Econometric modeling", "Impact evaluation", "Geospatial analysis"],
+      "countries": ["DRC", "Rwanda", "Burundi"],
+      "impact": "Policy recommendations implemented in 3 countries",
+      "duration": "18 months"
+    },
+    {
+      "name": "Agricultural Value Chain Development",
+      "organization": "CBI Netherlands",
+      "description": "Market research and value chain analysis for agricultural export development",
+      "tools_used": ["Excel", "Tableau", "SQL"],
+      "methodologies": ["Value chain analysis", "Market research", "Export potential assessment"],
+      "countries": ["Burkina Faso", "Côte d'Ivoire", "Benin"],
+      "impact": "$2M+ in new export opportunities identified",
+      "duration": "8 months"
+    }
+  ],
+  "countries_worked": [
+    {
+      "country": "Democratic Republic of Congo",
+      "projects": 5,
+      "sectors": ["Economic policy", "Urban development", "Financial resilience"],
+      "duration": "2018-2024"
+    },
+    {
+      "country": "Canada",
+      "projects": 3,
+      "sectors": ["Financial resilience", "Data analytics"],
+      "duration": "2023-Present"
+    },
+    {
+      "country": "Ghana",
+      "projects": 4,
+      "sectors": ["Agricultural economics", "Market analysis"],
+      "duration": "2020-2023"
+    },
+    {
+      "country": "Nigeria",
+      "projects": 3,
+      "sectors": ["Agricultural economics", "Value chain development"],
+      "duration": "2021-2023"
+    },
+    {
+      "country": "Rwanda",
+      "projects": 2,
+      "sectors": ["Urban development", "Economic policy"],
+      "duration": "2019-2022"
+    },
+    {
+      "country": "Kenya",
+      "projects": 2,
+      "sectors": ["Agricultural economics", "Financial resilience"],
+      "duration": "2020-2022"
+    },
+    {
+      "country": "Uganda",
+      "projects": 2,
+      "sectors": ["Urban development", "Economic analysis"],
+      "duration": "2019-2021"
+    },
+    {
+      "country": "Senegal",
+      "projects": 3,
+      "sectors": ["Agricultural economics", "Market development"],
+      "duration": "2020-2022"
+    },
+    {
+      "country": "Burkina Faso",
+      "projects": 2,
+      "sectors": ["Agricultural value chains", "Export development"],
+      "duration": "2021-2022"
+    },
+    {
+      "country": "Benin",
+      "projects": 2,
+      "sectors": ["Agricultural economics", "Market analysis"],
+      "duration": "2021-2022"
+    },
+    {
+      "country": "Côte d'Ivoire",
+      "projects": 2,
+      "sectors": ["Agricultural value chains", "Export potential"],
+      "duration": "2021-2022"
+    },
+    {
+      "country": "Burundi",
+      "projects": 2,
+      "sectors": ["Economic development", "Policy analysis"],
+      "duration": "2019-2020"
+    },
+    {
+      "country": "Eritrea",
+      "projects": 1,
+      "sectors": ["Economic assessment"],
+      "duration": "2020"
+    },
+    {
+      "country": "South Africa",
+      "projects": 1,
+      "sectors": ["Urban development analysis"],
+      "duration": "2021"
+    }
+  ],
+  "current_role": {
+    "title": "Senior Data Analyst",
+    "organization": "Financial Resilience Institute",
+    "location": "Winnipeg, MB, Canada",
+    "start_date": "October 2024",
+    "status": "Current position",
+    "responsibilities": [
+      "Lead delivery of actionable insights for financial resilience research",
+      "Develop data-driven strategies for financial well-being initiatives",
+      "Support impactful research projects with statistical expertise",
+      "Provide consulting on financial health assessment methodologies"
+    ]
+  },
+  "achievements": {
+    "total_projects": "25+",
+    "project_value": "$7.5 million+",
+    "countries": "14",
+    "beneficiaries": "25,000+",
+    "success_rate": "100%",
+    "organizations": ["FAO", "World Bank", "CBI Netherlands", "Financial Resilience Institute", "Various NGOs"]
+  }
+}
