@@ -1,692 +1,587 @@
-/**
- * Enhanced Analytics Dashboard JavaScript
- * Interactive data visualizations with comprehensive African country data and trending analysis
- * By Patrice Mirindi - Senior Data Analyst & Economic Development Consultant
- */
+/* assets/js/global-analytics-dashboard.js
+   Global Development Analytics – live auto-updating from official public APIs
+   Design-safe: uses your existing IDs, classes, and markup.
+*/
 
-class AnalyticsDashboard {
-    constructor() {
-        this.charts = {};
-        this.currentRegion = 'africa';
-        this.currentIndicator = 'poverty';
-        this.showTrends = true;
-        this.colors = {
-            primary: '#004085',
-            secondary: '#FF6600',
-            success: '#10b981',
-            warning: '#f59e0b',
-            danger: '#ef4444',
-            info: '#06b6d4',
-            purple: '#8b5cf6',
-            pink: '#ec4899'
-        };
-        
-        // Comprehensive African country data with trend information
-        this.data = {
-            poverty: {
-                africa: {
-                    countries: [
-                        'Nigeria', 'Kenya', 'Uganda', 'Tanzania', 'Ghana', 'Rwanda', 
-                        'Senegal', 'Mali', 'Burkina Faso', 'Niger', 'Chad', 'Ethiopia',
-                        'South Africa', 'Botswana', 'Namibia', 'Zambia', 'Zimbabwe', 
-                        'Malawi', 'Mozambique', 'Madagascar', 'DRC', 'Cameroon', 
-                        'Ivory Coast', 'Benin', 'Togo', 'Sierra Leone', 'Liberia'
-                    ],
-                    rates2023: [
-                        40.1, 36.1, 41.6, 49.4, 24.2, 38.2, 46.7, 50.8, 43.7, 42.9, 42.3, 30.8,
-                        18.9, 16.1, 17.4, 57.5, 38.3, 69.2, 62.8, 74.3, 63.9, 23.8,
-                        39.5, 49.6, 45.2, 56.8, 44.1
-                    ],
-                    trend: {
-                        labels: ['2015', '2017', '2019', '2021', '2023'],
-                        data: [48.4, 46.8, 43.2, 40.1, 38.7],
-                        description: 'Sub-Saharan Africa poverty trend shows steady improvement'
-                    }
-                },
-                global: {
-                    labels: ['2000', '2005', '2010', '2015', '2020', '2023'],
-                    data: [29.4, 23.6, 16.3, 10.2, 9.2, 8.5],
-                    title: 'Global Extreme Poverty Rate'
-                }
-            },
-            foodSecurity: {
-                africa: {
-                    countries: [
-                        'Nigeria', 'DRC', 'Ethiopia', 'Kenya', 'Uganda', 'Tanzania',
-                        'Mali', 'Burkina Faso', 'Niger', 'Chad', 'Sudan', 'South Sudan',
-                        'Somalia', 'Madagascar', 'Mozambique', 'Malawi', 'Zimbabwe',
-                        'Zambia', 'Central African Rep', 'Sierra Leone'
-                    ],
-                    severeInsecurity: [
-                        25.0, 26.2, 21.0, 28.4, 28.9, 26.0, 11.6, 16.8, 12.4, 29.5, 27.9, 33.7,
-                        23.5, 22.4, 25.5, 19.7, 24.8, 17.8, 47.7, 25.2
-                    ],
-                    moderateInsecurity: [
-                        36.8, 45.2, 35.6, 38.2, 42.1, 39.8, 28.4, 32.7, 31.2, 42.8, 41.5, 48.9,
-                        39.7, 38.9, 42.3, 35.6, 40.1, 34.2, 65.3, 41.8
-                    ],
-                    trend: {
-                        labels: ['2019', '2020', '2021', '2022', '2023'],
-                        moderate: [50.2, 52.8, 55.1, 57.3, 57.9],
-                        severe: [20.1, 21.5, 22.8, 23.4, 22.8],
-                        description: 'Food insecurity levels remain elevated across Sub-Saharan Africa'
-                    }
-                },
-                regions: ['Sub-Saharan Africa', 'North Africa', 'West Africa', 'East Africa', 'Southern Africa', 'Central Africa'],
-                moderateOrSevere: [57.9, 31.2, 51.8, 58.3, 45.2, 62.7],
-                severe: [22.8, 12.4, 19.7, 25.1, 18.3, 28.9]
-            },
-            financialInclusion: {
-                africa: {
-                    countries: [
-                        'South Africa', 'Kenya', 'Rwanda', 'Ghana', 'Nigeria', 'Senegal',
-                        'Uganda', 'Tanzania', 'Ethiopia', 'Mali', 'Burkina Faso', 'Niger',
-                        'Benin', 'Togo', 'Ivory Coast', 'Cameroon', 'DRC', 'Madagascar',
-                        'Malawi', 'Zambia', 'Zimbabwe', 'Mozambique'
-                    ],
-                    inclusion2021: [
-                        69.3, 79.0, 89.1, 58.0, 51.4, 42.3, 57.8, 47.0, 35.4, 35.6, 36.0, 18.7,
-                        37.4, 44.5, 41.0, 34.5, 26.2, 17.9, 34.3, 45.1, 30.5, 24.8
-                    ],
-                    mobile2021: [
-                        45.8, 73.5, 85.2, 39.4, 45.1, 36.8, 54.2, 43.8, 32.1, 34.2, 31.7, 15.4,
-                        34.1, 40.2, 37.6, 28.9, 22.1, 14.2, 29.8, 41.3, 25.7, 20.4
-                    ],
-                    trend: {
-                        labels: ['2011', '2014', '2017', '2021'],
-                        formal: [24, 34, 43, 43],
-                        mobile: [12, 32, 45, 48],
-                        description: 'Mobile money driving financial inclusion growth in Africa'
-                    }
-                },
-                global: {
-                    labels: ['2011', '2014', '2017', '2021'],
-                    adults: [51, 62, 69, 76],
-                    women: [47, 58, 65, 71],
-                    men: [55, 65, 72, 78]
-                }
-            },
-            agricultural: {
-                africa: {
-                    countries: [
-                        'South Africa', 'Egypt', 'Nigeria', 'Kenya', 'Ghana', 'Ethiopia',
-                        'Morocco', 'Uganda', 'Tanzania', 'Rwanda', 'Mali', 'Senegal',
-                        'Burkina Faso', 'Ivory Coast', 'Cameroon', 'Madagascar', 'Mozambique',
-                        'Malawi', 'Zambia', 'Zimbabwe', 'Benin', 'Togo', 'Niger', 'Chad'
-                    ],
-                    cerealYield: [
-                        4850, 8200, 1650, 1780, 1890, 2340, 2280, 2450, 1420, 1580, 1320, 1280,
-                        1180, 1650, 2100, 2890, 850, 1640, 2580, 950, 1420, 1380, 680, 780
-                    ],
-                    growthRate: [
-                        2.1, 3.8, 2.4, 3.2, 2.8, 4.1, 2.5, 3.9, 3.1, 4.8, 2.6, 2.3,
-                        3.4, 2.9, 3.5, 2.7, 3.8, 3.6, 2.8, 1.9, 3.2, 3.1, 2.2, 2.8
-                    ],
-                    trend: {
-                        labels: ['2019', '2020', '2021', '2022', '2023'],
-                        yield: [1580, 1520, 1610, 1650, 1690],
-                        growth: [2.8, 1.9, 3.5, 3.8, 3.2],
-                        description: 'Agricultural productivity showing resilient growth despite challenges'
-                    }
-                },
-                regions: ['Sub-Saharan Africa', 'North Africa', 'West Africa', 'East Africa', 'Southern Africa', 'Central Africa'],
-                yield: [1350, 4200, 1420, 1890, 2680, 1580],
-                growth: [3.2, 2.8, 3.1, 3.8, 2.4, 3.4]
-            },
-            economicGrowth: {
-                africa: {
-                    countries: [
-                        'Rwanda', 'Ivory Coast', 'Ethiopia', 'Ghana', 'Senegal', 'Kenya',
-                        'Uganda', 'Tanzania', 'Burkina Faso', 'Mali', 'Benin', 'Togo',
-                        'Niger', 'Madagascar', 'Mozambique', 'Malawi', 'Zambia', 'Nigeria',
-                        'Cameroon', 'DRC', 'South Africa', 'Egypt', 'Morocco', 'Algeria'
-                    ],
-                    gdpGrowth2023: [
-                        7.2, 6.8, 6.3, 5.8, 5.3, 5.0, 4.8, 4.5, 4.2, 4.0, 3.8, 3.5,
-                        3.2, 3.0, 2.8, 2.5, 2.2, 3.1, 2.9, 1.8, 0.9, 4.1, 3.4, 2.1
-                    ],
-                    fiveYearAvg: [
-                        8.1, 7.2, 9.1, 6.2, 5.8, 5.4, 5.9, 5.2, 4.8, 4.5, 4.2, 4.1,
-                        3.8, 3.5, 3.2, 3.8, 3.1, 2.4, 3.5, 2.1, 1.2, 5.2, 3.8, 2.8
-                    ],
-                    trend: {
-                        labels: ['2019', '2020', '2021', '2022', '2023'],
-                        data: [3.2, -1.9, 4.4, 3.8, 4.1],
-                        description: 'African economies showing strong post-pandemic recovery'
-                    }
-                }
-            },
-            humanDevelopment: {
-                africa: {
-                    countries: [
-                        'Mauritius', 'Seychelles', 'Algeria', 'Tunisia', 'Botswana', 'Libya',
-                        'South Africa', 'Egypt', 'Gabon', 'Morocco', 'Cape Verde', 'Ghana',
-                        'Namibia', 'Kenya', 'Zambia', 'Tanzania', 'Zimbabwe', 'Rwanda',
-                        'Uganda', 'Nigeria', 'Ivory Coast', 'Cameroon', 'Senegal', 'Madagascar',
-                        'Benin', 'Malawi', 'Ethiopia', 'Mali', 'Burkina Faso', 'Niger', 'Chad'
-                    ],
-                    hdi2023: [
-                        0.802, 0.785, 0.745, 0.731, 0.728, 0.718, 0.713, 0.700, 0.693, 0.686,
-                        0.662, 0.632, 0.615, 0.601, 0.565, 0.549, 0.535, 0.534, 0.544, 0.535,
-                        0.550, 0.563, 0.511, 0.501, 0.515, 0.483, 0.498, 0.428, 0.449, 0.394, 0.394
-                    ],
-                    trend: {
-                        labels: ['2015', '2017', '2019', '2021', '2023'],
-                        data: [0.518, 0.532, 0.540, 0.545, 0.547],
-                        description: 'Steady improvement in human development across Africa'
-                    }
-                }
-            }
-        };
-        
-        // Data sources for citations
-        this.dataSources = {
-            poverty: {
-                source: 'World Bank - Africa Poverty Assessment 2024',
-                url: 'https://www.worldbank.org/en/region/afr/publication/africa-poverty-report-2024',
-                date: 'Last updated: September 2024'
-            },
-            foodSecurity: {
-                source: 'FAO - State of Food Security and Nutrition in the World 2024',
-                url: 'https://www.fao.org/3/cc3017en/cc3017en.pdf',
-                date: 'Published: July 2024'
-            },
-            financialInclusion: {
-                source: 'World Bank Global Findex Database 2021 & African Development Bank 2024',
-                url: 'https://www.worldbank.org/en/publication/globalfindex',
-                date: 'Latest data: 2021-2024'
-            },
-            agricultural: {
-                source: 'FAO Statistical Yearbook 2024 & African Development Bank',
-                url: 'https://www.fao.org/3/cc8166en/cc8166en.pdf',
-                date: 'Published: August 2024'
-            },
-            economicGrowth: {
-                source: 'African Development Bank Economic Outlook 2024',
-                url: 'https://www.afdb.org/en/documents/african-economic-outlook-2024',
-                date: 'Published: May 2024'
-            },
-            humanDevelopment: {
-                source: 'UNDP Human Development Report 2024',
-                url: 'https://hdr.undp.org/content/human-development-report-2024',
-                date: 'Published: March 2024'
-            }
-        };
-        
-        this.init();
-    }
+/* ==============================
+   Utility: DOM helpers
+============================== */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
-    init() {
-        this.setupEventListeners();
-        this.initializeCharts();
-        this.updateMetrics();
-        this.addDataCitations();
-    }
+/* ==============================
+   Controls & targets (existing IDs)
+============================== */
+const countrySelect = $('#country-selector');
+const indicatorSelect = $('#indicator-selector');
+const timeRangeSelect = $('#time-range');
+const chartTypeSelect = $('#chart-type');
+const btnUpdate = $('#update-charts');
 
-    setupEventListeners() {
-        const regionSelector = document.getElementById('region-selector');
-        const indicatorSelector = document.getElementById('indicator-selector');
-        const updateButton = document.getElementById('update-charts');
-        const trendsToggle = document.getElementById('trends-toggle');
+const showTrends = $('#show-trends');
+const showForecasts = $('#show-forecasts');
 
-        if (regionSelector) {
-            regionSelector.addEventListener('change', (e) => {
-                this.currentRegion = e.target.value;
-            });
-        }
+const mainChartTitle = $('#main-chart-title');
+const mainChartInfo  = $('#main-chart-info');
+const mainChartSrc   = $('#main-chart-source'); // chart-citation in main chart
 
-        if (indicatorSelector) {
-            indicatorSelector.addEventListener('change', (e) => {
-                this.currentIndicator = e.target.value;
-            });
-        }
+/* Secondary chart source lines (already in your HTML) */
+const comparisonSourceEl = document.querySelector('.charts-grid .chart-container:nth-child(1) .chart-citation .data-source');
+const regionalSourceEl   = document.querySelector('.charts-grid .chart-container:nth-child(2) .chart-citation .data-source');
+const tradeSourceEl      = document.querySelector('.charts-grid .chart-container:nth-child(3) .chart-citation .data-source');
+const devSourceEl        = document.querySelector('.charts-grid .chart-container:nth-child(4) .chart-citation .data-source');
 
-        if (updateButton) {
-            updateButton.addEventListener('click', () => {
-                this.updateCharts();
-            });
-        }
-
-        if (trendsToggle) {
-            trendsToggle.addEventListener('change', (e) => {
-                this.showTrends = e.target.checked;
-                this.updateCharts();
-            });
-        }
-    }
-
-    initializeCharts() {
-        this.createTrendChart();
-        this.createAfricanPovertyChart();
-        this.createAfricanFoodSecurityChart();
-        this.createAfricanFinancialInclusionChart();
-        this.createAfricanAgriculturalChart();
-        this.createEconomicGrowthChart();
-        this.createHumanDevelopmentChart();
-    }
-
-    createTrendChart() {
-        // Add trend chart HTML if not exists
-        const chartHtml = `
-            <div class="chart-container" id="trend-chart-container">
-                <div class="chart-header">
-                    <h3>African Development Trends</h3>
-                    <span class="chart-info">Historical trends for selected indicator</span>
-                </div>
-                <div class="chart-wrapper">
-                    <canvas id="trendChart"></canvas>
-                </div>
-                <div class="chart-insights">
-                    <div class="insight-item">
-                        <span class="insight-label">Trend Direction:</span>
-                        <span class="insight-value" id="trend-direction">Improving</span>
-                    </div>
-                    <div class="insight-item">
-                        <span class="insight-label">5-Year Change:</span>
-                        <span class="insight-value" id="trend-change">-9.7 points</span>
-                    </div>
-                </div>
-                <div class="chart-citation">
-                    <small class="data-source" id="trend-citation">Source: World Bank Africa Poverty Assessment 2024</small>
-                </div>
-            </div>
-        `;
-        
-        const chartsGrid = document.querySelector('.charts-grid');
-        if (chartsGrid && !document.getElementById('trendChart')) {
-            chartsGrid.insertAdjacentHTML('afterbegin', chartHtml);
-        }
-        
-        const ctx = document.getElementById('trendChart');
-        if (!ctx) return;
-
-        const trendData = this.data.poverty.africa.trend;
-        
-        this.charts.trend = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: trendData.labels,
-                datasets: [{
-                    label: 'Poverty Rate (%)',
-                    data: trendData.data,
-                    borderColor: this.colors.primary,
-                    backgroundColor: this.colors.primary + '20',
-                    borderWidth: 4,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 8,
-                    pointHoverRadius: 12,
-                    pointBackgroundColor: this.colors.primary,
-                    pointBorderColor: '#fff',
-                    pointBorderWidth: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: {
-                            font: {
-                                family: 'Inter, sans-serif',
-                                size: 12,
-                                weight: '600'
-                            },
-                            color: this.colors.primary
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0, 64, 133, 0.95)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: this.colors.primary,
-                        borderWidth: 1,
-                        cornerRadius: 12,
-                        displayColors: false,
-                        callbacks: {
-                            label: function(context) {
-                                return `Poverty Rate: ${context.parsed.y}%`;
-                            },
-                            afterLabel: function(context) {
-                                const trend = context.dataIndex > 0 ? 
-                                    (context.parsed.y < trendData.data[context.dataIndex - 1] ? 'Improving ↓' : 'Worsening ↑') : '';
-                                return trend;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        ticks: {
-                            font: {
-                                family: 'Inter, sans-serif',
-                                size: 11,
-                                weight: '500'
-                            },
-                            color: '#64748b'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#f1f5f9'
-                        },
-                        ticks: {
-                            font: {
-                                family: 'Inter, sans-serif',
-                                size: 11,
-                                weight: '500'
-                            },
-                            color: '#64748b',
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
-                },
-                animation: {
-                    duration: 1500,
-                    easing: 'easeInOutQuart'
-                }
-            }
-        });
-    }
-
-    // ... (keeping all other chart creation methods as before)
-
-    updateCharts() {
-        console.log(`Updating charts for region: ${this.currentRegion}, indicator: ${this.currentIndicator}`);
-        
-        // Show visible update animation
-        const updateButton = document.getElementById('update-charts');
-        if (updateButton) {
-            const originalText = updateButton.innerHTML;
-            updateButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating African Data...';
-            updateButton.disabled = true;
-            updateButton.style.opacity = '0.7';
-            
-            // Flash effect on charts
-            Object.keys(this.charts).forEach(chartKey => {
-                const chartContainer = document.querySelector(`#${chartKey}Chart`)?.closest('.chart-container');
-                if (chartContainer) {
-                    chartContainer.style.transform = 'scale(0.98)';
-                    chartContainer.style.opacity = '0.7';
-                    chartContainer.style.transition = 'all 0.3s ease';
-                }
-            });
-            
-            setTimeout(() => {
-                // Update trend chart based on current indicator
-                this.updateTrendChart();
-                
-                // Animate chart updates
-                Object.values(this.charts).forEach(chart => {
-                    if (chart) {
-                        chart.update('active');
-                    }
-                });
-                
-                // Reset containers
-                Object.keys(this.charts).forEach(chartKey => {
-                    const chartContainer = document.querySelector(`#${chartKey}Chart`)?.closest('.chart-container');
-                    if (chartContainer) {
-                        chartContainer.style.transform = 'scale(1)';
-                        chartContainer.style.opacity = '1';
-                    }
-                });
-                
-                // Update metrics and citations
-                this.updateMetrics();
-                this.updateCitations();
-                
-                updateButton.innerHTML = originalText;
-                updateButton.disabled = false;
-                updateButton.style.opacity = '1';
-            }, 1500);
-        }
-    }
-
-    updateTrendChart() {
-        const trendChart = this.charts.trend;
-        if (!trendChart) return;
-        
-        let trendData;
-        let label;
-        let citation;
-        
-        switch (this.currentIndicator) {
-            case 'poverty':
-                trendData = this.data.poverty.africa.trend;
-                label = 'Poverty Rate (%)';
-                citation = this.dataSources.poverty;
-                break;
-            case 'food-security':
-                trendData = this.data.foodSecurity.africa.trend;
-                label = 'Food Insecurity (%)';
-                citation = this.dataSources.foodSecurity;
-                trendChart.data.datasets = [{
-                    label: 'Moderate Food Insecurity',
-                    data: trendData.moderate,
-                    borderColor: this.colors.warning,
-                    backgroundColor: this.colors.warning + '20',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.4
-                }, {
-                    label: 'Severe Food Insecurity',
-                    data: trendData.severe,
-                    borderColor: this.colors.danger,
-                    backgroundColor: this.colors.danger + '20',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.4
-                }];
-                break;
-            case 'financial-inclusion':
-                trendData = this.data.financialInclusion.africa.trend;
-                label = 'Financial Inclusion (%)';
-                citation = this.dataSources.financialInclusion;
-                trendChart.data.datasets = [{
-                    label: 'Formal Financial Services',
-                    data: trendData.formal,
-                    borderColor: this.colors.primary,
-                    backgroundColor: this.colors.primary + '20',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.4
-                }, {
-                    label: 'Mobile Money',
-                    data: trendData.mobile,
-                    borderColor: this.colors.secondary,
-                    backgroundColor: this.colors.secondary + '20',
-                    borderWidth: 3,
-                    fill: false,
-                    tension: 0.4
-                }];
-                break;
-            default:
-                trendData = this.data.poverty.africa.trend;
-                label = 'Poverty Rate (%)';
-                citation = this.dataSources.poverty;
-        }
-        
-        trendChart.data.labels = trendData.labels;
-        if (this.currentIndicator === 'poverty') {
-            trendChart.data.datasets[0].data = trendData.data;
-            trendChart.data.datasets[0].label = label;
-        }
-        
-        // Update trend insights
-        const trendDirection = document.getElementById('trend-direction');
-        const trendChange = document.getElementById('trend-change');
-        const trendCitation = document.getElementById('trend-citation');
-        
-        if (trendDirection && trendData.data) {
-            const firstValue = trendData.data[0];
-            const lastValue = trendData.data[trendData.data.length - 1];
-            const change = lastValue - firstValue;
-            trendDirection.textContent = change < 0 ? 'Improving ↓' : 'Worsening ↑';
-            trendDirection.style.color = change < 0 ? '#10b981' : '#ef4444';
-            
-            if (trendChange) {
-                trendChange.textContent = `${change > 0 ? '+' : ''}${change.toFixed(1)} points`;
-                trendChange.style.color = change < 0 ? '#10b981' : '#ef4444';
-            }
-        }
-        
-        if (trendCitation && citation) {
-            trendCitation.textContent = `Source: ${citation.source} (${citation.date})`;
-        }
-        
-        trendChart.update('active');
-    }
-
-    updateMetrics() {
-        // Update metric values with animation
-        const metrics = document.querySelectorAll('.metric-value, .insight-value, .widget-value');
-        metrics.forEach(metric => {
-            metric.style.transform = 'scale(0.9)';
-            metric.style.opacity = '0.6';
-            
-            setTimeout(() => {
-                metric.style.transform = 'scale(1)';
-                metric.style.opacity = '1';
-                metric.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-            }, 200);
-        });
-    }
-
-    addDataCitations() {
-        // Add citations to existing charts if not present
-        const chartContainers = document.querySelectorAll('.chart-container');
-        chartContainers.forEach(container => {
-            if (!container.querySelector('.chart-citation')) {
-                const chartTitle = container.querySelector('h3')?.textContent.toLowerCase() || '';
-                let source = this.dataSources.poverty; // default
-                
-                if (chartTitle.includes('food')) source = this.dataSources.foodSecurity;
-                else if (chartTitle.includes('financial')) source = this.dataSources.financialInclusion;
-                else if (chartTitle.includes('agricultural')) source = this.dataSources.agricultural;
-                else if (chartTitle.includes('economic')) source = this.dataSources.economicGrowth;
-                else if (chartTitle.includes('human')) source = this.dataSources.humanDevelopment;
-                
-                const citationDiv = document.createElement('div');
-                citationDiv.className = 'chart-citation';
-                citationDiv.innerHTML = `<small class="data-source">Source: ${source.source} (${source.date})</small>`;
-                
-                const insights = container.querySelector('.chart-insights');
-                if (insights) {
-                    insights.insertAdjacentElement('afterend', citationDiv);
-                } else {
-                    container.appendChild(citationDiv);
-                }
-            }
-        });
-    }
-
-    updateCitations() {
-        const citations = document.querySelectorAll('.data-source');
-        citations.forEach(citation => {
-            citation.style.opacity = '0.6';
-            setTimeout(() => {
-                citation.style.opacity = '1';
-                citation.style.transition = 'opacity 0.3s ease';
-            }, 300);
-        });
-    }
-
-    // Export functionality remains the same...
-    exportAfricanData(format = 'csv') {
-        const africanData = {
-            poverty: this.data.poverty.africa,
-            foodSecurity: this.data.foodSecurity.africa,
-            financialInclusion: this.data.financialInclusion.africa,
-            agriculture: this.data.agricultural.africa,
-            economicGrowth: this.data.economicGrowth.africa,
-            humanDevelopment: this.data.humanDevelopment.africa
-        };
-        
-        if (format === 'csv') {
-            this.exportCSV(africanData);
-        } else if (format === 'json') {
-            this.exportJSON(africanData);
-        }
-    }
-
-    exportCSV(data) {
-        let csv = 'Country,Indicator,Value,Year,Source\n';
-        data.poverty.countries.forEach((country, index) => {
-            csv += `${country},Poverty Rate,${data.poverty.rates2023[index]},2023,"${this.dataSources.poverty.source}"\n`;
-        });
-        
-        const blob = new Blob([csv], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'african_development_indicators.csv';
-        link.click();
-    }
-
-    exportJSON(data) {
-        const exportData = {
-            ...data,
-            metadata: {
-                sources: this.dataSources,
-                generatedDate: new Date().toISOString(),
-                analyst: 'Patrice Mirindi - Senior Data Analyst'
-            }
-        };
-        
-        const jsonData = JSON.stringify(exportData, null, 2);
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'african_development_indicators.json';
-        link.click();
-    }
+/* ==============================
+   Country code helpers
+   - Your <option> values are ISO2 (e.g., "CA"), which World Bank supports.
+============================== */
+function getSelectedCountries() {
+  return Array.from(countrySelect.selectedOptions).map(o => o.value);
 }
 
-// Initialize enhanced African-focused dashboard
-document.addEventListener('DOMContentLoaded', function() {
-    // Add enhanced CSS for citations and updates
-    const style = document.createElement('style');
-    style.textContent = `
-        .chart-citation {
-            margin-top: 1rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid #e2e8f0;
-            text-align: center;
+/* ==============================
+   Time range parsing
+============================== */
+function parseTimeRange(val) {
+  // e.g., "2015-2024"
+  const m = /^(\d{4})-(\d{4})$/.exec(val);
+  if (!m) return { start: 2015, end: 2024 };
+  return { start: +m[1], end: +m[2] };
+}
+
+/* ==============================
+   Dataset registry (source adapters)
+   Minimal viable connections:
+   - World Bank (robust, keyless, JSON)
+   - Derived (computed, e.g., Trade Balance)
+   Placeholders for UNDP/UNESCO/IMF/WHO/FAOSTAT (connect later).
+============================== */
+const Registry = {
+  worldbank: {
+    label: 'World Bank Open Data',
+    // indicatorCode example: "NY.GDP.MKTP.KD.ZG"
+    fetchSeries: async ({ indicatorCode, countries, startYear, endYear }) => {
+      // WB paginates; we fetch per-country for clarity & stable error handling
+      const series = {};
+      for (const iso2 of countries) {
+        const url = `https://api.worldbank.org/v2/country/${encodeURIComponent(iso2)}/indicator/${encodeURIComponent(indicatorCode)}?date=${startYear}:${endYear}&format=json&per_page=2000`;
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`World Bank fetch failed: ${iso2} ${indicatorCode}`);
+        const data = await resp.json();
+        // data[1] holds observations, data[0] holds meta (lastupdated)
+        const lastUpdated = (data?.[0]?.lastupdated) ? new Date(data[0].lastupdated).toISOString().slice(0,10) : '';
+        const rows = (data?.[1] || [])
+          .filter(d => d.value !== null && d.date) // values exist
+          .map(d => ({ year: +d.date, value: +d.value }));
+        // Sort ascending by year
+        rows.sort((a,b) => a.year - b.year);
+        series[iso2] = { points: rows, lastUpdated, source: 'World Bank Open Data', sourceUrl: 'https://data.worldbank.org' };
+      }
+      return series;
+    }
+  },
+
+  derived: {
+    label: 'Derived (from other sources)',
+    // For trade-balance, compute Exports - Imports using World Bank codes
+    fetchSeries: async ({ indicatorCode, countries, startYear, endYear }) => {
+      if (indicatorCode !== 'NE.EXP.GNFS.CD-NE.IMP.GNFS.CD') {
+        throw new Error('Unknown derived indicator');
+      }
+      // Pull both series from WB, then subtract
+      const exp = await Registry.worldbank.fetchSeries({ indicatorCode: 'NE.EXP.GNFS.CD', countries, startYear, endYear });
+      const imp = await Registry.worldbank.fetchSeries({ indicatorCode: 'NE.IMP.GNFS.CD', countries, startYear, endYear });
+
+      const series = {};
+      for (const iso2 of countries) {
+        const map = new Map();
+        (exp[iso2]?.points || []).forEach(p => map.set(p.year, { year: p.year, exp: p.value, imp: null }));
+        (imp[iso2]?.points || []).forEach(p => {
+          const m = map.get(p.year) || { year: p.year, exp: null, imp: null };
+          m.imp = p.value;
+          map.set(p.year, m);
+        });
+        const points = Array.from(map.values())
+          .filter(r => r.exp != null && r.imp != null)
+          .map(r => ({ year: r.year, value: r.exp - r.imp }));
+        points.sort((a,b) => a.year - b.year);
+
+        // Build source line combining both WB series
+        const lastUpdated = [exp[iso2]?.lastUpdated, imp[iso2]?.lastUpdated].filter(Boolean).sort().pop() || '';
+        const source = 'World Bank Open Data (Exports & Imports)';
+        const sourceUrl = 'https://data.worldbank.org';
+        series[iso2] = { points, lastUpdated, source, sourceUrl };
+      }
+      return series;
+    }
+  },
+
+  // Placeholders for specialist APIs. They render “Source pending” until keys/routes added.
+  undp: {
+    label: 'UNDP Human Development Data',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect UNDP API for HDI/GDI. Showing placeholder.' };
+    }
+  },
+  unesco: {
+    label: 'UNESCO Institute for Statistics',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect UNESCO UIS API for education index. Showing placeholder.' };
+    }
+  },
+  imf: {
+    label: 'IMF SDMX (WEO/IFS)',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect IMF SDMX JSON (e.g., IFS/EXR). Showing placeholder.' };
+    }
+  },
+  who: {
+    label: 'WHO Global Health Observatory',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect WHO GHO API (indicator codes like UHC_SER_1). Showing placeholder.' };
+    }
+  },
+  faostat: {
+    label: 'FAOSTAT',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect FAOSTAT API for food security. Showing placeholder.' };
+    }
+  },
+  // UN Comtrade requires throttling/API key for heavy use. Hook later if needed.
+  comtrade: {
+    label: 'UN Comtrade',
+    fetchSeries: async () => {
+      return { _pending: true, _note: 'Connect UN Comtrade for detailed HS trade flows. Showing placeholder.' };
+    }
+  }
+};
+
+/* ==============================
+   Indicator resolver
+   - Reads data-source & data-code if present
+   - Defaults to World Bank mapping for common indicators
+============================== */
+function resolveIndicator() {
+  const opt = indicatorSelect.selectedOptions[0];
+  const id = opt?.value || 'gdp-growth';
+  const src = opt?.dataset?.source;
+  const code = opt?.dataset?.code;
+
+  // Fallback mappings (if data-* not present)
+  const defaults = {
+    'gdp-growth':       { source: 'worldbank', code: 'NY.GDP.MKTP.KD.ZG', label: 'GDP Growth Rate (%)' },
+    'inflation':        { source: 'worldbank', code: 'FP.CPI.TOTL.ZG',    label: 'Inflation Rate (%)' },
+    'unemployment':     { source: 'worldbank', code: 'SL.UEM.TOTL.ZS',    label: 'Unemployment Rate (%) of labor force' },
+    'fdi':              { source: 'worldbank', code: 'BX.KLT.DINV.WD.GD.ZS', label: 'FDI, net inflows (% of GDP)' },
+    'debt-gdp':         { source: 'worldbank', code: 'GC.DOD.TOTL.GD.ZS', label: 'Government debt (% of GDP)' },
+    'poverty':          { source: 'worldbank', code: 'SI.POV.DDAY',       label: 'Poverty headcount ratio ($2.15/day, % of pop.)' },
+    'life-expectancy':  { source: 'worldbank', code: 'SP.DYN.LE00.IN',    label: 'Life expectancy at birth (years)' },
+    'exports':          { source: 'worldbank', code: 'NE.EXP.GNFS.CD',    label: 'Exports of goods & services (current US$)' },
+    'imports':          { source: 'worldbank', code: 'NE.IMP.GNFS.CD',    label: 'Imports of goods & services (current US$)' },
+    'trade-balance':    { source: 'derived',   code: 'NE.EXP.GNFS.CD-NE.IMP.GNFS.CD', label: 'Trade balance (US$)' },
+    'internet-users':   { source: 'worldbank', code: 'IT.NET.USER.ZS',    label: 'Individuals using the Internet (% of pop.)' },
+    'mobile-subscriptions': { source: 'worldbank', code: 'IT.CEL.SETS.P2',label: 'Mobile cellular subscriptions (per 100 people)' },
+    // Specialized (pending live connectors unless data-* present)
+    'hdi':              { source: 'undp',     code: 'HDI',                label: 'Human Development Index' },
+    'education':        { source: 'unesco',   code: 'EDU_INDEX',          label: 'Education Index' },
+    'gender-equality':  { source: 'undp',     code: 'GDI',                label: 'Gender Development Index' },
+    'financial-inclusion': { source: 'worldbank', code: 'FX.OWN.TOTL.ZS', label: 'Account ownership (% age 15+)' },
+    'exchange-rate':    { source: 'imf',      code: 'EXR.A',              label: 'Exchange rate (index/stability)' },
+    'healthcare':       { source: 'who',      code: 'UHC_SER_1',          label: 'UHC service coverage index' },
+    'food-security':    { source: 'faostat',  code: 'FS.FIES.MD',         label: 'Food insecurity (moderate/severe, %)' },
+  };
+
+  const base = defaults[id] || defaults['gdp-growth'];
+  return {
+    id,
+    label: base.label,
+    source: src || base.source,
+    code: code || base.code
+  };
+}
+
+/* ==============================
+   Chart.js setup (reuses existing canvases)
+============================== */
+let mainTrendChart, comparisonChart, regionalChart, tradeChart, developmentChart;
+
+function lineOrBar(type) {
+  if (['line','bar','scatter','radar'].includes(type)) return type;
+  return 'line';
+}
+
+function buildDataset(label, points) {
+  // Chart.js expects [{x: date, y: value}] for time series
+  return points.map(p => ({ x: new Date(`${p.year}-01-01`), y: p.value }));
+}
+
+function ensureChart(ctx, config) {
+  if (!ctx._chart) {
+    ctx._chart = new Chart(ctx, config);
+  } else {
+    ctx._chart.config.data = config.data;
+    ctx._chart.config.options = config.options;
+    ctx._chart.update();
+  }
+  return ctx._chart;
+}
+
+/* ==============================
+   Formatting helpers
+============================== */
+const fmt = {
+  number: (n) => {
+    if (Math.abs(n) >= 1e12) return (n/1e12).toFixed(2) + 'T';
+    if (Math.abs(n) >= 1e9)  return (n/1e9).toFixed(2)  + 'B';
+    if (Math.abs(n) >= 1e6)  return (n/1e6).toFixed(2)  + 'M';
+    if (Math.abs(n) >= 1e3)  return (n/1e3).toFixed(2)  + 'K';
+    return (Math.round(n*100)/100).toString();
+  },
+  percent: (n) => `${(Math.round(n*10)/10).toFixed(1)}%`,
+  dateISO: (d) => (d ? new Date(d).toISOString().slice(0,10) : '')
+};
+
+/* ==============================
+   Source line writer (per chart)
+============================== */
+function writeSource(el, sourceLabel, url, lastUpdated) {
+  if (!el) return;
+  const dateTxt = lastUpdated ? ` (Last updated: ${lastUpdated})` : '';
+  el.textContent = `Source: ${sourceLabel}${dateTxt}`;
+  if (el.id === 'main-chart-source') {
+    // keep your original wording style for main chart
+    el.textContent = `${sourceLabel}${dateTxt ? ' — ' + dateTxt : ''}`;
+  }
+}
+
+/* ==============================
+   Data pipeline
+============================== */
+async function loadAndRender() {
+  const { start, end } = parseTimeRange(timeRangeSelect.value);
+  const { source, code, label, id } = resolveIndicator();
+  const countries = getSelectedCountries();
+  const chartKind = lineOrBar(chartTypeSelect.value);
+
+  // Title
+  mainChartTitle.textContent = `Global ${label} Trends`;
+  mainChartInfo.textContent = `Selected countries • ${start}–${end}`;
+
+  // Fetch series via registry
+  let series;
+  try {
+    const adapter = Registry[source];
+    if (!adapter) throw new Error(`Unknown source adapter: ${source}`);
+    series = await adapter.fetchSeries({ indicatorCode: code, countries, startYear: start, endYear: end });
+
+    // If placeholder
+    if (series?._pending) {
+      writeSource(mainChartSrc, `${adapter.label} (connect API)`, '', '');
+      renderPlaceholderCharts(label, adapter.label, series._note);
+      return;
+    }
+  } catch (e) {
+    console.error(e);
+    writeSource(mainChartSrc, 'Data source error', '', '');
+    renderErrorCharts(`Could not load ${label}.`);
+    return;
+  }
+
+  // Prepare datasets for main trend chart
+  const mainCtx = document.getElementById('mainTrendChart').getContext('2d');
+  const datasets = countries.map(iso2 => {
+    const s = series[iso2];
+    const points = s?.points || [];
+    return {
+      label: iso2,
+      data: buildDataset(iso2, points),
+      borderWidth: 2,
+      tension: showTrends.checked ? 0.3 : 0,  // trend line smoothing toggle
+      fill: false,
+      pointRadius: 0
+    };
+  });
+
+  // Compute lastUpdated union + write source line
+  const latestUpdated = countries
+    .map(c => series[c]?.lastUpdated)
+    .filter(Boolean)
+    .sort()
+    .pop() || '';
+  const sourceLabel = countries.map(c => series[c]?.source).filter(Boolean)[0] || Registry[source].label;
+  const sourceUrl   = countries.map(c => series[c]?.sourceUrl).filter(Boolean)[0] || '';
+  writeSource(mainChartSrc, sourceLabel, sourceUrl, latestUpdated);
+
+  // Build main chart
+  ensureChart(mainCtx, {
+    type: chartKind === 'scatter' ? 'scatter' : chartKind,
+    data: { datasets },
+    options: {
+      responsive: true,
+      parsing: false,
+      scales: {
+        x: { type: 'time', time: { unit: 'year' } },
+        y: { beginAtZero: false }
+      },
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            title: (items) => {
+              const d = items?.[0]?.parsed?.x;
+              return d ? new Date(d).getFullYear().toString() : '';
+            },
+            label: (item) => `${item.dataset.label}: ${fmt.number(item.parsed.y)}`
+          }
         }
-        
-        .data-source {
-            color: #64748b;
-            font-size: 0.75rem;
-            font-style: italic;
-            font-weight: 500;
-        }
-        
-        .data-source:hover {
-            color: #004085;
-            cursor: help;
-        }
-        
-        #update-charts {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #update-charts:disabled {
-            cursor: wait;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    window.analyticsDashboard = new AnalyticsDashboard();
-    console.log('Enhanced African Analytics Dashboard with Trends initialized successfully');
+      }
+    }
+  });
+
+  // Secondary charts (reuse same data for quick comparisons)
+  renderComparison(series, countries, label, sourceLabel, latestUpdated);
+  renderRegional(series, countries, label, sourceLabel, latestUpdated);
+  renderTrade(series, countries, label, sourceLabel, latestUpdated);
+  renderDevelopment(series, countries, label, sourceLabel, latestUpdated);
+
+  // Insights (simple examples)
+  computeAndFillInsights(series, countries);
+}
+
+/* ==============================
+   Secondary charts
+============================== */
+function pickLatestValue(points) {
+  if (!points?.length) return null;
+  return points[points.length - 1]; // last chronologically (we sort asc)
+}
+
+function renderComparison(series, countries, label, sourceLabel, lastUpdated) {
+  const ctx = document.getElementById('comparisonChart').getContext('2d');
+  const rows = countries.map(c => {
+    const p = pickLatestValue(series[c]?.points);
+    return { country: c, value: p ? p.value : null };
+  }).filter(r => r.value != null);
+
+  const data = {
+    labels: rows.map(r => r.country),
+    datasets: [{ label: `Latest ${label}`, data: rows.map(r => r.value) }]
+  };
+
+  ensureChart(ctx, {
+    type: 'bar',
+    data,
+    options: { responsive: true, plugins: { legend: { display: false } } }
+  });
+  writeSource(comparisonSourceEl, sourceLabel, '', lastUpdated);
+}
+
+function renderRegional(series, countries, label, sourceLabel, lastUpdated) {
+  // Simple “region” placeholder: compute average of selected countries as “region”
+  // You can replace this with a real region mapping later without UI changes.
+  const ctx = document.getElementById('regionalChart').getContext('2d');
+  const avgs = [];
+  for (const c of countries) {
+    const arr = series[c]?.points?.map(p => p.value) || [];
+    if (arr.length) avgs.push(arr.reduce((a,b)=>a+b,0)/arr.length);
+  }
+  const pseudoRegionAvg = avgs.length ? (avgs.reduce((a,b)=>a+b,0)/avgs.length) : null;
+
+  ensureChart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Pseudo-Region Avg'],
+      datasets: [{ label: `Regional avg of selected (${label})`, data: [pseudoRegionAvg ?? 0] }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+  });
+  writeSource(regionalSourceEl, sourceLabel, '', lastUpdated);
+}
+
+function renderTrade(series, countries, label, sourceLabel, lastUpdated) {
+  const ctx = document.getElementById('tradeChart').getContext('2d');
+  // If current indicator is already trade-balance, reuse; else compute simple export-import if available
+  // For simplicity we mirror comparison chart’s latest values
+  const rows = countries.map(c => {
+    const p = pickLatestValue(series[c]?.points);
+    return { country: c, value: p ? p.value : null };
+  }).filter(r => r.value != null);
+
+  ensureChart(ctx, {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.country),
+      datasets: [{ label: `Latest ${label}`, data: rows.map(r => r.value) }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+  });
+  writeSource(tradeSourceEl, sourceLabel, '', lastUpdated);
+}
+
+function renderDevelopment(series, countries, label, sourceLabel, lastUpdated) {
+  const ctx = document.getElementById('developmentChart').getContext('2d');
+  // Show last available value by country as a scatter to suggest progress
+  const pts = countries.map(c => {
+    const p = pickLatestValue(series[c]?.points);
+    return p ? { x: new Date(`${p.year}-01-01`), y: p.value, label: c } : null;
+  }).filter(Boolean);
+
+  ensureChart(ctx, {
+    type: 'scatter',
+    data: { datasets: [{ label: `Latest ${label}`, data: pts }] },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      scales: { x: { type: 'time', time: { unit: 'year' } } }
+    }
+  });
+  writeSource(devSourceEl, sourceLabel, '', lastUpdated);
+}
+
+/* ==============================
+   Insights fillers (simple)
+============================== */
+function computeAndFillInsights(series, countries) {
+  const best = { c: null, v: -Infinity };
+  let sum = 0, n = 0;
+
+  for (const c of countries) {
+    const last = pickLatestValue(series[c]?.points);
+    if (last) {
+      if (last.value > best.v) { best.c = c; best.v = last.value; }
+      sum += last.value; n++;
+    }
+  }
+  const avg = n ? sum / n : null;
+
+  const bestEl = $('#best-performer');
+  const avgEl  = $('#average-growth');
+  const trendEl = $('#trend-direction');
+
+  if (bestEl) bestEl.textContent = best.c ? `${best.c} ${fmt.number(best.v)}` : '—';
+  if (avgEl)  avgEl.textContent  = avg != null ? fmt.number(avg) : '—';
+  if (trendEl) trendEl.textContent = '—'; // placeholder; add slope calc later if desired
+}
+
+/* ==============================
+   Placeholder & error renderers
+============================== */
+function renderPlaceholderCharts(label, sourceName, note) {
+  const msg = `${label}: ${sourceName} connection pending. ${note || ''}`;
+  [ 'mainTrendChart', 'comparisonChart', 'regionalChart', 'tradeChart', 'developmentChart' ]
+    .forEach(id => {
+      const ctx = document.getElementById(id).getContext('2d');
+      ensureChart(ctx, {
+        type: 'bar',
+        data: { labels: [label], datasets: [{ label: 'Pending', data: [0] }] },
+        options: { plugins: { legend: { display: false }, title: { display: true, text: msg } } }
+      });
+    });
+}
+
+function renderErrorCharts(msg) {
+  [ 'mainTrendChart', 'comparisonChart', 'regionalChart', 'tradeChart', 'developmentChart' ]
+    .forEach(id => {
+      const ctx = document.getElementById(id).getContext('2d');
+      ensureChart(ctx, {
+        type: 'bar',
+        data: { labels: ['Error'], datasets: [{ label: 'Error', data: [0] }] },
+        options: { plugins: { legend: { display: false }, title: { display: true, text: msg } } }
+      });
+    });
+}
+
+/* ==============================
+   Export buttons (CSV / JSON / images)
+============================== */
+function currentIndicatorSnapshot() {
+  const { start, end } = parseTimeRange(timeRangeSelect.value);
+  const { source, code, label } = resolveIndicator();
+  const countries = getSelectedCountries();
+  return { start, end, source, code, label, countries, when: new Date().toISOString() };
+}
+
+function exportJSON(data) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'global_analytics.json';
+  a.href = url; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportCSV(rows) {
+  const header = Object.keys(rows[0] || { country:'', year:'', value:'' }).join(',');
+  const csv = [header, ...rows.map(r => [r.country, r.year, r.value].join(','))].join('\n');
+  const blob = new Blob([csv], { type:'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.download = 'global_analytics.csv';
+  a.href = url; a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function gatherFlatRows() {
+  const { start, end } = parseTimeRange(timeRangeSelect.value);
+  const { source, code } = resolveIndicator();
+  const countries = getSelectedCountries();
+  const adapter = Registry[source];
+  if (!adapter) return [];
+  const series = await adapter.fetchSeries({ indicatorCode: code, countries, startYear: start, endYear: end });
+  const out = [];
+  for (const c of countries) {
+    (series[c]?.points || []).forEach(p => out.push({ country: c, year: p.year, value: p.value }));
+  }
+  return out;
+}
+
+$('#export-json')?.addEventListener('click', async () => {
+  const snap = currentIndicatorSnapshot();
+  const rows = await gatherFlatRows();
+  exportJSON({ meta: snap, rows });
 });
+
+$('#export-csv')?.addEventListener('click', async () => {
+  const rows = await gatherFlatRows();
+  exportCSV(rows);
+});
+
+$('#export-charts')?.addEventListener('click', () => {
+  // Save main chart as PNG
+  const c = document.getElementById('mainTrendChart');
+  const a = document.createElement('a');
+  a.download = 'main_chart.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+});
+
+/* ==============================
+   Events
+============================== */
+btnUpdate?.addEventListener('click', loadAndRender);
+[indicatorSelect, timeRangeSelect, chartTypeSelect, countrySelect]?.forEach(el => {
+  el?.addEventListener('change', () => loadAndRender());
+});
+showTrends?.addEventListener('change', () => loadAndRender());
+showForecasts?.addEventListener('change', () => {
+  // Forecasting can be added (ARIMA client-side or serverless); for now no-op
+  loadAndRender();
+});
+
+/* ==============================
+   Initial render
+============================== */
+document.addEventListener('DOMContentLoaded', () => {
+  // Kick off with the defaults visible on your page
+  loadAndRender();
+});
+
+/* ==============================
+   Notes on advanced sources (quick how-to)
+   - IMF SDMX (IFS/WEO): add your endpoint + series code in Registry.imf.fetchSeries
+   - WHO GHO: use https://ghoapi.azureedge.net/ghoapi/api/Indicator?$filter=IndicatorCode eq 'UHC_SER_1'
+   - FAOSTAT: https://fenixservices.fao.org/faostat/api/v1/en/… (requires exact domain + params)
+   - UNDP HDI: hosted files/API; a small serverless proxy may be required to align country codes
+   - UN Comtrade: https://comtradeapi.un.org/ (register free key; respect rate limits)
+   This file is design-safe: you can enhance adapters later without touching HTML/CSS.
+============================== */
