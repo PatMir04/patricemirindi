@@ -14,6 +14,7 @@ class SuperIntelligentChatbot {
         this.questionCount = 0;
         this.lastQuestionTime = Date.now();
         this.userLanguage = 'en'; // Default to English
+        this.initialized = false;
         
         // COMPLETE KNOWLEDGE BASE - ALL COUNTRIES & EXPERTISE
         this.profile = {
@@ -99,14 +100,35 @@ class SuperIntelligentChatbot {
             success_rate: "100%"
         };
         
+        // Initialize with error handling
         this.init();
     }
 
     init() {
-        this.createChatWidget();
-        this.attachEventListeners();
-        this.showGreeting();
-        this.startConversation();
+        try {
+            this.createChatWidget();
+            this.attachEventListeners();
+            this.showGreeting();
+            this.startConversation();
+            this.initialized = true;
+            console.log('✅ Chatbot initialized successfully');
+        } catch (error) {
+            console.error('❌ Chatbot initialization failed:', error);
+            this.showFallbackContact();
+        }
+    }
+
+    showFallbackContact() {
+        // Show a simple fallback if chatbot fails to load
+        const fallbackHTML = `
+            <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+                <a href="mailto:patricemirindi@gmail.com" 
+                   style="background: #004085; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-family: Arial, sans-serif; box-shadow: 0 4px 12px rgba(0,64,133,0.3);">
+                   📧 Contact Patrice
+                </a>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', fallbackHTML);
     }
 
     createChatWidget() {
@@ -114,7 +136,7 @@ class SuperIntelligentChatbot {
             <div id="super-chatbot" class="super-chatbot-widget">
                 <!-- Chat Button with PROFILE PHOTO -->
                 <div id="chat-button" class="chat-button">
-                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" class="profile-button-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="./assets/img/patricemirindi.jpg" alt="Patrice Mirindi" class="profile-button-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-button" style="display: none;">
                         <i class="fas fa-user"></i>
                         <div class="pm-indicator">PM</div>
@@ -126,7 +148,7 @@ class SuperIntelligentChatbot {
                 <div id="chat-window" class="chat-window">
                     <div class="chat-header">
                         <div class="chat-avatar">
-                            <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzAwNDA4NSIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UE08L3RleHQ+PC9zdmc+'">
+                            <img src="./assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzAwNDA4NSIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UE08L3RleHQ+PC9zdmc+'">
                         </div>
                         <div class="chat-info">
                             <h4>Patrice Mirindi <span class="ai-badge">AI Assistant</span></h4>
@@ -694,55 +716,78 @@ class SuperIntelligentChatbot {
     }
 
     attachEventListeners() {
-        const chatButton = document.getElementById('chat-button');
-        const chatClose = document.getElementById('chat-close');
-        const chatMinimize = document.getElementById('chat-minimize');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        const suggestionBtns = document.querySelectorAll('.suggestion-btn');
-        
-        chatButton.addEventListener('click', () => this.toggleChat());
-        chatClose.addEventListener('click', () => this.closeChat());
-        chatMinimize.addEventListener('click', () => this.minimizeChat());
-        chatSend.addEventListener('click', () => this.sendMessage());
-        
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.sendMessage();
+        try {
+            const chatButton = document.getElementById('chat-button');
+            const chatClose = document.getElementById('chat-close');
+            const chatMinimize = document.getElementById('chat-minimize');
+            const chatInput = document.getElementById('chat-input');
+            const chatSend = document.getElementById('chat-send');
+            const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+            
+            if (!chatButton || !chatInput || !chatSend) {
+                throw new Error('Required chat elements not found');
             }
-        });
-        
-        suggestionBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const message = btn.getAttribute('data-message');
-                this.handleUserMessage(message);
+            
+            chatButton.addEventListener('click', () => this.toggleChat());
+            if (chatClose) chatClose.addEventListener('click', () => this.closeChat());
+            if (chatMinimize) chatMinimize.addEventListener('click', () => this.minimizeChat());
+            chatSend.addEventListener('click', () => this.sendMessage());
+            
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.sendMessage();
+                }
             });
-        });
+            
+            suggestionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const message = btn.getAttribute('data-message');
+                    if (message) {
+                        this.handleUserMessage(message);
+                    }
+                });
+            });
+        } catch (error) {
+            console.error('Error attaching event listeners:', error);
+        }
     }
 
     toggleChat() {
-        const chatWindow = document.getElementById('chat-window');
-        const chatBadge = document.querySelector('.chat-badge');
-        
-        if (this.isOpen) {
-            this.closeChat();
-        } else {
-            chatWindow.classList.add('open');
-            chatBadge.style.display = 'none';
-            this.isOpen = true;
+        try {
+            const chatWindow = document.getElementById('chat-window');
+            const chatBadge = document.querySelector('.chat-badge');
             
-            setTimeout(() => {
-                document.getElementById('chat-input').focus();
-            }, 500);
+            if (!chatWindow) return;
+            
+            if (this.isOpen) {
+                this.closeChat();
+            } else {
+                chatWindow.classList.add('open');
+                if (chatBadge) chatBadge.style.display = 'none';
+                this.isOpen = true;
+                
+                setTimeout(() => {
+                    const input = document.getElementById('chat-input');
+                    if (input) input.focus();
+                }, 500);
+            }
+        } catch (error) {
+            console.error('Error toggling chat:', error);
         }
     }
 
     closeChat() {
-        const chatWindow = document.getElementById('chat-window');
-        chatWindow.classList.remove('open');
-        this.isOpen = false;
-        this.endConversation();
+        try {
+            const chatWindow = document.getElementById('chat-window');
+            if (chatWindow) {
+                chatWindow.classList.remove('open');
+            }
+            this.isOpen = false;
+            this.endConversation();
+        } catch (error) {
+            console.error('Error closing chat:', error);
+        }
     }
     
     minimizeChat() {
@@ -751,105 +796,482 @@ class SuperIntelligentChatbot {
 
     showGreeting() {
         setTimeout(() => {
-            const greeting = "👋 Hi! I'm Patrice's AI assistant. I can answer questions about his background, projects, expertise, or current economic data. What would you like to know?"
+            const greeting = "👋 Hi! I'm Patrice's AI assistant. I can answer questions about his background, projects, expertise, or current economic data. What would you like to know?";
             this.addMessage(greeting, 'bot');
         }, 1000);
     }
 
     sendMessage() {
-        const input = document.getElementById('chat-input');
-        const message = input.value.trim();
-        
-        if (message) {
-            this.handleUserMessage(message);
-            input.value = '';
+        try {
+            const input = document.getElementById('chat-input');
+            if (!input) return;
+            
+            const message = input.value.trim();
+            
+            if (message) {
+                this.handleUserMessage(message);
+                input.value = '';
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
         }
     }
 
     handleUserMessage(message) {
-        this.addMessage(message, 'user');
-        
-        // Detect language from user message
-        this.userLanguage = this.detectLanguage(message);
-        
-        // Count questions for conversion trigger
-        if (this.isQuestion(message)) {
-            this.questionCount++;
-            this.lastQuestionTime = Date.now();
-        }
-        
-        // Reset counter if idle for 5 minutes
-        if (Date.now() - this.lastQuestionTime > 300000) {
-            this.questionCount = 0;
-        }
-        
-        // Check for 10-question conversion trigger
-        if (this.questionCount >= 10) {
-            setTimeout(() => {
-                this.showConversionMessage();
-                this.questionCount = 0; // Reset after showing conversion
-            }, 1500);
-        }
-        
-        // Save to conversation
-        if (this.currentConversationId) {
-            this.conversations[this.currentConversationId].messages.push({
-                type: 'user',
-                content: message,
-                timestamp: new Date().toISOString()
-            });
-        }
-        
-        // Show typing indicator
-        this.showTypingIndicator();
-        
-        // Generate response after realistic delay
-        setTimeout(() => {
-            this.hideTypingIndicator();
-            const response = this.generateSmartResponse(message);
-            this.addMessage(response, 'bot');
+        try {
+            this.addMessage(message, 'user');
             
-            // Save bot response to conversation
-            if (this.currentConversationId) {
-                this.conversations[this.currentConversationId].messages.push({
-                    type: 'bot',
-                    content: response,
-                    timestamp: new Date().toISOString()
-                });
-                this.saveConversations();
+            // Detect language from user message
+            this.userLanguage = this.detectLanguage(message);
+            
+            // Count questions for conversion trigger
+            if (this.isQuestion(message)) {
+                this.questionCount++;
+                this.lastQuestionTime = Date.now();
             }
             
-        }, 1200 + Math.random() * 800);
+            // Reset counter if idle for 5 minutes
+            if (Date.now() - this.lastQuestionTime > 300000) {
+                this.questionCount = 0;
+            }
+            
+            // Check for 10-question conversion trigger
+            if (this.questionCount >= 10) {
+                setTimeout(() => {
+                    this.showConversionMessage();
+                    this.questionCount = 0; // Reset after showing conversion
+                }, 1500);
+            }
+            
+            // Save to conversation
+            if (this.currentConversationId) {
+                this.conversations[this.currentConversationId].messages.push({
+                    type: 'user',
+                    content: message,
+                    timestamp: new Date().toISOString()
+                });
+            }
+            
+            // Show typing indicator
+            this.showTypingIndicator();
+            
+            // Generate response after realistic delay
+            setTimeout(() => {
+                this.hideTypingIndicator();
+                const response = this.generateSmartResponse(message);
+                this.addMessage(response, 'bot');
+                
+                // Save bot response to conversation
+                if (this.currentConversationId) {
+                    this.conversations[this.currentConversationId].messages.push({
+                        type: 'bot',
+                        content: response,
+                        timestamp: new Date().toISOString()
+                    });
+                    this.saveConversations();
+                }
+                
+            }, 1200 + Math.random() * 800);
+        } catch (error) {
+            console.error('Error handling user message:', error);
+            this.addMessage('Sorry, I encountered an error. Please try again or contact Patrice directly at patricemirindi@gmail.com', 'bot');
+        }
     }
     
     // ADVANCED LANGUAGE DETECTION
     detectLanguage(message) {
-        const frenchWords = ['bonjour', 'salut', 'bonsoir', 'comment', 'quelles', 'sont', 'ses', 'où', 'vient', 'patrice', 'disponible', 'est-il', 'compétences', 'projets', 'contacter', 'dans', 'quels', 'pays', 'travaillé'];
-        const wordCount = message.toLowerCase().split(' ').length;
-        const frenchMatches = frenchWords.filter(word => message.toLowerCase().includes(word)).length;
-        
-        // If more than 20% of words are French, respond in French
-        return (frenchMatches / wordCount) > 0.2 ? 'fr' : 'en';
+        try {
+            const frenchWords = ['bonjour', 'salut', 'bonsoir', 'comment', 'quelles', 'sont', 'ses', 'où', 'vient', 'patrice', 'disponible', 'est-il', 'compétences', 'projets', 'contacter', 'dans', 'quels', 'pays', 'travaillé'];
+            const wordCount = message.toLowerCase().split(' ').length;
+            const frenchMatches = frenchWords.filter(word => message.toLowerCase().includes(word)).length;
+            
+            // If more than 20% of words are French, respond in French
+            return (frenchMatches / wordCount) > 0.2 ? 'fr' : 'en';
+        } catch (error) {
+            return 'en'; // Default to English on error
+        }
     }
     
     isQuestion(message) {
-        const questionWords = ['what', 'where', 'when', 'why', 'how', 'which', 'who', 'is', 'are', 'can', 'do', 'does', 'will', 'would', 'could', 'should', 
-                               'qu\\'est-ce que', 'où', 'quand', 'pourquoi', 'comment', 'quel', 'quelle', 'quels', 'quelles', 'qui', 'est-ce que'];
-        return questionWords.some(word => message.toLowerCase().includes(word)) || 
-               message.includes('?');
+        try {
+            const questionWords = ['what', 'where', 'when', 'why', 'how', 'which', 'who', 'is', 'are', 'can', 'do', 'does', 'will', 'would', 'could', 'should', 
+                                   'qu\'est-ce que', 'où', 'quand', 'pourquoi', 'comment', 'quel', 'quelle', 'quels', 'quelles', 'qui', 'est-ce que'];
+            return questionWords.some(word => message.toLowerCase().includes(word)) || 
+                   message.includes('?');
+        } catch (error) {
+            return false;
+        }
     }
     
     // ENHANCED SMART RESPONSE GENERATION
     generateSmartResponse(message) {
-        const msg = message.toLowerCase().trim();
-        const isFrench = this.userLanguage === 'fr';
-        
-        // 1. GREETINGS - BOTH LANGUAGES
-        if (this.isGreeting(msg)) {
-            return this.getGreetingResponse(isFrench);
+        try {
+            const msg = message.toLowerCase().trim();
+            const isFrench = this.userLanguage === 'fr';
+            
+            // 1. GREETINGS - BOTH LANGUAGES
+            if (this.isGreeting(msg)) {
+                return this.getGreetingResponse(isFrench);
+            }
+            
+            // 2. COUNTRIES QUESTION - MOST IMPORTANT FIX
+            if (this.isCountriesQuestion(msg)) {
+                return this.getCountriesResponse(isFrench);
+            }
+            
+            // 3. ECONOMIC DEVELOPMENT QUESTIONS
+            if (this.isEconomicDevelopmentQuestion(msg)) {
+                return this.getEconomicDevelopmentResponse(isFrench);
+            }
+            
+            // 4. ORIGIN/LOCATION QUESTIONS
+            if (this.isOriginQuestion(msg)) {
+                return isFrench ? 
+                    `Patrice est originaire de la République Démocratique du Congo (RDC) et vit actuellement au ${this.profile.current_location}.` :
+                    `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;
+            }
+            
+            // 5. CONTACT INFORMATION
+            if (this.isContactQuestion(msg)) {
+                return isFrench ?
+                    `Vous pouvez contacter Patrice à ${this.profile.email}. Il répond généralement ${this.profile.response_time} et offre une consultation gratuite de 30 minutes.` :
+                    `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;
+            }
+            
+            // 6. AVAILABILITY
+            if (this.isAvailabilityQuestion(msg)) {
+                return isFrench ?
+                    `Oui! Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour discuter de vos besoins.` :
+                    `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;
+            }
+            
+            // 7. EXPERIENCE & BACKGROUND  
+            if (this.isExperienceQuestion(msg)) {
+                return isFrench ?
+                    `Patrice a plus de ${this.profile.experience_years} années d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.countries_worked.length}+ pays et a complété ${this.projects.completed} projets d'une valeur de plus de ${this.projects.total_value}.` :
+                    `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.countries_worked.length}+ countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;
+            }
+            
+            // 8. CURRENT ROLE
+            if (this.isCurrentRoleQuestion(msg)) {
+                return isFrench ?
+                    `Patrice travaille actuellement comme ${this.current_role.title} à ${this.current_role.organization} au ${this.current_role.location}. Il a commencé ce poste en ${this.current_role.start_date}.` :
+                    `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;
+            }
+            
+            // 9. SKILLS & EXPERTISE
+            if (this.isSkillsQuestion(msg)) {
+                return isFrench ?
+                    `Patrice se spécialise dans ${this.expertise.core_skills.slice(0, 3).join(', ')} et plus. Ses compétences techniques incluent ${this.expertise.technical.slice(0, 4).join(', ')}. Il détient une ${this.profile.education}.` :
+                    `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;
+            }
+            
+            // 10. PROJECTS
+            if (this.isProjectsQuestion(msg)) {
+                return isFrench ?
+                    `Patrice a géré ${this.projects.completed} projets d'une valeur totale de ${this.projects.total_value}. Son travail a impacté ${this.projects.beneficiaries} vies dans ${this.projects.countries} pays avec un taux de succès de ${this.projects.success_rate}.` :
+                    `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;
+            }
+            
+            // 11. EDUCATION & LANGUAGES
+            if (this.isEducationQuestion(msg)) {
+                return isFrench ?
+                    `Patrice détient une ${this.profile.education}. Il parle ${this.profile.languages.join(', ')}.` :
+                    `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;
+            }
+            
+            // 12. DEFAULT - HELPFUL RESPONSE
+            return this.getHelpfulDefault(isFrench);
+        } catch (error) {
+            console.error('Error generating response:', error);
+            return "I'm sorry, I encountered an error processing your question. Please contact Patrice directly at patricemirindi@gmail.com for assistance.";
         }
+    }
+    
+    // ENHANCED INTENT RECOGNITION FUNCTIONS
+    isGreeting(msg) {
+        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut', 'bonsoir', 'ça va'];
+        return greetings.some(greeting => {
+            return msg === greeting || 
+                   msg.startsWith(greeting + ' ') || 
+                   msg.startsWith(greeting + ',') ||
+                   msg.startsWith(greeting + '!');
+        });
+    }
+    
+    // CRITICAL FIX: Countries Question Recognition
+    isCountriesQuestion(msg) {
+        return (msg.includes('countries') || msg.includes('country') || msg.includes('pays')) &&
+               (msg.includes('worked') || msg.includes('work') || msg.includes('experience') || 
+                msg.includes('travaillé') || msg.includes('travail') || msg.includes('expérience')) &&
+               (msg.includes('patrice') || msg.includes('you') || msg.includes('he') || msg.includes('il'));
+    }
+    
+    // NEW: Economic Development Question Recognition
+    isEconomicDevelopmentQuestion(msg) {
+        return (msg.includes('economic development') || msg.includes('development work') ||
+                msg.includes('développement économique') || msg.includes('travail de développement') ||
+                msg.includes('poverty') || msg.includes('pauvreté') ||
+                msg.includes('policy') || msg.includes('politique') ||
+                msg.includes('resilience') || msg.includes('résilience') ||
+                msg.includes('financial health') || msg.includes('santé financière'));
+    }
+    
+    isOriginQuestion(msg) {
+        return (msg.includes('where') || msg.includes('où')) && 
+               (msg.includes('from') || msg.includes('vient') || msg.includes('origin') || msg.includes('originaire')) &&
+               (msg.includes('patrice') || msg.includes('you') || msg.includes('il'));
+    }
+    
+    isContactQuestion(msg) {
+        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || 
+               msg.includes('get in touch') || msg.includes('how to contact') ||
+               msg.includes('contacter') || msg.includes('comment le joindre');
+    }
+    
+    isAvailabilityQuestion(msg) {
+        return msg.includes('available') || msg.includes('availability') || 
+               msg.includes('hire') || msg.includes('free') || msg.includes('busy') ||
+               msg.includes('disponible') || msg.includes('libre');
+    }
+    
+    isExperienceQuestion(msg) {
+        return msg.includes('experience') || msg.includes('background') || 
+               msg.includes('career') || msg.includes('work history') ||
+               msg.includes('expérience') || msg.includes('parcours');
+    }
+    
+    isCurrentRoleQuestion(msg) {
+        return (msg.includes('current') && (msg.includes('job') || msg.includes('role') || 
+               msg.includes('position') || msg.includes('work'))) ||
+               msg.includes('financial resilience institute') ||
+               msg.includes('poste actuel') || msg.includes('travail actuel');
+    }
+    
+    isSkillsQuestion(msg) {
+        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||
+               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at') ||
+               msg.includes('compétences') || msg.includes('spécialisation');
+    }
+    
+    isProjectsQuestion(msg) {
+        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||
+               msg.includes('case studies') || msg.includes('examples') ||
+               msg.includes('projets') || msg.includes('travaux');
+    }
+    
+    isEducationQuestion(msg) {
+        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||
+               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages') ||
+               msg.includes('éducation') || msg.includes('diplôme') || msg.includes('université') ||
+               msg.includes('langues');
+    }
+    
+    // ENHANCED RESPONSE FUNCTIONS
+    getGreetingResponse(isFrench = false) {
+        const englishGreetings = [
+            "Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience across 14+ countries, economic development work, or help you get in touch. What would you like to know?",
+            "Hello! Nice to meet you. I can tell you about Patrice's work in data analytics, his experience across Africa and Canada, or help schedule a consultation. How can I assist you?",
+            "Hey! Thanks for visiting. I know all about Patrice's expertise in economic development and can share information about the countries he's worked in. What interests you most?"
+        ];
         
-        // 2. COUNTRIES QUESTION - MOST IMPORTANT FIX
-        if (this.isCountriesQuestion(msg)) {
-            return this.getCountriesResponse(isFrench);
-        }\n        \n        // 3. ECONOMIC DEVELOPMENT QUESTIONS\n        if (this.isEconomicDevelopmentQuestion(msg)) {\n            return this.getEconomicDevelopmentResponse(isFrench);\n        }\n        \n        // 4. ORIGIN/LOCATION QUESTIONS\n        if (this.isOriginQuestion(msg)) {\n            return isFrench ? \n                `Patrice est originaire de la République Démocratique du Congo (RDC) et vit actuellement au ${this.profile.current_location}.` :\n                `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;\n        }\n        \n        // 5. CONTACT INFORMATION\n        if (this.isContactQuestion(msg)) {\n            return isFrench ?\n                `Vous pouvez contacter Patrice à ${this.profile.email}. Il répond généralement ${this.profile.response_time} et offre une consultation gratuite de 30 minutes.` :\n                `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;\n        }\n        \n        // 6. AVAILABILITY\n        if (this.isAvailabilityQuestion(msg)) {\n            return isFrench ?\n                `Oui! Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour discuter de vos besoins.` :\n                `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;\n        }\n        \n        // 7. EXPERIENCE & BACKGROUND  \n        if (this.isExperienceQuestion(msg)) {\n            return isFrench ?\n                `Patrice a plus de ${this.profile.experience_years} années d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.countries_worked.length}+ pays et a complété ${this.projects.completed} projets d'une valeur de plus de ${this.projects.total_value}.` :\n                `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.countries_worked.length}+ countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;\n        }\n        \n        // 8. CURRENT ROLE\n        if (this.isCurrentRoleQuestion(msg)) {\n            return isFrench ?\n                `Patrice travaille actuellement comme ${this.current_role.title} à ${this.current_role.organization} au ${this.current_role.location}. Il a commencé ce poste en ${this.current_role.start_date}.` :\n                `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;\n        }\n        \n        // 9. SKILLS & EXPERTISE\n        if (this.isSkillsQuestion(msg)) {\n            return isFrench ?\n                `Patrice se spécialise dans ${this.expertise.core_skills.slice(0, 3).join(', ')} et plus. Ses compétences techniques incluent ${this.expertise.technical.slice(0, 4).join(', ')}. Il détient une ${this.profile.education}.` :\n                `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;\n        }\n        \n        // 10. PROJECTS\n        if (this.isProjectsQuestion(msg)) {\n            return isFrench ?\n                `Patrice a géré ${this.projects.completed} projets d'une valeur totale de ${this.projects.total_value}. Son travail a impacté ${this.projects.beneficiaries} vies dans ${this.projects.countries} pays avec un taux de succès de ${this.projects.success_rate}.` :\n                `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;\n        }\n        \n        // 11. EDUCATION & LANGUAGES\n        if (this.isEducationQuestion(msg)) {\n            return isFrench ?\n                `Patrice détient une ${this.profile.education}. Il parle ${this.profile.languages.join(', ')}.` :\n                `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;\n        }\n        \n        // 12. DEFAULT - HELPFUL RESPONSE\n        return this.getHelpfulDefault(isFrench);\n    }\n    \n    // ENHANCED INTENT RECOGNITION FUNCTIONS\n    isGreeting(msg) {\n        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut', 'bonsoir', 'ça va'];\n        return greetings.some(greeting => {\n            return msg === greeting || \n                   msg.startsWith(greeting + ' ') || \n                   msg.startsWith(greeting + ',') ||\n                   msg.startsWith(greeting + '!');\n        });\n    }\n    \n    // CRITICAL FIX: Countries Question Recognition\n    isCountriesQuestion(msg) {\n        return (msg.includes('countries') || msg.includes('country') || msg.includes('pays')) &&\n               (msg.includes('worked') || msg.includes('work') || msg.includes('experience') || \n                msg.includes('travaillé') || msg.includes('travail') || msg.includes('expérience')) &&\n               (msg.includes('patrice') || msg.includes('you') || msg.includes('he') || msg.includes('il'));\n    }\n    \n    // NEW: Economic Development Question Recognition\n    isEconomicDevelopmentQuestion(msg) {\n        return (msg.includes('economic development') || msg.includes('development work') ||\n                msg.includes('développement économique') || msg.includes('travail de développement') ||\n                msg.includes('poverty') || msg.includes('pauvreté') ||\n                msg.includes('policy') || msg.includes('politique') ||\n                msg.includes('resilience') || msg.includes('résilience') ||\n                msg.includes('financial health') || msg.includes('santé financière'));\n    }\n    \n    isOriginQuestion(msg) {\n        return (msg.includes('where') || msg.includes('où')) && \n               (msg.includes('from') || msg.includes('vient') || msg.includes('origin') || msg.includes('originaire')) &&\n               (msg.includes('patrice') || msg.includes('you') || msg.includes('il'));\n    }\n    \n    isContactQuestion(msg) {\n        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || \n               msg.includes('get in touch') || msg.includes('how to contact') ||\n               msg.includes('contacter') || msg.includes('comment le joindre');\n    }\n    \n    isAvailabilityQuestion(msg) {\n        return msg.includes('available') || msg.includes('availability') || \n               msg.includes('hire') || msg.includes('free') || msg.includes('busy') ||\n               msg.includes('disponible') || msg.includes('libre');\n    }\n    \n    isExperienceQuestion(msg) {\n        return msg.includes('experience') || msg.includes('background') || \n               msg.includes('career') || msg.includes('work history') ||\n               msg.includes('expérience') || msg.includes('parcours');\n    }\n    \n    isCurrentRoleQuestion(msg) {\n        return (msg.includes('current') && (msg.includes('job') || msg.includes('role') || \n               msg.includes('position') || msg.includes('work'))) ||\n               msg.includes('financial resilience institute') ||\n               msg.includes('poste actuel') || msg.includes('travail actuel');\n    }\n    \n    isSkillsQuestion(msg) {\n        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||\n               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at') ||\n               msg.includes('compétences') || msg.includes('spécialisation');\n    }\n    \n    isProjectsQuestion(msg) {\n        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||\n               msg.includes('case studies') || msg.includes('examples') ||\n               msg.includes('projets') || msg.includes('travaux');\n    }\n    \n    isEducationQuestion(msg) {\n        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||\n               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages') ||\n               msg.includes('éducation') || msg.includes('diplôme') || msg.includes('université') ||\n               msg.includes('langues');\n    }\n    \n    // ENHANCED RESPONSE FUNCTIONS\n    getGreetingResponse(isFrench = false) {\n        const englishGreetings = [\n            \"Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience across 14+ countries, economic development work, or help you get in touch. What would you like to know?\",\n            \"Hello! Nice to meet you. I can tell you about Patrice's work in data analytics, his experience across Africa and Canada, or help schedule a consultation. How can I assist you?\",\n            \"Hey! Thanks for visiting. I know all about Patrice's expertise in economic development and can share information about the countries he's worked in. What interests you most?\"\n        ];\n        \n        const frenchGreetings = [\n            \"Bonjour! Je suis l'assistant IA de Patrice. Je peux répondre à vos questions sur son parcours, son expérience dans 14+ pays, son travail en développement économique, ou vous aider à le contacter. Que souhaitez-vous savoir?\",\n            \"Salut! Ravi de vous rencontrer. Je peux vous parler du travail de Patrice en analyse de données, de son expérience en Afrique et au Canada, ou vous aider à planifier une consultation. Comment puis-je vous aider?\",\n            \"Bonjour! Merci de votre visite. Je connais toute l'expertise de Patrice en développement économique et peux partager des informations sur les pays où il a travaillé. Qu'est-ce qui vous intéresse le plus?\"\n        ];\n        \n        const greetings = isFrench ? frenchGreetings : englishGreetings;\n        return greetings[Math.floor(Math.random() * greetings.length)];\n    }\n    \n    // CRITICAL FIX: Countries Response\n    getCountriesResponse(isFrench = false) {\n        const countries = this.countries_worked.join(', ');\n        \n        return isFrench ?\n            `Patrice a travaillé dans ${this.countries_worked.length} pays à travers l'Afrique et l'Amérique du Nord : ${countries}. Il se spécialise dans les projets de développement économique, d'analyse de données et de résilience financière dans ces régions.` :\n            `Patrice has worked in ${this.countries_worked.length} countries across Africa and North America: ${countries}. He specializes in economic development, data analytics, and financial resilience projects in these regions.`;\n    }\n    \n    // NEW: Economic Development Response\n    getEconomicDevelopmentResponse(isFrench = false) {\n        const economicAreas = this.expertise.economic_development.slice(0, 6).join(', ');\n        \n        return isFrench ?\n            `Patrice se spécialise dans le développement économique avec une expertise en : ${economicAreas}. Il a géré ${this.projects.completed} projets de développement d'une valeur de ${this.projects.total_value}, impactant ${this.projects.beneficiaries} vies dans ${this.countries_worked.length} pays.` :\n            `Patrice specializes in economic development with expertise in: ${economicAreas}. He has managed ${this.projects.completed} development projects worth ${this.projects.total_value}, impacting ${this.projects.beneficiaries} lives across ${this.countries_worked.length} countries.`;\n    }\n    \n    getHelpfulDefault(isFrench = false) {\n        return isFrench ?\n            `Je peux vous aider à en apprendre plus sur le parcours de Patrice (il vient de ${this.profile.origin}), son expertise en développement économique, les ${this.countries_worked.length} pays où il a travaillé, son portfolio de projets, ou sa disponibilité actuelle. Vous pouvez aussi le contacter directement à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :\n            `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his economic development expertise, the ${this.countries_worked.length} countries he's worked in, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;\n    }\n    \n    // 10-QUESTION CONVERSION SYSTEM\n    showConversionMessage() {\n        const conversionHTML = `\n            <div class=\"conversion-message\">\n                <h4>${this.userLanguage === 'fr' ? '🎯 Discutons directement!' : '🎯 Let\\'s Connect Directly!'}</h4>\n                <p>${this.userLanguage === 'fr' ? \n                    'Je vois que vous étudiez attentivement l\\'expertise de Patrice! Avec 10 questions détaillées, vous semblez sérieux concernant une collaboration potentielle.' : \n                    'I can see you\\'re thoroughly researching Patrice\\'s expertise! With 10 detailed questions, you seem serious about potential collaboration.'}</p>\n                <button class=\"contact-button\" onclick=\"window.location.href='mailto:patricemirindi@gmail.com?subject=Project Inquiry from Website Chatbot&body=Hi Patrice,%0A%0AI was exploring your website and have detailed questions about your expertise. I would like to discuss potential collaboration.%0A%0ABest regards,'\">\n                    ${this.userLanguage === 'fr' ? '📧 Contacter Patrice directement' : '📧 Contact Patrice Directly'}\n                </button>\n            </div>\n        `;\n        \n        const messagesContainer = document.getElementById('chat-messages');\n        messagesContainer.insertAdjacentHTML('beforeend', conversionHTML);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    addMessage(text, sender) {\n        const messagesContainer = document.getElementById('chat-messages');\n        const messageElement = document.createElement('div');\n        messageElement.className = `message ${sender}`;\n        \n        const now = new Date();\n        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });\n        \n        messageElement.innerHTML = `\n            <div class=\"message-text\">${text}</div>\n            <div class=\"message-time\">${timeString}</div>\n        `;\n        \n        messagesContainer.appendChild(messageElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n        \n        this.messages.push({ text, sender, timestamp: now });\n    }\n\n    showTypingIndicator() {\n        const messagesContainer = document.getElementById('chat-messages');\n        const typingElement = document.createElement('div');\n        typingElement.className = 'typing-indicator';\n        typingElement.id = 'typing-indicator';\n        typingElement.innerHTML = `\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n        `;\n        \n        messagesContainer.appendChild(typingElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    hideTypingIndicator() {\n        const typingIndicator = document.getElementById('typing-indicator');\n        if (typingIndicator) {\n            typingIndicator.remove();\n        }\n    }\n    \n    // CONVERSATION MANAGEMENT\n    startConversation() {\n        this.currentConversationId = 'conv_' + Date.now();\n        this.conversations[this.currentConversationId] = {\n            id: this.currentConversationId,\n            start_time: new Date().toISOString(),\n            messages: [],\n            user_info: {},\n            topics_discussed: [],\n            outcome: null\n        };\n    }\n    \n    endConversation() {\n        if (this.currentConversationId && this.conversations[this.currentConversationId]) {\n            this.conversations[this.currentConversationId].end_time = new Date().toISOString();\n            this.saveConversations();\n        }\n    }\n    \n    loadConversations() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');\n        } catch {\n            return {};\n        }\n    }\n    \n    saveConversations() {\n        try {\n            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));\n        } catch (e) {\n            console.log('Could not save conversations');\n        }\n    }\n    \n    loadContacts() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');\n        } catch {\n            return [];\n        }\n    }\n    \n    saveContacts() {\n        try {\n            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));\n        } catch (e) {\n            console.log('Could not save contacts');\n        }\n    }\n}\n\n// Initialize Super Intelligent Chatbot\ndocument.addEventListener('DOMContentLoaded', function() {\n    window.superIntelligentChatbot = new SuperIntelligentChatbot();\n    console.log('🤖 Super Intelligent Bilingual Chatbot initialized!');\n    console.log('✅ Features: Profile photo button, bilingual support, smart intent, 10-question conversion');\n    console.log('🌍 Countries: DRC, Canada, Ghana, Nigeria, Burundi, Eritrea, Benin, Burkina Faso, Senegal, Côte d\\'Ivoire, Rwanda, Kenya, Uganda, South Africa');\n});
+        const frenchGreetings = [
+            "Bonjour! Je suis l'assistant IA de Patrice. Je peux répondre à vos questions sur son parcours, son expérience dans 14+ pays, son travail en développement économique, ou vous aider à le contacter. Que souhaitez-vous savoir?",
+            "Salut! Ravi de vous rencontrer. Je peux vous parler du travail de Patrice en analyse de données, de son expérience en Afrique et au Canada, ou vous aider à planifier une consultation. Comment puis-je vous aider?",
+            "Bonjour! Merci de votre visite. Je connais toute l'expertise de Patrice en développement économique et peux partager des informations sur les pays où il a travaillé. Qu'est-ce qui vous intéresse le plus?"
+        ];
+        
+        const greetings = isFrench ? frenchGreetings : englishGreetings;
+        return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+    
+    // CRITICAL FIX: Countries Response
+    getCountriesResponse(isFrench = false) {
+        const countries = this.countries_worked.join(', ');
+        
+        return isFrench ?
+            `Patrice a travaillé dans ${this.countries_worked.length} pays à travers l'Afrique et l'Amérique du Nord : ${countries}. Il se spécialise dans les projets de développement économique, d'analyse de données et de résilience financière dans ces régions.` :
+            `Patrice has worked in ${this.countries_worked.length} countries across Africa and North America: ${countries}. He specializes in economic development, data analytics, and financial resilience projects in these regions.`;
+    }
+    
+    // NEW: Economic Development Response
+    getEconomicDevelopmentResponse(isFrench = false) {
+        const economicAreas = this.expertise.economic_development.slice(0, 6).join(', ');
+        
+        return isFrench ?
+            `Patrice se spécialise dans le développement économique avec une expertise en : ${economicAreas}. Il a géré ${this.projects.completed} projets de développement d'une valeur de ${this.projects.total_value}, impactant ${this.projects.beneficiaries} vies dans ${this.countries_worked.length} pays.` :
+            `Patrice specializes in economic development with expertise in: ${economicAreas}. He has managed ${this.projects.completed} development projects worth ${this.projects.total_value}, impacting ${this.projects.beneficiaries} lives across ${this.countries_worked.length} countries.`;
+    }
+    
+    getHelpfulDefault(isFrench = false) {
+        return isFrench ?
+            `Je peux vous aider à en apprendre plus sur le parcours de Patrice (il vient de ${this.profile.origin}), son expertise en développement économique, les ${this.countries_worked.length} pays où il a travaillé, son portfolio de projets, ou sa disponibilité actuelle. Vous pouvez aussi le contacter directement à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :
+            `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his economic development expertise, the ${this.countries_worked.length} countries he's worked in, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;
+    }
+    
+    // 10-QUESTION CONVERSION SYSTEM
+    showConversionMessage() {
+        const conversionHTML = `
+            <div class="conversion-message">
+                <h4>${this.userLanguage === 'fr' ? '🎯 Discutons directement!' : '🎯 Let\'s Connect Directly!'}</h4>
+                <p>${this.userLanguage === 'fr' ? 
+                    'Je vois que vous étudiez attentivement l\'expertise de Patrice! Avec 10 questions détaillées, vous semblez sérieux concernant une collaboration potentielle.' : 
+                    'I can see you\'re thoroughly researching Patrice\'s expertise! With 10 detailed questions, you seem serious about potential collaboration.'}</p>
+                <button class="contact-button" onclick="window.location.href='mailto:patricemirindi@gmail.com?subject=Project Inquiry from Website Chatbot&body=Hi Patrice,%0A%0AI was exploring your website and have detailed questions about your expertise. I would like to discuss potential collaboration.%0A%0ABest regards,'">
+                    ${this.userLanguage === 'fr' ? '📧 Contacter Patrice directement' : '📧 Contact Patrice Directly'}
+                </button>
+            </div>
+        `;
+        
+        const messagesContainer = document.getElementById('chat-messages');
+        if (messagesContainer) {
+            messagesContainer.insertAdjacentHTML('beforeend', conversionHTML);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }
+
+    addMessage(text, sender) {
+        try {
+            const messagesContainer = document.getElementById('chat-messages');
+            if (!messagesContainer) return;
+            
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            messageElement.innerHTML = `
+                <div class="message-text">${this.escapeHtml(text)}</div>
+                <div class="message-time">${timeString}</div>
+            `;
+            
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            this.messages.push({ text, sender, timestamp: now });
+        } catch (error) {
+            console.error('Error adding message:', error);
+        }
+    }
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    showTypingIndicator() {
+        try {
+            const messagesContainer = document.getElementById('chat-messages');
+            if (!messagesContainer) return;
+            
+            const typingElement = document.createElement('div');
+            typingElement.className = 'typing-indicator';
+            typingElement.id = 'typing-indicator';
+            typingElement.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            
+            messagesContainer.appendChild(typingElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        } catch (error) {
+            console.error('Error showing typing indicator:', error);
+        }
+    }
+
+    hideTypingIndicator() {
+        try {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        } catch (error) {
+            console.error('Error hiding typing indicator:', error);
+        }
+    }
+    
+    // CONVERSATION MANAGEMENT
+    startConversation() {
+        try {
+            this.currentConversationId = 'conv_' + Date.now();
+            this.conversations[this.currentConversationId] = {
+                id: this.currentConversationId,
+                start_time: new Date().toISOString(),
+                messages: [],
+                user_info: {},
+                topics_discussed: [],
+                outcome: null
+            };
+        } catch (error) {
+            console.error('Error starting conversation:', error);
+        }
+    }
+    
+    endConversation() {
+        try {
+            if (this.currentConversationId && this.conversations[this.currentConversationId]) {
+                this.conversations[this.currentConversationId].end_time = new Date().toISOString();
+                this.saveConversations();
+            }
+        } catch (error) {
+            console.error('Error ending conversation:', error);
+        }
+    }
+    
+    loadConversations() {
+        try {
+            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');
+        } catch {
+            return {};
+        }
+    }
+    
+    saveConversations() {
+        try {
+            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));
+        } catch (e) {
+            console.log('Could not save conversations');
+        }
+    }
+    
+    loadContacts() {
+        try {
+            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');
+        } catch {
+            return [];
+        }
+    }
+    
+    saveContacts() {
+        try {
+            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));
+        } catch (e) {
+            console.log('Could not save contacts');
+        }
+    }
+}
+
+// Initialize Super Intelligent Chatbot with error handling
+document.addEventListener('DOMContentLoaded', function() {
+    try {
+        window.superIntelligentChatbot = new SuperIntelligentChatbot();
+        console.log('🤖 Super Intelligent Bilingual Chatbot initialized!');
+        console.log('✅ Features: Profile photo button, bilingual support, smart intent, 10-question conversion');
+        console.log('🌍 Countries: DRC, Canada, Ghana, Nigeria, Burundi, Eritrea, Benin, Burkina Faso, Senegal, Côte d\'Ivoire, Rwanda, Kenya, Uganda, South Africa');
+    } catch (error) {
+        console.error('❌ Failed to initialize chatbot:', error);
+        // Show fallback contact method
+        const fallbackHTML = `
+            <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+                <a href="mailto:patricemirindi@gmail.com" 
+                   style="background: #004085; color: white; padding: 12px 20px; border-radius: 25px; text-decoration: none; font-family: Arial, sans-serif; box-shadow: 0 4px 12px rgba(0,64,133,0.3);">
+                   📧 Contact Patrice
+                </a>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', fallbackHTML);
+    }
+});
