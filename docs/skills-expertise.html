@@ -11,6 +11,19 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Patrice Mirindi",
+        "jobTitle": "Senior Data Analyst & Economic Development Consultant",
+        "skills": ["Data Analytics", "R Programming", "Python", "STATA", "Project Management", "Agricultural Economics"],
+        "hasCredential": ["PMP Certification", "Google Project Management Certificate"],
+        "knowsLanguage": ["French", "English", "Swahili", "Lingala"]
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -39,35 +52,43 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Matching Other Pages -->
-    <section class="skills-hero">
+    <!-- Hero Section - MATCHING ABOUT ME PAGE SUBTLE STYLE -->
+    <section class="about-hero">
         <div class="hero-background">
             <div class="hero-gradient"></div>
             <div class="hero-pattern"></div>
         </div>
         
         <div class="container">
-            <div class="hero-content">
-                <h1>Skills & Expertise</h1>
-                <p class="hero-subtitle">Advanced Analytics & Strategic Consulting Capabilities</p>
-                <p class="hero-description">Comprehensive technical toolkit combined with strategic thinking and international development expertise. From advanced statistical modeling to executive-level policy advisory, I deliver data-driven solutions that create measurable impact across 12+ countries.</p>
-                
-                <div class="expertise-highlights">
-                    <div class="highlight-item">
-                        <i class="fas fa-chart-line"></i>
+            <div class="about-hero-content">
+                <div class="hero-photo-section">
+                    <div class="skills-icon-container">
+                        <i class="fas fa-chart-line skills-main-icon"></i>
+                    </div>
+                    <div class="heritage-badge">
+                        <i class="fas fa-award"></i>
                         <span>Advanced Analytics</span>
                     </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-code"></i>
-                        <span>Programming & Development</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Strategic Consulting</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fas fa-globe"></i>
-                        <span>International Development</span>
+                </div>
+                
+                <div class="hero-text-section">
+                    <h1>Skills & Expertise</h1>
+                    <h2>Advanced Analytics & Strategic Consulting Capabilities</h2>
+                    <p class="hero-tagline">Comprehensive technical toolkit combined with strategic thinking and international development expertise. From advanced statistical modeling to executive-level policy advisory, I deliver data-driven solutions that create measurable impact across 12+ countries.</p>
+                    
+                    <div class="hero-credentials">
+                        <div class="credential-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Advanced Analytics<br><small>R, Python, STATA</small></span>
+                        </div>
+                        <div class="credential-item">
+                            <i class="fas fa-code"></i>
+                            <span>Programming & Development<br><small>8+ Years Experience</small></span>
+                        </div>
+                        <div class="credential-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>PMP Certified<br><small>Project Manager</small></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,9 +124,9 @@
                             </div>
                             <div class="proficiency-container">
                                 <div class="proficiency-bar">
-                                    <div class="proficiency-fill" style="width: 90%"></div>
+                                    <div class="proficiency-fill" style="width: 92%"></div>
                                 </div>
-                                <span class="proficiency-value">Advanced</span>
+                                <span class="proficiency-value">Expert</span>
                             </div>
                         </div>
                         
@@ -129,7 +150,7 @@
                             </div>
                             <div class="proficiency-container">
                                 <div class="proficiency-bar">
-                                    <div class="proficiency-fill" style="width: 92%"></div>
+                                    <div class="proficiency-fill" style="width: 90%"></div>
                                 </div>
                                 <span class="proficiency-value">Expert</span>
                             </div>
@@ -294,7 +315,7 @@
         </div>
     </section>
 
-    <!-- Professional Certifications - CORRECTED WITH ACTUAL CREDENTIALS -->
+    <!-- Professional Certifications -->
     <section class="certifications-showcase">
         <div class="container">
             <div class="section-header">
@@ -463,11 +484,33 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="skills-cta">
+    <section class="about-cta">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Leverage These Capabilities?</h2>
-                <p>Let's discuss how my technical expertise and strategic consulting experience can drive measurable impact for your organization's development goals.</p>
+                <div class="cta-header">
+                    <h2>Ready to Leverage These Capabilities?</h2>
+                    <p>Let's discuss how my technical expertise and strategic consulting experience can drive measurable impact for your organization's development goals.</p>
+                </div>
+                
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Advanced Analytics</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-certificate"></i>
+                        <span>PMP Certified</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-globe"></i>
+                        <span>International Experience</span>
+                    </div>
+                    <div class="cta-feature">
+                        <i class="fas fa-language"></i>
+                        <span>Multilingual</span>
+                    </div>
+                </div>
+                
                 <div class="cta-buttons">
                     <a href="contact.html" class="btn btn-primary btn-large">
                         <i class="fas fa-envelope"></i>
@@ -505,7 +548,7 @@
                 <div class="footer-section">
                     <h4>Technical Expertise</h4>
                     <ul>
-                        <li>R Programming (Advanced)</li>
+                        <li>R Programming (Expert)</li>
                         <li>Python & Data Science</li>
                         <li>STATA & Econometrics</li>
                         <li>Excel Data Analysis (Expert)</li>
@@ -538,110 +581,37 @@
         </div>
     </footer>
 
-    <!-- Enhanced Skills & Expertise CSS -->
+    <!-- Skills & Expertise CSS - EXACT MATCH TO ABOUT ME PAGE -->
     <style>
-    /* Hero Section - Matching Other Pages */
-    .skills-hero {
-        background: linear-gradient(135deg, #004085 0%, #0056b3 50%, #007bff 100%);
-        color: white;
-        padding: 5rem 1rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .hero-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-    }
-    
-    .hero-gradient {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
-    }
-    
-    .hero-pattern {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
-        opacity: 0.4;
-    }
-    
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #FF6600;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-description {
-        font-size: 1.25rem;
-        line-height: 1.6;
-        margin-bottom: 3rem;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 3rem;
-    }
-    
-    .expertise-highlights {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    .highlight-item {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 1.5rem 1rem;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
+    /* Using existing About Hero Section styling from About Me page */
+    .skills-icon-container {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
+        border: 8px solid white;
+        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.2);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
+        justify-content: center;
     }
     
-    .highlight-item:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-4px);
+    .skills-icon-container:hover {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 64, 133, 0.25);
     }
     
-    .highlight-item i {
-        color: #FF6600;
-        font-size: 2rem;
+    .skills-main-icon {
+        font-size: 5rem;
+        color: var(--primary-blue, #004085);
     }
-    
-    .highlight-item span {
-        font-weight: 600;
-        text-align: center;
-    }
-    
+
     /* Skills Showcase */
     .skills-showcase {
-        padding: 5rem 1rem;
-        background: #f8fbff;
+        padding: 5rem 0;
+        background: var(--white, #ffffff);
     }
     
     .skills-grid {
@@ -654,19 +624,19 @@
     .skill-category {
         background: white;
         padding: 2.5rem;
-        border-radius: 16px;
+        border-radius: 1.5rem;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
     }
     
     .skill-category:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
     }
     
     .skill-category.featured {
-        border-left: 4px solid #FF6600;
+        border-left: 4px solid var(--accent-orange, #FF6600);
     }
     
     .category-header {
@@ -679,8 +649,8 @@
     .category-icon {
         width: 60px;
         height: 60px;
-        background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary-blue, #004085), var(--accent-orange, #FF6600));
+        border-radius: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -689,7 +659,7 @@
     }
     
     .category-info h3 {
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-size: 1.25rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
@@ -707,16 +677,11 @@
         color: white;
     }
     
-    .expertise-level.advanced {
-        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-        color: white;
-    }
-    
     .expertise-level.intermediate {
         background: linear-gradient(135deg, #f59e0b, #d97706);
         color: white;
     }
-    
+
     /* Skills List */
     .skills-list {
         margin-bottom: 2rem;
@@ -739,14 +704,14 @@
     
     .skill-name {
         font-weight: 700;
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-size: 1.1rem;
         display: block;
         margin-bottom: 0.25rem;
     }
     
     .skill-detail {
-        color: #6B7280;
+        color: var(--gray-600, #6B7280);
         font-size: 0.9rem;
         line-height: 1.4;
     }
@@ -767,14 +732,14 @@
     
     .proficiency-fill {
         height: 100%;
-        background: linear-gradient(135deg, #004085, #FF6600);
+        background: linear-gradient(135deg, var(--primary-blue, #004085), var(--accent-orange, #FF6600));
         border-radius: 4px;
         transition: width 1.5s ease-in-out;
     }
     
     .proficiency-value {
         font-weight: 700;
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-size: 0.9rem;
         min-width: 80px;
     }
@@ -787,7 +752,7 @@
     }
     
     .applications h5 {
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-weight: 700;
         margin-bottom: 0.75rem;
         font-size: 0.9rem;
@@ -801,7 +766,7 @@
     
     .app-tag {
         background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
-        color: #004085;
+        color: var(--primary-blue, #004085);
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
         font-size: 0.75rem;
@@ -821,13 +786,13 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
-        background: #f8fbff;
-        border-radius: 12px;
+        background: rgba(0, 64, 133, 0.03);
+        border-radius: 0.75rem;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
     
     .competency-item i {
-        color: #FF6600;
+        color: var(--accent-orange, #FF6600);
         font-size: 1.25rem;
         width: 24px;
         text-align: center;
@@ -840,12 +805,12 @@
     
     .competency-name {
         font-weight: 700;
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-size: 1rem;
     }
     
     .competency-detail {
-        color: #6B7280;
+        color: var(--gray-600, #6B7280);
         font-size: 0.85rem;
     }
     
@@ -861,18 +826,18 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem;
-        background: #f8fbff;
-        border-radius: 12px;
+        background: rgba(0, 64, 133, 0.03);
+        border-radius: 0.75rem;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
     
     .area-name {
         font-weight: 600;
-        color: #004085;
+        color: var(--primary-blue, #004085);
     }
     
     .area-experience {
-        background: linear-gradient(135deg, #FF6600, #e55100);
+        background: linear-gradient(135deg, var(--accent-orange, #FF6600), #e55100);
         color: white;
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
@@ -882,8 +847,8 @@
     
     /* Certifications */
     .certifications-showcase {
-        padding: 4rem 1rem;
-        background: white;
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
     }
     
     .certifications-grid {
@@ -894,9 +859,9 @@
     }
     
     .certification-card {
-        background: #f8fbff;
+        background: white;
         padding: 2rem;
-        border-radius: 16px;
+        border-radius: 1.5rem;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
@@ -905,18 +870,18 @@
     }
     
     .certification-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
     }
     
     .certification-card.featured {
-        border: 2px solid #FF6600;
+        border: 2px solid var(--accent-orange, #FF6600);
     }
     
     .cert-badge {
         width: 60px;
         height: 60px;
-        border-radius: 12px;
+        border-radius: 1rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -950,28 +915,28 @@
     }
     
     .cert-content h4 {
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-weight: 700;
         margin-bottom: 0.5rem;
         font-size: 1.1rem;
     }
     
     .cert-issuer {
-        color: #FF6600;
+        color: var(--accent-orange, #FF6600);
         font-weight: 600;
         margin-bottom: 0.25rem;
         font-size: 0.9rem;
     }
     
     .cert-date {
-        color: #6B7280;
+        color: var(--gray-600, #6B7280);
         font-size: 0.85rem;
         margin-bottom: 0.75rem;
         font-style: italic;
     }
     
     .cert-description {
-        color: #6B7280;
+        color: var(--gray-700, #374151);
         line-height: 1.5;
         margin-bottom: 1rem;
         font-size: 0.9rem;
@@ -985,7 +950,7 @@
     
     .skill-tag {
         background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
-        color: #004085;
+        color: var(--primary-blue, #004085);
         padding: 0.25rem 0.75rem;
         border-radius: 1rem;
         font-size: 0.75rem;
@@ -995,8 +960,8 @@
     
     /* Language Skills */
     .language-skills {
-        padding: 4rem 1rem;
-        background: #f8fbff;
+        padding: 5rem 0;
+        background: var(--white, #ffffff);
     }
     
     .languages-grid {
@@ -1009,7 +974,7 @@
     .language-card {
         background: white;
         padding: 2rem;
-        border-radius: 16px;
+        border-radius: 1.5rem;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         text-align: center;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1018,7 +983,7 @@
     
     .language-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
+        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
     }
     
     .language-flag {
@@ -1028,7 +993,7 @@
     }
     
     .language-content h4 {
-        color: #004085;
+        color: var(--primary-blue, #004085);
         font-weight: 700;
         margin-bottom: 0.5rem;
         font-size: 1.25rem;
@@ -1059,58 +1024,13 @@
     }
     
     .language-content p {
-        color: #6B7280;
+        color: var(--gray-700, #374151);
         line-height: 1.5;
         font-size: 0.9rem;
     }
     
-    /* Skills CTA */
-    .skills-cta {
-        padding: 4rem 1rem;
-        background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
-        color: white;
-        text-align: center;
-    }
-    
-    .cta-content {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    
-    .cta-content h2 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: white;
-    }
-    
-    .cta-content p {
-        font-size: 1.25rem;
-        margin-bottom: 2rem;
-        color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .cta-buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
     /* Mobile Responsive */
     @media (max-width: 768px) {
-        .skills-hero {
-            padding: 3rem 1rem;
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-        }
-        
-        .expertise-highlights {
-            grid-template-columns: 1fr;
-        }
-        
         .skills-grid {
             grid-template-columns: 1fr;
         }
@@ -1138,31 +1058,20 @@
             grid-template-columns: 1fr;
         }
         
-        .cta-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-        
         .competency-item,
         .area-item {
             flex-direction: column;
             text-align: center;
             gap: 0.5rem;
         }
-    }
-    
-    @media (max-width: 480px) {
-        .skill-category {
-            padding: 1.5rem;
+
+        .skills-icon-container {
+            width: 220px;
+            height: 220px;
         }
         
-        .proficiency-container {
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .proficiency-value {
-            align-self: flex-end;
+        .skills-main-icon {
+            font-size: 4rem;
         }
     }
     </style>
