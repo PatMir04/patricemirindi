@@ -1,6 +1,7 @@
 /* ==========================================================================
    SUPER INTELLIGENT BILINGUAL CHATBOT FOR PATRICE MIRINDI
-   Enhanced: Profile Photo Button, Full French Support, Smart Intent Recognition
+   Complete Implementation: Profile Photo Button, Full French/English Support,
+   Smart Intent Recognition, 10-Question Conversion, Complete Knowledge Base
    ========================================================================== */
 
 class SuperIntelligentChatbot {
@@ -10,17 +11,19 @@ class SuperIntelligentChatbot {
         this.conversations = this.loadConversations();
         this.contacts = this.loadContacts();
         this.currentConversationId = null;
+        this.questionCount = 0;
+        this.lastQuestionTime = Date.now();
+        this.userLanguage = 'en'; // Default to English
         
-        // Complete and Accurate Knowledge Base
+        // COMPLETE KNOWLEDGE BASE - ALL COUNTRIES & EXPERTISE
         this.profile = {
             name: "Patrice Mirindi",
             origin: "Democratic Republic of Congo (DRC)",
-            current_location: "Winnipeg, MB, Canada",
+            current_location: "Canada", // Privacy protected - no specific city
             nationality: "Congolese-Canadian",
             education: "MSc Agricultural Economics from University of Nairobi",
             languages: ["French (Native)", "English (Fluent)", "Swahili (Fluent)", "Lingala (Native)"],
             experience_years: "8+",
-            countries_worked: "15+",
             email: "patricemirindi@gmail.com",
             linkedin: "linkedin.com/in/patricemirindi",
             github: "github.com/PatMir04",
@@ -29,14 +32,33 @@ class SuperIntelligentChatbot {
             consultation: "Free 30-minute consultation available"
         };
         
+        // COMPLETE COUNTRIES LIST - FROM YOUR WORK EXPERIENCE
+        this.countries_worked = [
+            "Democratic Republic of Congo",
+            "Canada", 
+            "Ghana",
+            "Nigeria", 
+            "Burundi",
+            "Eritrea", 
+            "Benin",
+            "Burkina Faso",
+            "Senegal",
+            "Côte d'Ivoire", // Ivory Coast
+            "Rwanda",
+            "Kenya", 
+            "Uganda", // CORRECTED: Uganda instead of Ethiopia
+            "South Africa"
+        ];
+        
         this.current_role = {
             title: "Senior Data Analyst",
             organization: "Financial Resilience Institute",
-            location: "Winnipeg, MB, Canada",
+            location: "Canada",
             start_date: "October 2024",
             status: "Current position"
         };
         
+        // COMPREHENSIVE EXPERTISE AREAS
         this.expertise = {
             core_skills: [
                 "Data Analytics & Statistical Modeling",
@@ -46,14 +68,33 @@ class SuperIntelligentChatbot {
                 "Project Management (PMP Certified)",
                 "Impact Evaluation & Measurement"
             ],
-            technical: ["R Programming", "Python", "Stata", "Power BI", "SQL", "Excel"],
-            specializations: ["Econometric modeling", "Survey design", "Policy analysis", "Value chain development"]
+            technical: ["R Programming", "Python", "Stata", "Power BI", "SQL", "Excel", "SPSS", "Tableau"],
+            economic_development: [
+                "Financial resilience frameworks",
+                "Poverty reduction strategies",
+                "Statistical modeling for economic indicators", 
+                "Policy assessment and evaluation",
+                "Data-driven development solutions",
+                "Economic impact analysis",
+                "Sustainable development metrics",
+                "Value chain development",
+                "Food security analysis",
+                "Gender transformative programming"
+            ],
+            specializations: [
+                "Econometric modeling", 
+                "Survey design and methodology", 
+                "Policy analysis and evaluation",
+                "Value chain development",
+                "Impact measurement",
+                "Financial inclusion research"
+            ]
         };
         
         this.projects = {
-            total_value: "7.5 million dollars",
+            total_value: "$7.5 million",
             completed: "25+",
-            countries: "15+",
+            countries: this.countries_worked.length + "+",
             beneficiaries: "25,000+",
             success_rate: "100%"
         };
@@ -71,7 +112,7 @@ class SuperIntelligentChatbot {
     createChatWidget() {
         const chatHTML = `
             <div id="super-chatbot" class="super-chatbot-widget">
-                <!-- Chat Button with Profile Photo -->
+                <!-- Chat Button with PROFILE PHOTO -->
                 <div id="chat-button" class="chat-button">
                     <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" class="profile-button-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="fallback-button" style="display: none;">
@@ -85,7 +126,7 @@ class SuperIntelligentChatbot {
                 <div id="chat-window" class="chat-window">
                     <div class="chat-header">
                         <div class="chat-avatar">
-                            <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzAwNDA4NSIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkF2ZW5pciIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9IjYwMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBNPC90ZXh0Pjwvc3ZnPg=='">
+                            <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIyMCIgZmlsbD0iIzAwNDA4NSIvPjx0ZXh0IHg9IjIwIiB5PSIyNiIgZm9udC1mYW1pbHk9IkludGVyIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNjAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+UE08L3RleHQ+PC9zdmc+'">
                         </div>
                         <div class="chat-info">
                             <h4>Patrice Mirindi <span class="ai-badge">AI Assistant</span></h4>
@@ -116,13 +157,17 @@ class SuperIntelligentChatbot {
                                 <i class="fas fa-globe-africa"></i>
                                 <span>Background</span>
                             </button>
-                            <button class="suggestion-btn" data-message="What is your experience?">
-                                <i class="fas fa-chart-bar"></i>
-                                <span>Experience</span>
+                            <button class="suggestion-btn" data-message="What countries have you worked in?">
+                                <i class="fas fa-map"></i>
+                                <span>Countries</span>
                             </button>
-                            <button class="suggestion-btn" data-message="Tell me about your projects">
-                                <i class="fas fa-project-diagram"></i>
-                                <span>Projects</span>
+                            <button class="suggestion-btn" data-message="Tell me about economic development">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Economic Work</span>
+                            </button>
+                            <button class="suggestion-btn" data-message="What is your experience?">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Experience</span>
                             </button>
                             <button class="suggestion-btn" data-message="Are you available for consulting?">
                                 <i class="fas fa-handshake"></i>
@@ -132,16 +177,12 @@ class SuperIntelligentChatbot {
                                 <i class="fas fa-envelope"></i>
                                 <span>Contact</span>
                             </button>
-                            <button class="suggestion-btn" data-message="What are your rates?">
-                                <i class="fas fa-dollar-sign"></i>
-                                <span>Pricing</span>
-                            </button>
                         </div>
                     </div>
                     
                     <div class="chat-input-area">
                         <div class="chat-input-container">
-                            <input type="text" id="chat-input" placeholder="Ask me anything about Patrice or current economic data..." maxlength="500">
+                            <input type="text" id="chat-input" placeholder="Ask me anything about Patrice's background, expertise, or countries he's worked in..." maxlength="500">
                             <button id="chat-send" class="chat-send">
                                 <i class="fas fa-paper-plane"></i>
                             </button>
@@ -169,10 +210,10 @@ class SuperIntelligentChatbot {
                     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 }
                 
+                /* PROFILE PHOTO CHAT BUTTON */
                 .chat-button {
                     width: 70px;
                     height: 70px;
-                    background: linear-gradient(135deg, #004085, #FF6600);
                     border-radius: 50%;
                     display: flex;
                     align-items: center;
@@ -181,22 +222,20 @@ class SuperIntelligentChatbot {
                     box-shadow: 0 10px 30px rgba(0, 64, 133, 0.3);
                     transition: all 0.3s ease;
                     position: relative;
-                    border: 3px solid white;
+                    border: 4px solid white;
                     overflow: hidden;
                 }
                 
                 .chat-button:hover {
-                    transform: scale(1.1) rotate(5deg);
+                    transform: scale(1.1);
                     box-shadow: 0 15px 40px rgba(0, 64, 133, 0.5);
                 }
                 
-                /* Profile Photo in Button */
                 .profile-button-image {
-                    width: 64px;
-                    height: 64px;
+                    width: 100%;
+                    height: 100%;
                     border-radius: 50%;
                     object-fit: cover;
-                    border: 2px solid white;
                     transition: all 0.3s ease;
                 }
                 
@@ -204,11 +243,15 @@ class SuperIntelligentChatbot {
                     transform: scale(1.05);
                 }
                 
-                /* Fallback Button Style */
+                /* Fallback if photo doesn't load */
                 .fallback-button {
+                    background: linear-gradient(135deg, #004085, #FF6600);
+                    width: 100%;
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    justify-content: center;
                     gap: 2px;
                     color: white;
                 }
@@ -584,85 +627,41 @@ class SuperIntelligentChatbot {
                     }
                 }
                 
-                /* Contact Collection Modal */
-                .contact-modal {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.6);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1001;
-                }
-                
-                .contact-form {
-                    background: white;
-                    padding: 30px;
-                    border-radius: 20px;
-                    width: 400px;
-                    max-width: 90vw;
-                    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-                }
-                
-                .contact-form h3 {
-                    color: #004085;
-                    margin-bottom: 20px;
+                /* Conversion Message Styling */
+                .conversion-message {
+                    background: linear-gradient(135deg, #10b981, #059669);
+                    color: white;
+                    padding: 20px;
+                    border-radius: 15px;
+                    margin: 10px 0;
                     text-align: center;
+                    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
                 }
                 
-                .form-group {
-                    margin-bottom: 15px;
+                .conversion-message h4 {
+                    margin: 0 0 10px 0;
+                    font-size: 16px;
                 }
                 
-                .form-group label {
-                    display: block;
-                    margin-bottom: 5px;
-                    color: #004085;
-                    font-weight: 600;
-                }
-                
-                .form-group input, .form-group select, .form-group textarea {
-                    width: 100%;
-                    padding: 12px;
-                    border: 2px solid #f0f8ff;
-                    border-radius: 8px;
+                .conversion-message p {
+                    margin: 0 0 15px 0;
                     font-size: 14px;
-                    outline: none;
-                    transition: border-color 0.3s ease;
                 }
                 
-                .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-                    border-color: #FF6600;
-                }
-                
-                .form-buttons {
-                    display: flex;
-                    gap: 12px;
-                    margin-top: 20px;
-                }
-                
-                .btn-primary, .btn-secondary {
-                    flex: 1;
-                    padding: 12px;
-                    border-radius: 8px;
+                .contact-button {
+                    background: white;
+                    color: #10b981;
                     border: none;
-                    cursor: pointer;
+                    padding: 12px 20px;
+                    border-radius: 8px;
                     font-weight: 600;
+                    cursor: pointer;
                     transition: all 0.3s ease;
                 }
                 
-                .btn-primary {
-                    background: linear-gradient(135deg, #004085, #FF6600);
-                    color: white;
-                }
-                
-                .btn-secondary {
-                    background: #f0f8ff;
-                    color: #004085;
-                    border: 2px solid #004085;
+                .contact-button:hover {
+                    background: #f0fdf4;
+                    transform: translateY(-2px);
                 }
                 
                 /* Mobile responsiveness */
@@ -682,11 +681,6 @@ class SuperIntelligentChatbot {
                     .chat-button {
                         width: 60px;
                         height: 60px;
-                    }
-                    
-                    .profile-button-image {
-                        width: 54px;
-                        height: 54px;
                     }
                     
                     .suggestions-grid {
@@ -775,6 +769,28 @@ class SuperIntelligentChatbot {
     handleUserMessage(message) {
         this.addMessage(message, 'user');
         
+        // Detect language from user message
+        this.userLanguage = this.detectLanguage(message);
+        
+        // Count questions for conversion trigger
+        if (this.isQuestion(message)) {
+            this.questionCount++;
+            this.lastQuestionTime = Date.now();
+        }
+        
+        // Reset counter if idle for 5 minutes
+        if (Date.now() - this.lastQuestionTime > 300000) {
+            this.questionCount = 0;
+        }
+        
+        // Check for 10-question conversion trigger
+        if (this.questionCount >= 10) {
+            setTimeout(() => {
+                this.showConversionMessage();
+                this.questionCount = 0; // Reset after showing conversion
+            }, 1500);
+        }
+        
         // Save to conversation
         if (this.currentConversationId) {
             this.conversations[this.currentConversationId].messages.push({
@@ -806,411 +822,34 @@ class SuperIntelligentChatbot {
         }, 1200 + Math.random() * 800);
     }
     
-    // SMART Response Generation with Full Bilingual Support
+    // ADVANCED LANGUAGE DETECTION
+    detectLanguage(message) {
+        const frenchWords = ['bonjour', 'salut', 'bonsoir', 'comment', 'quelles', 'sont', 'ses', 'où', 'vient', 'patrice', 'disponible', 'est-il', 'compétences', 'projets', 'contacter', 'dans', 'quels', 'pays', 'travaillé'];
+        const wordCount = message.toLowerCase().split(' ').length;
+        const frenchMatches = frenchWords.filter(word => message.toLowerCase().includes(word)).length;
+        
+        // If more than 20% of words are French, respond in French
+        return (frenchMatches / wordCount) > 0.2 ? 'fr' : 'en';
+    }
+    
+    isQuestion(message) {
+        const questionWords = ['what', 'where', 'when', 'why', 'how', 'which', 'who', 'is', 'are', 'can', 'do', 'does', 'will', 'would', 'could', 'should', 
+                               'qu\\'est-ce que', 'où', 'quand', 'pourquoi', 'comment', 'quel', 'quelle', 'quels', 'quelles', 'qui', 'est-ce que'];
+        return questionWords.some(word => message.toLowerCase().includes(word)) || 
+               message.includes('?');
+    }
+    
+    // ENHANCED SMART RESPONSE GENERATION
     generateSmartResponse(message) {
         const msg = message.toLowerCase().trim();
-        
-        // Detect language (French vs English)
-        const isFrench = this.detectFrench(msg);
+        const isFrench = this.userLanguage === 'fr';
         
         // 1. GREETINGS - BOTH LANGUAGES
         if (this.isGreeting(msg)) {
             return this.getGreetingResponse(isFrench);
         }
         
-        // 2. ORIGIN/LOCATION QUESTIONS
-        if (this.isOriginQuestion(msg)) {
-            return isFrench ? 
-                `Patrice est originaire de la République Démocratique du Congo (RDC) et vit actuellement à ${this.profile.current_location}.` :
-                `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;
-        }
-        
-        // 3. CONTACT INFORMATION
-        if (this.isContactQuestion(msg)) {
-            return isFrench ?
-                `Vous pouvez contacter Patrice à ${this.profile.email}. Il répond généralement ${this.profile.response_time} et offre une consultation gratuite de 30 minutes.` :
-                `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;
-        }
-        
-        // 4. AVAILABILITY
-        if (this.isAvailabilityQuestion(msg)) {
-            return isFrench ?
-                `Oui! Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour discuter de vos besoins.` :
-                `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;
-        }
-        
-        // 5. EXPERIENCE & BACKGROUND  
-        if (this.isExperienceQuestion(msg)) {
-            return isFrench ?
-                `Patrice a plus de ${this.profile.experience_years} années d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.profile.countries_worked} pays et a complété ${this.projects.completed} projets d'une valeur de plus de ${this.projects.total_value}.` :
-                `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.profile.countries_worked} countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;
-        }
-        
-        // 6. CURRENT ROLE
-        if (this.isCurrentRoleQuestion(msg)) {
-            return isFrench ?
-                `Patrice travaille actuellement comme ${this.current_role.title} à ${this.current_role.organization} à ${this.current_role.location}. Il a commencé ce poste en ${this.current_role.start_date}.` :
-                `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;
-        }
-        
-        // 7. SKILLS & EXPERTISE
-        if (this.isSkillsQuestion(msg)) {
-            return isFrench ?
-                `Patrice se spécialise dans ${this.expertise.core_skills.slice(0, 3).join(', ')} et plus. Ses compétences techniques incluent ${this.expertise.technical.slice(0, 4).join(', ')}. Il détient une ${this.profile.education}.` :
-                `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;
-        }
-        
-        // 8. PROJECTS
-        if (this.isProjectsQuestion(msg)) {
-            return isFrench ?
-                `Patrice a géré ${this.projects.completed} projets d'une valeur totale de ${this.projects.total_value}. Son travail a impacté ${this.projects.beneficiaries} vies dans ${this.projects.countries} pays avec un taux de succès de ${this.projects.success_rate}.` :
-                `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;
-        }
-        
-        // 9. EDUCATION
-        if (this.isEducationQuestion(msg)) {
-            return isFrench ?
-                `Patrice détient une ${this.profile.education}. Il parle ${this.profile.languages.join(', ')}.` :
-                `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;
-        }
-        
-        // 10. PRICING/RATES
-        if (this.isPricingQuestion(msg)) {
-            setTimeout(() => this.showContactForm('pricing'), 2000);
-            return isFrench ?
-                `Les tarifs de Patrice dépendent de la portée et de la chronologie du projet. Il offre une tarification transparente avec une consultation gratuite de 30 minutes pour discuter de vos besoins spécifiques. Je peux collecter vos informations pour obtenir un devis personnalisé.` :
-                `Patrice's rates depend on project scope and timeline. He offers transparent pricing with a free 30-minute consultation to discuss your specific needs. I can collect your information to get you a custom quote.`;
-        }
-        
-        // 11. SCHEDULING
-        if (this.isSchedulingQuestion(msg)) {
-            setTimeout(() => this.showContactForm('schedule'), 2000);
-            return isFrench ?
-                `Je peux vous aider à planifier une consultation avec Patrice! Il offre des discussions de projet gratuites de 30 minutes. Laissez-moi collecter vos informations pour organiser cela.` :
-                `I can help you schedule a consultation with Patrice! He offers free 30-minute project discussions. Let me collect your information to set this up.`;
-        }
-        
-        // 12. LANGUAGES
-        if (this.isLanguageQuestion(msg)) {
-            return isFrench ?
-                `Patrice parle ${this.profile.languages.join(', ')}. Cela l'aide à travailler efficacement avec des clients et organisations internationaux.` :
-                `Patrice speaks ${this.profile.languages.join(', ')}. This helps him work effectively with international clients and organizations.`;
-        }
-        
-        // 13. DEFAULT - HELPFUL BUT CONCISE
-        return this.getHelpfulDefault(isFrench);
-    }
-    
-    // Language Detection and Intent Recognition Functions
-    detectFrench(msg) {
-        const frenchWords = ['bonjour', 'salut', 'bonsoir', 'comment', 'quelles', 'sont', 'ses', 'où', 'vient', 'patrice', 'disponible', 'est-il', 'compétences', 'projets', 'contacter'];
-        return frenchWords.some(word => msg.includes(word));
-    }
-    
-    isGreeting(msg) {
-        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut', 'bonsoir', 'ça va'];
-        return greetings.some(greeting => {
-            return msg === greeting || 
-                   msg.startsWith(greeting + ' ') || 
-                   msg.startsWith(greeting + ',') ||
-                   msg.startsWith(greeting + '!');
-        });
-    }
-    
-    isOriginQuestion(msg) {
-        return (msg.includes('where') || msg.includes('où')) && 
-               (msg.includes('from') || msg.includes('vient') || msg.includes('origin')) &&
-               (msg.includes('patrice') || msg.includes('you') || msg.includes('il'));
-    }
-    
-    isLocationQuestion(msg) {
-        return (msg.includes('where') && (msg.includes('live') || msg.includes('based') || msg.includes('located'))) ||
-               (msg.includes('current') && msg.includes('location')) ||
-               (msg.includes('où') && msg.includes('vit'));
-    }
-    
-    isContactQuestion(msg) {
-        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || 
-               msg.includes('get in touch') || msg.includes('how to contact') ||
-               msg.includes('contacter') || msg.includes('comment le joindre');
-    }
-    
-    isAvailabilityQuestion(msg) {
-        return msg.includes('available') || msg.includes('availability') || 
-               msg.includes('hire') || msg.includes('free') || msg.includes('busy') ||
-               msg.includes('disponible') || msg.includes('libre');
-    }
-    
-    isExperienceQuestion(msg) {
-        return msg.includes('experience') || msg.includes('background') || 
-               msg.includes('career') || msg.includes('work history') ||
-               msg.includes('expérience') || msg.includes('parcours');
-    }
-    
-    isCurrentRoleQuestion(msg) {
-        return msg.includes('current') && (msg.includes('job') || msg.includes('role') || 
-               msg.includes('position') || msg.includes('work')) ||
-               msg.includes('financial resilience institute') ||
-               msg.includes('poste actuel') || msg.includes('travail actuel');
-    }
-    
-    isSkillsQuestion(msg) {
-        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||
-               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at') ||
-               msg.includes('compétences') || msg.includes('spécialisation');
-    }
-    
-    isProjectsQuestion(msg) {
-        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||
-               msg.includes('case studies') || msg.includes('examples') ||
-               msg.includes('projets') || msg.includes('travaux');
-    }
-    
-    isEducationQuestion(msg) {
-        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||
-               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages') ||
-               msg.includes('éducation') || msg.includes('diplôme') || msg.includes('université') ||
-               msg.includes('langues');
-    }
-    
-    isPricingQuestion(msg) {
-        return msg.includes('price') || msg.includes('cost') || msg.includes('rate') || 
-               msg.includes('pricing') || msg.includes('budget') || msg.includes('fee') ||
-               msg.includes('prix') || msg.includes('tarif') || msg.includes('coût');
-    }
-    
-    isSchedulingQuestion(msg) {
-        return msg.includes('schedule') || msg.includes('meeting') || msg.includes('call') ||
-               msg.includes('consultation') || msg.includes('appointment') || msg.includes('book') ||
-               msg.includes('planifier') || msg.includes('rendez-vous') || msg.includes('réunion');
-    }
-    
-    isLanguageQuestion(msg) {
-        return msg.includes('language') || msg.includes('speak') || msg.includes('french') ||
-               msg.includes('english') || msg.includes('swahili') || msg.includes('lingala') ||
-               msg.includes('langues') || msg.includes('parle') || msg.includes('français');
-    }
-    
-    // Response Functions
-    getGreetingResponse(isFrench = false) {
-        const englishGreetings = [
-            "Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience, projects, or help you get in touch. What would you like to know?",
-            "Hello! Nice to meet you. I can tell you about Patrice's work in data analytics and development economics, or help schedule a consultation. How can I assist you?",
-            "Hey! Thanks for visiting. I know all about Patrice's expertise and can share current economic data too. What interests you most?"
-        ];
-        
-        const frenchGreetings = [
-            "Bonjour! Je suis l'assistant virtuel de Patrice. Je peux répondre à vos questions sur son parcours, son expérience, ses projets, ou vous aider à le contacter. Que souhaitez-vous savoir?",
-            "Salut! Ravi de vous rencontrer. Je peux vous parler du travail de Patrice en analyse de données et économie du développement, ou vous aider à planifier une consultation. Comment puis-je vous aider?",
-            "Bonjour! Merci de votre visite. Je connais toute l'expertise de Patrice et peux aussi partager des données économiques actuelles. Qu'est-ce qui vous intéresse le plus?"
-        ];
-        
-        const greetings = isFrench ? frenchGreetings : englishGreetings;
-        return greetings[Math.floor(Math.random() * greetings.length)];
-    }
-    
-    getHelpfulDefault(isFrench = false) {
-        return isFrench ?
-            `Je peux vous aider à en apprendre plus sur le parcours de Patrice (il vient de ${this.profile.origin}), son expertise en analyse de données et développement économique, son portfolio de projets, ou sa disponibilité actuelle. Vous pouvez aussi le contacter directement à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :
-            `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his expertise in data analytics and economic development, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;
-    }
-
-    // Contact Form Functions
-    showContactForm(type = 'contact') {
-        const modal = document.createElement('div');
-        modal.className = 'contact-modal';
-        modal.innerHTML = `
-            <div class="contact-form">
-                <h3>${type === 'schedule' ? '📅 Schedule Consultation' : type === 'pricing' ? '💰 Get Pricing Quote' : '📧 Contact Information'}</h3>
-                <form id="contact-collection-form">
-                    <div class="form-group">
-                        <label for="contact-name">Full Name *</label>
-                        <input type="text" id="contact-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email Address *</label>
-                        <input type="email" id="contact-email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-organization">Organization</label>
-                        <input type="text" id="contact-organization">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-interest">Project Interest *</label>
-                        <select id="contact-interest" required>
-                            <option value="">Select area of interest</option>
-                            <option value="data-analytics">Data Analytics & Statistical Modeling</option>
-                            <option value="financial-resilience">Financial Resilience Assessment</option>
-                            <option value="agricultural-economics">Agricultural Economics & Policy</option>
-                            <option value="economic-development">Economic Development Strategy</option>
-                            <option value="project-management">Project Management</option>
-                            <option value="impact-evaluation">Impact Evaluation & Measurement</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-message">Message</label>
-                        <textarea id="contact-message" rows="3" placeholder="Tell me about your project or question..."></textarea>
-                    </div>
-                    <div class="form-buttons">
-                        <button type="submit" class="btn-primary">${type === 'schedule' ? 'Schedule Meeting' : type === 'pricing' ? 'Get Quote' : 'Send Info'}</button>
-                        <button type="button" class="btn-secondary" id="cancel-contact">Cancel</button>
-                    </div>
-                </form>
-            </div>
-        `;
-        
-        document.body.appendChild(modal);
-        
-        const form = document.getElementById('contact-collection-form');
-        const cancelBtn = document.getElementById('cancel-contact');
-        
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.submitContactForm(type);
-            document.body.removeChild(modal);
-        });
-        
-        cancelBtn.addEventListener('click', () => {
-            document.body.removeChild(modal);
-        });
-        
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                document.body.removeChild(modal);
-            }
-        });
-    }
-    
-    submitContactForm(type) {
-        const formData = {
-            name: document.getElementById('contact-name').value,
-            email: document.getElementById('contact-email').value,
-            organization: document.getElementById('contact-organization').value,
-            interest: document.getElementById('contact-interest').value,
-            message: document.getElementById('contact-message').value,
-            type: type,
-            timestamp: new Date().toISOString(),
-            source: 'AI Chatbot'
-        };
-        
-        this.contacts.push(formData);
-        this.saveContacts();
-        
-        if (this.currentConversationId) {
-            this.conversations[this.currentConversationId].user_info = formData;
-            this.conversations[this.currentConversationId].outcome = type;
-            this.saveConversations();
-        }
-        
-        const confirmationMessage = type === 'schedule' ? 
-            `🎉 Meeting request submitted! Thanks ${formData.name}! Patrice will email you at ${formData.email} within 24 hours to schedule your consultation.` :
-            type === 'pricing' ?
-            `✅ Quote request received! Thanks ${formData.name}! Patrice will send you a detailed proposal at ${formData.email} within 24 hours.` :
-            `📧 Contact info saved! Thanks ${formData.name}! Patrice will respond to ${formData.email} within 24 hours.`;
-            
-        setTimeout(() => {
-            this.addMessage(confirmationMessage, 'bot');
-        }, 500);
-    }
-
-    addMessage(text, sender) {
-        const messagesContainer = document.getElementById('chat-messages');
-        const messageElement = document.createElement('div');
-        messageElement.className = `message ${sender}`;
-        
-        const now = new Date();
-        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        
-        messageElement.innerHTML = `
-            <div class="message-text">${text}</div>
-            <div class="message-time">${timeString}</div>
-        `;
-        
-        messagesContainer.appendChild(messageElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        
-        this.messages.push({ text, sender, timestamp: now });
-    }
-
-    showTypingIndicator() {
-        const messagesContainer = document.getElementById('chat-messages');
-        const typingElement = document.createElement('div');
-        typingElement.className = 'typing-indicator';
-        typingElement.id = 'typing-indicator';
-        typingElement.innerHTML = `
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-        `;
-        
-        messagesContainer.appendChild(typingElement);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    hideTypingIndicator() {
-        const typingIndicator = document.getElementById('typing-indicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
-    }
-    
-    // Conversation Management
-    startConversation() {
-        this.currentConversationId = 'conv_' + Date.now();
-        this.conversations[this.currentConversationId] = {
-            id: this.currentConversationId,
-            start_time: new Date().toISOString(),
-            messages: [],
-            user_info: {},
-            topics_discussed: [],
-            outcome: null
-        };
-    }
-    
-    endConversation() {
-        if (this.currentConversationId && this.conversations[this.currentConversationId]) {
-            this.conversations[this.currentConversationId].end_time = new Date().toISOString();
-            this.saveConversations();
-        }
-    }
-    
-    loadConversations() {
-        try {
-            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');
-        } catch {
-            return {};
-        }
-    }
-    
-    saveConversations() {
-        try {
-            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));
-        } catch (e) {
-            console.log('Could not save conversations');
-        }
-    }
-    
-    loadContacts() {
-        try {
-            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');
-        } catch {
-            return [];
-        }
-    }
-    
-    saveContacts() {
-        try {
-            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));
-        } catch (e) {
-            console.log('Could not save contacts');
-        }
-    }
-}
-
-// Initialize Super Intelligent Chatbot
-document.addEventListener('DOMContentLoaded', function() {
-    window.superIntelligentChatbot = new SuperIntelligentChatbot();
-    console.log('🤖 Super Intelligent Bilingual Chatbot initialized!');
-    console.log('✅ Profile photo button, French support, smart intent recognition');
-});
+        // 2. COUNTRIES QUESTION - MOST IMPORTANT FIX
+        if (this.isCountriesQuestion(msg)) {
+            return this.getCountriesResponse(isFrench);
+        }\n        \n        // 3. ECONOMIC DEVELOPMENT QUESTIONS\n        if (this.isEconomicDevelopmentQuestion(msg)) {\n            return this.getEconomicDevelopmentResponse(isFrench);\n        }\n        \n        // 4. ORIGIN/LOCATION QUESTIONS\n        if (this.isOriginQuestion(msg)) {\n            return isFrench ? \n                `Patrice est originaire de la République Démocratique du Congo (RDC) et vit actuellement au ${this.profile.current_location}.` :\n                `Patrice is originally from the Democratic Republic of Congo (DRC) and currently lives in ${this.profile.current_location}.`;\n        }\n        \n        // 5. CONTACT INFORMATION\n        if (this.isContactQuestion(msg)) {\n            return isFrench ?\n                `Vous pouvez contacter Patrice à ${this.profile.email}. Il répond généralement ${this.profile.response_time} et offre une consultation gratuite de 30 minutes.` :\n                `You can reach Patrice at ${this.profile.email}. He typically responds ${this.profile.response_time} and offers a ${this.profile.consultation}.`;\n        }\n        \n        // 6. AVAILABILITY\n        if (this.isAvailabilityQuestion(msg)) {\n            return isFrench ?\n                `Oui! Patrice est actuellement disponible pour de nouveaux projets de consultation. Contactez-le à ${this.profile.email} pour discuter de vos besoins.` :\n                `Yes! Patrice is ${this.profile.availability}. You can contact him at ${this.profile.email} to discuss your project needs.`;\n        }\n        \n        // 7. EXPERIENCE & BACKGROUND  \n        if (this.isExperienceQuestion(msg)) {\n            return isFrench ?\n                `Patrice a plus de ${this.profile.experience_years} années d'expérience en économie du développement et analyse de données. Il a travaillé dans ${this.countries_worked.length}+ pays et a complété ${this.projects.completed} projets d'une valeur de plus de ${this.projects.total_value}.` :\n                `Patrice has ${this.profile.experience_years} years of experience in development economics and data analytics. He's worked across ${this.countries_worked.length}+ countries and has completed ${this.projects.completed} projects worth over ${this.projects.total_value}.`;\n        }\n        \n        // 8. CURRENT ROLE\n        if (this.isCurrentRoleQuestion(msg)) {\n            return isFrench ?\n                `Patrice travaille actuellement comme ${this.current_role.title} à ${this.current_role.organization} au ${this.current_role.location}. Il a commencé ce poste en ${this.current_role.start_date}.` :\n                `Patrice currently works as a ${this.current_role.title} at the ${this.current_role.organization} in ${this.current_role.location}. He started this role in ${this.current_role.start_date}.`;\n        }\n        \n        // 9. SKILLS & EXPERTISE\n        if (this.isSkillsQuestion(msg)) {\n            return isFrench ?\n                `Patrice se spécialise dans ${this.expertise.core_skills.slice(0, 3).join(', ')} et plus. Ses compétences techniques incluent ${this.expertise.technical.slice(0, 4).join(', ')}. Il détient une ${this.profile.education}.` :\n                `Patrice specializes in ${this.expertise.core_skills.slice(0, 3).join(', ')} and more. His technical skills include ${this.expertise.technical.slice(0, 4).join(', ')}. He has an ${this.profile.education}.`;\n        }\n        \n        // 10. PROJECTS\n        if (this.isProjectsQuestion(msg)) {\n            return isFrench ?\n                `Patrice a géré ${this.projects.completed} projets d'une valeur totale de ${this.projects.total_value}. Son travail a impacté ${this.projects.beneficiaries} vies dans ${this.projects.countries} pays avec un taux de succès de ${this.projects.success_rate}.` :\n                `Patrice has managed ${this.projects.completed} projects with a total value of ${this.projects.total_value}. His work has impacted ${this.projects.beneficiaries} lives across ${this.projects.countries} countries with a ${this.projects.success_rate} success rate.`;\n        }\n        \n        // 11. EDUCATION & LANGUAGES\n        if (this.isEducationQuestion(msg)) {\n            return isFrench ?\n                `Patrice détient une ${this.profile.education}. Il parle ${this.profile.languages.join(', ')}.` :\n                `Patrice holds an ${this.profile.education}. He speaks ${this.profile.languages.join(', ')}.`;\n        }\n        \n        // 12. DEFAULT - HELPFUL RESPONSE\n        return this.getHelpfulDefault(isFrench);\n    }\n    \n    // ENHANCED INTENT RECOGNITION FUNCTIONS\n    isGreeting(msg) {\n        const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'howdy', 'bonjour', 'salut', 'bonsoir', 'ça va'];\n        return greetings.some(greeting => {\n            return msg === greeting || \n                   msg.startsWith(greeting + ' ') || \n                   msg.startsWith(greeting + ',') ||\n                   msg.startsWith(greeting + '!');\n        });\n    }\n    \n    // CRITICAL FIX: Countries Question Recognition\n    isCountriesQuestion(msg) {\n        return (msg.includes('countries') || msg.includes('country') || msg.includes('pays')) &&\n               (msg.includes('worked') || msg.includes('work') || msg.includes('experience') || \n                msg.includes('travaillé') || msg.includes('travail') || msg.includes('expérience')) &&\n               (msg.includes('patrice') || msg.includes('you') || msg.includes('he') || msg.includes('il'));\n    }\n    \n    // NEW: Economic Development Question Recognition\n    isEconomicDevelopmentQuestion(msg) {\n        return (msg.includes('economic development') || msg.includes('development work') ||\n                msg.includes('développement économique') || msg.includes('travail de développement') ||\n                msg.includes('poverty') || msg.includes('pauvreté') ||\n                msg.includes('policy') || msg.includes('politique') ||\n                msg.includes('resilience') || msg.includes('résilience') ||\n                msg.includes('financial health') || msg.includes('santé financière'));\n    }\n    \n    isOriginQuestion(msg) {\n        return (msg.includes('where') || msg.includes('où')) && \n               (msg.includes('from') || msg.includes('vient') || msg.includes('origin') || msg.includes('originaire')) &&\n               (msg.includes('patrice') || msg.includes('you') || msg.includes('il'));\n    }\n    \n    isContactQuestion(msg) {\n        return msg.includes('contact') || msg.includes('email') || msg.includes('reach') || \n               msg.includes('get in touch') || msg.includes('how to contact') ||\n               msg.includes('contacter') || msg.includes('comment le joindre');\n    }\n    \n    isAvailabilityQuestion(msg) {\n        return msg.includes('available') || msg.includes('availability') || \n               msg.includes('hire') || msg.includes('free') || msg.includes('busy') ||\n               msg.includes('disponible') || msg.includes('libre');\n    }\n    \n    isExperienceQuestion(msg) {\n        return msg.includes('experience') || msg.includes('background') || \n               msg.includes('career') || msg.includes('work history') ||\n               msg.includes('expérience') || msg.includes('parcours');\n    }\n    \n    isCurrentRoleQuestion(msg) {\n        return (msg.includes('current') && (msg.includes('job') || msg.includes('role') || \n               msg.includes('position') || msg.includes('work'))) ||\n               msg.includes('financial resilience institute') ||\n               msg.includes('poste actuel') || msg.includes('travail actuel');\n    }\n    \n    isSkillsQuestion(msg) {\n        return msg.includes('skills') || msg.includes('expertise') || msg.includes('specialization') ||\n               msg.includes('capabilities') || msg.includes('what can you do') || msg.includes('good at') ||\n               msg.includes('compétences') || msg.includes('spécialisation');\n    }\n    \n    isProjectsQuestion(msg) {\n        return msg.includes('project') || msg.includes('work') || msg.includes('portfolio') ||\n               msg.includes('case studies') || msg.includes('examples') ||\n               msg.includes('projets') || msg.includes('travaux');\n    }\n    \n    isEducationQuestion(msg) {\n        return msg.includes('education') || msg.includes('degree') || msg.includes('university') ||\n               msg.includes('qualification') || msg.includes('studied') || msg.includes('languages') ||\n               msg.includes('éducation') || msg.includes('diplôme') || msg.includes('université') ||\n               msg.includes('langues');\n    }\n    \n    // ENHANCED RESPONSE FUNCTIONS\n    getGreetingResponse(isFrench = false) {\n        const englishGreetings = [\n            \"Hi there! I'm Patrice's AI assistant. I can answer questions about his background, experience across 14+ countries, economic development work, or help you get in touch. What would you like to know?\",\n            \"Hello! Nice to meet you. I can tell you about Patrice's work in data analytics, his experience across Africa and Canada, or help schedule a consultation. How can I assist you?\",\n            \"Hey! Thanks for visiting. I know all about Patrice's expertise in economic development and can share information about the countries he's worked in. What interests you most?\"\n        ];\n        \n        const frenchGreetings = [\n            \"Bonjour! Je suis l'assistant IA de Patrice. Je peux répondre à vos questions sur son parcours, son expérience dans 14+ pays, son travail en développement économique, ou vous aider à le contacter. Que souhaitez-vous savoir?\",\n            \"Salut! Ravi de vous rencontrer. Je peux vous parler du travail de Patrice en analyse de données, de son expérience en Afrique et au Canada, ou vous aider à planifier une consultation. Comment puis-je vous aider?\",\n            \"Bonjour! Merci de votre visite. Je connais toute l'expertise de Patrice en développement économique et peux partager des informations sur les pays où il a travaillé. Qu'est-ce qui vous intéresse le plus?\"\n        ];\n        \n        const greetings = isFrench ? frenchGreetings : englishGreetings;\n        return greetings[Math.floor(Math.random() * greetings.length)];\n    }\n    \n    // CRITICAL FIX: Countries Response\n    getCountriesResponse(isFrench = false) {\n        const countries = this.countries_worked.join(', ');\n        \n        return isFrench ?\n            `Patrice a travaillé dans ${this.countries_worked.length} pays à travers l'Afrique et l'Amérique du Nord : ${countries}. Il se spécialise dans les projets de développement économique, d'analyse de données et de résilience financière dans ces régions.` :\n            `Patrice has worked in ${this.countries_worked.length} countries across Africa and North America: ${countries}. He specializes in economic development, data analytics, and financial resilience projects in these regions.`;\n    }\n    \n    // NEW: Economic Development Response\n    getEconomicDevelopmentResponse(isFrench = false) {\n        const economicAreas = this.expertise.economic_development.slice(0, 6).join(', ');\n        \n        return isFrench ?\n            `Patrice se spécialise dans le développement économique avec une expertise en : ${economicAreas}. Il a géré ${this.projects.completed} projets de développement d'une valeur de ${this.projects.total_value}, impactant ${this.projects.beneficiaries} vies dans ${this.countries_worked.length} pays.` :\n            `Patrice specializes in economic development with expertise in: ${economicAreas}. He has managed ${this.projects.completed} development projects worth ${this.projects.total_value}, impacting ${this.projects.beneficiaries} lives across ${this.countries_worked.length} countries.`;\n    }\n    \n    getHelpfulDefault(isFrench = false) {\n        return isFrench ?\n            `Je peux vous aider à en apprendre plus sur le parcours de Patrice (il vient de ${this.profile.origin}), son expertise en développement économique, les ${this.countries_worked.length} pays où il a travaillé, son portfolio de projets, ou sa disponibilité actuelle. Vous pouvez aussi le contacter directement à ${this.profile.email}. Quelle information spécifique souhaitez-vous?` :\n            `I can help you learn about Patrice's background (he's from ${this.profile.origin}), his economic development expertise, the ${this.countries_worked.length} countries he's worked in, his project portfolio, or current availability. You can also reach him directly at ${this.profile.email}. What specific information would you like?`;\n    }\n    \n    // 10-QUESTION CONVERSION SYSTEM\n    showConversionMessage() {\n        const conversionHTML = `\n            <div class=\"conversion-message\">\n                <h4>${this.userLanguage === 'fr' ? '🎯 Discutons directement!' : '🎯 Let\\'s Connect Directly!'}</h4>\n                <p>${this.userLanguage === 'fr' ? \n                    'Je vois que vous étudiez attentivement l\\'expertise de Patrice! Avec 10 questions détaillées, vous semblez sérieux concernant une collaboration potentielle.' : \n                    'I can see you\\'re thoroughly researching Patrice\\'s expertise! With 10 detailed questions, you seem serious about potential collaboration.'}</p>\n                <button class=\"contact-button\" onclick=\"window.location.href='mailto:patricemirindi@gmail.com?subject=Project Inquiry from Website Chatbot&body=Hi Patrice,%0A%0AI was exploring your website and have detailed questions about your expertise. I would like to discuss potential collaboration.%0A%0ABest regards,'\">\n                    ${this.userLanguage === 'fr' ? '📧 Contacter Patrice directement' : '📧 Contact Patrice Directly'}\n                </button>\n            </div>\n        `;\n        \n        const messagesContainer = document.getElementById('chat-messages');\n        messagesContainer.insertAdjacentHTML('beforeend', conversionHTML);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    addMessage(text, sender) {\n        const messagesContainer = document.getElementById('chat-messages');\n        const messageElement = document.createElement('div');\n        messageElement.className = `message ${sender}`;\n        \n        const now = new Date();\n        const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });\n        \n        messageElement.innerHTML = `\n            <div class=\"message-text\">${text}</div>\n            <div class=\"message-time\">${timeString}</div>\n        `;\n        \n        messagesContainer.appendChild(messageElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n        \n        this.messages.push({ text, sender, timestamp: now });\n    }\n\n    showTypingIndicator() {\n        const messagesContainer = document.getElementById('chat-messages');\n        const typingElement = document.createElement('div');\n        typingElement.className = 'typing-indicator';\n        typingElement.id = 'typing-indicator';\n        typingElement.innerHTML = `\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n            <div class=\"typing-dot\"></div>\n        `;\n        \n        messagesContainer.appendChild(typingElement);\n        messagesContainer.scrollTop = messagesContainer.scrollHeight;\n    }\n\n    hideTypingIndicator() {\n        const typingIndicator = document.getElementById('typing-indicator');\n        if (typingIndicator) {\n            typingIndicator.remove();\n        }\n    }\n    \n    // CONVERSATION MANAGEMENT\n    startConversation() {\n        this.currentConversationId = 'conv_' + Date.now();\n        this.conversations[this.currentConversationId] = {\n            id: this.currentConversationId,\n            start_time: new Date().toISOString(),\n            messages: [],\n            user_info: {},\n            topics_discussed: [],\n            outcome: null\n        };\n    }\n    \n    endConversation() {\n        if (this.currentConversationId && this.conversations[this.currentConversationId]) {\n            this.conversations[this.currentConversationId].end_time = new Date().toISOString();\n            this.saveConversations();\n        }\n    }\n    \n    loadConversations() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_conversations') || '{}');\n        } catch {\n            return {};\n        }\n    }\n    \n    saveConversations() {\n        try {\n            localStorage.setItem('chatbot_conversations', JSON.stringify(this.conversations));\n        } catch (e) {\n            console.log('Could not save conversations');\n        }\n    }\n    \n    loadContacts() {\n        try {\n            return JSON.parse(localStorage.getItem('chatbot_contacts') || '[]');\n        } catch {\n            return [];\n        }\n    }\n    \n    saveContacts() {\n        try {\n            localStorage.setItem('chatbot_contacts', JSON.stringify(this.contacts));\n        } catch (e) {\n            console.log('Could not save contacts');\n        }\n    }\n}\n\n// Initialize Super Intelligent Chatbot\ndocument.addEventListener('DOMContentLoaded', function() {\n    window.superIntelligentChatbot = new SuperIntelligentChatbot();\n    console.log('🤖 Super Intelligent Bilingual Chatbot initialized!');\n    console.log('✅ Features: Profile photo button, bilingual support, smart intent, 10-question conversion');\n    console.log('🌍 Countries: DRC, Canada, Ghana, Nigeria, Burundi, Eritrea, Benin, Burkina Faso, Senegal, Côte d\\'Ivoire, Rwanda, Kenya, Uganda, South Africa');\n});
