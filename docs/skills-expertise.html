@@ -540,12 +540,10 @@
 
     <!-- Enhanced Skills & Expertise CSS -->
     <style>
-    /* Hero Section - Matching Other Pages */
-    .skills-hero {
+    /* About Hero Section */
+    .about-hero {
         background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
-        color: white;
-        padding: 5rem 1rem;
-        text-align: center;
+        padding: 120px 0 80px;
         position: relative;
         overflow: hidden;
     }
@@ -574,67 +572,104 @@
         right: 0;
         width: 40%;
         height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23004085" opacity="0.08"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.08"/><circle cx="40" cy="80" r="2" fill="%23004085" opacity="0.08"/></svg>');
         opacity: 0.4;
     }
     
-    .hero-content {
+    .about-hero-content {
         position: relative;
         z-index: 2;
-        max-width: 1000px;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4rem;
+        align-items: center;
+        max-width: 1200px;
         margin: 0 auto;
     }
     
-    .hero-subtitle {
+    .hero-photo-section {
+        text-align: center;
+    }
+    
+    .about-profile-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid white;
+        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.2);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .about-profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 64, 133, 0.25);
+    }
+    
+    .heritage-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #FF6600, #e55100);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        font-size: 0.875rem;
+        box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
+    }
+    
+    .hero-text-section h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--primary-blue, #004085);
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+    }
+    
+    .hero-text-section h2 {
         font-size: 1.5rem;
         font-weight: 600;
-        color: #FF6600;
+        color: var(--accent-orange, #FF6600);
         margin-bottom: 1rem;
     }
     
-    .hero-description {
+    .hero-tagline {
         font-size: 1.25rem;
         line-height: 1.6;
-        margin-bottom: 3rem;
-        color: rgba(255, 255, 255, 0.9);
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 3rem;
+        color: var(--gray-700, #374151);
+        margin-bottom: 2rem;
+        font-style: italic;
     }
     
-    .expertise-highlights {
+    .hero-credentials {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
-        max-width: 800px;
-        margin: 0 auto;
     }
     
-    .highlight-item {
-        background: rgba(255, 255, 255, 0.1);
-        padding: 1.5rem 1rem;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.3s ease;
+    .credential-item {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        gap: 0.75rem;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 1rem;
+        border: 2px solid rgba(0, 64, 133, 0.1);
+        transition: all 0.3s ease;
     }
     
-    .highlight-item:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-4px);
+    .credential-item:hover {
+        background: rgba(0, 64, 133, 0.05);
+        border-color: var(--accent-orange, #FF6600);
+        transform: translateY(-2px);
     }
     
-    .highlight-item i {
-        color: #FF6600;
-        font-size: 2rem;
-    }
-    
-    .highlight-item span {
-        font-weight: 600;
+    .credential-item i {
+        color: var(--accent-orange, #FF6600);
+        font-size: 1.5rem;
+        width: 24px;
         text-align: center;
     }
     
