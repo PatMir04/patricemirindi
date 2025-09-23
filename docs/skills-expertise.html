@@ -52,54 +52,52 @@
         </div>
     </nav>
 
-    <!-- Hero Section - COMPACT SIZE -->
-    <section class="about-hero skills-hero-section">
+    <!-- Hero Section - Matching Homepage/About Style -->
+    <section class="skills-hero">
         <div class="hero-background">
             <div class="hero-gradient"></div>
             <div class="hero-pattern"></div>
         </div>
         
         <div class="container">
-            <div class="about-hero-content">
+            <div class="skills-hero-content">
                 <div class="hero-photo-section">
-                    <div class="profile-image-container">
-                        <div class="skills-icon-wrapper">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                    </div>
-                    <div class="heritage-badge">
-                        <i class="fas fa-award"></i>
-                        <span>Technical Excellence</span>
+                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist" class="profile-photo">
+                    <div class="availability-badge">
+                        <div class="status-dot"></div>
+                        <span>Available for Projects</span>
                     </div>
                 </div>
                 
                 <div class="hero-text-section">
-                    <h1>Skills & Expertise</h1>
+                    <h1>Patrice Mirindi, MSc</h1>
                     <h2>Advanced Analytics & Strategic Consulting Capabilities</h2>
                     <p class="hero-tagline">Comprehensive technical toolkit combined with strategic thinking and international development expertise</p>
                     
                     <div class="hero-credentials">
                         <div class="credential-item">
                             <i class="fas fa-chart-bar"></i>
-                            <div class="credential-text">
-                                <span>Advanced Analytics</span>
-                                <small>R, Python, STATA</small>
-                            </div>
-                        </div>
-                        <div class="credential-item">
-                            <i class="fas fa-code"></i>
-                            <div class="credential-text">
-                                <span>Programming & Development</span>
-                                <small>8+ Years Experience</small>
-                            </div>
+                            <span>Advanced Analytics<br><small>R, Python, STATA</small></span>
                         </div>
                         <div class="credential-item">
                             <i class="fas fa-certificate"></i>
-                            <div class="credential-text">
-                                <span>PMP Certified</span>
-                                <small>Project Manager</small>
-                            </div>
+                            <span>PMP Certified<br><small>Project Manager</small></span>
                         </div>
+                        <div class="credential-item">
+                            <i class="fas fa-language"></i>
+                            <span>Multilingual<br><small>4 Languages</small></span>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="contact.html" class="btn btn-primary btn-large">
+                            <i class="fas fa-envelope"></i>
+                            Discuss Your Project
+                        </a>
+                        <a href="data-analytics.html" class="btn btn-secondary btn-large">
+                            <i class="fas fa-chart-bar"></i>
+                            View Analytics Platform
+                        </a>
                     </div>
                 </div>
             </div>
@@ -425,59 +423,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Academic Verification -->
-                <div class="certification-card">
-                    <div class="cert-badge academic">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h4>Verified International Academic Qualifications</h4>
-                        <p class="cert-issuer">World Education Services</p>
-                        <p class="cert-date">October 2023</p>
-                        <p class="cert-description">Official verification and evaluation of international academic credentials for professional recognition in North America.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">Academic Verification</span>
-                            <span class="skill-tag">Credential Assessment</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Professional Development -->
-                <div class="certification-card">
-                    <div class="cert-badge linkedin">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h4>Professional Development Portfolio</h4>
-                        <p class="cert-issuer">LinkedIn Learning</p>
-                        <p class="cert-date">2019 - 2020</p>
-                        <p class="cert-description">Continuous learning in communication, data analysis, and professional skills. Excel data analysis certification included.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">Excel Data Analysis</span>
-                            <span class="skill-tag">Communication</span>
-                            <span class="skill-tag">Professional Skills</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Google PM Course Series -->
-                <div class="certification-card">
-                    <div class="cert-badge courses">
-                        <i class="fas fa-tasks"></i>
-                    </div>
-                    <div class="cert-content">
-                        <h4>Google Project Management Course Series</h4>
-                        <p class="cert-issuer">Google via Coursera</p>
-                        <p class="cert-date">February 2024 - August 2024</p>
-                        <p class="cert-description">Complete series: Foundations, Initiation, Planning, Execution, Agile Management, and Capstone application.</p>
-                        <div class="cert-skills">
-                            <span class="skill-tag">Project Foundations</span>
-                            <span class="skill-tag">Agile Management</span>
-                            <span class="skill-tag">Execution</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -531,12 +476,12 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="about-cta">
+    <section class="skills-cta">
         <div class="container">
             <div class="cta-content">
                 <div class="cta-header">
                     <h2>Ready to Leverage These Capabilities?</h2>
-                    <p>Let's discuss how my technical expertise and strategic consulting experience can drive measurable impact for your organization's development goals.</p>
+                    <p>Let's discuss how my technical expertise and strategic consulting experience can drive measurable impact for your organization.</p>
                 </div>
                 
                 <div class="cta-features">
@@ -628,17 +573,18 @@
         </div>
     </footer>
 
-    <!-- COMPACT HERO STYLES - FIXED ICON SIZE -->
+    <!-- Skills Page - Enhanced Styling to Match Home/About -->
     <style>
-    /* Hero Section - REDUCED SIZE AND SPACING */
-    .skills-hero-section {
-        background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
-        padding: 3rem 0 2rem; /* REDUCED from 5rem to 3rem */
+    /* Skills Hero Section - Exact Same as Homepage/About -->
+    .skills-hero {
+        background: linear-gradient(135deg, #004085 0%, #0056b3 50%, #007bff 100%);
+        color: white;
+        padding: 5rem 1rem;
         position: relative;
         overflow: hidden;
     }
     
-    .skills-hero-section .hero-background {
+    .hero-background {
         position: absolute;
         top: 0;
         left: 0;
@@ -647,174 +593,159 @@
         z-index: 1;
     }
     
-    .skills-hero-section .hero-gradient {
+    .hero-gradient {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.02) 0%, rgba(255, 102, 0, 0.02) 100%);
+        background: linear-gradient(135deg, rgba(0, 64, 133, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
     }
     
-    .skills-hero-section .hero-pattern {
+    .hero-pattern {
         position: absolute;
         top: 0;
         right: 0;
         width: 40%;
         height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="%23004085" opacity="0.1"/><circle cx="80" cy="40" r="1" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="1" fill="%23004085" opacity="0.1"/></svg>');
-        opacity: 0.3;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.15"/><circle cx="40" cy="80" r="2" fill="%23ffffff" opacity="0.1"/></svg>');
+        opacity: 0.4;
     }
     
-    /* Skills Icon Wrapper - MUCH SMALLER SIZE */
-    .skills-icon-wrapper {
-        width: 180px; /* REDUCED from 280px to 180px */
-        height: 180px; /* REDUCED from 280px to 180px */
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
-        border: 6px solid white; /* REDUCED from 8px to 6px */
-        box-shadow: 0 15px 45px rgba(0, 64, 133, 0.15); /* REDUCED shadow */
-        margin: 0;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3.5rem; /* REDUCED from 5rem to 3.5rem */
-        color: #004085;
+    .skills-hero-content {
         position: relative;
-    }
-    
-    .skills-icon-wrapper:hover {
-        transform: scale(1.03);
-        box-shadow: 0 20px 55px rgba(0, 64, 133, 0.2);
-    }
-    
-    .skills-icon-wrapper::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 50%;
-        z-index: -1;
-        opacity: 0.1;
-    }
-    
-    /* Heritage Badge - SMALLER */
-    .heritage-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, #FF6600, #e55100);
-        color: white;
-        padding: 0.6rem 1.25rem; /* REDUCED padding */
-        border-radius: 2rem;
-        font-weight: 700;
-        font-size: 0.8rem; /* REDUCED from 0.875rem */
-        box-shadow: 0 6px 20px rgba(255, 102, 0, 0.25); /* REDUCED shadow */
-        margin-top: 1rem; /* REDUCED from 1.5rem */
-    }
-    
-    /* Hero Text Section - REDUCED SIZES */
-    .skills-hero-section .hero-text-section h1 {
-        font-size: 3rem; /* REDUCED from 4rem */
-        font-weight: 900;
-        color: #004085;
-        margin-bottom: 0.5rem;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-    }
-    
-    .skills-hero-section .hero-text-section h2 {
-        font-size: 1.5rem; /* REDUCED from 1.75rem */
-        font-weight: 600;
-        color: #FF6600;
-        margin-bottom: 1rem; /* REDUCED from 1.5rem */
-        line-height: 1.3;
-    }
-    
-    .skills-hero-section .hero-tagline {
-        font-size: 1.1rem; /* REDUCED from 1.25rem */
-        line-height: 1.6;
-        color: #374151;
-        margin-bottom: 1.5rem; /* REDUCED from 2.5rem */
-        font-weight: 400;
-        max-width: 90%;
-    }
-    
-    /* Credentials - SMALLER CARDS */
-    .skills-hero-section .hero-credentials {
+        z-index: 2;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* REDUCED min width */
-        gap: 1rem; /* REDUCED from 1.5rem */
-        margin-top: 1.5rem; /* REDUCED from 2rem */
-    }
-    
-    .skills-hero-section .credential-item {
-        display: flex;
+        grid-template-columns: auto 1fr;
+        gap: 4rem;
         align-items: center;
-        gap: 0.75rem; /* REDUCED from 1rem */
-        padding: 1rem; /* REDUCED from 1.25rem */
-        background: white;
-        border-radius: 0.75rem; /* REDUCED from 1rem */
-        border: 2px solid rgba(0, 64, 133, 0.1);
-        transition: all 0.3s ease;
-        box-shadow: 0 3px 12px rgba(0, 64, 133, 0.05); /* REDUCED shadow */
+        max-width: 1200px;
+        margin: 0 auto;
     }
     
-    .skills-hero-section .credential-item:hover {
-        background: rgba(0, 64, 133, 0.02);
-        border-color: #FF6600;
-        transform: translateY(-2px);
-        box-shadow: 0 6px 18px rgba(0, 64, 133, 0.1); /* REDUCED shadow */
-    }
-    
-    .skills-hero-section .credential-item i {
-        color: #FF6600;
-        font-size: 1.5rem; /* REDUCED from 1.75rem */
-        width: 24px; /* REDUCED from 28px */
+    .hero-photo-section {
         text-align: center;
     }
     
-    .skills-hero-section .credential-text {
+    .profile-photo {
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 8px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .profile-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    }
+    
+    .availability-badge {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .status-dot {
+        width: 10px;
+        height: 10px;
+        background: #00ff88;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+        70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+    }
+    
+    .hero-text-section h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+    }
+    
+    .hero-text-section h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #FF6600;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-tagline {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .hero-credentials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .credential-item {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
     }
     
-    .skills-hero-section .credential-text span {
-        font-weight: 700;
-        font-size: 0.9rem; /* REDUCED from 1rem */
-        color: #004085;
-        margin-bottom: 0.25rem;
+    .credential-item:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
     }
     
-    .skills-hero-section .credential-text small {
-        color: #6B7280;
-        font-size: 0.8rem; /* REDUCED from 0.875rem */
-        font-weight: 500;
+    .credential-item i {
+        color: #FF6600;
+        font-size: 1.5rem;
+        width: 24px;
+        text-align: center;
     }
     
-    /* Competency Overview Section - REDUCED PADDING */
+    .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* Technical Competency Overview */
     .competency-overview {
-        padding: 3rem 0; /* REDUCED from 4rem */
-        background: white;
-        border-top: 1px solid #e5e7eb;
+        padding: 4rem 1rem;
+        background: #f8fbff;
     }
     
     .competency-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* REDUCED min width */
-        gap: 1.5rem; /* REDUCED from 2rem */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
         margin-top: 0;
     }
     
     .competency-card {
         text-align: center;
-        padding: 1.5rem 1rem; /* REDUCED padding */
-        background: #f8fbff;
-        border-radius: 1.25rem; /* REDUCED from 1.5rem */
+        padding: 2rem 1.5rem;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         border: 2px solid rgba(0, 64, 133, 0.05);
         transition: all 0.3s ease;
         position: relative;
@@ -827,141 +758,58 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 3px; /* REDUCED from 4px */
+        height: 4px;
         background: linear-gradient(135deg, #004085, #FF6600);
-        transition: height 0.3s ease;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
     }
     
     .competency-card:hover {
-        transform: translateY(-6px); /* REDUCED from -8px */
-        box-shadow: 0 12px 32px rgba(0, 64, 133, 0.15); /* REDUCED shadow */
+        transform: translateY(-8px);
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
         border-color: rgba(255, 102, 0, 0.3);
     }
     
     .competency-card:hover::before {
-        height: 6px; /* REDUCED from 8px */
+        transform: scaleX(1);
     }
     
     .competency-icon {
-        width: 70px; /* REDUCED from 80px */
-        height: 70px; /* REDUCED from 80px */
-        border-radius: 1.25rem; /* REDUCED from 1.5rem */
+        width: 80px;
+        height: 80px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1rem; /* REDUCED margin */
-        font-size: 1.75rem; /* REDUCED from 2rem */
+        margin: 0 auto 1.5rem;
+        font-size: 2rem;
         color: white;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* REDUCED shadow */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     }
     
-    .competency-icon.data-analytics {
-        background: linear-gradient(135deg, #10b981, #059669);
-    }
-    
-    .competency-icon.programming {
-        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-    }
-    
-    .competency-icon.consulting {
-        background: linear-gradient(135deg, #f59e0b, #d97706);
-    }
-    
-    .competency-icon.international {
-        background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    }
+    .competency-icon.data-analytics { background: linear-gradient(135deg, #10b981, #059669); }
+    .competency-icon.programming { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .competency-icon.consulting { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .competency-icon.international { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
     
     .competency-card h3 {
-        font-size: 1.1rem; /* REDUCED from 1.25rem */
+        font-size: 1.25rem;
         font-weight: 700;
         color: #004085;
-        margin-bottom: 0.75rem; /* REDUCED from 1rem */
+        margin-bottom: 1rem;
         line-height: 1.3;
     }
     
     .competency-card p {
         color: #6B7280;
         line-height: 1.6;
-        font-size: 0.9rem; /* REDUCED from 0.95rem */
+        font-size: 0.95rem;
     }
-    
-    /* Mobile Responsive - COMPACT SIZES */
-    @media (max-width: 768px) {
-        .skills-hero-section {
-            padding: 2rem 0 1.5rem; /* REDUCED further for mobile */
-        }
-        
-        .skills-hero-section .about-hero-content {
-            grid-template-columns: 1fr;
-            text-align: center;
-            gap: 2rem; /* REDUCED from 2.5rem */
-        }
-        
-        .skills-icon-wrapper {
-            width: 150px; /* REDUCED from 220px */
-            height: 150px; /* REDUCED from 220px */
-            font-size: 3rem; /* REDUCED from 4rem */
-        }
-        
-        .skills-hero-section .hero-text-section h1 {
-            font-size: 2.5rem; /* REDUCED from 2.75rem */
-        }
-        
-        .skills-hero-section .hero-text-section h2 {
-            font-size: 1.25rem; /* REDUCED from 1.5rem */
-        }
-        
-        .skills-hero-section .hero-tagline {
-            font-size: 1rem; /* REDUCED from 1.1rem */
-            max-width: 100%;
-        }
-        
-        .skills-hero-section .hero-credentials {
-            grid-template-columns: 1fr;
-            gap: 0.75rem; /* REDUCED gap */
-        }
-        
-        .competency-grid {
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* REDUCED for mobile */
-            gap: 1rem; /* REDUCED gap */
-        }
-        
-        .competency-card {
-            padding: 1.25rem 0.75rem; /* REDUCED padding */
-        }
-        
-        .competency-icon {
-            width: 60px; /* REDUCED from 70px */
-            height: 60px; /* REDUCED from 70px */
-            font-size: 1.5rem; /* REDUCED from 1.75rem */
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .skills-hero-section .hero-text-section h1 {
-            font-size: 2rem; /* REDUCED from 2.25rem */
-        }
-        
-        .skills-hero-section .credential-item {
-            padding: 0.75rem; /* REDUCED from 1rem */
-        }
-        
-        .competency-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .skills-icon-wrapper {
-            width: 130px; /* Further reduced for very small screens */
-            height: 130px;
-            font-size: 2.5rem;
-        }
-    }
-    
-    /* Rest of existing styles remain the same... */
+
     /* Skills Showcase */
     .skills-showcase {
-        padding: 4rem 0; /* SLIGHTLY REDUCED from 5rem */
-        background: #ffffff;
+        padding: 5rem 1rem;
+        background: white;
     }
     
     .skills-grid {
@@ -972,9 +820,9 @@
     }
     
     .skill-category {
-        background: white;
+        background: #f8fbff;
         padding: 2.5rem;
-        border-radius: 1.5rem;
+        border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
@@ -982,7 +830,7 @@
     
     .skill-category:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
     }
     
     .skill-category.featured {
@@ -1000,7 +848,7 @@
         width: 60px;
         height: 60px;
         background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 1rem;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1040,7 +888,7 @@
     .skill-item {
         margin-bottom: 1.5rem;
         padding-bottom: 1rem;
-        border-bottom: 1px solid #f0f8ff;
+        border-bottom: 1px solid rgba(0, 64, 133, 0.1);
     }
     
     .skill-item:last-child {
@@ -1075,7 +923,7 @@
     .proficiency-bar {
         flex: 1;
         height: 8px;
-        background: #f0f8ff;
+        background: rgba(0, 64, 133, 0.1);
         border-radius: 4px;
         overflow: hidden;
     }
@@ -1098,7 +946,7 @@
     .applications {
         margin-top: 1.5rem;
         padding-top: 1.5rem;
-        border-top: 2px solid #f0f8ff;
+        border-top: 2px solid rgba(0, 64, 133, 0.1);
     }
     
     .applications h5 {
@@ -1136,8 +984,8 @@
         align-items: center;
         gap: 1rem;
         padding: 1rem;
-        background: rgba(0, 64, 133, 0.03);
-        border-radius: 0.75rem;
+        background: white;
+        border-radius: 12px;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
     
@@ -1176,8 +1024,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 1rem;
-        background: rgba(0, 64, 133, 0.03);
-        border-radius: 0.75rem;
+        background: white;
+        border-radius: 12px;
         border: 1px solid rgba(0, 64, 133, 0.1);
     }
     
@@ -1194,11 +1042,11 @@
         font-size: 0.75rem;
         font-weight: 600;
     }
-    
-    /* Certifications */
+
+    /* Certifications Showcase */
     .certifications-showcase {
-        padding: 4rem 0; /* SLIGHTLY REDUCED from 5rem */
-        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
+        padding: 5rem 1rem;
+        background: #f8fbff;
     }
     
     .certifications-grid {
@@ -1211,17 +1059,17 @@
     .certification-card {
         background: white;
         padding: 2rem;
-        border-radius: 1.5rem;
+        border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
         display: flex;
         gap: 1.5rem;
     }
     
     .certification-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
+        transform: translateY(-5px);
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
     }
     
     .certification-card.featured {
@@ -1231,7 +1079,7 @@
     .cert-badge {
         width: 60px;
         height: 60px;
-        border-radius: 1rem;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1243,9 +1091,6 @@
     .cert-badge.pmp { background: linear-gradient(135deg, #10b981, #059669); }
     .cert-badge.google { background: linear-gradient(135deg, #4285f4, #34a853); }
     .cert-badge.design { background: linear-gradient(135deg, #9c27b0, #673ab7); }
-    .cert-badge.academic { background: linear-gradient(135deg, #ff5722, #f44336); }
-    .cert-badge.linkedin { background: linear-gradient(135deg, #0077b5, #005885); }
-    .cert-badge.courses { background: linear-gradient(135deg, #607d8b, #455a64); }
     
     .cert-content h4 {
         color: #004085;
@@ -1290,11 +1135,11 @@
         font-weight: 600;
         border: 1px solid rgba(0, 64, 133, 0.2);
     }
-    
+
     /* Language Skills */
     .language-skills {
-        padding: 4rem 0; /* SLIGHTLY REDUCED from 5rem */
-        background: #ffffff;
+        padding: 5rem 1rem;
+        background: white;
     }
     
     .languages-grid {
@@ -1305,18 +1150,18 @@
     }
     
     .language-card {
-        background: white;
+        background: #f8fbff;
         padding: 2rem;
-        border-radius: 1.5rem;
+        border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
         text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease;
         border: 1px solid rgba(0, 64, 133, 0.05);
     }
     
     .language-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.12);
+        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
     }
     
     .language-flag {
@@ -1360,6 +1205,135 @@
         color: #374151;
         line-height: 1.5;
         font-size: 0.9rem;
+    }
+
+    /* Skills CTA - Same style as Homepage */
+    .skills-cta {
+        padding: 5rem 1rem;
+        background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
+        color: white;
+    }
+    
+    .cta-content {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .cta-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: white;
+    }
+    
+    .cta-header p {
+        font-size: 1.25rem;
+        margin-bottom: 3rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+    }
+    
+    .cta-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    
+    .cta-feature {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .cta-feature:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .cta-feature i {
+        color: #FF6600;
+        font-size: 1.25rem;
+        width: 24px;
+        text-align: center;
+    }
+    
+    .cta-feature span {
+        font-weight: 600;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .skills-hero-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 2rem;
+        }
+        
+        .profile-photo {
+            width: 220px;
+            height: 220px;
+        }
+        
+        .hero-text-section h1 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-text-section h2 {
+            font-size: 1.3rem;
+        }
+        
+        .competency-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .skills-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .certifications-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .languages-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .cta-features {
+            grid-template-columns: 1fr;
+        }
+        
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-text-section h1 {
+            font-size: 2rem;
+        }
+        
+        .competency-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .languages-grid {
+            grid-template-columns: 1fr;
+        }
     }
     </style>
 
