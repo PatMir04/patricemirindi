@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSV Uploads Demo (Auto-Loader)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Chart.js for Visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- PapaParse for CSV Parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 32px; background: #f5f7fa; }
+    h2 { margin-top: 0; }
+    .controls { display: flex; gap: 16px; margin-bottom: 18px; }
+    label { font-weight: bold; }
+    select, button { padding:3px 8px; }
+    #summary { margin: 20px 0 10px 0; font-size: 1.1em; background: #e6f6fc; padding: 5px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h2>CSV Uploads Demo Dashboard <span id="loader" style="color:#1976d2;">Loading data…</span></h2>
+  <div id="summary"></div>
+  <div class="controls">
+    <label>Country:
+      <select id="countrySel"><option>All</option></select>
+    </label>
+    <label>Indicator:
+      <select id="indicatorSel"><option>All</option></select>
+    </label>
+    <label>Year:
+      <select id="yearSel"><option>All</option></select>
+    </label>
+    <button id="refreshBtn">Show Chart</button>
+  </div>
+  <canvas id="demoChart" width="900" height="420"></canvas>
+  <script>
+    // ==== PARAMETERS ====
+    const GITHUB_USER = 'PatMir04';
+    const GITHUB_REPO = 'patricemirindi';
+    const GITHUB_CSV_PATH = 'data/uploads';
+    const CSV_RAW_ROOT = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/${GITHUB_CSV_PATH}/`;
+    const API_LIST_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_CSV_PATH}`;
+    // ==== STATE ====
+    let ALLDATA = [];
+    let chartObj = null;
+    // ==== DATA LOADER ====
+    async function loadAllCSVs() {
+      document.getElementById('loader').textContent = "Loading CSV list…";
+      const resp = await fetch(API_LIST_URL);
+      const files = (await resp.json()).filter(f=>f.name.endsWith('.csv'));
+      let allRows = [];
+      for (let f of files) {
+        document.getElementById('loader').textContent = `Loading: ${f.name}…`;
+        const txt = await fetch(CSV_RAW_ROOT + f.name).then(r=>r.text());
+        const {data} = Papa.parse(txt,{header:true,skipEmptyLines:true,transformHeader: h=>h.trim()});
+        allRows.push(...data.filter(row=>row.Country&&row.Year&&row.Value&&row.Indicator));
+      }
+      // Filter regions
+      const regions = ['Africa','Asia','Europe','Americas','Oceania','World','European Union','OECD'];
+      ALLDATA = allRows.filter(r=>!regions.some(region=>(r.Country||"").includes(region)));
+      document.getElementById('loader').textContent = "";
+    }
+    // ==== UI POPULATION ====
+    function populateControls() {
+      const csel = document.getElementById('countrySel'), isel = document.getElementById('indicatorSel'), ysel = document.getElementById('yearSel');
+      // Countries
+      const countries = Array.from(new Set(ALLDATA.map(r=>r.Country))).sort();
+      csel.innerHTML = '<option value="">All</option>'+countries.map(c=>`<option>${c}</option>`).join('');
+      // Indicators
+      const inds = Array.from(new Set(ALLDATA.map(r=>r.Indicator))).sort();
+      isel.innerHTML = '<option value="">All</option>'+inds.map(i=>`<option>${i}</option>`).join('');
+      // Years
+      const years = Array.from(new Set(ALLDATA.map(r=>r.Year))).sort((a,b)=>a-b);
+      ysel.innerHTML = '<option value="">All</option>'+years.map(y=>`<option>${y}</option>`).join('');
+      updateSummary();
+    }
+    // ==== SUMMARY ====
+    function updateSummary() {
+      let txt = `Loaded <b>${ALLDATA.length}</b> records from <b>${new Set(ALLDATA.map(r=>r.source_file||"CSV")).size}</b> CSVs. `;
+      txt += `Countries: <b>${new Set(ALLDATA.map(r=>r.Country)).size}</b>. `;
+      txt += `Indicators: <b>${new Set(ALLDATA.map(r=>r.Indicator)).size}</b>. `;
+      document.getElementById('summary').innerHTML = txt;
+    }
+    // ==== FILTERING & CHART ====
+    function getFilteredData() {
+      const country = document.getElementById('countrySel').value;
+      const indicator = document.getElementById('indicatorSel').value;
+      const year = document.getElementById('yearSel').value;
+      return ALLDATA.filter(row =>
+        (!country || row.Country===country) &&
+        (!indicator || row.Indicator===indicator) &&
+        (!year || row.Year==year)
+      );
+    }
+    function showChart() {
+      const c = document.getElementById('demoChart').getContext('2d');
+      if (chartObj) chartObj.destroy();
+      let filtered = getFilteredData();
+      if (filtered.length===0) {
+        c.clearRect(0, 0, 900, 420);
+        return;
+      }
+      // If multiple years, show a line per country/indicator
+      let groups;
+      let xlabel;
+      if (filtered.length && (filtered[0].Year !== undefined)) {
+        // If more than one country or more than one indicator, group accordingly
+        const groupKey = filtered.length > 1 && new Set(filtered.map(r=>r.Country)).size>1 ? "Country" : "Indicator";
+        groups = {};
+        filtered.forEach(row=>{
+          const key = row[groupKey];
+          if(!groups[key]) groups[key]=[];
+          groups[key].push(row);
+        });
+        xlabel = [...new Set(filtered.map(r=>r.Year))].sort();
+      } else {
+        groups = {Combined: filtered};
+        xlabel = filtered.map((_,i)=>i+1);
+      }
+      chartObj = new Chart(c,{
+        type:'line',
+        data:{
+          labels: xlabel,
+          datasets:Object.entries(groups).map(([name,rows],idx)=>({
+            label:name,
+            data:xlabel.map(xv=> {
+              // Find the matching row for this key/year
+              const rec = rows.find(r=>("" + r.Year)===("" + xv));
+              return rec ? Number(rec.Value) : null;
+            }),
+            borderColor:['#1976d2','#388e3c','#fbc02d','#d32f2f','#7b1fa2','#0097a7','#c2185b'][idx%7],
+            backgroundColor:['#bbdefb','#c8e6c9','#fff9c4','#ffcdd2','#ede7f6','#b2ebf2','#f8bbd0'][idx%7],
+            fill:false,
+            tension:0.2,
+          }))
+        },
+        options:{
+          responsive:false,
+          plugins:{legend:{display:true}},
+          scales:{y:{beginAtZero:false}}
+        }
+      });
+    }
+    // ==== MAIN ====
+    async function main() {
+      await loadAllCSVs();
+      populateControls();
+      showChart();
+    }
+    document.getElementById('refreshBtn').onclick = showChart;
+    document.getElementById('countrySel').onchange = showChart;
+    document.getElementById('indicatorSel').onchange = showChart;
+    document.getElementById('yearSel').onchange = showChart;
+    main();
+  </script>
+</body>
+</html>
