@@ -7,7 +7,6 @@ window.DATA_LOADER = {
         try {
             console.log('🔄 Loading all CSV files from GitHub...');
             
-            // Get list of CSV files
             const response = await fetch(this.API_URL);
             const files = await response.json();
             const csvFiles = files.filter(f => f.name.endsWith('.csv'));
@@ -16,7 +15,6 @@ window.DATA_LOADER = {
             
             let allRows = [];
             
-            // Load each CSV file
             for (let file of csvFiles) {
                 console.log(`📥 Loading ${file.name}...`);
                 const csvText = await fetch(this.RAW_ROOT + file.name).then(r => r.text());
@@ -25,24 +23,40 @@ window.DATA_LOADER = {
                     header: true, 
                     skipEmptyLines: true,
                     transformHeader: function(h) {
-                        return h.trim(); // Remove extra spaces from headers
+                        return h.trim();
                     }
                 });
                 
-                // Filter rows with required columns
                 const validRows = parsed.data.filter(row => 
                     row.Country && row.Year && row.Indicator && row.Value
-                );
+                ).map(row => ({
+                    Country: row.Country.trim(),
+                    Year: parseInt(row.Year),
+                    Value: parseFloat(row.Value) || 0,
+                    Indicator: row.Indicator.trim(),
+                    Unit: row.Unit ? row.Unit.trim() : '',
+                    source_file: file.name
+                }));
                 
                 allRows.push(...validRows);
                 console.log(`✅ ${file.name}: ${validRows.length} valid rows loaded`);
             }
             
-            // Remove duplicates based on Country + Year + Indicator
+            const regionalFilters = [
+                'Africa', 'Asia', 'Europe', 'Americas', 'Oceania', 'World',
+                'Sub-Saharan Africa', 'Eastern Africa', 'Western Africa', 
+                'Northern Africa', 'Central Africa', 'Southern Africa',
+                'European Union', 'OECD'
+            ];
+            
+            const countryRows = allRows.filter(row => 
+                !regionalFilters.some(region => row.Country.includes(region))
+            );
+            
             const uniqueRows = [];
             const seen = new Set();
             
-            allRows.forEach(row => {
+            countryRows.forEach(row => {
                 const key = `${row.Country}_${row.Year}_${row.Indicator}`;
                 if (!seen.has(key)) {
                     seen.add(key);
@@ -57,9 +71,11 @@ window.DATA_LOADER = {
             console.log(`📊 Countries: ${new Set(uniqueRows.map(r => r.Country)).size}`);
             console.log(`📈 Indicators: ${new Set(uniqueRows.map(r => r.Indicator)).size}`);
             
+            return uniqueRows;
+            
         } catch (error) {
             console.error('❌ Error loading CSV files:', error);
-            alert('Error loading data files. Please check console for details.');
+            return [];
         }
     }
 };
