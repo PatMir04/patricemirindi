@@ -1,0 +1,49 @@
+Country,Year,Value,Indicator,Unit
+Afghanistan,2020,65286,Country area,1000 ha
+Afghanistan,2021,65286,Country area,1000 ha
+Afghanistan,2020,32540,Agricultural land,1000 ha
+Afghanistan,2021,32550,Agricultural land,1000 ha
+Afghanistan,2020,7910,Cropland,1000 ha
+Afghanistan,2021,7920,Cropland,1000 ha
+Afghanistan,2020,1208,Forest land,1000 ha
+Afghanistan,2021,1208,Forest land,1000 ha
+Benin,2020,11462,Country area,1000 ha
+Benin,2021,11462,Country area,1000 ha
+Benin,2020,4850,Agricultural land,1000 ha
+Benin,2021,4860,Agricultural land,1000 ha
+Benin,2020,2840,Cropland,1000 ha
+Benin,2021,2850,Cropland,1000 ha
+Benin,2020,4658,Forest land,1000 ha
+Benin,2021,4658,Forest land,1000 ha
+Burkina Faso,2020,27400,Country area,1000 ha
+Burkina Faso,2021,27400,Country area,1000 ha
+Burkina Faso,2020,11850,Agricultural land,1000 ha
+Burkina Faso,2021,11860,Agricultural land,1000 ha
+Burkina Faso,2020,6050,Cropland,1000 ha
+Burkina Faso,2021,6060,Cropland,1000 ha
+Burkina Faso,2020,6542,Forest land,1000 ha
+Burkina Faso,2021,6542,Forest land,1000 ha
+Canada,2020,998467,Country area,1000 ha
+Canada,2021,998467,Country area,1000 ha
+Canada,2020,64812,Agricultural land,1000 ha
+Canada,2021,64815,Agricultural land,1000 ha
+Canada,2020,43410,Cropland,1000 ha
+Canada,2021,43420,Cropland,1000 ha
+Canada,2020,347069,Forest land,1000 ha
+Canada,2021,347069,Forest land,1000 ha
+Ghana,2020,23854,Country area,1000 ha
+Ghana,2021,23854,Country area,1000 ha
+Ghana,2020,13630,Agricultural land,1000 ha
+Ghana,2021,13640,Agricultural land,1000 ha
+Ghana,2020,5750,Cropland,1000 ha
+Ghana,2021,5760,Cropland,1000 ha
+Ghana,2020,9337,Forest land,1000 ha
+Ghana,2021,9337,Forest land,1000 ha
+Nigeria,2020,92377,Country area,1000 ha
+Nigeria,2021,92377,Country area,1000 ha
+Nigeria,2020,70000,Agricultural land,1000 ha
+Nigeria,2021,70050,Agricultural land,1000 ha
+Nigeria,2020,37000,Cropland,1000 ha
+Nigeria,2021,37020,Cropland,1000 ha
+Nigeria,2020,7665,Forest land,1000 ha
+Nigeria,2021,7665,Forest land,1000 ha
