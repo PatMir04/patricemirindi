@@ -1,0 +1,44 @@
+{
+  "name": "fao-data-integration",
+  "version": "1.0.0",
+  "description": "FAO dataset integration for Global Development Analytics Dashboard",
+  "main": "step1_land_use_integration.js",
+  "scripts": {
+    "test-setup": "node test_setup.js",
+    "step1": "node step1_land_use_integration.js",
+    "step2": "node step2_food_security_integration.js",
+    "step3": "node step3_production_integration.js",
+    "find-credentials": "node find_credentials.js",
+    "install": "npm install"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "papaparse": "^5.4.1",
+    "pg": "^8.11.3",
+    "mysql2": "^3.6.0",
+    "mongodb": "^6.1.0",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "fao",
+    "faostat", 
+    "agriculture",
+    "data-integration",
+    "analytics",
+    "dashboard"
+  ],
+  "author": "Patrice Mirindi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatMir04/patricemirindi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PatMir04/patricemirindi/issues"
+  },
+  "homepage": "https://patricemirindi.com/data-analytics.html"
+}
