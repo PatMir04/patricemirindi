@@ -880,6 +880,33 @@
         </div>
     </footer>
 
+
+    <!-- CSV Parser for automatic loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    
+    <!-- Auto-loading system -->
+    <script src="js/data-loader.js"></script>
+    <script src="js/ui-updater.js"></script>
+    
+    <!-- Auto-load data on page ready -->
+    <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        console.log('🚀 Starting automatic data loading...');
+        
+        try {
+            await window.DATA_LOADER.loadAllCSVs();
+            window.UI_UPDATER.populateCountrySelector();
+            window.UI_UPDATER.populateIndicatorSelector();
+            window.UI_UPDATER.updateGlobalStats();
+            
+            console.log('✅ Dashboard ready with automatic data loading!');
+            
+        } catch (error) {
+            console.error('❌ Failed to initialize dashboard:', error);
+        }
+    });
+    </script>
+    
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
