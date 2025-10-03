@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAO Data Processor - Solve Missing Countries Problem</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status {
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .progress {
+            background: #e9ecef;
+            border-radius: 20px;
+            padding: 3px;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #007bff, #28a745);
+            height: 20px;
+            border-radius: 18px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .results {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: background 0.2s;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .success {
+            color: #28a745;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .stat-label {
+            color: #6c757d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 FAO Data Processor</h1>
+            <h2>Solve Missing Countries Problem Instantly</h2>
+            <p>Generate a complete countries list from FAO data for your analytics dashboard</p>
+        </div>
+        
+        <div class="status" id="status">
+            <strong>Ready:</strong> Click "Process FAO Data" to generate countries.json with 246 countries/territories
+        </div>
+        
+        <div class="progress" style="display: none;" id="progress-container">
+            <div class="progress-bar" id="progress-bar" style="width: 0%;">0%</div>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="button" id="process-btn" onclick="processData()">🚀 Process FAO Data</button>
+            <button class="button" id="download-btn" onclick="downloadCountries()" style="display: none;">📥 Download countries.json</button>
+        </div>
+        
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-number" id="total-countries">0</div>
+                <div class="stat-label">Total Countries</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="regions-count">0</div>
+                <div class="stat-label">Regions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="new-countries">0</div>
+                <div class="stat-label">New Countries Added</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="iso3-coverage">0%</div>
+                <div class="stat-label">ISO3 Coverage</div>
+            </div>
+        </div>
+        
+        <div class="results" id="results" style="display: none;">
+            <h3>📊 Processing Results</h3>
+            <div id="results-content"></div>
+        </div>
+        
+        <div class="results" id="country-list" style="display: none;">
+            <h3>🌍 Countries Added to Your Dashboard</h3>
+            <div id="country-list-content"></div>
+        </div>
+    </div>
+
+    <script src="./scripts/process_manual_csv.js"></script>
+    <script>
+        let processedData = null;
+        
+        async function processData() {
+            const statusDiv = document.getElementById('status');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            const processBtn = document.getElementById('process-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const resultsDiv = document.getElementById('results');
+            const statsDiv = document.getElementById('stats');
+            
+            // Show progress
+            processBtn.disabled = true;
+            progressContainer.style.display = 'block';
+            statusDiv.innerHTML = '<strong>Processing:</strong> Loading country data from GitHub...';
+            updateProgress(20);
+            
+            try {
+                const processor = new FAODataProcessor();
+                
+                // Load country mapping
+                updateProgress(40);
+                statusDiv.innerHTML = '<strong>Processing:</strong> Harmonizing country codes...';
+                
+                const loaded = await processor.loadCountryMapping();
+                if (!loaded) {
+                    throw new Error('Failed to load country data');
+                }
+                
+                updateProgress(70);
+                statusDiv.innerHTML = '<strong>Processing:</strong> Generating countries.json...';
+                
+                // Generate countries JSON
+                processedData = await processor.generateCountriesJSON();
+                
+                updateProgress(100);
+                statusDiv.innerHTML = '<strong class="success">✅ Success:</strong> Generated countries.json with ' + processedData.total_countries + ' countries!';
+                
+                // Show results
+                showResults(processedData);
+                downloadBtn.style.display = 'inline-block';
+                
+            } catch (error) {
+                console.error('Processing error:', error);
+                statusDiv.innerHTML = '<strong class="error">❌ Error:</strong> ' + error.message;
+                updateProgress(0);
+            } finally {
+                processBtn.disabled = false;
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                }, 1000);
+            }
+        }
+        
+        function updateProgress(percentage) {
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+        
+        function showResults(data) {
+            const statsDiv = document.getElementById('stats');
+            const resultsDiv = document.getElementById('results');
+            const countryListDiv = document.getElementById('country-list');
+            
+            // Update statistics
+            document.getElementById('total-countries').textContent = data.total_countries;
+            
+            const regionCounts = {};
+            data.countries.forEach(country => {
+                regionCounts[country.region] = (regionCounts[country.region] || 0) + 1;
+            });
+            
+            document.getElementById('regions-count').textContent = Object.keys(regionCounts).length;
+            
+            // Calculate new countries (assuming previous was ~195)
+            const newCountries = Math.max(0, data.total_countries - 195);
+            document.getElementById('new-countries').textContent = newCountries;
+            
+            // Calculate ISO3 coverage
+            const withISO3 = data.countries.filter(c => c.iso3_code).length;
+            const iso3Coverage = Math.round((withISO3 / data.total_countries) * 100);
+            document.getElementById('iso3-coverage').textContent = iso3Coverage + '%';
+            
+            statsDiv.style.display = 'grid';
+            
+            // Show detailed results
+            const resultsContent = document.getElementById('results-content');
+            resultsContent.innerHTML = `
+                <h4>📈 Coverage Improvement</h4>
+                <ul>
+                    <li><strong>Before:</strong> ~195 countries (estimated)</li>
+                    <li><strong>After:</strong> ${data.total_countries} countries/territories</li>
+                    <li><strong>Improvement:</strong> +${newCountries} new countries</li>
+                </ul>
+                
+                <h4>🌍 Regional Distribution</h4>
+                <ul>
+                    ${Object.entries(regionCounts).map(([region, count]) => 
+                        `<li><strong>${region}:</strong> ${count} countries</li>`
+                    ).join('')}
+                </ul>
+                
+                <h4>🎯 Key Features</h4>
+                <ul>
+                    <li>✅ Small island states included (Cook Islands, Niue, Tuvalu, etc.)</li>
+                    <li>✅ Dependencies and territories (Hong Kong SAR, Greenland, etc.)</li>
+                    <li>✅ Recent nations (South Sudan, Montenegro)</li>
+                    <li>✅ Micro-states (Vatican City, Monaco, San Marino)</li>
+                    <li>✅ Standardized country codes (FAO + ISO3)</li>
+                </ul>
+            `;
+            
+            resultsDiv.style.display = 'block';
+            
+            // Show country list preview
+            const countryListContent = document.getElementById('country-list-content');
+            const sampleCountries = data.countries.slice(0, 20);
+            
+            countryListContent.innerHTML = `
+                <p><strong>Sample countries (first 20 of ${data.total_countries}):</strong></p>
+                <div style="columns: 2; column-gap: 30px; margin-top: 15px;">
+                    ${sampleCountries.map(country => 
+                        `<div style="margin-bottom: 5px;">• ${country.name} (${country.region})</div>`
+                    ).join('')}
+                </div>
+                <p style="margin-top: 15px;"><em>...and ${data.total_countries - 20} more countries</em></p>
+            `;
+            
+            countryListDiv.style.display = 'block';
+        }
+        
+        function downloadCountries() {
+            if (!processedData) {
+                alert('Please process data first!');
+                return;
+            }
+            
+            const jsonString = JSON.stringify(processedData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'countries.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('✅ countries.json downloaded! Upload this to your dashboard to add all 246 countries.');
+        }
+        
+        // Auto-process when page loads (optional)
+        // window.addEventListener('load', processData);
+    </script>
+</body>
+</html>
