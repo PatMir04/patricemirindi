@@ -887,6 +887,15 @@
     <!-- Auto-loading system -->
     <script src="assets/js/data-loader.js"></script>
     <script src="assets/js/ui-updater.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        await window.DATA_LOADER.loadAllCSVs();
+        window.UI_UPDATER.populateCountrySelector();
+        window.UI_UPDATER.populateIndicatorSelector();
+        // Your dashboard's existing init code follows here as always!
+    });
+    </script>
     
     <!-- Auto-load data on page ready -->
     <script>
