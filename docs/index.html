@@ -1126,9 +1126,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         document.addEventListener('DOMContentLoaded',function(){
             fetchWB('NY.GDP.MKTP.KD.ZG','gdpChart','gdpChartSrc','GDP Growth (%)','#004085');
-            fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');
-            fetchWB('SE.PRM.ENRR','educationChart','eduSrc','Primary Enrollment (%)','#38a169');
-            fetchWB('SP.DYN.LE00.IN','lifeExpChart','lifeSrc','Life Expectancy (years)','#FF6600');
+            setTimeout(function(){fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');},1000);
+            setTimeout(function(){fetchWB('SE.PRM.ENRR','educationChart','eduSrc','Primary Enrollment (%)','#38a169');},2000);
+            setTimeout(function(){fetchWB('SP.DYN.LE00.IN','lifeExpChart','lifeSrc','Life Expectancy (years)','#FF6600');},3000);
         });
     })();
     </script>
