@@ -1353,6 +1353,48 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Technology/Tool Grid with Icons
+  var tools = [
+    {name:'R',icon:'fa-chart-line',color:'#276DC3'},
+    {name:'Python',icon:'fa-python',color:'#3776AB'},
+    {name:'STATA',icon:'fa-calculator',color:'#1A5276'},
+    {name:'Excel',icon:'fa-file-excel',color:'#217346'},
+    {name:'Power BI',icon:'fa-chart-bar',color:'#F2C811'},
+    {name:'Tableau',icon:'fa-chart-pie',color:'#E97627'},
+    {name:'Git',icon:'fa-code-branch',color:'#F05032'},
+    {name:'SQL',icon:'fa-database',color:'#4479A1'},
+    {name:'LaTeX',icon:'fa-file-alt',color:'#008080'},
+    {name:'QGIS',icon:'fa-globe-africa',color:'#589632'},
+    {name:'D3.js',icon:'fa-project-diagram',color:'#F9A03C'},
+    {name:'Leaflet',icon:'fa-map-marked-alt',color:'#199900'}
+  ];
+  var certSection = document.querySelector('.certifications-showcase');
+  if (certSection) {
+    var grid = document.createElement('div');
+    grid.innerHTML = '<div class="container"><h2 class="section-title" style="text-align:center;color:#004085;margin-bottom:2rem">Tools & Technologies</h2><div id="techGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:1rem;max-width:800px;margin:0 auto 3rem"></div></div>';
+    certSection.parentNode.insertBefore(grid, certSection);
+    var tg = document.getElementById('techGrid');
+    tools.forEach(function(t) {
+      var d = document.createElement('div');
+      d.style.cssText = 'text-align:center;padding:1.5rem 1rem;background:white;border-radius:12px;box-shadow:0 4px 16px rgba(0,64,133,0.08);transition:transform 0.3s;cursor:default';
+      d.innerHTML = '<i class="fas '+t.icon+'" style="font-size:2rem;color:'+t.color+';margin-bottom:0.5rem;display:block"></i><span style="font-size:0.85rem;font-weight:600;color:#004085">'+t.name+'</span>';
+      d.onmouseenter = function(){this.style.transform='translateY(-5px)'};
+      d.onmouseleave = function(){this.style.transform=''};
+      tg.appendChild(d);
+    });
+  }
+  // GitHub Contribution Heatmap
+  var langSection = document.querySelector('.language-skills');
+  if (langSection) {
+    var heatmap = document.createElement('div');
+    heatmap.innerHTML = '<div class="container" style="padding:3rem 0"><h2 class="section-title" style="text-align:center;color:#004085;margin-bottom:2rem">GitHub Activity</h2><div style="text-align:center"><img src="https://ghchart.rshah.org/004085/PatMir04" alt="GitHub Contributions" style="max-width:100%;border-radius:8px;box-shadow:0 4px 16px rgba(0,64,133,0.1)"/><p style="margin-top:1rem;color:#6B7280;font-size:0.9rem"><a href="https://github.com/PatMir04" target="_blank" style="color:#FF6600;font-weight:600">View Full GitHub Profile</a></p></div></div>';
+    langSection.parentNode.insertBefore(heatmap, langSection);
+  }
+});
+</script>
+
     
 
     
