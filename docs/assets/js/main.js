@@ -542,3 +542,62 @@
     };
 
 })();
+
+// ================================================================
+// ROTATING MULTILINGUAL PHRASES - Consistent across all pages
+// ================================================================
+(function() {
+  var phrases = [
+    'Un pas vers un meilleur univers',
+    'One step to a better universe',
+    'Ein Schritt zu einem besseren Universum',
+    'E\u00e9n stap naar een beter universum',
+    'Un paso hacia un universo mejor',
+    'Hatua moja kuelekea ulimwengu bora'
+  ];
+  var el = document.querySelector('.rotating-text, .hero-subtitle-rotating, .banner-text');
+  if (el) {
+    var idx = 0;
+    function rotate() {
+      el.style.opacity = 0;
+      setTimeout(function() {
+        el.textContent = phrases[idx];
+        el.style.opacity = 1;
+        idx = (idx + 1) % phrases.length;
+      }, 500);
+    }
+    el.style.transition = 'opacity 0.5s ease';
+    rotate();
+    setInterval(rotate, 4000);
+  }
+})();
+
+// ================================================================
+// MOBILE RESPONSIVENESS ENHANCEMENTS
+// ================================================================
+(function() {
+  // Smooth hamburger menu
+  var hamburger = document.querySelector('.hamburger');
+  var navMenu = document.querySelector('.nav-menu');
+  if (hamburger && navMenu) {
+    hamburger.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    });
+    // Close menu on link click
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+      });
+    });
+  }
+  // Touch-friendly hover effects
+  if ('ontouchstart' in window) {
+    document.body.classList.add('touch-device');
+  }
+  // Lazy load all images
+  document.querySelectorAll('img:not([loading])').forEach(function(img) {
+    img.setAttribute('loading', 'lazy');
+  });
+})();
