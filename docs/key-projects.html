@@ -1675,4 +1675,37 @@ document.addEventListener('DOMContentLoaded', function() {
   }, 2000);
 });
 </script>
+
+    <script>
+// Improve Canada marker visibility
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    // Find and enhance Canada marker via popup content check
+    var markers = document.querySelectorAll('.leaflet-marker-icon');
+    markers.forEach(function(m) {
+      m.style.filter = 'hue-rotate(0deg)';
+    });
+    // Add pulsing effect to all markers for better visibility
+    var style = document.createElement('style');
+    style.textContent = '.leaflet-marker-icon{transition:transform 0.3s!important}.leaflet-marker-icon:hover{transform:scale(1.3)!important;z-index:9999!important}';
+    document.head.appendChild(style);
+    // Zoom controls enhancement
+    var map = document.querySelector('.leaflet-container');
+    if (map && map._leaflet_id) {
+      // Add fit bounds button
+      var fitBtn = document.createElement('button');
+      fitBtn.textContent = 'Fit All';
+      fitBtn.style.cssText = 'position:absolute;top:80px;left:10px;z-index:1000;padding:6px 12px;background:white;border:2px solid rgba(0,0,0,0.2);border-radius:4px;cursor:pointer;font-size:12px;font-weight:600';
+      fitBtn.addEventListener('click', function() {
+        var mapEl = document.querySelector('#project-map, .map-container, [id*=map]');
+        if (mapEl && mapEl._leaflet_id) {
+          // Trigger window resize to refresh map
+          window.dispatchEvent(new Event('resize'));
+        }
+      });
+      map.appendChild(fitBtn);
+    }
+  }, 3000);
+});
+</script>
 </html>
