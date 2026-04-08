@@ -16,6 +16,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Structured Data -->
@@ -277,6 +278,38 @@
                         <span class="impact-meta">Global Findex 2021</span>
                         <p class="impact-insight">Digital financial services driving inclusion in emerging markets</p>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Global Development Data Charts -->
+    <section class="dev-charts-section" style="padding:4rem 0;background:#fff">
+        <div class="container">
+            <div style="text-align:center;margin-bottom:2rem">
+                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">Global Development Trends</h2>
+                <p style="font-size:1.1rem;color:#6B7280">Live data from the World Bank API</p>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:2rem">
+                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-chart-line" style="color:#FF6600;margin-right:.5rem"></i>GDP Growth Rate (%) - World</h3>
+                    <canvas id="gdpChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="gdpChartSrc">Loading...</p>
+                </div>
+                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-users" style="color:#FF6600;margin-right:.5rem"></i>Extreme Poverty Rate (%) - World</h3>
+                    <canvas id="povertyChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="povertySrc">Loading...</p>
+                </div>
+                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-graduation-cap" style="color:#FF6600;margin-right:.5rem"></i>School Enrollment, Primary (%) - World</h3>
+                    <canvas id="educationChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="eduSrc">Loading...</p>
+                </div>
+                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-heartbeat" style="color:#FF6600;margin-right:.5rem"></i>Life Expectancy at Birth - World</h3>
+                    <canvas id="lifeExpChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="lifeSrc">Loading...</p>
                 </div>
             </div>
         </div>
@@ -1070,5 +1103,34 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+        <script>
+    // World Bank Chart.js - fetch live data and render charts
+    (function(){
+        var chartOpts={responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false},x:{ticks:{maxRotation:45}}}};
+        function buildChart(id,labels,values,color,label){
+            new Chart(document.getElementById(id),{type:'line',data:{labels:labels,datasets:[{label:label,data:values,borderColor:color,backgroundColor:color+'33',fill:true,tension:0.3,pointRadius:3}]},options:chartOpts});
+        }
+        function fetchWB(indicator,id,srcId,label,color){
+            fetch('https://api.worldbank.org/v2/country/WLD/indicator/'+indicator+'?format=json&date=2000:2025&per_page=30')
+            .then(function(r){return r.json();})
+            .then(function(d){
+                if(!d[1])return;
+                var pts=d[1].filter(function(x){return x.value!==null;}).reverse();
+                var labels=pts.map(function(x){return x.date;});
+                var values=pts.map(function(x){return parseFloat(x.value.toFixed(2));});
+                buildChart(id,labels,values,color,label);
+                var el=document.getElementById(srcId);
+                if(el) el.textContent='Source: World Bank | '+pts[0].date+' - '+pts[pts.length-1].date;
+            }).catch(function(){var el=document.getElementById(srcId);if(el)el.textContent='Data unavailable';});
+        }
+        document.addEventListener('DOMContentLoaded',function(){
+            fetchWB('NY.GDP.MKTP.KD.ZG','gdpChart','gdpChartSrc','GDP Growth (%)','#004085');
+            fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');
+            fetchWB('SE.PRM.ENRR','educationChart','eduSrc','Primary Enrollment (%)','#38a169');
+            fetchWB('SP.DYN.LE00.IN','lifeExpChart','lifeSrc','Life Expectancy (years)','#FF6600');
+        });
+    })();
+    </script>
 </body>
 </html>
