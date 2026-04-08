@@ -287,8 +287,8 @@
     <section class="dev-charts-section" style="padding:4rem 0;background:linear-gradient(135deg,#f0f4ff 0%,#e8f4ff 100%)">
         <div class="container">
             <div style="text-align:center;margin-bottom:2rem">
-                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">Tracking Global Economic Resilience</h2>
-                <p style="font-size:1.1rem;color:#6B7280">Live World Bank data on the indicators that matter most to development economists and policymakers</p>
+                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">Tracking Global Development Indicators</h2>
+                <p style="font-size:1.1rem;color:#6B7280">Live data from the World Bank powering evidence-based development solutions</p>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:2rem">
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
@@ -1126,7 +1126,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         document.addEventListener('DOMContentLoaded',function(){
             fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');
-             new Chart(document.getElementById('findexChart'),{type:'bar',data:{labels:['2011','2014','2017','2021','2024'],datasets:[{label:'Account Ownership (%)',data:[51,62,69,76,75],backgroundColor:['#004085','#0056b3','#0069d9','#FF6600','#e55100'],borderRadius:6}]},options:{responsive:true,animation:{duration:2000,easing:'easeInOutQuart'},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,64,133,0.9)',padding:12,cornerRadius:8}},scales:{y:{beginAtZero:true,max:100,grid:{color:'rgba(0,64,133,0.06)'}},x:{grid:{display:false}}}}});document.getElementById('findexSrc').textContent='Source: Global Findex 2025 (World Bank,'Poverty Rate (%)','#e53e3e');},1000);
+             new Chart(document.getElementById('findexChart'),{type:'bar',data:{labels:['2011','2014','2017','2021','2024'],datasets:[{label:'Account Ownership (%)',data:[51,62,69,76,75],backgroundColor:['#004085','#0056b3','#0069d9','#FF6600','#e55100'],borderRadius:6}]},options:{responsive:true,animation:{duration:2000,easing:'easeInOutQuart'},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,64,133,0.9)',padding:12,cornerRadius:8}},scales:{y:{beginAtZero:true,max:100,grid:{color:'rgba(0,64,133,0.06)'}},x:{grid:{display:false}}}}});document.getElementById('findexSrc').textContent='Source: Global Findex 2025 (World Bank)';},1000);
             setTimeout(function(){fetchWB('NV.AGR.TOTL.ZS','agriChart','agriSrc','Agriculture (% of GDP)','#38a169');},2000);
             setTimeout(function(){fetchWB('EN.GHG.CO2.MT.CE.AR5','co2Chart','co2Src','CO2 Emissions (Mt CO2e)','#6b7280');},3000);
         });
