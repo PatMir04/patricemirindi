@@ -996,5 +996,46 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Quantified achievements as large callout numbers
+  document.querySelectorAll('.achievement-tag').forEach(function(tag) {
+    var text = tag.textContent.trim();
+    var match = text.match(/^([\d,$%+]+)\s*(.*)/);
+    if (match) {
+      tag.innerHTML = '<span style="font-size:1.5rem;font-weight:800;color:#FF6600;display:block">' + match[1] + '</span><span style="font-size:0.7rem;color:#004085">' + match[2] + '</span>';
+      tag.style.cssText = 'text-align:center;padding:0.5rem 1rem;min-width:100px;background:linear-gradient(135deg,rgba(255,102,0,0.08),rgba(0,64,133,0.08));border:2px solid rgba(255,102,0,0.2)';
+    }
+  });
+  // Animated counter for impact stats
+  function animateCounter(el, target, suffix) {
+    var current = 0, step = Math.max(1, Math.floor(target/50));
+    var timer = setInterval(function() {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current.toLocaleString() + (suffix||'');
+    }, 30);
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var text = el.textContent.trim();
+        var num = parseInt(text.replace(/[^0-9]/g,''));
+        var suffix = text.replace(/[0-9,]/g,'');
+        if (num) { el.textContent='0'; animateCounter(el,num,suffix); }
+        observer.unobserve(el);
+      }
+    });
+  }, {threshold:0.3});
+  document.querySelectorAll('.stat-number').forEach(function(s){observer.observe(s);});
+  // Fix rotating phrase - make consistent
+  var phrase = document.querySelector('.rotating-text, .hero-subtitle-rotating');
+  if (phrase && phrase.textContent.trim().length < 3) {
+    phrase.textContent = 'One step to a better universe';
+  }
+});
+</script>
 </body>
 </html>
