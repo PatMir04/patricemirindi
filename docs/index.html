@@ -265,7 +265,7 @@
                 <div class="impact-card development">
                     <div class="impact-header">
                         <div class="impact-icon">
-                            <i class="fas fa-seedling"></i>
+                            <i class="fas fa-exchange-alt"></i>
                         </div>
                         <div class="impact-trend neutral">
                             <i class="fas fa-minus"></i>
@@ -287,8 +287,8 @@
     <section class="dev-charts-section" style="padding:4rem 0;background:linear-gradient(135deg,#f0f4ff 0%,#e8f4ff 100%)">
         <div class="container">
             <div style="text-align:center;margin-bottom:2rem">
-                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">The Data Behind Global Development</h2>
-                <p style="font-size:1.1rem;color:#6B7280">Real-time World Bank indicators driving financial resilience and development research</p>
+                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">Tracking Global Economic Resilience</h2>
+                <p style="font-size:1.1rem;color:#6B7280">Live World Bank data on the indicators that matter most to development economists and policymakers</p>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:2rem">
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
@@ -302,14 +302,14 @@
                     <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="povertySrc">Loading...</p>
                 </div>
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-seedling" style="color:#FF6600;margin-right:.5rem"></i>Agriculture, Forestry & Fishing (% of GDP) - World</h3>
-                    <canvas id="agriChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="agriSrc">Loading...</p>
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-exchange-alt" style="color:#FF6600;margin-right:.5rem"></i>Trade Openness (% of GDP) - World</h3>
+                    <canvas id="tradeChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="tradeSrc">Loading...</p>
                 </div>
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-bolt" style="color:#FF6600;margin-right:.5rem"></i>Access to Electricity (% of Population) - World</h3>
-                    <canvas id="elecChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="elecSrc">Loading...</p>
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-piggy-bank" style="color:#FF6600;margin-right:.5rem"></i>Gross Savings (% of GDP) - World</h3>
+                    <canvas id="savingsChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="savingsSrc">Loading...</p>
                 </div>
             </div>
         </div>
@@ -378,7 +378,7 @@
                         <span>Data-Driven Solutions</span>
                     </div>
                     <div class="cta-feature">
-                        <i class="fas fa-seedling"></i>
+                        <i class="fas fa-exchange-alt"></i>
                         <span>Sustainable Impact</span>
                     </div>
                 </div>
@@ -1127,8 +1127,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('DOMContentLoaded',function(){
             fetchWB('BX.TRF.PWKR.CD.DT','remitChart','remitSrc','Remittances (USD)','#004085');
             setTimeout(function(){fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');},1000);
-            setTimeout(function(){fetchWB('NV.AGR.TOTL.ZS','agriChart','agriSrc','Agriculture (% of GDP)','#38a169');},2000);
-            setTimeout(function(){fetchWB('EG.ELC.ACCS.ZS','elecChart','elecSrc','Electricity Access (%)','#FF6600');},3000);
+            setTimeout(function(){fetchWB('NE.TRD.GNFS.ZS','tradeChart','tradeSrc','Trade Openness (% of GDP)','#38a169');},2000);
+            setTimeout(function(){fetchWB('NY.GNS.ICTR.ZS','savingsChart','savingsSrc','Gross Savings (% of GDP)','#FF6600');},3000);
         });
     })();
     </script>
