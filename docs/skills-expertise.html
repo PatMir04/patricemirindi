@@ -1308,5 +1308,53 @@
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Create radar chart canvas dynamically
+  var section = document.querySelector('.competency-overview .container');
+  if (section) {
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'max-width:500px;margin:2rem auto';
+    var canvas = document.createElement('canvas');
+    canvas.id = 'skillsRadarChart';
+    wrapper.appendChild(canvas);
+    section.insertBefore(wrapper, section.firstChild);
+    new Chart(canvas, {
+      type: 'radar',
+      data: {
+        labels: ['R','Python','STATA','Excel','Power BI','Project Mgmt','Policy','Stakeholders'],
+        datasets: [{
+          label: 'Proficiency',
+          data: [95,88,85,95,75,90,92,90],
+          backgroundColor: 'rgba(0,64,133,0.2)',
+          borderColor: '#004085',
+          pointBackgroundColor: '#FF6600'
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {r:{beginAtZero:true,max:100}},
+        plugins: {legend:{display:false}}
+      }
+    });
+  }
+  // Animate proficiency bars on scroll
+  document.querySelectorAll('.proficiency-fill').forEach(function(bar) {
+    var w = bar.style.width;
+    bar.style.width = '0';
+    bar.style.transition = 'width 1.5s ease';
+    var obs = new IntersectionObserver(function(e) {
+      if (e[0].isIntersecting) { bar.style.width = w; obs.unobserve(bar); }
+    }, {threshold: 0.3});
+    obs.observe(bar);
+  });
+});
+</script>
+
+    
+
+    
 </body>
 </html>
