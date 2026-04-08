@@ -302,9 +302,9 @@
                     <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="povertySrc">Loading...</p>
                 </div>
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-graduation-cap" style="color:#FF6600;margin-right:.5rem"></i>School Enrollment, Primary (%) - World</h3>
-                    <canvas id="educationChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="eduSrc">Loading...</p>
+                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-seedling" style="color:#FF6600;margin-right:.5rem"></i>Agriculture, Forestry & Fishing (% of GDP) - World</h3>
+                    <canvas id="agriChart" height="220"></canvas>
+                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="agriSrc">Loading...</p>
                 </div>
                 <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
                     <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-heartbeat" style="color:#FF6600;margin-right:.5rem"></i>Life Expectancy at Birth - World</h3>
@@ -1107,9 +1107,9 @@ document.addEventListener('DOMContentLoaded', function() {
         <script>
     // World Bank Chart.js - fetch live data and render charts
     (function(){
-        var chartOpts={responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:false},x:{ticks:{maxRotation:45}}}};
+        var chartOpts={responsive:true,animation:{duration:2000,easing:'easeInOutQuart'},interaction:{intersect:false,mode:'index'},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,64,133,0.9)',titleFont:{size:14},bodyFont:{size:13},padding:12,cornerRadius:8,displayColors:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,64,133,0.06)'}},x:{ticks:{maxRotation:45},grid:{display:false}}}};
         function buildChart(id,labels,values,color,label){
-            new Chart(document.getElementById(id),{type:'line',data:{labels:labels,datasets:[{label:label,data:values,borderColor:color,backgroundColor:color+'33',fill:true,tension:0.3,pointRadius:3}]},options:chartOpts});
+            new Chart(document.getElementById(id),{type:'line',data:{labels:labels,datasets:[{label:label,data:values,borderColor:color,backgroundColor:color+'22',borderWidth:3,fill:true,tension:0.4,pointRadius:4,pointHoverRadius:8,pointBackgroundColor:'#fff',pointBorderColor:color,pointBorderWidth:2,pointHoverBackgroundColor:color,pointHoverBorderColor:'#fff'}]},options:chartOpts});
         }
         function fetchWB(indicator,id,srcId,label,color){
             fetch('https://api.worldbank.org/v2/country/WLD/indicator/'+indicator+'?format=json&date=2000:2025&per_page=30')
@@ -1127,7 +1127,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('DOMContentLoaded',function(){
             fetchWB('NY.GDP.MKTP.KD.ZG','gdpChart','gdpChartSrc','GDP Growth (%)','#004085');
             setTimeout(function(){fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');},1000);
-            setTimeout(function(){fetchWB('SE.PRM.ENRR','educationChart','eduSrc','Primary Enrollment (%)','#38a169');},2000);
+            setTimeout(function(){fetchWB('NV.AGR.TOTL.ZS','agriChart','agriSrc','Agriculture (% of GDP)','#38a169');},2000);
             setTimeout(function(){fetchWB('SP.DYN.LE00.IN','lifeExpChart','lifeSrc','Life Expectancy (years)','#FF6600');},3000);
         });
     })();
