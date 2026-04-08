@@ -965,5 +965,36 @@
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var logos = {
+    'Financial Resilience Institute': {bg:'#004085',text:'FRI'},
+    'Economic Sense': {bg:'#10b981',text:'ES'},
+    'The Anzisha Prize': {bg:'#f59e0b',text:'AP'},
+    'African Economic Research Consortium': {bg:'#8b5cf6',text:'AERC'},
+    "Cellule d'Appui Technique": {bg:'#FF6600',text:'CAT'}
+  };
+  document.querySelectorAll('.timeline-card h4').forEach(function(h4) {
+    var text = h4.textContent;
+    for (var org in logos) {
+      if (text.indexOf(org) !== -1) {
+        var badge = document.createElement('span');
+        badge.style.cssText = 'display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:8px;color:white;font-size:0.65rem;font-weight:700;margin-right:8px;vertical-align:middle;background:'+logos[org].bg;
+        badge.textContent = logos[org].text;
+        h4.insertBefore(badge, h4.firstChild);
+        break;
+      }
+    }
+  });
+  document.querySelectorAll('.timeline-marker').forEach(function(marker) {
+    marker.style.cursor = 'pointer';
+    marker.addEventListener('click', function() {
+      var card = this.parentElement.querySelector('.timeline-card');
+      if (card) { card.scrollIntoView({behavior:'smooth',block:'center'}); card.style.boxShadow='0 0 0 3px #FF6600'; setTimeout(function(){card.style.boxShadow='';},2000); }
+    });
+  });
+});
+</script>
 </body>
 </html>
