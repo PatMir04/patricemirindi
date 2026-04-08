@@ -1633,4 +1633,46 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
 </body>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Add Show All button above project cards
+  var showcase = document.querySelector('.projects-showcase .container');
+  if (showcase) {
+    var btn = document.createElement('button');
+    btn.textContent = 'Show All Projects';
+    btn.id = 'showAllBtn';
+    btn.style.cssText = 'display:none;margin:1rem auto;padding:0.75rem 2rem;background:#FF6600;color:white;border:none;border-radius:2rem;font-weight:700;cursor:pointer;font-size:1rem;';
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.project-card').forEach(function(c){c.style.display='';});
+      btn.style.display='none';
+    });
+    showcase.insertBefore(btn, showcase.querySelector('.projects-grid'));
+  }
+  // Override marker click to filter project cards by location
+  setTimeout(function() {
+    var markers = document.querySelectorAll('.leaflet-marker-icon');
+    markers.forEach(function(m) {
+      m.addEventListener('click', function() {
+        setTimeout(function() {
+          var popup = document.querySelector('.leaflet-popup-content');
+          if (!popup) return;
+          var locEl = popup.querySelector('span');
+          var spans = popup.querySelectorAll('span');
+          var loc = '';
+          spans.forEach(function(s) { if (s.previousElementSibling && s.previousElementSibling.textContent.indexOf('Location') !== -1) loc = s.textContent; });
+          if (!loc) return;
+          var cards = document.querySelectorAll('.project-card');
+          var found = false;
+          cards.forEach(function(c) {
+            if (c.textContent.indexOf(loc.trim()) !== -1) { c.style.display=''; found=true; }
+            else { c.style.display='none'; }
+          });
+          if (found) { var b=document.getElementById('showAllBtn'); if(b) b.style.display='block'; }
+        }, 300);
+      });
+    });
+  }, 2000);
+});
+</script>
 </html>
