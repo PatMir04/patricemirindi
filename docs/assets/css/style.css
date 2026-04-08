@@ -2313,3 +2313,68 @@ a:hover {
   color: var(--white);
   transform: translateY(-1px);
 }
+
+
+/* ================================================================
+   ENHANCED MOBILE RESPONSIVENESS
+   ================================================================ */
+
+/* Touch device optimizations */
+.touch-device .card:hover,
+.touch-device .project-card:hover,
+.touch-device .competency-card:hover {
+  transform: none;
+}
+
+/* Better tap targets for mobile */
+@media (max-width: 768px) {
+  .nav-link {
+    padding: 12px 16px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .btn, .cta-btn, button {
+    min-height: 44px;
+    padding: 12px 24px;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  .hero-tagline { font-size: 1rem; }
+  .section-title { font-size: 1.75rem; }
+  /* Fix overflow on mobile */
+  body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+  /* Stack grids on mobile */
+  .impact-stats-grid,
+  .competency-grid,
+  .skills-grid,
+  .certifications-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.25rem; }
+  .hero-credentials { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; width: 100%; }
+  .cta-buttons a, .cta-buttons button { width: 100%; text-align: center; }
+}
+
+/* Smooth scroll behavior */
+html { scroll-behavior: smooth; }
+
+/* Reading progress bar */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--accent-orange));
+  z-index: 9999;
+  transition: width 0.1s;
+}
