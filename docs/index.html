@@ -75,7 +75,7 @@
                     <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist from DRC" class="home-profile-photo">
                     <div class="availability-badge">
                         <div class="status-dot"></div>
-                        <span>One step to a better universe</span>
+                        <span>Currently at Financial Resilience Institute</span>
                     </div>
                 </div>
                 
@@ -238,7 +238,7 @@
                     <div class="impact-content">
                         <span class="impact-value">3.1%</span>
                         <span class="impact-label">Global GDP Growth</span>
-                        <span class="impact-meta">World Bank 2024</span>
+                        <span class="impact-meta" id="gdp-source">World Bank 2024</span>
                         <p class="impact-insight">Post-pandemic recovery showing steady improvement across emerging markets</p>
                     </div>
                 </div>
@@ -256,7 +256,7 @@
                     <div class="impact-content">
                         <span class="impact-value">8.5%</span>
                         <span class="impact-label">Extreme Poverty Rate</span>
-                        <span class="impact-meta">World Bank 2024</span>
+                        <span class="impact-meta" id="gdp-source">World Bank 2024</span>
                         <p class="impact-insight">Continued progress toward SDG 1 target despite global challenges</p>
                     </div>
                 </div>
@@ -415,7 +415,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Patrice Mirindi. All rights reserved.</p>
+                <p>&copy; 2026 Patrice Mirindi. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1005,5 +1005,36 @@
     <!-- JavaScript -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/chatbot.js"></script>
+        <script>
+    // World Bank API - Fetch live development indicators
+    document.addEventListener('DOMContentLoaded', function() {
+        // GDP Growth
+        fetch('https://api.worldbank.org/v2/country/WLD/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2020:2025&per_page=5')
+            .then(r => r.json())
+            .then(data => {
+                if (data[1] && data[1][0]) {
+                    var latest = data[1].find(d => d.value !== null);
+                    if (latest) {
+                        var el = document.getElementById('gdp-value');
+                        if (el) el.textContent = latest.value.toFixed(1) + '%';
+                        var src = document.getElementById('gdp-source');
+                        if (src) src.textContent = 'World Bank ' + latest.date;
+                    }
+                }
+            }).catch(function() {});
+        // Poverty Rate
+        fetch('https://api.worldbank.org/v2/country/WLD/indicator/SI.POV.DDAY?format=json&date=2015:2025&per_page=10')
+            .then(r => r.json())
+            .then(data => {
+                if (data[1]) {
+                    var latest = data[1].find(d => d.value !== null);
+                    if (latest) {
+                        var el = document.getElementById('poverty-value');
+                        if (el) el.textContent = latest.value.toFixed(1) + '%';
+                    }
+                }
+            }).catch(function() {});
+    });
+    </script>
 </body>
 </html>
