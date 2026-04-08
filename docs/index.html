@@ -1042,7 +1042,7 @@
     // World Bank API - Fetch live development indicators
     document.addEventListener('DOMContentLoaded', function() {
         // GDP Growth
-        fetch('https://api.worldbank.org/v2/country/WLD/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2020:2025&per_page=5')
+        // fetch('https://api.worldbank.org/v2/country/WLD/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2020:2025&per_page=5')
             .then(r => r.json())
             .then(data => {
                 if (data[1] && data[1][0]) {
@@ -1056,7 +1056,7 @@
                 }
             }).catch(function() {});
         // Poverty Rate
-        fetch('https://api.worldbank.org/v2/country/WLD/indicator/SI.POV.DDAY?format=json&date=2015:2025&per_page=10')
+        // fetch('https://api.worldbank.org/v2/country/WLD/indicator/SI.POV.DDAY?format=json&date=2015:2025&per_page=10')
             .then(r => r.json())
             .then(data => {
                 if (data[1]) {
@@ -1125,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).catch(function(){var el=document.getElementById(srcId);if(el)el.textContent='Data unavailable';});
         }
         document.addEventListener('DOMContentLoaded',function(){
-            fetchWB('NY.GDP.MKTP.KD.ZG','remitChart','remitSrc','Remittances (USD)','#004085');
+            fetchWB('BX.TRF.PWKR.CD.DT','remitChart','remitSrc','Remittances (USD)','#004085');
             setTimeout(function(){fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');},1000);
             setTimeout(function(){fetchWB('NV.AGR.TOTL.ZS','agriChart','agriSrc','Agriculture (% of GDP)','#38a169');},2000);
             setTimeout(function(){fetchWB('EG.ELC.ACCS.ZS','elecChart','elecSrc','Electricity Access (%)','#FF6600');},3000);
