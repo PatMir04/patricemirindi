@@ -1036,5 +1036,39 @@
             }).catch(function() {});
     });
     </script>
+
+    <script>
+// Animated count-up for impact stats
+function animateCounter(el, target, suffix) {
+  var current = 0;
+  var step = Math.max(1, Math.floor(target / 60));
+  var timer = setInterval(function() {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = current.toLocaleString() + (suffix || '');
+  }, 30);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var stats = document.querySelectorAll('.stat-number, .impact-number');
+  if (!stats.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var text = el.textContent.trim();
+        var num = parseInt(text.replace(/[^0-9]/g, ''));
+        var suffix = text.replace(/[0-9,]/g, '');
+        if (num) { el.textContent = '0'; animateCounter(el, num, suffix); }
+        observer.unobserve(el);
+      }
+    });
+  }, {threshold: 0.3});
+  stats.forEach(function(s) { observer.observe(s); });
+  // Lazy load images
+  document.querySelectorAll('img[loading]').forEach(function(img) {
+    img.setAttribute('loading', 'lazy');
+  });
+});
+</script>
 </body>
 </html>
