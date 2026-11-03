@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinq modèles SQL de fonctions de fenêtrage à garder sous la main | Patrice Mirindi</title>
+    <meta name="description" content="Dédoublonner des enregistrements, calculer des cumuls, comparer des périodes, obtenir des parts et classer au sein de groupes : cinq modèles T-SQL prêts à copier, qui fonctionnent aussi dans les entrepôts Microsoft Fabric.">
+    <link rel="canonical" href="https://patricemirindi.com/blog/sql-window-function-patterns.fr.html">
+    <link rel="alternate" hreflang="fr" href="https://patricemirindi.com/blog/sql-window-function-patterns.fr.html">
+    <link rel="alternate" hreflang="en" href="https://patricemirindi.com/blog/sql-window-function-patterns.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patricemirindi.com/blog/sql-window-function-patterns.fr.html">
+    <meta property="og:title" content="Cinq modèles SQL de fonctions de fenêtrage à garder sous la main">
+    <meta property="og:description" content="Dédoublonner des enregistrements, calculer des cumuls, comparer des périodes, obtenir des parts et classer au sein de groupes : cinq modèles T-SQL prêts à copier, qui fonctionnent aussi dans les entrepôts Microsoft Fabric.">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Cinq modèles SQL de fonctions de fenêtrage à garder sous la main", "datePublished": "2026-11-03", "inLanguage": "fr", "url": "https://patricemirindi.com/blog/sql-window-function-patterns.fr.html", "description": "Dédoublonner des enregistrements, calculer des cumuls, comparer des périodes, obtenir des parts et classer au sein de groupes : cinq modèles T-SQL prêts à copier, qui fonctionnent aussi dans les entrepôts Microsoft Fabric.", "author": {"@type": "Person", "name": "Patrice Mirindi", "url": "https://patricemirindi.com/"}}</script>
+</head>
+<body class="article-page">
+    <nav class="navbar" aria-label="Main">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="/">Patrice Mirindi</a></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="/skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="/key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="/data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/blog.html" class="nav-link active">Insights</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="hamburger" type="button" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+        </div>
+    </nav>
+    <main class="article-wrap">
+        <article>
+            <p class="eyebrow"><a href="/blog.html?series=code">Astuces de code</a> · SQL · T-SQL</p>
+            <h1>Cinq modèles SQL de fonctions de fenêtrage à garder sous la main</h1>
+            <p class="meta"><time datetime="2026-11-03">3 novembre 2026</time> · 4 min de lecture <a class="lang-switch" href="/blog/sql-window-function-patterns.html" hreflang="en">Read in English</a></p>
+            <p class="standfirst">Dédoublonner des enregistrements, calculer des cumuls, comparer des périodes, obtenir des parts et classer au sein de groupes : cinq modèles T-SQL prêts à copier, qui fonctionnent aussi dans les entrepôts Microsoft Fabric.</p>
+            <div class="prose">
+<p>Les fonctions de fenêtrage sont le progrès le plus utile après les bases du SQL. Elles permettent de calculer sur des lignes liées entre elles — le mois précédent, le reste d'une région, la version la plus récente d'un enregistrement — sans regrouper les données comme le fait <code>GROUP BY</code>.</p>
+<p>La clause <code>OVER</code> qui les rend possibles est prise en charge par SQL Server, Azure SQL, ainsi que par l'entrepôt (Warehouse) et le point de terminaison d'analytique SQL de Microsoft Fabric. Les modèles ci-dessous se transposent donc facilement d'une plateforme à l'autre. Tous les exemples utilisent une seule table simple :</p>
+<table>
+<thead>
+<tr>
+<th>Colonne</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_id</code></td>
+<td>Identifiant de commande</td>
+</tr>
+<tr>
+<td><code>customer_id</code></td>
+<td>Client</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>Région de vente</td>
+</tr>
+<tr>
+<td><code>order_date</code></td>
+<td>Date de la commande</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>Montant de la commande</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>Date de dernière modification de la ligne</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-dedoublonner-garder-uniquement-la-derniere-version-de-chaque-enregistrement">1. Dédoublonner : garder uniquement la dernière version de chaque enregistrement</h2>
+<p>Les systèmes sources envoient souvent plusieurs fois le même enregistrement. <code>ROW_NUMBER</code> numérote les versions pour conserver la plus récente.</p>
+<pre><code class="language-sql">WITH ranked AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY updated_at DESC) AS rn
+    FROM dbo.sales
+)
+SELECT order_id, customer_id, region, order_date, amount
+FROM ranked
+WHERE rn = 1;
+</code></pre>
+<p>Ajoutez une deuxième colonne dans l'<code>ORDER BY</code> (par exemple un identifiant de chargement) si deux versions peuvent avoir le même horodatage ; sinon, le choix de la ligne gagnante est arbitraire.</p>
+<h2 id="2-cumul-au-sein-dun-groupe">2. Cumul au sein d'un groupe</h2>
+<p>Une somme cumulée tient en une ligne. Précisez explicitement le cadre avec <code>ROWS</code> :</p>
+<pre><code class="language-sql">SELECT region, order_date, amount,
+       SUM(amount) OVER (
+           PARTITION BY region
+           ORDER BY order_date, order_id
+           ROWS UNBOUNDED PRECEDING
+       ) AS running_total
+FROM dbo.sales;
+</code></pre>
+<p>Pourquoi <code>ROWS</code> ? Avec un <code>ORDER BY</code> sans cadre, la valeur par défaut est <code>RANGE UNBOUNDED PRECEDING AND CURRENT ROW</code>, qui traite les lignes ayant la même date comme un seul bloc. Deux commandes du même jour afficheraient alors le même cumul. <code>ROWS</code> avance ligne par ligne.</p>
+<h2 id="3-variation-par-rapport-a-la-periode-precedente">3. Variation par rapport à la période précédente</h2>
+<p>Agrégez d'abord, puis comparez chaque mois au précédent avec <code>LAG</code>. <code>NULLIF</code> évite l'erreur de division par zéro.</p>
+<pre><code class="language-sql">WITH monthly AS (
+    SELECT region,
+           DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1) AS month_start,
+           SUM(amount) AS revenue
+    FROM dbo.sales
+    GROUP BY region, DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1)
+)
+SELECT region, month_start, revenue,
+       LAG(revenue) OVER (PARTITION BY region ORDER BY month_start) AS prev_revenue,
+       100.0 * (revenue - LAG(revenue) OVER (PARTITION BY region ORDER BY month_start))
+             / NULLIF(LAG(revenue) OVER (PARTITION BY region ORDER BY month_start), 0) AS pct_change
+FROM monthly;
+</code></pre>
+<p><code>LAG</code> regarde la ligne précédente, pas le mois civil précédent. Si une région peut avoir des mois sans ventes, construisez d'abord une liste complète des mois (voir le bonus) pour que les trous ne faussent pas la comparaison.</p>
+<h2 id="4-part-du-total">4. Part du total</h2>
+<p>Un agrégat de fenêtre sans <code>ORDER BY</code> renvoie le total du groupe sur chaque ligne, ce qui simplifie le calcul des pourcentages :</p>
+<pre><code class="language-sql">SELECT region, customer_id,
+       SUM(amount) AS customer_revenue,
+       100.0 * SUM(amount) / SUM(SUM(amount)) OVER (PARTITION BY region) AS pct_of_region
+FROM dbo.sales
+GROUP BY region, customer_id;
+</code></pre>
+<p>Le <code>SUM(SUM(amount))</code> n'est pas une coquille : le <code>SUM</code> intérieur est l'agrégat du <code>GROUP BY</code>, et l'extérieur additionne ces résultats sur la fenêtre.</p>
+<h2 id="5-les-n-premiers-de-chaque-groupe">5. Les N premiers de chaque groupe</h2>
+<p>Pour afficher les trois plus gros clients de chaque région, classez-les puis filtrez :</p>
+<pre><code class="language-sql">WITH customer_totals AS (
+    SELECT region, customer_id, SUM(amount) AS revenue
+    FROM dbo.sales
+    GROUP BY region, customer_id
+), ranked AS (
+    SELECT *, DENSE_RANK() OVER (PARTITION BY region ORDER BY revenue DESC) AS rnk
+    FROM customer_totals
+)
+SELECT region, customer_id, revenue, rnk
+FROM ranked
+WHERE rnk &lt;= 3
+ORDER BY region, rnk;
+</code></pre>
+<p>Utilisez <code>DENSE_RANK</code> quand des ex æquo doivent partager le même rang, et <code>ROW_NUMBER</code> quand il vous faut exactement trois lignes par groupe.</p>
+<h2 id="bonus-un-calendrier-complet-des-mois">Bonus : un calendrier complet des mois</h2>
+<p>Sur SQL Server 2022 et Azure SQL, <code>GENERATE_SERIES</code> crée une suite de nombres que l'on peut transformer en dates, ce qui est pratique pour combler les trous avant le modèle 3. Elle exige un niveau de compatibilité de base de données de 160 ou plus ; vérifiez la documentation de votre plateforme avant de vous y fier ailleurs.</p>
+<pre><code class="language-sql">SELECT DATEADD(MONTH, value, '2024-01-01') AS month_start
+FROM GENERATE_SERIES(0, 23);
+</code></pre>
+<p>Faites ensuite une jointure externe gauche de vos totaux mensuels sur cette liste et remplacez les revenus manquants par zéro avec <code>COALESCE</code>.</p>
+<h2 id="aide-memoire">Aide-mémoire</h2>
+<ul>
+<li>Ajoutez toujours un critère de départage dans l'<code>ORDER BY</code> d'un <code>OVER</code> quand l'ordre doit être déterministe.</li>
+<li>Préférez un cadre <code>ROWS</code> pour les cumuls.</li>
+<li>Agrégez au bon niveau (jour, mois) avant d'utiliser <code>LAG</code> ou <code>LEAD</code>.</li>
+<li>Protégez les diviseurs avec <code>NULLIF(..., 0)</code>.</li>
+</ul>
+<p>Ces cinq modèles couvrent une grande part de la logique de rapport du quotidien. Une fois devenus des réflexes, bien des requêtes qui exigeaient des tables temporaires ou des étapes dans un tableur se réduisent à une seule instruction lisible.</p>
+            </div>
+            
+            <section class="sources"><h2>Sources</h2><ol><li><a href="https://learn.microsoft.com/sql/t-sql/queries/select-over-clause-transact-sql" rel="noopener" target="_blank">SELECT - OVER clause (Transact-SQL)</a> — Microsoft Learn</li><li><a href="https://www.microsoft.com/en-us/sql-server/blog/2023/01/12/working-with-time-series-data-in-sql-server-2022-and-azure-sql/" rel="noopener" target="_blank">Working with time series data in SQL Server 2022 and Azure SQL</a> — Microsoft SQL Server Blog</li></ol></section>
+            <section class="author">
+                <img src="/assets/img/patricemirindi-640.jpg" width="72" height="72" alt="">
+                <div><h2>À propos de l'auteur</h2><p>Patrice Mirindi est analyste de données et économiste du développement bilingue, basé à Ottawa. Il conçoit des tableaux de bord, des flux de données et des analyses d'impact pour le secteur public, les organismes sans but lucratif et le développement international.</p>
+                <a class="pill pill-accent" href="/contact.html">Discutons de votre projet</a></div>
+            </section>
+            <p><a class="back" href="/blog.html">← Tous les articles</a></p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; Patrice Mirindi · Ottawa, ON · <a href="/blog/feed.xml">RSS</a></p></div></div></footer>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/knowledge-chat.js" defer></script>
+</body>
+</html>

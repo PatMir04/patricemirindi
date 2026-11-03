@@ -1,0 +1,60 @@
+/* Article and blog index pages — Midnight theme */
+.article-page, .blog-page { background: var(--mn-bg); color: var(--mn-body); }
+.article-wrap, .blog-wrap { max-width: 760px; margin: 0 auto; padding: 136px 24px 80px; }
+.blog-wrap { max-width: 1100px; }
+.article-page .eyebrow, .blog-page .eyebrow { color: var(--mn-accent); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 16px; }
+.article-page h1, .blog-page h1 { color: #fff; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 16px; font-weight: 700; }
+.article-page .meta { color: var(--mn-muted); margin: 0 0 24px; }
+.lang-switch { margin-left: 12px; color: var(--mn-accent); font-weight: 600; text-decoration: none; }
+.lang-switch:hover { text-decoration: underline; }
+.standfirst { font-size: 1.25rem; line-height: 1.55; color: var(--mn-ink); margin: 0 0 40px; }
+
+.prose { font-size: 1.125rem; line-height: 1.75; color: var(--mn-body); }
+.prose h2 { color: var(--mn-ink); font-size: 1.5rem; margin: 48px 0 12px; line-height: 1.25; }
+.prose h3 { color: var(--mn-ink); font-size: 1.2rem; margin: 32px 0 8px; }
+.prose p, .prose ul, .prose ol { margin: 0 0 20px; }
+.prose li { margin-bottom: 8px; }
+.prose a { color: var(--mn-accent); }
+.prose strong { color: var(--mn-ink); }
+.prose blockquote { margin: 28px 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--mn-accent); color: var(--mn-ink); }
+.prose code { background: var(--mn-surface); border: 1px solid var(--mn-line); padding: 2px 6px; border-radius: 6px; font-size: 0.95em; color: var(--mn-ink); }
+.prose pre { background: #081428; border: 1px solid var(--mn-line); border-radius: 12px; padding: 16px; overflow-x: auto; }
+.prose pre code { background: none; border: 0; padding: 0; }
+.prose table { width: 100%; border-collapse: collapse; margin: 0 0 24px; font-size: 1rem; display: block; overflow-x: auto; }
+.prose th, .prose td { border-bottom: 1px solid var(--mn-line); padding: 10px 12px; text-align: left; }
+.prose th { color: var(--mn-ink); }
+
+.related, .sources, .author { margin-top: 48px; padding: 24px; background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 16px; }
+.related h2, .sources h2, .author h2 { color: var(--mn-ink); font-size: 1.05rem; margin: 0 0 12px; }
+.related a, .sources a { color: var(--mn-accent); }
+.sources ol { margin: 0; padding-left: 20px; }
+.sources li { margin-bottom: 8px; line-height: 1.5; }
+.author { display: flex; gap: 20px; align-items: flex-start; }
+.author img { border-radius: 50%; flex-shrink: 0; object-fit: cover; }
+.author p { margin: 0 0 16px; line-height: 1.6; }
+.back { color: var(--mn-body); text-decoration: none; display: inline-block; margin-top: 32px; }
+.back:hover { color: var(--mn-accent); }
+
+.pill { display: inline-flex; align-items: center; text-decoration: none; padding: 12px 22px; border-radius: 999px; font-weight: 700; min-height: 44px; box-sizing: border-box; }
+.pill-accent { background: var(--mn-accent); color: var(--mn-on-accent); }
+.pill-accent:hover { background: var(--mn-accent-hover); color: var(--mn-on-accent); }
+
+/* Blog index */
+.blog-page .lead { font-size: 1.125rem; line-height: 1.6; max-width: 640px; margin: 0 0 32px; }
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 32px; }
+.filters button { background: transparent; color: var(--mn-body); border: 1px solid var(--mn-line); border-radius: 999px; padding: 10px 16px; min-height: 44px; font: inherit; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--mn-accent); color: var(--mn-on-accent); border-color: var(--mn-accent); font-weight: 700; }
+.post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+.post-card { background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; }
+.post-card h2 { color: #fff; font-size: 1.2rem; line-height: 1.3; margin: 0 0 10px; }
+.post-card h2 a { color: inherit; text-decoration: none; }
+.post-card h2 a:hover { color: var(--mn-accent); }
+.post-card p { margin: 0 0 16px; line-height: 1.55; }
+.post-card .meta { color: var(--mn-muted); font-size: 0.875rem; margin-top: auto; }
+.post-card .tag { color: var(--mn-accent); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.empty { padding: 32px; border: 1px dashed var(--mn-line); border-radius: 16px; }
+
+@media (max-width: 640px) {
+  .article-wrap, .blog-wrap { padding-top: 112px; }
+  .author { flex-direction: column; }
+}

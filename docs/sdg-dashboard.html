@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SDG Dashboard - Track Sustainable Development Goals progress across countries with real-time data by Patrice Mirindi">
+    <meta name="description" content="SDG Dashboard - Interface demo of an SDG tracking dashboard using simulated values, by Patrice Mirindi">
     <meta name="keywords" content="SDG, sustainable development goals, dashboard, country comparison, UN goals, development tracking">
     <title>SDG Dashboard - Sustainable Development Goals Tracking | Patrice Mirindi</title>
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://patricemirindi.com/sdg-dashboard.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://patricemirindi.com/sdg-dashboard.html">
+    <meta property="og:title" content="SDG Dashboard - Sustainable Development Goals Tracking | Patrice Mirindi">
+    <meta property="og:description" content="SDG Dashboard - Interface demo of an SDG tracking dashboard using simulated values, by Patrice Mirindi">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Open Graph Tags -->
-    <meta property="og:title" content="SDG Dashboard - Real-time Sustainable Development Goals Tracking">
+    <meta property="og:title" content="SDG Dashboard - Interface demo (simulated data)">
     <meta property="og:description" content="Interactive dashboard tracking progress on all 17 UN Sustainable Development Goals with country comparisons">
     <meta property="og:type" content="website">
     
@@ -23,7 +31,8 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <!-- Futuristic Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/theme.css">
 </head>
 <body class="futuristic-theme">
     <!-- Navigation -->
@@ -36,21 +45,19 @@
                 </a>
             </div>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
-                <li class="nav-item"><a href="work-experience.html" class="nav-link">Work Experience</a></li>
-                <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
-                <li class="nav-item"><a href="key-projects.html" class="nav-link">Key Projects</a></li>
-                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
-                <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="sdg-dashboard.html" class="nav-link active">SDG Dashboard</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Insights</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link nav-cta">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Open menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
         <div class="reading-progress">
             <div class="reading-progress-bar" id="reading-progress"></div>
@@ -68,11 +75,11 @@
                 <h1 class="glitch" data-text="SDG Progress Tracker">
                     SDG Progress Tracker
                 </h1>
-                <p class="hero-subtitle neon-text">Real-time • Data-driven • Global Impact</p>
+                <p class="hero-subtitle neon-text">Interface demo · Simulated values, not real SDG data</p>
                 <p class="hero-description">
-                    Monitor progress toward the UN's 17 Sustainable Development Goals with 
-                    real-time data visualization, country comparisons, and trend analysis. 
-                    Explore how nations are advancing toward a sustainable future.
+                    A design prototype for tracking the UN's 17 Sustainable Development Goals.
+                    The numbers on this page are generated for demonstration and are not real SDG data.
+                    For real indicators, see the <a href="data-analytics.html" style="color:inherit;text-decoration:underline">development dashboard</a>.
                 </p>
                 <div class="hero-stats futuristic-stats">
                     <div class="stat-card glowing-border">
@@ -323,9 +330,9 @@
                     <div class="methodology-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Real-time Updates</h3>
-                    <p>Data is automatically updated every 24 hours from official sources with change tracking and notifications.</p>
-                    <span class="methodology-link">Auto-refresh enabled <i class="fas fa-check-circle"></i></span>
+                    <h3>Prototype data</h3>
+                    <p>Values are simulated to show the interface. A version connected to the UN SDG database is planned.</p>
+                    <span class="methodology-link">Simulated values <i class="fas fa-info-circle"></i></span>
                 </div>
             </div>
             
@@ -390,7 +397,7 @@
                 <div class="footer-section">
                     <h4>Connect & Collaborate</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Winnipeg, MB, Canada</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ottawa, ON, Canada</li>
                         <li><i class="fas fa-envelope"></i> patricemirindi@gmail.com</li>
                         <li><i class="fas fa-globe"></i> www.patricemirindi.com</li>
                         <li><i class="fas fa-language"></i> EN • FR • SW • LN</li>
@@ -407,9 +414,9 @@
     <script src="assets/js/sdg-dashboard.js"></script>
     
     <!-- Enhanced Chatbot with Data Integration -->
-    <script src="assets/js/data-enhanced-chatbot.js"></script>
     
     <!-- Main JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/knowledge-chat.js" defer></script>
 </body>
 </html>

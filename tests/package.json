@@ -1,0 +1,13 @@
+{
+  "name": "patricemirindi-site-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node smoke.mjs",
+    "test:live": "BASE_URL=https://patricemirindi.com node smoke.mjs"
+  },
+  "devDependencies": {
+    "chart.js": "4.4.1",
+    "playwright-core": "1.48.2"
+  }
+}

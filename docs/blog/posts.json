@@ -1,0 +1,70 @@
+[
+ {
+  "slug": "findex-2025-savings",
+  "lang": "en",
+  "title": "Financial inclusion is accelerating — and savings are leading the way",
+  "summary": "The World Bank's Global Findex 2025 shows the fastest rise in formal saving in over a decade, driven by mobile phones. Here is what changed, and what it means for teams that measure financial health.",
+  "date": "2026-11-03",
+  "series": "development",
+  "seriesLabel": "Economic development",
+  "tags": [
+   "Financial inclusion",
+   "Data",
+   "Africa"
+  ],
+  "url": "/blog/findex-2025-savings.html",
+  "readMinutes": 4,
+  "published": true
+ },
+ {
+  "slug": "findex-2025-savings",
+  "lang": "fr",
+  "title": "L'inclusion financière s'accélère, et l'épargne mène la marche",
+  "summary": "Le Global Findex 2025 de la Banque mondiale montre la plus forte hausse de l'épargne formelle en plus de dix ans, portée par le téléphone mobile. Ce qui a changé, et ce que cela signifie pour les équipes qui mesurent la santé financière.",
+  "date": "2026-11-03",
+  "series": "development",
+  "seriesLabel": "Développement économique",
+  "tags": [
+   "Inclusion financière",
+   "Données",
+   "Afrique"
+  ],
+  "url": "/blog/findex-2025-savings.fr.html",
+  "readMinutes": 4,
+  "published": true
+ },
+ {
+  "slug": "sql-window-function-patterns",
+  "lang": "en",
+  "title": "Five SQL window-function patterns every analyst should keep handy",
+  "summary": "Deduplicate records, build running totals, compare periods, compute shares and rank within groups — five copy-ready T-SQL patterns that also run in Microsoft Fabric warehouses.",
+  "date": "2026-11-03",
+  "series": "code",
+  "seriesLabel": "Code tips",
+  "tags": [
+   "SQL",
+   "T-SQL",
+   "Microsoft Fabric"
+  ],
+  "url": "/blog/sql-window-function-patterns.html",
+  "readMinutes": 3,
+  "published": true
+ },
+ {
+  "slug": "sql-window-function-patterns",
+  "lang": "fr",
+  "title": "Cinq modèles SQL de fonctions de fenêtrage à garder sous la main",
+  "summary": "Dédoublonner des enregistrements, calculer des cumuls, comparer des périodes, obtenir des parts et classer au sein de groupes : cinq modèles T-SQL prêts à copier, qui fonctionnent aussi dans les entrepôts Microsoft Fabric.",
+  "date": "2026-11-03",
+  "series": "code",
+  "seriesLabel": "Astuces de code",
+  "tags": [
+   "SQL",
+   "T-SQL",
+   "Microsoft Fabric"
+  ],
+  "url": "/blog/sql-window-function-patterns.fr.html",
+  "readMinutes": 4,
+  "published": true
+ }
+]

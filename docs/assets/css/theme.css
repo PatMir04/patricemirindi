@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Midnight theme — Patrice Mirindi
+   Loaded LAST on every page. Tokens here are the single source of truth for
+   colour and type; page-specific CSS should use these variables.
+   Contrast (WCAG 2.1): ink on bg 15.7:1, body on bg 9.9:1, muted on bg 6.7:1,
+   accent on bg 6.6:1, bg on accent 6.6:1, navy on white 10.1:1.
+   ========================================================================== */
+
+:root {
+  --mn-bg: #0B1B33;          /* page background (dark sections) */
+  --mn-surface: #12284A;     /* cards on dark */
+  --mn-surface-2: #183259;   /* raised / hover */
+  --mn-line: #1E3A63;        /* borders on dark */
+  --mn-ink: #F1F5F9;         /* headings on dark */
+  --mn-body: #CBD5E1;        /* body text on dark */
+  --mn-muted: #94A3B8;       /* secondary text on dark */
+  --mn-accent: #FF7A1A;      /* orange: buttons, highlights on dark */
+  --mn-accent-hover: #FFA25E;
+  --mn-on-accent: #0B1B33;   /* text on orange */
+  --mn-navy: #004085;        /* navy: headings/links on light sections */
+  --mn-accent-on-light: #C2410C; /* orange text/buttons on white (5.2:1) */
+  --mn-light: #F6F8FB;       /* light sections */
+
+  --font-avenir: 'Avenir Next', Avenir, 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Re-point the legacy tokens used by style.css */
+  --font-primary: var(--font-avenir);
+  --font-display: var(--font-avenir);
+  --primary-blue: #004085;
+  --accent-orange: #C2410C;   /* legacy token: used on light sections, so the accessible shade */
+  --gradient-primary: linear-gradient(135deg, #004085 0%, #C2410C 100%);
+  --gradient-secondary: linear-gradient(180deg, #0B1B33 0%, #0B1B33 100%);
+}
+
+html, body, button, input, select, textarea {
+  font-family: var(--font-avenir);
+}
+
+body { -webkit-font-smoothing: antialiased; overflow-x: clip; }
+
+h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing: -0.01em; }
+
+/* ---------- Navigation ---------- */
+.navbar {
+  background: rgba(11, 27, 51, 0.96) !important;
+  border-bottom: 1px solid var(--mn-line);
+  box-shadow: none;
+}
+.nav-logo a {
+  background: none !important;
+  -webkit-text-fill-color: var(--mn-ink) !important;
+  color: var(--mn-ink) !important;
+  font-weight: 700;
+}
+.nav-logo a::after { content: "."; color: var(--mn-accent); -webkit-text-fill-color: var(--mn-accent); }
+.nav-link { color: var(--mn-body) !important; }
+.nav-link:hover, .nav-link.active { color: var(--mn-ink) !important; background: transparent; }
+.nav-link.active::after, .nav-link:hover::after { background: var(--mn-accent) !important; }
+.nav-link.nav-cta {
+  background: var(--mn-accent);
+  color: var(--mn-on-accent) !important;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav-link.nav-cta:hover { background: var(--mn-accent-hover); }
+.nav-link.nav-cta::after { display: none; }
+.hamburger .bar { background: var(--mn-ink) !important; }
+.reading-progress-bar { background: var(--mn-accent) !important; }
+@media (max-width: 768px) {
+  .nav-menu { background: rgba(11, 27, 51, 0.99) !important; }
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: var(--mn-accent) !important;
+  color: var(--mn-on-accent) !important;
+  border-color: transparent !important;
+}
+.btn-primary:hover { background: var(--mn-accent-hover) !important; }
+.btn-secondary {
+  background: transparent !important;
+  color: var(--mn-navy) !important;
+  border: 2px solid var(--mn-navy) !important;
+}
+.mn-dark .btn-secondary, .footer .btn-secondary {
+  color: var(--mn-ink) !important;
+  border-color: var(--mn-body) !important;
+}
+
+/* ---------- Footer ---------- */
+.footer { background: var(--mn-bg) !important; color: var(--mn-body); border-top: 1px solid var(--mn-line); }
+.footer h3, .footer h4 { color: var(--mn-ink); }
+.footer a { color: var(--mn-body); }
+.footer a:hover { color: var(--mn-accent); }
+.footer-bottom { border-top-color: var(--mn-line) !important; color: var(--mn-muted); }
+
+/* ---------- Dark section helper ---------- */
+.mn-dark { background: var(--mn-bg); color: var(--mn-body); }
+.mn-dark h1, .mn-dark h2, .mn-dark h3 { color: var(--mn-ink); }
+
+/* ---------- Accessibility: keep motion optional ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+:focus-visible { outline: 3px solid var(--mn-accent); outline-offset: 2px; }
+
+.hamburger { background: none; border: 0; cursor: pointer; padding: 8px; }
+
+/* Body copy on Midnight (dark) pages */
+.home p, .blog-page p, .article-page p, .dash-page p, .mn-dark p { color: var(--mn-body); }
+.dash-head .lead, .blog-page .lead { color: var(--mn-body); }
+
+/* Light sections on older pages: navy headings, accessible orange */
+.section-title { color: var(--mn-navy); }

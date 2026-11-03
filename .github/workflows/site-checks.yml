@@ -1,0 +1,97 @@
+# Runs on GitHub's servers — nothing depends on Patrice's computer being on.
+#  - Every pull request and push: content lint, generated files up to date, static health check,
+#    browser tests of every page, the dashboard and the chatbot (World Bank API mocked).
+#  - After each push to main and every Monday: the same browser tests against the live site and
+#    the real World Bank API. A failing scheduled run opens (or updates) a GitHub issue.
+name: Site checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 11 * * 1"   # Mondays 11:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: site-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      PRIVATE_BLOCKLIST: ${{ secrets.PRIVATE_BLOCKLIST }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Content lint and generated files
+        run: |
+          pip install markdown
+          python tools/build_site_content.py --check
+
+      - name: Static health check
+        run: python tools/site_check.py .
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install test tools
+        working-directory: tests
+        run: npm ci
+
+      - name: Browser tests (local build, mocked data)
+        working-directory: tests
+        run: node smoke.mjs
+
+  live:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    needs: checks
+    runs-on: ubuntu-latest
+    env:
+      PRIVATE_BLOCKLIST: ${{ secrets.PRIVATE_BLOCKLIST }}
+      BASE_URL: https://patricemirindi.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for GitHub Pages to publish the push
+        if: github.event_name == 'push'
+        run: sleep 180
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install test tools
+        working-directory: tests
+        run: npm ci
+
+      - name: Browser tests (live site, real World Bank API)
+        working-directory: tests
+        shell: bash
+        run: set -o pipefail; node smoke.mjs | tee live-report.txt
+
+      - name: Open an issue if the live site is broken
+        if: failure() && github.event_name == 'schedule'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.existsSync('tests/live-report.txt') ? fs.readFileSync('tests/live-report.txt', 'utf8').slice(-6000) : 'See the workflow log.';
+            const title = 'Live site check failed';
+            const body = `The weekly live check failed.\n\nRun: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\n\`\`\`\n${report}\n\`\`\``;
+            const open = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', labels: 'site-check' });
+            if (open.data.length) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: open.data[0].number, body });
+            } else {
+              await github.rest.issues.create({ ...context.repo, title, body, labels: ['site-check'] });
+            }

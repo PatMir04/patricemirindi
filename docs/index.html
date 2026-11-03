@@ -3,1133 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Patrice Mirindi - Development Economist from DRC. MSc Agricultural Economics, University of Nairobi. 8+ years transforming data into sustainable impact across 12+ countries.">
-    <meta name="keywords" content="Patrice Mirindi, DRC economist, development consultant, agricultural economics, data analytics, financial resilience">
-    <title>Patrice Mirindi - From DRC to Global Development Impact | Home</title>
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Patrice Mirindi - Development Economist & Data Analytics Consultant">
-    <meta property="og:description" content="From DRC to global impact - transforming complex data into sustainable development solutions">
+    <title>Patrice Mirindi — Systems Analyst, Developer &amp; Development Economist | Ottawa</title>
+    <meta name="description" content="Bilingual (English/French) systems analyst, developer and development economist in Ottawa. Data systems, Microsoft Fabric and Power BI, data pipelines, and impact analysis for public-sector, non-profit and development teams.">
+    <link rel="canonical" href="https://patricemirindi.com/">
+    <link rel="alternate" type="application/rss+xml" title="Insights — Patrice Mirindi" href="https://patricemirindi.com/blog/feed.xml">
+
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/img/patricemirindi.jpg">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <meta property="og:url" content="https://patricemirindi.com/">
+    <meta property="og:title" content="Patrice Mirindi — Systems Analyst, Developer &amp; Development Economist">
+    <meta property="og:description" content="I turn complex data into decisions people act on. Dashboards, data pipelines and impact analysis, in English or French.">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Structured Data -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Patrice Mirindi",
-        "jobTitle": "Development Economist & Data Analytics Consultant",
-        "email": "patricemirindi@gmail.com",
-        "image": "assets/img/patricemirindi.jpg",
+        "url": "https://patricemirindi.com/",
+        "image": "https://patricemirindi.com/assets/img/patricemirindi-640.jpg",
+        "jobTitle": "Systems Analyst, Developer and Development Economist",
+        "address": {"@type": "PostalAddress", "addressLocality": "Ottawa", "addressRegion": "ON", "addressCountry": "CA"},
         "alumniOf": "University of Nairobi",
-        "birthPlace": "Democratic Republic of Congo",
-        "nationality": "Congolese-Canadian",
-        "knowsLanguage": ["French", "English", "Swahili", "Lingala"],
-        "expertise": ["Agricultural Economics", "Data Analytics", "Financial Resilience", "Development Consulting"]
+        "knowsLanguage": ["English", "French", "Swahili", "Lingala"],
+        "knowsAbout": ["Systems analysis", "Software development", "Microsoft Fabric", "Data engineering", "Data analytics", "Power BI", "SQL", "Python", "Data modelling", "Development economics", "Agricultural economics", "Impact evaluation"],
+        "sameAs": ["https://www.linkedin.com/in/patricemirindi", "https://github.com/PatMir04"]
     }
     </script>
+
+    <style>
+    .home { background: var(--mn-bg); color: var(--mn-body); }
+    .home .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .home section { padding: 88px 0; }
+    .home .eyebrow { color: var(--mn-accent); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 16px; }
+    .home h2 { color: var(--mn-ink); font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.15; margin: 0 0 12px; font-weight: 700; }
+    .home .lead { font-size: 1.125rem; line-height: 1.6; color: var(--mn-body); max-width: 640px; margin: 0; }
+
+    .hero-mn { padding: 152px 0 72px !important; position: relative; overflow: hidden; }
+    .hero-mn .grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 64px; align-items: center; }
+    .hero-mn h1 { color: #fff; font-size: clamp(2.5rem, 5vw, 3.75rem); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px; font-weight: 700; }
+    .hero-mn .sub { font-size: 1.25rem; line-height: 1.55; color: var(--mn-body); max-width: 540px; margin: 0 0 36px; }
+    .hero-mn .ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+    .pill { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; padding: 16px 28px; border-radius: 999px; font-weight: 700; font-size: 1.0625rem; min-height: 44px; box-sizing: border-box; }
+    .pill-accent { background: var(--mn-accent); color: var(--mn-on-accent); }
+    .pill-accent:hover { background: var(--mn-accent-hover); color: var(--mn-on-accent); }
+    .pill-ghost { border: 2px solid var(--mn-body); color: var(--mn-ink); padding: 14px 26px; }
+    .pill-ghost:hover { border-color: var(--mn-accent); color: var(--mn-accent); }
+    .hero-visual { position: relative; display: flex; justify-content: center; }
+    .hero-visual .halo { position: absolute; right: 4%; top: -4%; width: 78%; aspect-ratio: 1; border-radius: 50%; background: var(--mn-accent); opacity: 0.18; }
+    .hero-visual .block { position: absolute; left: 6%; bottom: 4%; width: 26%; aspect-ratio: 1; border-radius: 24px; background: #1E4D8C; opacity: 0.6; }
+    .hero-visual img { position: relative; width: min(380px, 90%); aspect-ratio: 19 / 20; height: auto; border-radius: 28px; object-fit: cover; box-shadow: 0 24px 60px rgba(0,0,0,0.45); }
+    .latest-card { position: absolute; left: 0; bottom: 8%; background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 16px; padding: 16px 20px; width: 250px; box-shadow: 0 12px 32px rgba(0,0,0,0.35); text-decoration: none; }
+    .latest-card .k { margin: 0 0 6px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mn-accent); }
+    .latest-card .t { margin: 0; font-size: 1rem; line-height: 1.35; font-weight: 600; color: var(--mn-ink); }
+    .latest-card:hover .t { color: var(--mn-accent); }
+
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+    .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    @media (max-width: 1100px) { .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .card { background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 18px; padding: 28px; }
+    .card .ico { width: 44px; height: 44px; border-radius: 12px; background: #2A2A3A; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .card h3 { color: #fff; font-size: 1.125rem; margin: 0 0 8px; font-weight: 700; }
+    .card p { margin: 0; color: var(--mn-body); line-height: 1.55; }
+    .card .meta { color: var(--mn-muted); font-size: 0.875rem; margin-top: 14px; }
+    .card a.more { display: inline-block; margin-top: 16px; color: var(--mn-accent); font-weight: 600; text-decoration: none; }
+    .card a.more:hover { text-decoration: underline; }
+
+    .band { background: #0E2240; border-top: 1px solid var(--mn-line); border-bottom: 1px solid var(--mn-line); }
+    .charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+    .chart-card { background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 18px; padding: 24px; }
+    .chart-card h3 { color: var(--mn-ink); font-size: 1rem; margin: 0 0 4px; }
+    .chart-card .src { color: var(--mn-muted); font-size: 0.8125rem; margin: 12px 0 0; }
+    .chart-card canvas { width: 100% !important; height: 220px !important; }
+
+    .quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px; }
+    .quote { background: var(--mn-surface); border: 1px solid var(--mn-line); border-radius: 18px; padding: 32px; margin: 0; }
+    .quote blockquote { margin: 0 0 20px; color: var(--mn-ink); font-size: 1.125rem; line-height: 1.6; }
+    .quote figcaption { color: var(--mn-body); }
+    .quote figcaption strong { color: #fff; display: block; }
+
+    .cta-band { text-align: center; }
+    .cta-band .lead { margin: 0 auto 32px; }
+
+    @media (max-width: 900px) {
+        .hero-mn .grid, .cards, .charts, .quotes { grid-template-columns: minmax(0, 1fr); }
+        .hero-mn { padding-top: 120px !important; }
+        .hero-visual { margin-top: 24px; }
+        .latest-card { position: relative; left: auto; bottom: auto; width: auto; margin-top: -40px; }
+        .home section { padding: 64px 0; }
+    }
+    </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
+<body class="home">
+    <nav class="navbar" aria-label="Main">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html">Patrice Mirindi</a>
-            </div>
+            <div class="nav-logo"><a href="index.html">Patrice Mirindi</a></div>
             <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="about.html" class="nav-link">About Me</a></li>
-                <li class="nav-item"><a href="work-experience.html" class="nav-link">Work Experience</a></li>
-                <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills & Expertise</a></li>
-                <li class="nav-item"><a href="key-projects.html" class="nav-link">Key Projects</a></li>
-                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Data Analytics</a></li>
-                <li class="nav-item"><a href="contact.html" class="nav-link">Contact Me</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="blog.html" class="nav-link">Insights</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link nav-cta">Contact</a></li>
             </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-        <div class="reading-progress">
-            <div class="reading-progress-bar" id="reading-progress"></div>
+            <button class="hamburger" type="button" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
         </div>
     </nav>
 
-    <!-- Hero Section - EXACT Same as About Page (Light Blue Background) -->
-    <section class="home-hero">
-        <div class="hero-background">
-            <div class="hero-gradient"></div>
-            <div class="hero-pattern"></div>
-        </div>
-        
-        <div class="container">
-            <div class="home-hero-content">
-                <div class="hero-photo-section">
-                    <img src="assets/img/patricemirindi.jpg" alt="Patrice Mirindi - Development Economist from DRC" class="home-profile-photo">
-                    <div class="availability-badge">
-                        <div class="status-dot"></div>
-                        <span>Currently at Financial Resilience Institute</span>
+    <main>
+        <section class="hero-mn">
+            <div class="wrap grid">
+                <div>
+                    <p class="eyebrow">Systems analysis · Data engineering · Development economics · EN / FR</p>
+                    <h1>I turn complex data into decisions people act on.</h1>
+                    <p class="sub">Bilingual systems analyst, developer and development economist in Ottawa. I design data systems, build pipelines and dashboards, and measure impact for public-sector, non-profit and development teams.</p>
+                    <div class="ctas">
+                        <a class="pill pill-accent" href="contact.html">Start a conversation</a>
+                        <a class="pill pill-ghost" href="key-projects.html">See my work</a>
                     </div>
                 </div>
-                
-                <div class="hero-text-section">
-                    <h1>Patrice Mirindi</h1>
-                    <h2>Development Economist & Data Analytics Consultant</h2>
-                    <p class="hero-tagline">Turning data into transformative insights that spark sustainable growth</p>
-                    
-                    <div class="hero-credentials">
-                        <div class="credential-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <span>MSc Agricultural Economics<br><small>University of Nairobi</small></span>
-                        </div>
-                        <div class="credential-item">
-                            <i class="fas fa-chart-line"></i>
-                            <span>8+ Years Experience<br><small>12+ Countries</small></span>
-                        </div>
-                        <div class="credential-item">
-                            <i class="fas fa-certificate"></i>
-                            <span>PMP Certified<br><small>Project Manager</small></span>
-                        </div>
-                    </div>
-                    
-                    <div class="hero-buttons">
-                        <a href="data-analytics.html" class="btn btn-primary btn-large">
-                            <i class="fas fa-chart-bar"></i>
-                            View Analytics Platform
-                        </a>
-                        <a href="contact.html" class="btn btn-secondary btn-large">
-                            <i class="fas fa-envelope"></i>
-                            Let's Collaborate
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Professional Journey Section - Journey Card Style -->
-    <section class="professional-journey">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Professional Excellence & Impact</h2>
-                <p class="section-subtitle">Delivering data-driven solutions that transform communities and economies</p>
-            </div>
-            
-            <div class="journey-content">
-                <div class="journey-cards">
-                    <div class="journey-card featured">
-                        <div class="card-header">
-                            <span class="card-icon">📊</span>
-                            <h3>Advanced Data Analytics</h3>
-                        </div>
-                        <p>Transforming complex datasets into strategic insights using cutting-edge analytical tools and methodologies. Specialized in econometric modeling, time series analysis, and predictive analytics for development finance.</p>
-                        <div class="card-stats">
-                            <div class="stat-item">
-                                <span class="stat-value">95%</span>
-                                <span class="stat-label">Success Rate</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">20+</span>
-                                <span class="stat-label">Projects</span>
-                            </div>
-                        </div>
-                        <div class="skill-tags">
-                            <span class="skill-tag">R Programming</span>
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">Power BI</span>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-card">
-                        <div class="card-header">
-                            <span class="card-icon">🛡️</span>
-                            <h3>International Development Consulting</h3>
-                        </div>
-                        <p>Leading research and policy development for international development and economic resilience. Currently contributing to advancing and improving financial health and financial well-being in Canada and globally at the Financial Resilience Institute.</p>
-                        <div class="card-stats">
-                            <div class="stat-item">
-                                <span class="stat-value">$5.2M+</span>
-                                <span class="stat-label">Project Value</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">15+</span>
-                                <span class="stat-label">Organizations</span>
-                            </div>
-                        </div>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Risk Assessment</span>
-                            <span class="skill-tag">Policy Design</span>
-                            <span class="skill-tag">Impact Measurement</span>
-                        </div>
-                    </div>
-                    
-                    <div class="journey-card">
-                        <div class="card-header">
-                            <span class="card-icon">🌱</span>
-                            <h3>Agricultural Economics & Value Chains</h3>
-                        </div>
-                        <p>Comprehensive market research and policy analysis for agricultural systems, food security initiatives, and sustainable rural development across Africa. Expert in commodity value chain analysis and export market development.</p>
-                        <div class="card-stats">
-                            <div class="stat-item">
-                                <span class="stat-value">8</span>
-                                <span class="stat-label">Countries</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-value">2,000+</span>
-                                <span class="stat-label">Lives Impacted</span>
-                            </div>
-                        </div>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Market Analysis</span>
-                            <span class="skill-tag">Value Chains</span>
-                            <span class="skill-tag">Food Security</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Current Role Highlight -->
-    <section class="current-role-highlight">
-        <div class="container">
-            <div class="role-card">
-                <div class="role-header">
-                    <div class="role-badge current">Current Role</div>
-                    <h3>Senior Data Analyst</h3>
-                    <h4>Financial Resilience Institute | Vancouver, BC</h4>
-                    <p class="role-period">October 2024 - Present</p>
-                </div>
-                
-                <div class="role-content">
-                    <p>Lead the delivery of actionable insights and solutions to advance financial resilience across Canada and globally. By leveraging data analytics, statistical expertise, and consulting skills, I support impactful research projects and provide clients with data-driven strategies that address financial well-being challenges.</p>
-        
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Global Impact Statistics -->
-    <section class="global-impact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Global Development Impact</h2>
-                <p class="section-subtitle">Real-time indicators that drive my work and demonstrate measurable outcomes</p>
-            </div>
-            
-            <div class="impact-grid">
-                <div class="impact-card economic">
-                    <div class="impact-header">
-                        <div class="impact-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="impact-trend up">
-                            <i class="fas fa-arrow-up"></i>
-                            <span>-0.4%</span>
-                        </div>
-                    </div>
-                    <div class="impact-content">
-                        <span class="impact-value">2.7%</span>
-                        <span class="impact-label">Global GDP Growth</span>
-                        <span class="impact-meta" id="gdp-source">World Bank 2025</span>
-                        <p class="impact-insight">Global growth holding steady at 2.7% amid trade uncertainty and policy shifts</p>
-                    </div>
-                </div>
-                
-                <div class="impact-card social">
-                    <div class="impact-header">
-                        <div class="impact-icon">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <div class="impact-trend down">
-                            <i class="fas fa-arrow-down"></i>
-                            <span>-0.6%</span>
-                        </div>
-                    </div>
-                    <div class="impact-content">
-                        <span class="impact-value">9.9%</span>
-                        <span class="impact-label">Extreme Poverty Rate</span>
-                        <span class="impact-meta" id="gdp-source">World Bank 2025</span>
-                        <p class="impact-insight">831 million still in extreme poverty; new $3.00/day line adopted in 2025</p>
-                    </div>
-                </div>
-                
-                <div class="impact-card development">
-                    <div class="impact-header">
-                        <div class="impact-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <div class="impact-trend neutral">
-                            <i class="fas fa-minus"></i>
-                            <span>Stable</span>
-                        </div>
-                    </div>
-                    <div class="impact-content">
-                        <span class="impact-value">75%</span>
-                        <span class="impact-label">Financial Inclusion</span>
-                        <span class="impact-meta">Global Findex 2025</span>
-                        <p class="impact-insight">75% of adults in developing economies now have a financial account (80% increase since 2011)</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-        <!-- Global Development Data Charts -->
-    <section class="dev-charts-section" style="padding:4rem 0;background:linear-gradient(135deg,#f0f4ff 0%,#e8f4ff 100%)">
-        <div class="container">
-            <div style="text-align:center;margin-bottom:2rem">
-                <h2 style="font-size:2.2rem;font-weight:700;color:#004085">Tracking Global Development Indicators</h2>
-                <p style="font-size:1.1rem;color:#6B7280">Live data from the World Bank powering evidence-based development solutions</p>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(450px,1fr));gap:2rem">
-                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-hand-holding-usd" style="color:#FF6600;margin-right:.5rem"></i>Global Extreme Poverty Rate ($2.15/day)</h3>
-                                        <canvas id="povertyChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="povertySrc">Loading...</p>
-                </div>
-                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-university" style="color:#FF6600;margin-right:.5rem"></i>Financial Account Ownership (%)</h3>
-                    <canvas id="findexChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="findexSrc">Loading...</p>
-                </div>
-                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-seedling" style="color:#FF6600;margin-right:.5rem"></i>Agriculture Value Added (% of GDP)</h3>
-                    <canvas id="agriChart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="agriSrc">Loading...</p>
-                </div>
-                <div style="background:#f8fbff;padding:1.5rem;border-radius:16px;box-shadow:0 8px 32px rgba(0,64,133,.08)">
-                    <h3 style="color:#004085;margin-bottom:1rem;font-size:1.15rem"><i class="fas fa-smog" style="color:#FF6600;margin-right:.5rem"></i>CO2 Emissions Excl. LULUCF (Mt CO2e)</h3>
-                    <canvas id="co2Chart" height="220"></canvas>
-                    <p style="font-size:.8rem;color:#9CA3AF;margin-top:.5rem" id="co2Src">Loading...</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Professional Testimonials -->
-    <section class="testimonials-showcase">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Client & Colleague Recommendations</h2>
-                <p class="section-subtitle">What international partners say about working with me</p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card featured">
-                    <div class="testimonial-content">
-                        <p>"Patrice is smart, hard-working, and very capable. He can manage complex topics and always looks for ways to find practical solutions. His calm and warm personality enables him to connect with clients and beneficiaries."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">KK</div>
-                        <div class="author-info">
-                            <h4>Kerry Kyd</h4>
-                            <p>Africa Sector & Business Development</p>
-                            <span class="company-tag">International Development</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <p>"Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MH</div>
-                        <div class="author-info">
-                            <h4>Melanie van der Baaren-Haga</h4>
-                            <p>CBI - Centre for the Promotion of Imports</p>
-                            <span class="company-tag">Netherlands Enterprise Agency</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action - Same as About Page Style -->
-    <section class="home-cta">
-        <div class="container">
-            <div class="cta-content">
-                <div class="cta-header">
-                    <h2>Ready to Transform Your Development Challenges?</h2>
-                    <p>Let's collaborate to create evidence-based solutions that generate lasting positive impact for your organization and the communities you serve.</p>
-                </div>
-                
-                <div class="cta-features">
-                    <div class="cta-feature">
-                        <i class="fas fa-handshake"></i>
-                        <span>Collaborative Approach</span>
-                    </div>
-                    <div class="cta-feature">
-                        <i class="fas fa-globe"></i>
-                        <span>International Experience</span>
-                    </div>
-                    <div class="cta-feature">
-                        <i class="fas fa-chart-bar"></i>
-                        <span>Data-Driven Solutions</span>
-                    </div>
-                    <div class="cta-feature">
-                        <i class="fas fa-seedling"></i>
-                        <span>Sustainable Impact</span>
-                    </div>
-                </div>
-                
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-envelope"></i>
-                        Start a Conversation
-                    </a>
-                    <a href="about.html" class="btn btn-secondary btn-large">
-                        <i class="fas fa-user"></i>
-                        Learn My Story
+                <div class="hero-visual">
+                    <div class="halo" aria-hidden="true"></div>
+                    <div class="block" aria-hidden="true"></div>
+                    <img src="assets/img/patricemirindi-640.jpg" width="640" height="640" alt="Portrait of Patrice Mirindi">
+                    <a class="latest-card" id="latest-card" href="blog.html" hidden>
+                        <p class="k">Latest insight</p>
+                        <p class="t" id="latest-title"></p>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
+        <section id="services">
+            <div class="wrap">
+                <p class="eyebrow">What I do</p>
+                <h2>Practical analytics, built to be used</h2>
+                <p class="lead">From business requirements and messy source data to systems and answers your team can rely on — delivered in English or French.</p>
+                <div class="cards cards-4">
+                    <article class="card">
+                        <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+                        <h3>Systems analysis &amp; development</h3>
+                        <p>Requirements, solution design and code — turning how a team actually works into reliable data systems and tools.</p>
+                    </article>
+                    <article class="card">
+                        <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+                        <h3>Power BI dashboards</h3>
+                        <p>From raw sources to a published report your team actually opens, with clear definitions and handover documentation.</p>
+                    </article>
+                    <article class="card">
+                        <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+                        <h3>Data pipelines &amp; modelling</h3>
+                        <p>Lakehouse and warehouse models on Microsoft Fabric and SQL — clean, documented and reliable after handover.</p>
+                    </article>
+                    <article class="card">
+                        <div class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+                        <h3>Survey &amp; impact analysis</h3>
+                        <p>Sampling, R and Stata analysis, and plain-language reporting for programmes and funders.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="band" id="work">
+            <div class="wrap">
+                <p class="eyebrow">Selected work</p>
+                <h2>Development projects across West and East Africa</h2>
+                <div class="cards">
+                    <article class="card">
+                        <h3>Hortiplus — gender-transformative horticulture</h3>
+                        <p>Diversification programme to raise horticulture production, climate resilience and food and nutrition security.</p>
+                        <p class="meta">Burkina Faso</p>
+                    </article>
+                    <article class="card">
+                        <h3>Rice Mill Academy</h3>
+                        <p>Business advisory and data-driven capacity-building courses for rice mills, strengthening market-oriented value chains.</p>
+                        <p class="meta">Burkina Faso · Côte d'Ivoire · Ghana · Nigeria</p>
+                    </article>
+                    <article class="card">
+                        <h3>Dried mango export coaching</h3>
+                        <p>Business coaching for eight factories to grow EU and regional exports of dried mango.</p>
+                        <p class="meta">Burkina Faso</p>
+                    </article>
+                </div>
+                <p style="margin-top: 28px"><a class="pill pill-ghost" href="key-projects.html">All projects</a></p>
+            </div>
+        </section>
+
+        <section id="indicators">
+            <div class="wrap">
+                <p class="eyebrow">Live data</p>
+                <h2>Global development indicators</h2>
+                <p class="lead">Pulled from the World Bank API each time this page loads.</p>
+                <div class="charts">
+                    <div class="chart-card"><h3 id="t-pov">Extreme poverty rate (% of population)</h3><canvas id="c-pov" aria-label="Line chart of the world extreme poverty rate" role="img"></canvas><p class="src" id="s-pov">Loading…</p></div>
+                    <div class="chart-card"><h3 id="t-acc">Account ownership (% of adults)</h3><canvas id="c-acc" aria-label="Chart of world account ownership" role="img"></canvas><p class="src" id="s-acc">Loading…</p></div>
+                    <div class="chart-card"><h3 id="t-agr">Agriculture value added (% of GDP)</h3><canvas id="c-agr" aria-label="Line chart of world agriculture value added" role="img"></canvas><p class="src" id="s-agr">Loading…</p></div>
+                    <div class="chart-card"><h3 id="t-co2">CO2 emissions excl. LULUCF (Mt CO2e)</h3><canvas id="c-co2" aria-label="Line chart of world CO2 emissions" role="img"></canvas><p class="src" id="s-co2">Loading…</p></div>
+                </div>
+                <p style="margin-top: 28px"><a class="pill pill-ghost" href="data-analytics.html">Open the full dashboard</a></p>
+            </div>
+        </section>
+
+        <section class="band" id="insights">
+            <div class="wrap">
+                <p class="eyebrow">Insights</p>
+                <h2>Recent articles</h2>
+                <p class="lead">Five series in English and French: Microsoft Fabric &amp; Power BI, economic development, code tips, stories from the field, and trends.</p>
+                <div class="cards" id="post-cards"></div>
+                <p style="margin-top: 28px"><a class="pill pill-ghost" href="blog.html">All articles</a></p>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <div class="wrap">
+                <p class="eyebrow">Recommendations</p>
+                <h2>What partners say</h2>
+                <div class="quotes">
+                    <figure class="quote">
+                        <blockquote>"Patrice is smart, hard-working, and very capable. He can manage complex topics and always looks for ways to find practical solutions. His calm and warm personality enables him to connect with clients and beneficiaries."</blockquote>
+                        <figcaption><strong>Kerry Kyd</strong>Africa Sector &amp; Business Development</figcaption>
+                    </figure>
+                    <figure class="quote">
+                        <blockquote>"Patrice has been very professional to share his knowledge of the sector and market to local farmers. His communication skills are very good and he often delivers more than expected."</blockquote>
+                        <figcaption><strong>Melanie van der Baaren-Haga</strong>CBI — Centre for the Promotion of Imports, Netherlands Enterprise Agency</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="band cta-band">
+            <div class="wrap">
+                <h2>Have a data question you need answered?</h2>
+                <p class="lead">Tell me what you're trying to decide. I'll tell you honestly whether data can help, and how.</p>
+                <a class="pill pill-accent" href="contact.html">Start a conversation</a>
+            </div>
+        </section>
+    </main>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Patrice Mirindi</h3>
-                    <p>Development Economist & Data Analytics Consultant</p>
-                    <p>From DRC to global impact - transforming data into sustainable development solutions</p>
+                    <p>Systems analyst, developer &amp; development economist</p>
                     <div class="social-links">
-                        <a href="https://linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:patricemirindi@gmail.com" aria-label="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
+                        <a href="https://www.linkedin.com/in/patricemirindi" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/PatMir04" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="mailto:patricemirindi@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Professional Journey</h4>
+                    <h4>Explore</h4>
                     <ul>
-                        <li>Born in Democratic Republic of Congo</li>
-                        <li>MSc Agricultural Economics (University of Nairobi)</li>
-                        <li>8+ Years International Experience</li>
-                        <li>Current: Financial Resilience Institute</li>
-                        <li>Multilingual Professional</li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="key-projects.html">Projects</a></li>
+                        <li><a href="data-analytics.html">Dashboard</a></li>
+                        <li><a href="blog.html">Insights</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Core Expertise</h4>
+                    <h4>Contact</h4>
                     <ul>
-                        <li>Advanced Data Analytics</li>
-                        <li>Financial Resilience Research</li>
-                        <li>Agricultural Economics</li>
-                        <li>International Development</li>
-                        <li>Strategic Consulting</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect With Me</h4>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Winnipeg, MB, Canada</li>
-                        <li><i class="fas fa-envelope"></i> patricemirindi@gmail.com</li>
-                        <li><i class="fas fa-language"></i> French, English, Swahili, Lingala</li>
-                        <li><i class="fas fa-globe-africa"></i> From DRC to Global Impact</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ottawa, ON, Canada</li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:patricemirindi@gmail.com">patricemirindi@gmail.com</a></li>
+                        <li><i class="fas fa-language"></i> English · Français</li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Patrice Mirindi. All rights reserved.</p>
-            </div>
+            <div class="footer-bottom"><p>&copy; <span id="yr">2026</span> Patrice Mirindi</p></div>
         </div>
     </footer>
 
-    <!-- Homepage - EXACT Same Styling as About Page (Light Blue Background) -->
-    <style>
-    /* Hero Section - EXACT Same as About Page (Light Blue Background) */
-    .home-hero {
-        background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%);
-        padding: 120px 0 80px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .hero-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-    }
-    
-    .hero-gradient {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.05) 0%, rgba(255, 102, 0, 0.05) 100%);
-    }
-    
-    .hero-pattern {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 40%;
-        height: 100%;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23004085" opacity="0.08"/><circle cx="80" cy="40" r="2" fill="%23FF6600" opacity="0.08"/><circle cx="40" cy="80" r="2" fill="%23004085" opacity="0.08"/></svg>');
-        opacity: 0.4;
-    }
-    
-    .home-hero-content {
-        position: relative;
-        z-index: 2;
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 4rem;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .hero-photo-section {
-        text-align: center;
-    }
-    
-    /* EXACT Same Photo Styling as About Page */
-    .home-profile-photo {
-        width: 280px;
-        height: 280px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 8px solid white;
-        box-shadow: 0 20px 60px rgba(0, 64, 133, 0.2);
-        margin-bottom: 1.5rem;
-        transition: transform 0.3s ease;
-    }
-    
-    .home-profile-photo:hover {
-        transform: scale(1.05);
-        box-shadow: 0 25px 70px rgba(0, 64, 133, 0.25);
-    }
-    
-    .availability-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: linear-gradient(135deg, #FF6600, #e55100);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 2rem;
-        font-weight: 600;
-        font-size: 0.875rem;
-        box-shadow: 0 8px 25px rgba(255, 102, 0, 0.3);
-    }
-    
-    .status-dot {
-        width: 10px;
-        height: 10px;
-        background: #00ff88;
-        border-radius: 50%;
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
-    }
-    
-    .hero-text-section h1 {
-        font-size: 3.5rem;
-        font-weight: 800;
-        color: #004085;
-        margin-bottom: 0.5rem;
-        line-height: 1.1;
-    }
-    
-    .hero-text-section h2 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #FF6600;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-tagline {
-        font-size: 1.25rem;
-        line-height: 1.6;
-        color: #374151;
-        margin-bottom: 2rem;
-        font-style: italic;
-    }
-    
-    .hero-credentials {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
-    
-    .credential-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 1rem;
-        border: 2px solid rgba(0, 64, 133, 0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .credential-item:hover {
-        background: rgba(0, 64, 133, 0.05);
-        border-color: #FF6600;
-        transform: translateY(-2px);
-    }
-    
-    .credential-item i {
-        color: #FF6600;
-        font-size: 1.5rem;
-        width: 24px;
-        text-align: center;
-    }
-    
-    .hero-buttons {
-        display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-    }
-    
-    /* Professional Journey - Journey Card Style */
-    .professional-journey {
-        padding: 5rem 0;
-        background: white;
-    }
-    
-    .journey-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-    
-    .journey-card {
-        background: #f8fbff;
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid rgba(0, 64, 133, 0.05);
-    }
-    
-    .journey-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 16px 48px rgba(0, 64, 133, 0.15);
-    }
-    
-    .journey-card.featured {
-        border-left: 4px solid #FF6600;
-    }
-    
-    .card-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-    }
-    
-    .card-icon {
-        font-size: 2rem;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 12px;
-        color: white;
-    }
-    
-    .card-header h3 {
-        color: #004085;
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin: 0;
-    }
-    
-    .journey-card p {
-        color: #374151;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
-    }
-    
-    .card-stats {
-        display: flex;
-        gap: 2rem;
-        margin-bottom: 1.5rem;
-        padding-top: 1rem;
-        border-top: 2px solid #f0f8ff;
-    }
-    
-    .stat-item {
-        text-align: center;
-    }
-    
-    .stat-value {
-        display: block;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #FF6600;
-        margin-bottom: 0.25rem;
-    }
-    
-    .stat-label {
-        font-size: 0.875rem;
-        color: #6B7280;
-        font-weight: 600;
-    }
-    
-    .skill-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .skill-tag {
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
-        color: #004085;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        border: 1px solid rgba(0, 64, 133, 0.2);
-    }
-    
-    /* Current Role Highlight */
-    .current-role-highlight {
-        padding: 3rem 0;
-        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
-    }
-    
-    .role-card {
-        max-width: 1000px;
-        margin: 0 auto;
-        background: white;
-        padding: 2.5rem;
-        border-radius: 20px;
-        box-shadow: 0 12px 40px rgba(0, 64, 133, 0.1);
-        border: 2px solid rgba(0, 64, 133, 0.05);
-    }
-    
-    .role-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    
-    .role-badge.current {
-        background: linear-gradient(135deg, #10b981, #059669);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 1rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        display: inline-block;
-        margin-bottom: 1rem;
-    }
-    
-    .role-header h3 {
-        font-size: 2rem;
-        color: #004085;
-        margin-bottom: 0.5rem;
-    }
-    
-    .role-header h4 {
-        font-size: 1.25rem;
-        color: #FF6600;
-        margin-bottom: 0.5rem;
-    }
-    
-    .role-period {
-        color: #6B7280;
-        font-weight: 600;
-    }
-    
-    .role-content p {
-        color: #374151;
-        line-height: 1.7;
-        text-align: center;
-        font-size: 1.1rem;
-    }
-    
-    /* Global Impact */
-    .global-impact {
-        padding: 4rem 0;
-        background: white;
-    }
-    
-    .impact-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-    
-    .impact-card {
-        background: #f8fbff;
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
-        transition: transform 0.3s ease;
-    }
-    
-    .impact-card:hover {
-        transform: translateY(-5px);
-    }
-    
-    .impact-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-    
-    .impact-icon {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.25rem;
-    }
-    
-    .impact-trend {
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-    }
-    
-    .impact-trend.up { color: #10b981; }
-    .impact-trend.down { color: #ef4444; }
-    .impact-trend.neutral { color: #6b7280; }
-    
-    .impact-value {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #004085;
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-    
-    .impact-label {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: #374151;
-        display: block;
-        margin-bottom: 0.25rem;
-    }
-    
-    .impact-meta {
-        font-size: 0.875rem;
-        color: #6B7280;
-        display: block;
-        margin-bottom: 1rem;
-    }
-    
-    .impact-insight {
-        font-size: 0.875rem;
-        color: #6B7280;
-        line-height: 1.5;
-        margin: 0;
-    }
-    
-    /* Testimonials */
-    .testimonials-showcase {
-        padding: 4rem 0;
-        background: linear-gradient(135deg, #f8fbff 0%, #f1f5f9 100%);
-    }
-    
-    .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-    
-    .testimonial-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08);
-        transition: transform 0.3s ease;
-    }
-    
-    .testimonial-card:hover {
-        transform: translateY(-5px);
-    }
-    
-    .testimonial-card.featured {
-        border: 2px solid #FF6600;
-    }
-    
-    .testimonial-content p {
-        font-style: italic;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #374151;
-        margin-bottom: 2rem;
-    }
-    
-    .testimonial-author {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .author-avatar {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #004085, #FF6600);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 700;
-        font-size: 1.1rem;
-    }
-    
-    .author-info h4 {
-        color: #004085;
-        font-weight: 700;
-        margin-bottom: 0.25rem;
-    }
-    
-    .author-info p {
-        color: #6B7280;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .company-tag {
-        background: linear-gradient(135deg, rgba(0, 64, 133, 0.1), rgba(255, 102, 0, 0.1));
-        color: #004085;
-        padding: 0.25rem 0.75rem;
-        border-radius: 1rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
-    
-    /* Home CTA - Same as About Page Style */
-    .home-cta {
-        padding: 5rem 0;
-        background: linear-gradient(135deg, #004085 0%, #1e40af 100%);
-        color: white;
-    }
-    
-    .cta-content {
-        text-align: center;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    
-    .cta-header h2 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: white;
-    }
-    
-    .cta-header p {
-        font-size: 1.25rem;
-        margin-bottom: 3rem;
-        color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .cta-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
-    
-    .cta-feature {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .cta-feature i {
-        color: #FF6600;
-        font-size: 1.25rem;
-    }
-    
-    .cta-buttons {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-        .home-hero-content {
-            grid-template-columns: 1fr;
-            text-align: center;
-            gap: 2rem;
-        }
-        
-        .home-profile-photo {
-            width: 220px;
-            height: 220px;
-        }
-        
-        .hero-text-section h1 {
-            font-size: 2.5rem;
-        }
-        
-        .journey-cards {
-            grid-template-columns: 1fr;
-        }
-        
-        .impact-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .testimonials-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .cta-features {
-            grid-template-columns: 1fr;
-        }
-        
-        .cta-buttons {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .hero-text-section h1 {
-            font-size: 2rem;
-        }
-    }
-    </style>
-
-    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/chatbot.js"></script>
-        <script>
-    // World Bank API - Fetch live development indicators
-    document.addEventListener('DOMContentLoaded', function() {
-        // GDP Growth
-        // fetch('https://api.worldbank.org/v2/country/WLD/indicator/NY.GDP.MKTP.KD.ZG?format=json&date=2020:2025&per_page=5')
-            .then(r => r.json())
-            .then(data => {
-                if (data[1] && data[1][0]) {
-                    var latest = data[1].find(d => d.value !== null);
-                    if (latest) {
-                        var el = document.getElementById('gdp-value');
-                        if (el) el.textContent = latest.value.toFixed(1) + '%';
-                        var src = document.getElementById('gdp-source');
-                        if (src) src.textContent = 'World Bank ' + latest.date;
-                    }
-                }
-            }).catch(function() {});
-        // Poverty Rate
-        // fetch('https://api.worldbank.org/v2/country/WLD/indicator/SI.POV.DDAY?format=json&date=2015:2025&per_page=10')
-            .then(r => r.json())
-            .then(data => {
-                if (data[1]) {
-                    var latest = data[1].find(d => d.value !== null);
-                    if (latest) {
-                        var el = document.getElementById('poverty-value');
-                        if (el) el.textContent = latest.value.toFixed(1) + '%';
-                    }
-                }
-            }).catch(function() {});
-    });
-    </script>
-
+    <script src="assets/js/knowledge-chat.js" defer></script>
     <script>
-// Animated count-up for impact stats
-function animateCounter(el, target, suffix) {
-  var current = 0;
-  var step = Math.max(1, Math.floor(target / 60));
-  var timer = setInterval(function() {
-    current += step;
-    if (current >= target) { current = target; clearInterval(timer); }
-    el.textContent = current.toLocaleString() + (suffix || '');
-  }, 30);
-}
-document.addEventListener('DOMContentLoaded', function() {
-  var stats = document.querySelectorAll('.stat-number, .impact-number');
-  if (!stats.length) return;
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var text = el.textContent.trim();
-        var num = parseInt(text.replace(/[^0-9]/g, ''));
-        var suffix = text.replace(/[0-9,]/g, '');
-        if (num) { el.textContent = '0'; animateCounter(el, num, suffix); }
-        observer.unobserve(el);
-      }
-    });
-  }, {threshold: 0.3});
-  stats.forEach(function(s) { observer.observe(s); });
-  // Lazy load images
-  document.querySelectorAll('img[loading]').forEach(function(img) {
-    img.setAttribute('loading', 'lazy');
-  });
-});
-</script>
+    (function () {
+        document.getElementById('yr').textContent = new Date().getFullYear();
 
-        <script>
-    // World Bank Chart.js - fetch live data and render charts
-    (function(){
-        var chartOpts={responsive:true,animation:{duration:2000,easing:'easeInOutQuart'},interaction:{intersect:false,mode:'index'},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,64,133,0.9)',titleFont:{size:14},bodyFont:{size:13},padding:12,cornerRadius:8,displayColors:false}},scales:{y:{beginAtZero:false,grid:{color:'rgba(0,64,133,0.06)'}},x:{ticks:{maxRotation:45},grid:{display:false}}}};
-        function buildChart(id,labels,values,color,label){
-            new Chart(document.getElementById(id),{type:'line',data:{labels:labels,datasets:[{label:label,data:values,borderColor:color,backgroundColor:color+'22',borderWidth:3,fill:true,tension:0.4,pointRadius:4,pointHoverRadius:8,pointBackgroundColor:'#fff',pointBorderColor:color,pointBorderWidth:2,pointHoverBackgroundColor:color,pointHoverBorderColor:'#fff'}]},options:chartOpts});
+        // Latest articles from blog/posts.json
+        fetch('blog/posts.json').then(function (r) { return r.ok ? r.json() : []; }).then(function (posts) {
+            posts = (posts || []).filter(function (p) { return p.published; })
+                .sort(function (a, b) { return b.date.localeCompare(a.date); });
+            var wrap = document.getElementById('post-cards');
+            if (!posts.length) {
+                wrap.innerHTML = '<p class="lead">The first articles are on their way.</p>';
+                return;
+            }
+            var latest = document.getElementById('latest-card');
+            latest.href = 'blog/' + posts[0].slug + '.html';
+            document.getElementById('latest-title').textContent = posts[0].title;
+            latest.hidden = false;
+            posts.slice(0, 3).forEach(function (p) {
+                var a = document.createElement('article');
+                a.className = 'card';
+                var k = document.createElement('p'); k.className = 'meta'; k.style.marginTop = '0'; k.style.color = '#FF7A1A'; k.textContent = p.seriesLabel;
+                var h = document.createElement('h3'); h.textContent = p.title;
+                var s = document.createElement('p'); s.textContent = p.summary;
+                var m = document.createElement('p'); m.className = 'meta';
+                m.textContent = new Date(p.date + 'T12:00:00').toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }) + ' · ' + p.readMinutes + ' min read';
+                var l = document.createElement('a'); l.className = 'more'; l.href = 'blog/' + p.slug + '.html'; l.textContent = 'Read article';
+                a.append(k, h, s, m, l); wrap.appendChild(a);
+            });
+        }).catch(function () {});
+
+        // World Bank indicators (live)
+        if (!window.Chart) return;
+        Chart.defaults.color = '#CBD5E1';
+        Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+        var grid = 'rgba(203, 213, 225, 0.12)';
+        function draw(id, type, labels, values, color) {
+            new Chart(document.getElementById(id), {
+                type: type,
+                data: { labels: labels, datasets: [{ data: values, borderColor: color, backgroundColor: type === 'bar' ? color : color + '33', fill: type === 'line', tension: 0.3, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5, borderRadius: 6 }] },
+                options: { responsive: true, maintainAspectRatio: false, animation: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#12284A', borderColor: '#1E3A63', borderWidth: 1 } },
+                    scales: { x: { grid: { display: false }, ticks: { maxTicksLimit: 8 } }, y: { grid: { color: grid }, beginAtZero: type === 'bar' } } }
+            });
         }
-        function fetchWB(indicator,id,srcId,label,color){
-            fetch('https://api.worldbank.org/v2/country/WLD/indicator/'+indicator+'?format=json&date=2000:2025&per_page=30')
-            .then(function(r){return r.json();})
-            .then(function(d){
-                if(!d[1])return;
-                var pts=d[1].filter(function(x){return x.value!==null;}).reverse();
-                var labels=pts.map(function(x){return x.date;});
-                var values=pts.map(function(x){var v=x.value;if(v>1e9)v=v/1e9;return parseFloat(v.toFixed(2));});
-                buildChart(id,labels,values,color,label);
-                var el=document.getElementById(srcId);
-                if(el) el.textContent='Source: World Bank | '+pts[0].date+' - '+pts[pts.length-1].date;
-            }).catch(function(){var el=document.getElementById(srcId);if(el)el.textContent='Data unavailable';});
+        function wb(code, key, color, type) {
+            return fetch('https://api.worldbank.org/v2/country/WLD/indicator/' + code + '?format=json&date=2000:2030&per_page=60')
+                .then(function (r) { return r.json(); })
+                .then(function (d) {
+                    var rows = (d[1] || []).filter(function (x) { return x.value !== null; }).reverse();
+                    if (!rows.length) throw new Error('no data');
+                    draw('c-' + key, type || 'line', rows.map(function (x) { return x.date; }), rows.map(function (x) { return +x.value.toFixed(2); }), color);
+                    document.getElementById('t-' + key).textContent = rows[0].indicator.value;
+                    document.getElementById('s-' + key).textContent = 'Source: World Bank, ' + code + ', ' + rows[0].date + '–' + rows[rows.length - 1].date;
+                })
+                .catch(function () { document.getElementById('s-' + key).textContent = 'World Bank data is unavailable right now.'; });
         }
-        document.addEventListener('DOMContentLoaded',function(){
-            fetchWB('SI.POV.DDAY','povertyChart','povertySrc','Poverty Rate (%)','#e53e3e');
-             new Chart(document.getElementById('findexChart'),{type:'bar',data:{labels:['2011','2014','2017','2021','2024'],datasets:[{label:'Account Ownership (%)',data:[51,62,69,76,75],backgroundColor:['#004085','#0056b3','#0069d9','#FF6600','#e55100'],borderRadius:6}]},options:{responsive:true,animation:{duration:2000,easing:'easeInOutQuart'},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(0,64,133,0.9)',padding:12,cornerRadius:8}},scales:{y:{beginAtZero:true,max:100,grid:{color:'rgba(0,64,133,0.06)'}},x:{grid:{display:false}}}}});document.getElementById('findexSrc').textContent='Source: Global Findex 2025 (World Bank)';
-            setTimeout(function(){fetchWB('NV.AGR.TOTL.ZS','agriChart','agriSrc','Agriculture (% of GDP)','#38a169');},2000);
-            setTimeout(function(){fetchWB('EN.GHG.CO2.MT.CE.AR5','co2Chart','co2Src','CO2 Emissions (Mt CO2e)','#6b7280');},3000);
-        });
+        wb('SI.POV.DDAY', 'pov', '#FF7A1A');
+        wb('FX.OWN.TOTL.ZS', 'acc', '#60A5FA', 'bar');
+        wb('NV.AGR.TOTL.ZS', 'agr', '#34D399');
+        wb('EN.GHG.CO2.MT.CE.AR5', 'co2', '#CBD5E1');
     })();
     </script>
 </body>

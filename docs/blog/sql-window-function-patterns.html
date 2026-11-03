@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five SQL window-function patterns every analyst should keep handy | Patrice Mirindi</title>
+    <meta name="description" content="Deduplicate records, build running totals, compare periods, compute shares and rank within groups — five copy-ready T-SQL patterns that also run in Microsoft Fabric warehouses.">
+    <link rel="canonical" href="https://patricemirindi.com/blog/sql-window-function-patterns.html">
+    <link rel="alternate" hreflang="en" href="https://patricemirindi.com/blog/sql-window-function-patterns.html">
+    <link rel="alternate" hreflang="fr" href="https://patricemirindi.com/blog/sql-window-function-patterns.fr.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patricemirindi.com/blog/sql-window-function-patterns.html">
+    <meta property="og:title" content="Five SQL window-function patterns every analyst should keep handy">
+    <meta property="og:description" content="Deduplicate records, build running totals, compare periods, compute shares and rank within groups — five copy-ready T-SQL patterns that also run in Microsoft Fabric warehouses.">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Five SQL window-function patterns every analyst should keep handy", "datePublished": "2026-11-03", "inLanguage": "en", "url": "https://patricemirindi.com/blog/sql-window-function-patterns.html", "description": "Deduplicate records, build running totals, compare periods, compute shares and rank within groups — five copy-ready T-SQL patterns that also run in Microsoft Fabric warehouses.", "author": {"@type": "Person", "name": "Patrice Mirindi", "url": "https://patricemirindi.com/"}}</script>
+</head>
+<body class="article-page">
+    <nav class="navbar" aria-label="Main">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="/">Patrice Mirindi</a></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="/skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="/key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="/data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/blog.html" class="nav-link active">Insights</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="hamburger" type="button" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+        </div>
+    </nav>
+    <main class="article-wrap">
+        <article>
+            <p class="eyebrow"><a href="/blog.html?series=code">Code tips</a> · SQL · T-SQL</p>
+            <h1>Five SQL window-function patterns every analyst should keep handy</h1>
+            <p class="meta"><time datetime="2026-11-03">November 3, 2026</time> · 3 min read <a class="lang-switch" href="/blog/sql-window-function-patterns.fr.html" hreflang="fr">Lire en français</a></p>
+            <p class="standfirst">Deduplicate records, build running totals, compare periods, compute shares and rank within groups — five copy-ready T-SQL patterns that also run in Microsoft Fabric warehouses.</p>
+            <div class="prose">
+<p>Window functions are the single most useful step up from basic SQL. They let you calculate across related rows — the previous month, the rest of a region, the latest version of a record — without collapsing your data the way <code>GROUP BY</code> does.</p>
+<p>The <code>OVER</code> clause that powers them is supported across SQL Server, Azure SQL, and the Warehouse and SQL analytics endpoint in Microsoft Fabric, so the patterns below travel well between platforms. All examples use one simple table:</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_id</code></td>
+<td>Order identifier</td>
+</tr>
+<tr>
+<td><code>customer_id</code></td>
+<td>Customer</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>Sales region</td>
+</tr>
+<tr>
+<td><code>order_date</code></td>
+<td>Date of the order</td>
+</tr>
+<tr>
+<td><code>amount</code></td>
+<td>Order value</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>When the row was last changed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-remove-duplicates-keep-only-the-latest-version-of-each-record">1. Remove duplicates: keep only the latest version of each record</h2>
+<p>Source systems often send the same record several times. <code>ROW_NUMBER</code> numbers the versions so you can keep the newest one.</p>
+<pre><code class="language-sql">WITH ranked AS (
+    SELECT *,
+           ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY updated_at DESC) AS rn
+    FROM dbo.sales
+)
+SELECT order_id, customer_id, region, order_date, amount
+FROM ranked
+WHERE rn = 1;
+</code></pre>
+<p>Add a second column to the <code>ORDER BY</code> (for example an ingestion ID) if two versions can share the same timestamp; otherwise the winner is arbitrary.</p>
+<h2 id="2-running-total-within-a-group">2. Running total within a group</h2>
+<p>A cumulative sum is one line. Specify the frame explicitly with <code>ROWS</code>:</p>
+<pre><code class="language-sql">SELECT region, order_date, amount,
+       SUM(amount) OVER (
+           PARTITION BY region
+           ORDER BY order_date, order_id
+           ROWS UNBOUNDED PRECEDING
+       ) AS running_total
+FROM dbo.sales;
+</code></pre>
+<p>Why <code>ROWS</code>? When you write <code>ORDER BY</code> without a frame, the default is <code>RANGE UNBOUNDED PRECEDING AND CURRENT ROW</code>, which treats rows with the same date as one block. Two orders on the same day would then show the same running total. <code>ROWS</code> moves one row at a time.</p>
+<h2 id="3-change-versus-the-previous-period">3. Change versus the previous period</h2>
+<p>Aggregate first, then compare each month with the one before using <code>LAG</code>. <code>NULLIF</code> avoids a divide-by-zero error.</p>
+<pre><code class="language-sql">WITH monthly AS (
+    SELECT region,
+           DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1) AS month_start,
+           SUM(amount) AS revenue
+    FROM dbo.sales
+    GROUP BY region, DATEFROMPARTS(YEAR(order_date), MONTH(order_date), 1)
+)
+SELECT region, month_start, revenue,
+       LAG(revenue) OVER (PARTITION BY region ORDER BY month_start) AS prev_revenue,
+       100.0 * (revenue - LAG(revenue) OVER (PARTITION BY region ORDER BY month_start))
+             / NULLIF(LAG(revenue) OVER (PARTITION BY region ORDER BY month_start), 0) AS pct_change
+FROM monthly;
+</code></pre>
+<p><code>LAG</code> looks at the previous row, not the previous calendar month. If a region can have months with no sales, build a complete month list first (see the bonus below) so gaps don't distort the comparison.</p>
+<h2 id="4-share-of-the-total">4. Share of the total</h2>
+<p>A window aggregate with no <code>ORDER BY</code> returns the group total on every row, which makes percentages straightforward:</p>
+<pre><code class="language-sql">SELECT region, customer_id,
+       SUM(amount) AS customer_revenue,
+       100.0 * SUM(amount) / SUM(SUM(amount)) OVER (PARTITION BY region) AS pct_of_region
+FROM dbo.sales
+GROUP BY region, customer_id;
+</code></pre>
+<p>The <code>SUM(SUM(amount))</code> is not a typo: the inner <code>SUM</code> is the <code>GROUP BY</code> aggregate, and the outer one adds those results up across the window.</p>
+<h2 id="5-top-n-within-each-group">5. Top N within each group</h2>
+<p>To list the three largest customers in each region, rank them and filter:</p>
+<pre><code class="language-sql">WITH customer_totals AS (
+    SELECT region, customer_id, SUM(amount) AS revenue
+    FROM dbo.sales
+    GROUP BY region, customer_id
+), ranked AS (
+    SELECT *, DENSE_RANK() OVER (PARTITION BY region ORDER BY revenue DESC) AS rnk
+    FROM customer_totals
+)
+SELECT region, customer_id, revenue, rnk
+FROM ranked
+WHERE rnk &lt;= 3
+ORDER BY region, rnk;
+</code></pre>
+<p>Use <code>DENSE_RANK</code> when ties should share a place, and <code>ROW_NUMBER</code> when you need exactly three rows per group.</p>
+<h2 id="bonus-a-complete-calendar-of-months">Bonus: a complete calendar of months</h2>
+<p>On SQL Server 2022 and Azure SQL, <code>GENERATE_SERIES</code> creates a number sequence you can turn into dates — handy for filling gaps before pattern 3. It needs database compatibility level 160 or higher; check your platform's documentation before relying on it elsewhere.</p>
+<pre><code class="language-sql">SELECT DATEADD(MONTH, value, '2024-01-01') AS month_start
+FROM GENERATE_SERIES(0, 23);
+</code></pre>
+<p>Left-join your monthly totals to this list and replace missing revenue with zero using <code>COALESCE</code>.</p>
+<h2 id="quick-checklist">Quick checklist</h2>
+<ul>
+<li>Always include a tie-breaker in <code>ORDER BY</code> inside <code>OVER</code> when the order must be deterministic.</li>
+<li>Prefer <code>ROWS</code> frames for running totals.</li>
+<li>Aggregate to the grain you want (day, month) before using <code>LAG</code> or <code>LEAD</code>.</li>
+<li>Wrap divisors in <code>NULLIF(..., 0)</code>.</li>
+</ul>
+<p>These five patterns cover a large share of everyday reporting logic. Once they become habits, many queries that used to need temporary tables or spreadsheet steps shrink to a single readable statement.</p>
+            </div>
+            
+            <section class="sources"><h2>Sources</h2><ol><li><a href="https://learn.microsoft.com/sql/t-sql/queries/select-over-clause-transact-sql" rel="noopener" target="_blank">SELECT - OVER clause (Transact-SQL)</a> — Microsoft Learn</li><li><a href="https://www.microsoft.com/en-us/sql-server/blog/2023/01/12/working-with-time-series-data-in-sql-server-2022-and-azure-sql/" rel="noopener" target="_blank">Working with time series data in SQL Server 2022 and Azure SQL</a> — Microsoft SQL Server Blog</li></ol></section>
+            <section class="author">
+                <img src="/assets/img/patricemirindi-640.jpg" width="72" height="72" alt="">
+                <div><h2>About the author</h2><p>Patrice Mirindi is a bilingual data analyst and development economist in Ottawa. He builds dashboards, data pipelines and impact analyses for public-sector, non-profit and development teams.</p>
+                <a class="pill pill-accent" href="/contact.html">Start a conversation</a></div>
+            </section>
+            <p><a class="back" href="/blog.html">← All articles</a></p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; Patrice Mirindi · Ottawa, ON · <a href="/blog/feed.xml">RSS</a></p></div></div></footer>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/knowledge-chat.js" defer></script>
+</body>
+</html>

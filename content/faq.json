@@ -1,0 +1,231 @@
+[
+  {
+    "lang": "en",
+    "q": "What services do you offer?",
+    "url": "/contact.html",
+    "tags": [
+      "services",
+      "consulting",
+      "hire",
+      "help"
+    ],
+    "a": "Patrice offers four kinds of work: systems analysis and development (turning business needs into data systems and tools), data pipelines and data modelling (clean, documented SQL models, including on Microsoft Fabric), Power BI dashboards (from raw sources to a published, documented report), and survey and impact analysis (sampling, R and Stata analysis, plain-language reporting). Work can be delivered in English or French."
+  },
+  {
+    "lang": "fr",
+    "q": "Quels services offrez-vous ?",
+    "url": "/contact.html",
+    "tags": [
+      "services",
+      "conseil",
+      "aide"
+    ],
+    "a": "Patrice propose quatre types de mandats : l'analyse et le développement de systèmes (traduire des besoins d'affaires en systèmes et outils de données), les flux et modèles de données (modèles SQL propres et documentés, y compris sur Microsoft Fabric), les tableaux de bord Power BI (des données brutes jusqu'au rapport publié et documenté), et l'analyse d'enquêtes et d'impact (échantillonnage, analyse en R et Stata, rapports clairs). Le travail peut être livré en français ou en anglais."
+  },
+  {
+    "lang": "en",
+    "q": "How can I contact Patrice?",
+    "url": "/contact.html",
+    "tags": [
+      "contact",
+      "email",
+      "reach",
+      "call",
+      "meeting"
+    ],
+    "a": "Use the contact form on the Contact page or email patricemirindi@gmail.com. You can also connect on LinkedIn (linkedin.com/in/patricemirindi). Describe what you are trying to decide and Patrice will get back to you."
+  },
+  {
+    "lang": "fr",
+    "q": "Comment joindre Patrice ?",
+    "url": "/contact.html",
+    "tags": [
+      "contact",
+      "courriel",
+      "joindre",
+      "rencontre"
+    ],
+    "a": "Utilisez le formulaire de la page Contact ou écrivez à patricemirindi@gmail.com. Vous pouvez aussi le contacter sur LinkedIn (linkedin.com/in/patricemirindi). Décrivez votre besoin et Patrice vous répondra."
+  },
+  {
+    "lang": "en",
+    "q": "Where is Patrice based and which languages does he work in?",
+    "url": "/about.html",
+    "tags": [
+      "location",
+      "ottawa",
+      "languages",
+      "french",
+      "english",
+      "bilingual"
+    ],
+    "a": "Patrice is based in Ottawa, Canada. He works in English and French, and also speaks Swahili and Lingala."
+  },
+  {
+    "lang": "fr",
+    "q": "Où est basé Patrice et dans quelles langues travaille-t-il ?",
+    "url": "/about.html",
+    "tags": [
+      "lieu",
+      "ottawa",
+      "langues",
+      "français",
+      "anglais",
+      "bilingue"
+    ],
+    "a": "Patrice est basé à Ottawa, au Canada. Il travaille en français et en anglais, et parle aussi le swahili et le lingala."
+  },
+  {
+    "lang": "en",
+    "q": "What is Patrice's current role?",
+    "url": "/work-experience.html",
+    "tags": [
+      "current",
+      "job",
+      "role",
+      "work",
+      "employer",
+      "company",
+      "now",
+      "currently",
+      "position"
+    ],
+    "a": "Patrice currently works as a Data Systems Analyst in Ottawa, building data pipelines, data models and Power BI reporting. Before that he was a Senior Data Analyst and Consultant at the Financial Resilience Institute (2024–2026). For more on his current role, connect with him on LinkedIn."
+  },
+  {
+    "lang": "fr",
+    "q": "Quel est le poste actuel de Patrice ?",
+    "url": "/work-experience.html",
+    "tags": [
+      "poste",
+      "emploi",
+      "travail",
+      "employeur"
+    ],
+    "a": "Patrice est actuellement analyste des systèmes de données à Ottawa. Il conçoit des flux de données, des modèles de données et des rapports Power BI. Auparavant, il a été analyste de données principal et consultant au Financial Resilience Institute (2024–2026)."
+  },
+  {
+    "lang": "en",
+    "q": "Does Patrice work with Microsoft Fabric?",
+    "url": "/skills-expertise.html",
+    "tags": [
+      "fabric",
+      "microsoft fabric",
+      "lakehouse",
+      "warehouse",
+      "pipelines",
+      "power bi",
+      "data engineering",
+      "systems"
+    ],
+    "a": "Yes. Patrice works with Microsoft Fabric day to day: lakehouses and warehouses, data pipelines, SQL and Spark SQL models, and Power BI semantic models on top. He also writes about Fabric and Power BI in his Insights series."
+  },
+  {
+    "lang": "fr",
+    "q": "Patrice travaille-t-il avec Microsoft Fabric ?",
+    "url": "/skills-expertise.html",
+    "tags": [
+      "fabric",
+      "microsoft fabric",
+      "lakehouse",
+      "entrepôt",
+      "pipelines",
+      "power bi",
+      "ingénierie des données"
+    ],
+    "a": "Oui. Patrice utilise Microsoft Fabric au quotidien : lakehouses et entrepôts, pipelines de données, modèles SQL et Spark SQL, et modèles sémantiques Power BI. Il écrit aussi sur Fabric et Power BI dans sa série d'analyses."
+  },
+  {
+    "lang": "en",
+    "q": "What is Patrice's education and background?",
+    "url": "/about.html",
+    "tags": [
+      "education",
+      "degree",
+      "background",
+      "university",
+      "nairobi"
+    ],
+    "a": "Patrice is originally from the Democratic Republic of Congo and holds an MSc in Agricultural Economics from the University of Nairobi. His career spans agricultural value chains and business development across Africa, financial resilience research in Canada, and data systems work."
+  },
+  {
+    "lang": "fr",
+    "q": "Quelle est la formation de Patrice ?",
+    "url": "/about.html",
+    "tags": [
+      "formation",
+      "diplôme",
+      "parcours",
+      "université"
+    ],
+    "a": "Originaire de la République démocratique du Congo, Patrice détient une maîtrise en économie agricole de l'Université de Nairobi. Son parcours couvre les chaînes de valeur agricoles en Afrique, la recherche sur la résilience financière au Canada et les systèmes de données."
+  },
+  {
+    "lang": "en",
+    "q": "Which countries has Patrice worked in?",
+    "url": "/key-projects.html",
+    "tags": [
+      "countries",
+      "africa",
+      "experience",
+      "international"
+    ],
+    "a": "Patrice's projects include work in Burkina Faso, Benin, Côte d'Ivoire, Ghana, Nigeria, Burundi, the Democratic Republic of Congo and Canada. The Projects page has a map and details for each."
+  },
+  {
+    "lang": "en",
+    "q": "Which tools and languages does Patrice use?",
+    "url": "/skills-expertise.html",
+    "tags": [
+      "tools",
+      "skills",
+      "python",
+      "r",
+      "sql",
+      "power bi",
+      "stata",
+      "excel"
+    ],
+    "a": "Patrice works mainly with R, Python, Stata, SQL, Power BI and advanced Excel, plus data modelling and dashboard design. The Skills page lists them in detail."
+  },
+  {
+    "lang": "en",
+    "q": "Can you help me fix my code?",
+    "url": "/contact.html",
+    "tags": [
+      "code",
+      "coding",
+      "debug",
+      "error",
+      "bug",
+      "python",
+      "sql",
+      "dax"
+    ],
+    "a": "I can share tips and ready-to-use code from Patrice's Code tips articles (SQL, Power BI, Python and more) — try asking about a specific task, such as removing duplicates in SQL. I can't debug your own code yet; for that, describe the problem through the contact form."
+  },
+  {
+    "lang": "fr",
+    "q": "Pouvez-vous m'aider à corriger mon code ?",
+    "url": "/contact.html",
+    "tags": [
+      "code",
+      "programmation",
+      "erreur",
+      "bogue"
+    ],
+    "a": "Je peux partager des astuces et du code prêt à l'emploi tirés des articles Astuces de code de Patrice (SQL, Power BI, Python, etc.) — essayez une question précise, par exemple dédoublonner en SQL. Je ne peux pas encore déboguer votre propre code ; pour cela, décrivez le problème dans le formulaire de contact."
+  },
+  {
+    "lang": "en",
+    "q": "What is the development dashboard?",
+    "url": "/data-analytics.html",
+    "tags": [
+      "dashboard",
+      "data",
+      "indicators",
+      "world bank"
+    ],
+    "a": "The Dashboard page lets you compare development indicators across countries and over time, using World Bank data, and export the results."
+  }
+]
