@@ -1,5 +1,25 @@
 {
   "technical_skills": {
+    "systems_engineering": {
+      "category": "Systems Analysis & Data Engineering",
+      "skills": [
+        {
+          "name": "Microsoft Fabric (lakehouses, warehouses, pipelines)"
+        },
+        {
+          "name": "SQL (T-SQL, Spark SQL)"
+        },
+        {
+          "name": "Power BI semantic models and DAX"
+        },
+        {
+          "name": "Systems analysis and requirements"
+        },
+        {
+          "name": "Git and GitHub"
+        }
+      ]
+    },
     "data_analytics": {
       "category": "Data Analytics & Statistical Analysis",
       "skills": [

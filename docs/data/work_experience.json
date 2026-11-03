@@ -1,13 +1,30 @@
 [
   {
+    "id": 0,
+    "title": "Data Systems Analyst",
+    "company": "",
+    "location": "Ottawa, Canada",
+    "period": "2026 - Present",
+    "duration": "Current",
+    "type": "Full-time",
+    "description": "Designing and maintaining enterprise data pipelines, data models and Power BI reporting that turn operational data into reliable decision support.",
+    "achievements": [],
+    "skills": [
+      "SQL",
+      "Data Modelling",
+      "Power BI",
+      "Data Pipelines"
+    ]
+  },
+  {
     "id": 1,
     "title": "Senior Data Analyst and Consultant",
     "company": "Financial Resilience Institute",
     "location": "Vancouver, Canada",
-    "period": "October 2024 - Present",
-    "duration": "Current",
+    "period": "October 2024 - June 2026",
+    "duration": "20 months",
     "type": "Full-time",
-    "description": "Leading complex data analyses and strategic consulting to advance financial resilience across Canada and globally.",
+    "description": "Led complex data analyses and strategic consulting to advance financial resilience across Canada and globally.",
     "achievements": [
       "Conducting multivariate and regression modeling to uncover financial health trends",
       "Managing multiple planned and ad-hoc research projects",
