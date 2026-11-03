@@ -36,7 +36,8 @@ html, body, button, input, select, textarea {
   font-family: var(--font-avenir);
 }
 
-body { -webkit-font-smoothing: antialiased; overflow-x: clip; }
+html, body { overflow-x: clip; }  /* entrance animations must never cause sideways scrolling */
+body { -webkit-font-smoothing: antialiased; }
 
 h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing: -0.01em; }
 
