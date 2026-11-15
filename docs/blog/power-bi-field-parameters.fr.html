@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un graphique, plusieurs vues : les paramètres de champ dans Power BI après la mise à jour d&#x27;octobre 2026 | Patrice Mirindi</title>
+    <meta name="description" content="Les paramètres de champ permettent au lecteur de choisir ce qu&#x27;affiche un graphique. Depuis la mise à jour d&#x27;octobre 2026, les graphiques à barres, à colonnes et en courbes déploient automatiquement les axes hiérarchiques lorsque plusieurs champs sont sélectionnés. Voici comment les mettre en place, avec du DAX prêt à copier.">
+    <link rel="canonical" href="https://patricemirindi.com/blog/power-bi-field-parameters.fr.html">
+    <link rel="alternate" hreflang="fr" href="https://patricemirindi.com/blog/power-bi-field-parameters.fr.html">
+    <link rel="alternate" hreflang="en" href="https://patricemirindi.com/blog/power-bi-field-parameters.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patricemirindi.com/blog/power-bi-field-parameters.fr.html">
+    <meta property="og:title" content="Un graphique, plusieurs vues : les paramètres de champ dans Power BI après la mise à jour d&#x27;octobre 2026">
+    <meta property="og:description" content="Les paramètres de champ permettent au lecteur de choisir ce qu&#x27;affiche un graphique. Depuis la mise à jour d&#x27;octobre 2026, les graphiques à barres, à colonnes et en courbes déploient automatiquement les axes hiérarchiques lorsque plusieurs champs sont sélectionnés. Voici comment les mettre en place, avec du DAX prêt à copier.">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Un graphique, plusieurs vues : les paramètres de champ dans Power BI après la mise à jour d'octobre 2026", "datePublished": "2026-11-15", "inLanguage": "fr", "url": "https://patricemirindi.com/blog/power-bi-field-parameters.fr.html", "description": "Les paramètres de champ permettent au lecteur de choisir ce qu'affiche un graphique. Depuis la mise à jour d'octobre 2026, les graphiques à barres, à colonnes et en courbes déploient automatiquement les axes hiérarchiques lorsque plusieurs champs sont sélectionnés. Voici comment les mettre en place, avec du DAX prêt à copier.", "author": {"@type": "Person", "name": "Patrice Mirindi", "url": "https://patricemirindi.com/"}}</script>
+</head>
+<body class="article-page">
+    <nav class="navbar" aria-label="Main">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="/">Patrice Mirindi</a></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="/skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="/key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="/data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/blog.html" class="nav-link active">Insights</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="hamburger" type="button" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+        </div>
+    </nav>
+    <main class="article-wrap">
+        <article>
+            <p class="eyebrow"><a href="/blog.html?series=fabric">Microsoft Fabric et Power BI</a> · Power BI · DAX</p>
+            <h1>Un graphique, plusieurs vues : les paramètres de champ dans Power BI après la mise à jour d&#x27;octobre 2026</h1>
+            <p class="meta"><time datetime="2026-11-15">15 novembre 2026</time> · 5 min de lecture <a class="lang-switch" href="/blog/power-bi-field-parameters.html" hreflang="en">Read in English</a></p>
+            <p class="standfirst">Les paramètres de champ permettent au lecteur de choisir ce qu&#x27;affiche un graphique. Depuis la mise à jour d&#x27;octobre 2026, les graphiques à barres, à colonnes et en courbes déploient automatiquement les axes hiérarchiques lorsque plusieurs champs sont sélectionnés. Voici comment les mettre en place, avec du DAX prêt à copier.</p>
+            <div class="prose">
+<p>La plupart des pages de rapport grossissent de la même façon. On demande les ventes par région, puis par produit, puis par année, et chaque demande devient un nouveau graphique. Bientôt, la page est encombrée, lente à charger et difficile à lire.</p>
+<p>Les paramètres de champ règlent ce problème en laissant la personne qui consulte le rapport décider de ce que montre un graphique. Un graphique, un segment, plusieurs vues. La mise à jour d'octobre 2026 de Power BI les rend encore plus utiles : les graphiques à barres, à colonnes et en courbes peuvent maintenant <strong>déployer automatiquement les axes hiérarchiques lorsque plusieurs colonnes sont sélectionnées</strong>, y compris celles fournies par un paramètre de champ. Le lecteur peut changer les champs de l'axe avec un segment ou avec l'option <strong>Personnaliser ce visuel</strong>.</p>
+<p>Cet article présente une mise en place concrète à partir d'un modèle simple d'indicateurs de développement, semblable aux données de la Banque mondiale qui alimentent le <a href="/data-analytics.html">tableau de bord</a> de ce site.</p>
+<p>Un paramètre de champ est une petite table calculée qui énumère les champs (colonnes ou mesures) parmi lesquels le lecteur peut choisir. On le place dans l'axe ou dans les valeurs d'un visuel, puis dans un segment. Si le lecteur choisit « Région », le graphique regroupe par région; s'il choisit « Groupe de revenu », tout se réorganise aussitôt. Pas de signets, pas de visuels en double.</p>
+<p>La documentation de Microsoft signale quelques propriétés utiles :</p>
+<ul>
+<li>Un paramètre peut combiner des champs provenant de tables différentes.</li>
+<li>On peut mélanger mesures et dimensions dans un même paramètre, mais en pratique, un paramètre pour l'axe et un autre pour les valeurs est plus facile à maintenir.</li>
+<li>Les paramètres de colonnes vont dans les zones d'axe; les paramètres de mesures, dans les zones de valeurs.</li>
+</ul>
+<p>Le modèle de l'exemple comprend une table <code>Country</code> (pays, région, groupe de revenu), une table <code>Calendar</code> (année, décennie) et une table de faits <code>Indicators</code> qui contient des valeurs comme le PIB par habitant ou l'accès à l'électricité.</p>
+<h2 id="etape-1-creer-le-parametre-daxe">Étape 1 : créer le paramètre d'axe</h2>
+<p>Dans Power BI Desktop, ouvrez l'onglet <strong>Modélisation</strong> et choisissez <strong>Nouveau paramètre</strong> &gt; <strong>Champs</strong>. Sélectionnez les champs, nommez le paramètre, et Power BI écrit le DAX à votre place. Vous pouvez aussi modifier ce DAX directement : c'est la façon la plus rapide de renommer ou de réordonner les choix. Chaque ligne contient un nom affiché, une référence au champ et un ordre de tri :</p>
+<pre><code class="language-dax">Axis Choice = {
+    (&quot;Région&quot;, NAMEOF('Country'[Region]), 0),
+    (&quot;Groupe de revenu&quot;, NAMEOF('Country'[Income Group]), 1),
+    (&quot;Pays&quot;, NAMEOF('Country'[Country Name]), 2),
+    (&quot;Décennie&quot;, NAMEOF('Calendar'[Decade]), 3)
+}
+</code></pre>
+<p>Gardez exactement trois valeurs par ligne et rendez chaque valeur unique; la documentation prévient que des colonnes supplémentaires peuvent produire des résultats inattendus. Pour ajouter un choix plus tard, mettez une virgule après la dernière ligne et ajoutez-en une nouvelle.</p>
+<h2 id="etape-2-ecrire-des-mesures-explicites">Étape 2 : écrire des mesures explicites</h2>
+<p>Les paramètres de champ n'acceptent pas les mesures implicites (glisser une colonne numérique brute et laisser Power BI en faire la somme). Définissez d'abord des mesures DAX explicites, que vous utiliserez ensuite dans un second paramètre pour les valeurs :</p>
+<pre><code class="language-dax">Average Value = AVERAGE ( Indicators[Value] )
+
+Countries Reporting = DISTINCTCOUNT ( Indicators[Country Code] )
+</code></pre>
+<h2 id="etape-3-creer-le-parametre-de-mesures">Étape 3 : créer le paramètre de mesures</h2>
+<p>Avec ces mesures en place, un second paramètre permet au lecteur de passer de la valeur moyenne au nombre de pays qui ont des données. C'est une bonne habitude pour tout graphique d'indicateurs : montrer le chiffre, et montrer combien de données le soutiennent.</p>
+<pre><code class="language-dax">Measure Choice = {
+    (&quot;Valeur moyenne&quot;, NAMEOF([Average Value]), 0),
+    (&quot;Pays déclarants&quot;, NAMEOF([Countries Reporting]), 1)
+}
+</code></pre>
+<h2 id="etape-4-laisser-laxe-se-deployer">Étape 4 : laisser l'axe se déployer</h2>
+<p>Placez <code>Axis Choice</code> sur l'axe X d'un graphique à colonnes ou en courbes, et <code>Measure Choice</code> dans ses valeurs. Ajoutez <code>Axis Choice</code> à un segment et autorisez la sélection multiple.</p>
+<p>C'est là que la mise à jour d'octobre fait la différence. Quand le lecteur sélectionne à la fois « Région » et « Pays », le graphique peut maintenant déployer l'axe comme une hiérarchie : il voit les régions, avec leurs pays imbriqués en dessous, sans devoir reconstruire le visuel. Ceux qui préfèrent se passer du segment peuvent modifier les champs de l'axe avec <strong>Personnaliser ce visuel</strong>, si la personnalisation est activée pour le rapport.</p>
+<p>Pour un segment plus clair, cliquez avec le bouton droit sur le paramètre dans le volet <strong>Générer</strong> et choisissez <strong>Afficher les valeurs du champ sélectionné</strong>. Le segment se comporte alors comme un segment hiérarchique. Cette option ne fonctionne qu'avec les paramètres qui contiennent des colonnes, pas des mesures.</p>
+<h2 id="limites-a-connaitre-et-points-a-retenir">Limites à connaître, et points à retenir</h2>
+<p>Les paramètres de champ sont éprouvés, mais quelques contraintes tirées de la documentation vous éviteront des appels de soutien :</p>
+<ul>
+<li><strong>Les visuels d'IA et Questions et réponses</strong> ne fonctionnent pas avec les paramètres de champ.</li>
+<li><strong>Ne rien sélectionner revient à tout sélectionner.</strong> Le lecteur ne peut pas choisir « aucun »; prévoyez donc une sélection par défaut sensée.</li>
+<li><strong>Les pages d'extraction et d'info-bulle</strong> ne peuvent pas utiliser un paramètre de champ comme champ lié.</li>
+<li><strong>Les dates :</strong> une colonne de date dans un paramètre perd sa hiérarchie de dates lorsque la date/heure automatique est activée. Une vraie table <code>Calendar</code> avec des colonnes <code>Year</code> et <code>Decade</code>, comme ci-dessus, évite le problème.</li>
+<li><strong>Les connexions actives</strong> sans modèle local ne permettent pas de créer des paramètres de champ; les modèles DirectQuery le peuvent, une fois un modèle local ajouté.</li>
+</ul>
+<p>En bref :</p>
+<ul>
+<li>Remplacez les graphiques presque identiques par un seul visuel, un paramètre d'axe et un paramètre de mesures.</li>
+<li>Écrivez tôt des mesures explicites; elles sont obligatoires ici et rendent les modèles plus faciles à tester.</li>
+<li>Modifiez le DAX généré pour contrôler les libellés et l'ordre, en gardant trois valeurs uniques par ligne.</li>
+<li>Depuis la mise à jour d'octobre 2026, autorisez la sélection multiple dans le segment d'axe pour que le lecteur passe des régions aux pays dans le même graphique.</li>
+<li>Associez chaque valeur à une mesure de couverture comme « pays déclarants » pour que le lecteur sache combien de données se cachent derrière chaque barre.</li>
+</ul>
+<p>Moins de visuels, des pages plus claires et des lecteurs qui trouvent eux-mêmes la réponse à leurs questions de suivi : un bon rendement pour quelques lignes de DAX.</p>
+            </div>
+            
+            <section class="sources"><h2>Sources</h2><ol><li><a href="https://learn.microsoft.com/en-us/power-bi/fundamentals/whats-new" rel="noopener" target="_blank">What&#x27;s new in Power BI? October 2026 update</a> — Microsoft Learn</li><li><a href="https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-field-parameters" rel="noopener" target="_blank">Let report readers use field parameters to change visuals</a> — Microsoft Learn</li><li><a href="https://community.fabric.microsoft.com/blog/fbc_pbiupdatesblog/power-bi-october-2026-feature-summary/5374650" rel="noopener" target="_blank">Power BI October 2026 Feature Summary</a> — Microsoft Fabric Community</li></ol></section>
+            <section class="author">
+                <img src="/assets/img/patricemirindi-640.jpg" width="72" height="72" alt="">
+                <div><h2>À propos de l'auteur</h2><p>Patrice Mirindi est analyste de données et économiste du développement bilingue, basé à Ottawa. Il conçoit des tableaux de bord, des flux de données et des analyses d'impact pour le secteur public, les organismes sans but lucratif et le développement international.</p>
+                <a class="pill pill-accent" href="/contact.html">Discutons de votre projet</a></div>
+            </section>
+            <p><a class="back" href="/blog.html">← Tous les articles</a></p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; Patrice Mirindi · Ottawa, ON · <a href="/blog/feed.xml">RSS</a></p></div></div></footer>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/knowledge-chat.js" defer></script>
+</body>
+</html>

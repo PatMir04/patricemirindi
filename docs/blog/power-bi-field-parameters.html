@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One chart, many views: field parameters in Power BI after the October 2026 update | Patrice Mirindi</title>
+    <meta name="description" content="Field parameters let report viewers choose what a chart shows. The October 2026 Power BI update makes bar, column and line charts expand hierarchy axes automatically when several fields are selected. Here is how to set it up, with copy-ready DAX.">
+    <link rel="canonical" href="https://patricemirindi.com/blog/power-bi-field-parameters.html">
+    <link rel="alternate" hreflang="en" href="https://patricemirindi.com/blog/power-bi-field-parameters.html">
+    <link rel="alternate" hreflang="fr" href="https://patricemirindi.com/blog/power-bi-field-parameters.fr.html">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://patricemirindi.com/blog/power-bi-field-parameters.html">
+    <meta property="og:title" content="One chart, many views: field parameters in Power BI after the October 2026 update">
+    <meta property="og:description" content="Field parameters let report viewers choose what a chart shows. The October 2026 Power BI update makes bar, column and line charts expand hierarchy axes automatically when several fields are selected. Here is how to set it up, with copy-ready DAX.">
+    <meta property="og:image" content="https://patricemirindi.com/assets/img/og-card.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    <link rel="stylesheet" href="/assets/css/article.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "One chart, many views: field parameters in Power BI after the October 2026 update", "datePublished": "2026-11-15", "inLanguage": "en", "url": "https://patricemirindi.com/blog/power-bi-field-parameters.html", "description": "Field parameters let report viewers choose what a chart shows. The October 2026 Power BI update makes bar, column and line charts expand hierarchy axes automatically when several fields are selected. Here is how to set it up, with copy-ready DAX.", "author": {"@type": "Person", "name": "Patrice Mirindi", "url": "https://patricemirindi.com/"}}</script>
+</head>
+<body class="article-page">
+    <nav class="navbar" aria-label="Main">
+        <div class="nav-container">
+            <div class="nav-logo"><a href="/">Patrice Mirindi</a></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="/work-experience.html" class="nav-link">Experience</a></li>
+                <li class="nav-item"><a href="/skills-expertise.html" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="/key-projects.html" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="/data-analytics.html" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/blog.html" class="nav-link active">Insights</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="hamburger" type="button" aria-label="Open menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
+        </div>
+    </nav>
+    <main class="article-wrap">
+        <article>
+            <p class="eyebrow"><a href="/blog.html?series=fabric">Microsoft Fabric &amp; Power BI</a> · Power BI · DAX</p>
+            <h1>One chart, many views: field parameters in Power BI after the October 2026 update</h1>
+            <p class="meta"><time datetime="2026-11-15">November 15, 2026</time> · 4 min read <a class="lang-switch" href="/blog/power-bi-field-parameters.fr.html" hreflang="fr">Lire en français</a></p>
+            <p class="standfirst">Field parameters let report viewers choose what a chart shows. The October 2026 Power BI update makes bar, column and line charts expand hierarchy axes automatically when several fields are selected. Here is how to set it up, with copy-ready DAX.</p>
+            <div class="prose">
+<p>Most report pages grow the same way. Someone asks for sales by region, then by product, then by year, and each request becomes another chart. Soon the page is crowded, slow to load and hard to read.</p>
+<p>Field parameters fix this by letting the person reading the report decide what a chart shows. One chart, one slicer, many views. The October 2026 Power BI update makes them even more useful: bar, column and line charts can now <strong>automatically expand hierarchy axes when several columns are selected</strong>, including columns supplied by a field parameter. Viewers can switch axis fields with a slicer or with <strong>Personalize this visual</strong>.</p>
+<p>This article walks through a practical set-up using a simple development-indicators model, similar to the World Bank data behind this site's <a href="/data-analytics.html">dashboard</a>.</p>
+<p>A field parameter is a small calculated table that lists fields (columns or measures) the viewer can pick from. You place it in a visual's axis or values well, and add it to a slicer. When the viewer picks "Region" in the slicer, the chart groups by region; when they pick "Income group", it regroups instantly. No bookmarks, no duplicated visuals.</p>
+<p>Microsoft's documentation notes a few useful properties:</p>
+<ul>
+<li>A parameter can mix fields from different tables.</li>
+<li>You can mix and match measures and dimensions within the same parameter, although in practice one parameter for the axis and another for values is easier to maintain.</li>
+<li>Column-based parameters go in the axis field wells; measure-based parameters go in the values field wells.</li>
+</ul>
+<p>The model in this example has a <code>Country</code> table (country, region, income group), a <code>Calendar</code> table (year, decade) and an <code>Indicators</code> fact table holding values such as GDP per capita or access to electricity.</p>
+<h2 id="step-1-create-the-axis-parameter">Step 1: create the axis parameter</h2>
+<p>In Power BI Desktop, open the <strong>Modeling</strong> tab and choose <strong>New parameter</strong> &gt; <strong>Fields</strong>. Pick the fields, give the parameter a name, and Power BI writes the DAX for you. You can also edit that DAX directly, which is the fastest way to rename or reorder options. Each row holds a display name, a reference to the field, and a sort order:</p>
+<pre><code class="language-dax">Axis Choice = {
+    (&quot;Region&quot;, NAMEOF('Country'[Region]), 0),
+    (&quot;Income group&quot;, NAMEOF('Country'[Income Group]), 1),
+    (&quot;Country&quot;, NAMEOF('Country'[Country Name]), 2),
+    (&quot;Decade&quot;, NAMEOF('Calendar'[Decade]), 3)
+}
+</code></pre>
+<p>Keep exactly three values per row and make every value unique; the documentation warns that extra columns can lead to unexpected results. To add an option later, type a comma after the last row and add a new one.</p>
+<h2 id="step-2-write-explicit-measures">Step 2: write explicit measures</h2>
+<p>Field parameters do not accept implicit measures (dragging a raw numeric column and letting Power BI sum it). Define explicit DAX measures first, then reference them in a second parameter for the values:</p>
+<pre><code class="language-dax">Average Value = AVERAGE ( Indicators[Value] )
+
+Countries Reporting = DISTINCTCOUNT ( Indicators[Country Code] )
+</code></pre>
+<h2 id="step-3-create-the-measure-parameter">Step 3: create the measure parameter</h2>
+<p>With those measures in place, a second parameter lets the viewer switch between the average value and how many countries have data, which is a good habit for any indicator chart: show the number, and show how much data sits behind it.</p>
+<pre><code class="language-dax">Measure Choice = {
+    (&quot;Average value&quot;, NAMEOF([Average Value]), 0),
+    (&quot;Countries reporting&quot;, NAMEOF([Countries Reporting]), 1)
+}
+</code></pre>
+<h2 id="step-4-let-the-axis-expand">Step 4: let the axis expand</h2>
+<p>Place <code>Axis Choice</code> on the X-axis of a column or line chart and <code>Measure Choice</code> in its values. Add <code>Axis Choice</code> to a slicer and allow multiple selections.</p>
+<p>This is where the October update helps. When a viewer selects both "Region" and "Country", the chart can now expand the axis as a hierarchy, so they see regions with their countries nested underneath, rather than having to rebuild the visual. Viewers who prefer not to use a slicer can change the axis fields through <strong>Personalize this visual</strong>, if you have enabled personalization for the report.</p>
+<p>For a cleaner slicer, right-click the parameter in the <strong>Build</strong> pane and choose <strong>Show values of the selected field</strong>. The slicer then behaves like a hierarchy slicer. This option works only for parameters that contain columns, not measures.</p>
+<h2 id="limits-to-know-and-takeaways">Limits to know, and takeaways</h2>
+<p>Field parameters are mature, but a few constraints from the documentation will save you a support call:</p>
+<ul>
+<li><strong>AI visuals and Q&amp;A</strong> do not work with field parameters.</li>
+<li><strong>Selecting nothing equals selecting everything.</strong> Viewers cannot choose "none", so set a sensible default selection.</li>
+<li><strong>Drill-through and tooltip pages</strong> cannot use a field parameter as their linked field.</li>
+<li><strong>Dates:</strong> a date column in a parameter loses its date hierarchy when auto date/time is on. A proper <code>Calendar</code> table with <code>Year</code> and <code>Decade</code> columns, as above, avoids the issue.</li>
+<li><strong>Live connections</strong> without a local model cannot create field parameters; DirectQuery models can, once a local model is added.</li>
+</ul>
+<p>In short:</p>
+<ul>
+<li>Replace near-duplicate charts with one visual, one axis parameter and one measure parameter.</li>
+<li>Write explicit measures early; they are required here and make models easier to test.</li>
+<li>Edit the generated DAX to control labels and order, and keep it to three unique values per row.</li>
+<li>After the October 2026 update, allow multi-select on the axis slicer so viewers can drill from regions to countries in the same chart.</li>
+<li>Pair every value with a coverage measure such as "countries reporting" so readers know how much data sits behind each bar.</li>
+</ul>
+<p>Fewer visuals, clearer pages and readers who can answer their own follow-up questions: that is a good return for a few lines of DAX.</p>
+            </div>
+            
+            <section class="sources"><h2>Sources</h2><ol><li><a href="https://learn.microsoft.com/en-us/power-bi/fundamentals/whats-new" rel="noopener" target="_blank">What&#x27;s new in Power BI? October 2026 update</a> — Microsoft Learn</li><li><a href="https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-field-parameters" rel="noopener" target="_blank">Let report readers use field parameters to change visuals</a> — Microsoft Learn</li><li><a href="https://community.fabric.microsoft.com/blog/fbc_pbiupdatesblog/power-bi-october-2026-feature-summary/5374650" rel="noopener" target="_blank">Power BI October 2026 Feature Summary</a> — Microsoft Fabric Community</li></ol></section>
+            <section class="author">
+                <img src="/assets/img/patricemirindi-640.jpg" width="72" height="72" alt="">
+                <div><h2>About the author</h2><p>Patrice Mirindi is a bilingual data analyst and development economist in Ottawa. He builds dashboards, data pipelines and impact analyses for public-sector, non-profit and development teams.</p>
+                <a class="pill pill-accent" href="/contact.html">Start a conversation</a></div>
+            </section>
+            <p><a class="back" href="/blog.html">← All articles</a></p>
+        </article>
+    </main>
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; Patrice Mirindi · Ottawa, ON · <a href="/blog/feed.xml">RSS</a></p></div></div></footer>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/knowledge-chat.js" defer></script>
+</body>
+</html>
