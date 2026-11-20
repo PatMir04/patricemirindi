@@ -13,7 +13,7 @@
   // Worker first and silently falls back to this built-in engine on any
   // error, timeout or quota. EMPTY = disabled (the site behaves exactly
   // as before). Set it only after the worker is deployed and indexed.
-  var WORKER_URL = '';
+  var WORKER_URL = 'https://patrice-chat.patricemirindi.workers.dev/chat';
   var pageLang = (document.documentElement.lang || 'en').slice(0, 2) === 'fr' ? 'fr' : 'en';
 
   var T = {
