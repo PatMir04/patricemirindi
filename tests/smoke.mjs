@@ -211,7 +211,9 @@ async function main() {
     await page.click('.kc-btn');
     await page.fill('.kc-form input', 'Which countries has Patrice worked in?');
     await page.press('.kc-form input', 'Enter');
-    await page.waitForTimeout(500);
+    // The chat tries the AI worker first (network round-trip), so wait for
+    // the answer to appear instead of assuming the local engine's speed.
+    await page.waitForFunction(() => document.querySelectorAll('.kc-bot').length >= 2, null, { timeout: 15000 }).catch(() => {});
     check(await page.locator('.kc-bot').count() >= 2, 'chatbot: UI shows an answer');
     await page.close();
   }
