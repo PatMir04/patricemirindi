@@ -576,22 +576,9 @@
 // MOBILE RESPONSIVENESS ENHANCEMENTS
 // ================================================================
 (function() {
-  // Smooth hamburger menu
-  var hamburger = document.querySelector('.hamburger');
-  var navMenu = document.querySelector('.nav-menu');
-  if (hamburger && navMenu) {
-    hamburger.addEventListener('click', function() {
-      navMenu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-    });
-    // Close menu on link click
-    document.querySelectorAll('.nav-link').forEach(function(link) {
-      link.addEventListener('click', function() {
-        navMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-      });
-    });
-  }
+  // NOTE: the hamburger menu is handled solely by initMobileMenu() above.
+  // A second click handler used to live here and toggled the same classes,
+  // so every tap opened and instantly closed the menu. Do not re-add one.
   // Touch-friendly hover effects
   if ('ontouchstart' in window) {
     document.body.classList.add('touch-device');
