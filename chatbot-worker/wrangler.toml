@@ -1,0 +1,35 @@
+# patricemirindi.com AI chat worker — Cloudflare Workers config TEMPLATE.
+# No secrets and no account IDs live in this file. Secrets are set with:
+#   npx wrangler secret put GROQ_API_KEY     (optional, from groq.com)
+#   npx wrangler secret put ADMIN_TOKEN      (any long random string you invent)
+#   npx wrangler secret put PRIVATE_TERMS    (optional, comma-separated terms
+#                                             that must never appear in answers)
+name = "patrice-chat"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+[vars]
+# Default chat model: Llama 3.1 8B (fast variant) keeps the free neuron
+# budget healthy. NOTE: @cf/meta/llama-3.1-8b-instruct and its -fp8 variant
+# were deprecated by Cloudflare on 2026-11-20; production runs the -fast
+# model below. For a quality switch, check Cloudflare's current model
+# catalogue first — names change as models are deprecated.
+CHAT_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+
+# Workers AI binding (no API key needed).
+[ai]
+binding = "AI"
+
+# Vectorize index. Create it once (1024 dims = bge-m3, cosine):
+#   npx wrangler vectorize create patrice-chat-index --dimensions=1024 --metric=cosine
+[[vectorize]]
+binding = "INDEX"
+index_name = "patrice-chat-index"
+
+# Optional but recommended: KV for the per-IP rate limit and the daily
+# neuron budget guard. Create with:  npx wrangler kv namespace create BUDGET
+# then paste the returned id below and uncomment.
+# [[kv_namespaces]]
+# binding = "BUDGET"
+# id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"

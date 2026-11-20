@@ -9,6 +9,11 @@
   window.__kcLoaded = true;
 
   var KB_URL = '/data/knowledge.json';
+  // AI worker (chatbot-worker/): when set, the chat tries the Cloudflare
+  // Worker first and silently falls back to this built-in engine on any
+  // error, timeout or quota. EMPTY = disabled (the site behaves exactly
+  // as before). Set it only after the worker is deployed and indexed.
+  var WORKER_URL = '';
   var pageLang = (document.documentElement.lang || 'en').slice(0, 2) === 'fr' ? 'fr' : 'en';
 
   var T = {
@@ -424,10 +429,27 @@
       input.value = '';
       chips.innerHTML = '';
       load().then(function () {
-        var a = answer(q);
-        say('bot', a.text, a.links, a.code);
-        if (a.chips) showChips(a.lang);
+        return answerRemote(q).then(function (a) {
+          say('bot', a.text, a.links, a.code);
+          if (a.chips) showChips(a.lang);
+        });
       }).catch(function () { say('bot', t.error, [{ title: t.contact, url: '/contact.html' }]); });
+    }
+    function answerRemote(q) {
+      if (!WORKER_URL) return Promise.resolve(answer(q));
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 6000) : null;
+      var research = /\b(research|recherche)\b/i.test(q);
+      return fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ q: q, lang: pageLang, mode: research ? 'research' : undefined }),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (timer) clearTimeout(timer);
+        if (d && d.text && !d.fallback) return { lang: pageLang, text: d.text, links: d.links || [] };
+        return answer(q);
+      }).catch(function () { if (timer) clearTimeout(timer); return answer(q); });
     }
     var opened = false;
     function open() {
