@@ -20,6 +20,9 @@
       read: 'Read more', related: 'Related pages', contact: 'Contact Patrice',
       error: 'Sorry — I couldn’t load my knowledge right now. You can still reach Patrice through the Contact page.',
       chips: ['What services do you offer?', 'SQL tip: remove duplicates', 'Show me recent articles', 'How can I contact you?'],
+      dash: 'The development dashboard tracks 15 World Bank indicators — growth, poverty, financial inclusion, internet use and more — for 32 countries and economies, with charts, a comparison table and downloads. The data is from the World Bank (World Development Indicators, updated 11 November 2026) and is re-checked weekly. For the latest headline figures, see the article “The world in numbers, late 2026”.',
+      hire: 'Patrice works as a consultant: dashboards, data pipelines and impact analysis for public-sector, non-profit and development teams. Pricing depends on the project — the contact form asks for your budget range (from under $5k to $50k+), and a first 30-minute consultation is free.',
+      book: 'You can book a free 30-minute consultation through the contact form. It asks about your project type, timeline and budget, and Patrice replies within 24 hours.',
       note: 'Answers come from this site’s pages and articles.'
     },
     fr: {
@@ -30,6 +33,9 @@
       read: 'En savoir plus', related: 'Pages liées', contact: 'Contacter Patrice',
       error: 'Désolé, je n’arrive pas à charger mes informations. Vous pouvez joindre Patrice par la page Contact.',
       chips: ['Quels services offrez-vous ?', 'Astuce SQL : dédoublonner', 'Articles récents', 'Comment vous joindre ?'],
+      dash: 'Le tableau de bord du développement suit 15 indicateurs de la Banque mondiale — croissance, pauvreté, inclusion financière, usage d’internet et plus — pour 32 pays et économies, avec graphiques, tableau comparatif et téléchargements. Les données proviennent de la Banque mondiale (Indicateurs du développement dans le monde, mis à jour le 11 novembre 2026) et sont revérifiées chaque semaine. Pour les derniers chiffres clés, voyez l’article « Le monde en chiffres, fin 2026 ».',
+      hire: 'Patrice travaille comme consultant : tableaux de bord, flux de données et analyses d’impact pour le secteur public, les organismes sans but lucratif et le développement international. Les tarifs dépendent du projet — le formulaire de contact demande votre fourchette de budget (de moins de 5 000 $ à 50 000 $ et plus), et une première consultation de 30 minutes est gratuite.',
+      book: 'Vous pouvez réserver une consultation gratuite de 30 minutes via le formulaire de contact. Il pose des questions sur le type de projet, l’échéancier et le budget, et Patrice répond dans les 24 heures.',
       note: 'Les réponses proviennent des pages et articles du site.'
     }
   };
@@ -38,6 +44,14 @@
     'tell that the their this to was we what when where which who why will with you your about any there some show ' +
     'le la les un une des de du et est en au aux pour par sur dans que qui quoi quel quelle quels quelles ce ces cette ' +
     'il elle ils vous nous je mon ma mes son sa ses leur leurs pas plus avec comment où est-ce y a-t-il votre vos patrice').split(' '));
+  var SYN = { powerbi: ['power', 'bi'], powerquery: ['power', 'query'], cv: ['experience', 'about'],
+    resume: ['experience', 'about'], cout: ['service', 'contact'], prix: ['service', 'contact'],
+    tarifs: ['service', 'contact'], tarif: ['service', 'contact'] };
+  function expand(qt) {
+    var out = qt.slice();
+    qt.forEach(function (tk) { (SYN[tk] || []).forEach(function (s) { if (out.indexOf(s) < 0) out.push(s); }); });
+    return out;
+  }
   var FR_HINT = /\b(le|la|les|des|est|pour|vous|quels?|quelles?|comment|où|êtes|avez|travaillez|bonjour|merci)\b|[àâçéèêëîïôûùüÿœ]/i;
 
   function norm(s) {
@@ -63,7 +77,7 @@
     return { rows: rows, df: df, N: rows.length, avg: total / Math.max(rows.length, 1) };
   }
   function search(q, lang, onlyType) {
-    var qt = tokens(q);
+    var qt = expand(tokens(q));
     if (!qt.length) return [];
     var k1 = 1.4, b = 0.75;
     return index.rows.map(function (r) {
@@ -98,6 +112,10 @@
   var DOING_RE = /\b(how|write|example|snippet|code|query|tip|tips|syntax|calculate|compute|remove|keep|rank|compare|dedup\w*|deduplicat\w*|filter|join|pivot|comment|exemple|astuce|requ[eê]te|[eé]crire|calculer|supprimer|d[eé]doublonner|classer)\b/i;
   var ROLE_RE = /\b(work for|employer|employed|who.*(work|employ)|current (job|role|position|employer)|day job|pour qui|employeur|poste actuel|emploi actuel)\b/i;
   var HELLO_RE = /^\s*(hi|hello|hey|bonjour|salut|allo|good (morning|afternoon|evening))\b[\s!.?]*$/i;
+  var DASHBOARD_RE = /\b(dashboard|tableau de bord|world bank|banque mondiale|indicators?|indicateurs?)\b/i;
+  var BUILD_RE = /\b(power bi|fabric|excel|tableau software|build|building|create|make|cr[ée]er|construire)\b/i;
+  var HIRE_RE = /\b(hire|hiring|engage|engager|embaucher|cost|costs|price|pricing|rates|fees|prix|tarifs?|co[ûu]t\w*)\b/i;
+  var BOOKING_RE = /\b(book|booking|schedule|consultation|appointment|rendez-vous|r[ée]server|appel|rencontrer)\b/i;
   var ARTICLES_RE = /\b(article|articles|blog|insight|insights|post|posts|analyse|analyses|recent|récent)/i;
 
   function answer(q) {
@@ -107,6 +125,10 @@
     if (ROLE_RE.test(q)) {
       var role = kb.docs.filter(function (x) { return x.type === 'faq' && x.lang === lang && /(current role|poste actuel)/i.test(x.title); })[0];
       if (role) return { lang: lang, text: role.text, links: [{ title: pageName(role.url, lang), url: role.url }] };
+    }
+    if (DASHBOARD_RE.test(q) && !BUILD_RE.test(q)) {
+      return { lang: lang, text: t.dash, links: [{ title: pageName('/data-analytics.html', lang), url: '/data-analytics.html' },
+        { title: lang === 'fr' ? 'Le monde en chiffres, fin 2026' : 'The world in numbers, late 2026', url: '/blog/world-bank-numbers-late-2026' + (lang === 'fr' ? '.fr' : '') + '.html' }] };
     }
     if ((HOWTO_RE.test(q) && DOING_RE.test(q)) || CODE_RE.test(q)) {
       var sn = search(q, lang, 'snippet');
@@ -119,6 +141,12 @@
         var faqCode = kb.docs.filter(function (x) { return x.type === 'faq' && /code/.test(norm(x.title)) && x.lang === lang; })[0];
         if (faqCode) return { lang: lang, text: faqCode.text, links: [{ title: t.contact, url: '/contact.html' }] };
       }
+    }
+    if (HIRE_RE.test(q)) {
+      return { lang: lang, text: t.hire, links: [{ title: t.contact, url: '/contact.html' }] };
+    }
+    if (BOOKING_RE.test(q)) {
+      return { lang: lang, text: t.book, links: [{ title: t.contact, url: '/contact.html' }] };
     }
     if (ARTICLES_RE.test(q) && tokens(q).length <= 3) {
       var seen = {}, arts = kb.docs.filter(function (d) {

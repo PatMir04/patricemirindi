@@ -177,6 +177,12 @@ async function main() {
     check(/field-parameters|NAMEOF/.test(JSON.stringify(a6)), 'chatbot: field parameters question finds the Power BI article');
     const a7 = await ask('What share of the world uses the internet in the latest World Bank data?');
     check(/73\.6|world-bank-numbers/.test(JSON.stringify(a7)), 'chatbot: internet question finds the World Bank numbers article');
+    const a8 = await ask('What does the dashboard show?');
+    check(/data-analytics/.test(JSON.stringify(a8)), 'chatbot: dashboard question links the dashboard');
+    const a9 = await ask('How much does it cost to hire Patrice?');
+    check(/contact\.html/.test(JSON.stringify(a9)), 'chatbot: hiring/cost question reaches the contact page');
+    const a10 = await ask('Je veux réserver une consultation gratuite');
+    check(a10.lang === 'fr' && /contact\.html/.test(JSON.stringify(a10)), 'chatbot: French booking question answered in French with contact link');
     const a5 = await ask('Show me recent articles');
     check((a5.links || []).length >= 1, 'chatbot: lists recent articles');
     await page.click('.kc-btn');
