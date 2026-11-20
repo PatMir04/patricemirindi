@@ -11,40 +11,9 @@
   var FIRST_YEAR = 1990;
   var THIS_YEAR = new Date().getFullYear();
 
-  var INDICATORS = [
-    { group: 'Economy', items: [
-      ['NY.GDP.MKTP.KD.ZG', 'GDP growth (annual %)', '%'],
-      ['NY.GDP.PCAP.CD', 'GDP per capita (current US$)', 'US$'],
-      ['FP.CPI.TOTL.ZG', 'Inflation, consumer prices (annual %)', '%'],
-      ['NE.EXP.GNFS.ZS', 'Exports of goods and services (% of GDP)', '% of GDP'],
-      ['SL.UEM.TOTL.ZS', 'Unemployment (% of labour force, ILO estimate)', '%']] },
-    { group: 'Agriculture & food', items: [
-      ['NV.AGR.TOTL.ZS', 'Agriculture, forestry and fishing, value added (% of GDP)', '% of GDP'],
-      ['SL.AGR.EMPL.ZS', 'Employment in agriculture (% of total employment)', '%'],
-      ['AG.YLD.CREL.KG', 'Cereal yield (kg per hectare)', 'kg/ha']] },
-    { group: 'People & inclusion', items: [
-      ['SI.POV.DDAY', 'Poverty headcount at the international poverty line (% of population)', '%'],
-      ['FX.OWN.TOTL.ZS', 'Account ownership (% of population ages 15+)', '%'],
-      ['SP.DYN.LE00.IN', 'Life expectancy at birth (years)', 'years'],
-      ['SP.POP.TOTL', 'Population, total', 'people']] },
-    { group: 'Infrastructure & environment', items: [
-      ['EG.ELC.ACCS.ZS', 'Access to electricity (% of population)', '%'],
-      ['IT.NET.USER.ZS', 'Individuals using the Internet (% of population)', '%'],
-      ['EN.GHG.CO2.MT.CE.AR5', 'CO2 emissions excluding LULUCF (Mt CO2e)', 'Mt CO2e']] }
-  ];
+  var INDICATORS = []; // loaded from data/dashboard-catalogue.json by start()
 
-  var COUNTRIES = [
-    ['WLD', 'World', 'Aggregates'], ['SSF', 'Sub-Saharan Africa', 'Aggregates'], ['LMC', 'Lower middle income', 'Aggregates'],
-    ['BFA', 'Burkina Faso', 'West Africa'], ['BEN', 'Benin', 'West Africa'], ['CIV', "Côte d'Ivoire", 'West Africa'],
-    ['GHA', 'Ghana', 'West Africa'], ['NGA', 'Nigeria', 'West Africa'], ['SEN', 'Senegal', 'West Africa'],
-    ['MLI', 'Mali', 'West Africa'], ['NER', 'Niger', 'West Africa'], ['TGO', 'Togo', 'West Africa'],
-    ['COD', 'DR Congo', 'Central & East Africa'], ['BDI', 'Burundi', 'Central & East Africa'], ['RWA', 'Rwanda', 'Central & East Africa'],
-    ['KEN', 'Kenya', 'Central & East Africa'], ['UGA', 'Uganda', 'Central & East Africa'], ['TZA', 'Tanzania', 'Central & East Africa'],
-    ['ETH', 'Ethiopia', 'Central & East Africa'], ['CMR', 'Cameroon', 'Central & East Africa'],
-    ['ZAF', 'South Africa', 'Southern & North Africa'], ['MAR', 'Morocco', 'Southern & North Africa'], ['EGY', 'Egypt', 'Southern & North Africa'],
-    ['CAN', 'Canada', 'Other'], ['USA', 'United States', 'Other'], ['FRA', 'France', 'Other'], ['GBR', 'United Kingdom', 'Other'],
-    ['DEU', 'Germany', 'Other'], ['NLD', 'Netherlands', 'Other'], ['IND', 'India', 'Other'], ['BRA', 'Brazil', 'Other'], ['CHN', 'China', 'Other']
-  ];
+  var COUNTRIES = []; // loaded from data/dashboard-catalogue.json by start()
   var PRESETS = {
     worked: { label: "Where I've worked", codes: ['BFA', 'BEN', 'CIV', 'GHA', 'NGA', 'BDI', 'COD', 'CAN'] },
     west: { label: 'West Africa', codes: ['BFA', 'BEN', 'CIV', 'GHA', 'NGA', 'SEN', 'MLI', 'NER', 'TGO'] },
@@ -54,9 +23,11 @@
   var PALETTE = ['#FF7A1A', '#60A5FA', '#34D399', '#F472B6', '#FBBF24', '#A78BFA', '#22D3EE', '#F87171', '#E2E8F0', '#4ADE80'];
 
   var IND = {};
-  INDICATORS.forEach(function (g) { g.items.forEach(function (i) { IND[i[0]] = { code: i[0], name: i[1], unit: i[2], group: g.group }; }); });
   var NAME = {};
-  COUNTRIES.forEach(function (c) { NAME[c[0]] = c[1]; });
+  function buildIndex() {
+    INDICATORS.forEach(function (g) { g.items.forEach(function (i) { IND[i[0]] = { code: i[0], name: i[1], unit: i[2], group: g.group }; }); });
+    COUNTRIES.forEach(function (c) { NAME[c[0]] = c[1]; });
+  }
 
   var $ = function (id) { return document.getElementById(id); };
   var state = { indicator: 'NY.GDP.MKTP.KD.ZG', countries: ['BFA', 'BEN', 'CIV', 'GHA', 'CAN', 'WLD'], from: 2010, to: THIS_YEAR };
@@ -317,13 +288,24 @@
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
 
+  var CATALOGUE_URL = 'data/dashboard-catalogue.json';
   function start() {
     if (!window.Chart) { setStatus('error', 'The charting library did not load. Please refresh the page.'); return; }
-    Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
-    readUrl();
-    buildControls();
-    load();
-    window.Dashboard = { state: function () { return JSON.parse(JSON.stringify(state)); }, reload: load };
+    fetch(CATALOGUE_URL).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (cat) {
+      INDICATORS = cat.indicators || [];
+      COUNTRIES = cat.countries || [];
+      buildIndex();
+      Chart.defaults.font.family = getComputedStyle(document.body).fontFamily;
+      readUrl();
+      buildControls();
+      load();
+      window.Dashboard = { state: function () { return JSON.parse(JSON.stringify(state)); }, reload: load };
+    }).catch(function () {
+      setStatus('error', 'The indicator catalogue did not load. Please refresh the page.');
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

@@ -12,7 +12,7 @@ Personal site of Patrice Mirindi — systems analyst, developer and development 
 | Generated | `docs/blog/`, `docs/data/knowledge.json`, `docs/sitemap.xml` | Built by `tools/build_site_content.py`; never edit by hand |
 | Chatbot | `docs/assets/js/knowledge-chat.js` | Runs in the browser, answers from `knowledge.json` (articles, code snippets, projects, skills, FAQ) |
 | Chatbot FAQ | `content/faq.json` | Curated questions and answers, EN + FR |
-| Dashboard | `docs/data-analytics.html`, `docs/assets/js/dashboard.js` | Live World Bank Indicators API, shareable URLs, CSV export |
+| Dashboard | `docs/data-analytics.html`, `docs/assets/js/dashboard.js` | Live World Bank Indicators API, shareable URLs, CSV export; indicators & countries live in `docs/data/dashboard-catalogue.json` (loaded by dashboard.js) |
 | Checks | `tools/site_check.py`, `tests/smoke.mjs`, `.github/workflows/site-checks.yml` | Run on GitHub for every pull request, after every deploy and weekly |
 
 ## Common tasks
