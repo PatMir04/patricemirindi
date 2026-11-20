@@ -1,5 +1,39 @@
 [
  {
+  "slug": "power-bi-field-parameters",
+  "lang": "en",
+  "title": "One chart, many views: field parameters in Power BI after the October 2026 update",
+  "summary": "Field parameters let report viewers choose what a chart shows. The October 2026 Power BI update makes bar, column and line charts expand hierarchy axes automatically when several fields are selected. Here is how to set it up, with copy-ready DAX.",
+  "date": "2026-11-15",
+  "series": "fabric",
+  "seriesLabel": "Microsoft Fabric & Power BI",
+  "tags": [
+   "Power BI",
+   "DAX",
+   "Microsoft Fabric"
+  ],
+  "url": "/blog/power-bi-field-parameters.html",
+  "readMinutes": 4,
+  "published": true
+ },
+ {
+  "slug": "power-bi-field-parameters",
+  "lang": "fr",
+  "title": "Un graphique, plusieurs vues : les paramètres de champ dans Power BI après la mise à jour d'octobre 2026",
+  "summary": "Les paramètres de champ permettent au lecteur de choisir ce qu'affiche un graphique. Depuis la mise à jour d'octobre 2026, les graphiques à barres, à colonnes et en courbes déploient automatiquement les axes hiérarchiques lorsque plusieurs champs sont sélectionnés. Voici comment les mettre en place, avec du DAX prêt à copier.",
+  "date": "2026-11-15",
+  "series": "fabric",
+  "seriesLabel": "Microsoft Fabric et Power BI",
+  "tags": [
+   "Power BI",
+   "DAX",
+   "Microsoft Fabric"
+  ],
+  "url": "/blog/power-bi-field-parameters.fr.html",
+  "readMinutes": 5,
+  "published": true
+ },
+ {
   "slug": "findex-2025-savings",
   "lang": "en",
   "title": "Financial inclusion is accelerating — and savings are leading the way",
