@@ -1,0 +1,1 @@
+{"description":"AI chat worker for patricemirindi.com (Cloudflare Workers AI + Vectorize, Groq overflow). See README.md.","devDependencies":{"wrangler":"^3.0.0"},"name":"patrice-chat-worker","private":true,"scripts":{"deploy":"wrangler deploy","dev":"wrangler dev"},"version":"1.0.0"}
