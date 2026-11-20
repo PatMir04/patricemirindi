@@ -116,16 +116,122 @@
   var BUILD_RE = /\b(power bi|fabric|excel|tableau software|build|building|create|make|cr[ée]er|construire)\b/i;
   var HIRE_RE = /\b(hire|hiring|engage|engager|embaucher|cost|costs|price|pricing|rates|fees|prix|tarifs?|co[ûu]t\w*)\b/i;
   var BOOKING_RE = /\b(book|booking|schedule|consultation|appointment|rendez-vous|r[ée]server|appel|rencontrer)\b/i;
+  var ABOUT_RE = /\b(who is patrice|who's patrice|tell me about patrice|about patrice|who are you|qui est patrice|parlez-moi de patrice|a propos de patrice|presentez patrice|presente patrice)\b/;
+  var ABOUT_SKILLS_RE = /\b(patrice's skills|skills of patrice|what are (his|patrice's) skills|competences de patrice|quelles sont (ses|les) competences)\b/;
+  var ABOUT_EXP_RE = /\b(where (has|did) (he|patrice) work|patrice's (experience|career)|his (career|experience)|parcours de patrice|experience de patrice|ou (a-t-il|patrice a) travaille)\b/;
+  var ABOUT_EDU_RE = /\b(patrice's education|his education|education of patrice|formation de patrice|etudes de patrice|diplomes? de patrice|where did (he|patrice) study)\b/;
+  var ABOUT_PROJ_RE = /\b(patrice's projects|his projects|projets de patrice)\b/;
   var ARTICLES_RE = /\b(article|articles|blog|insight|insights|post|posts|analyse|analyses|recent|récent)/i;
+
+  // ---------- About Patrice: guided follow-up flow ----------
+  var aboutState = null; // 'menu' | 'positions' | 'projects' — remembers one pending follow-up
+  function expDocs() { return kb.docs.filter(function (d) { return d.type === 'experience'; }); }
+  function projDocs() { return kb.docs.filter(function (d) { return d.type === 'project'; }).slice(0, 5); }
+  function firstSentences(text, n) {
+    var s = text.match(/[^.!?]+[.!?]+/g) || [text];
+    return s.slice(0, n).map(function (x) { return x.trim(); }).join(' ');
+  }
+  function aboutMenu(lang) {
+    aboutState = 'menu';
+    var text = lang === 'fr'
+      ? 'Patrice Mirindi est un analyste des systèmes de données, développeur et économiste du développement bilingue (FR/EN) basé à Ottawa, au Canada. Il transforme des données complexes en décisions concrètes — flux de données, tableaux de bord et analyses d\u2019impact pour le secteur public, les organismes sans but lucratif et le développement international.\n\nQue voulez-vous savoir sur lui ?\n1) Parcours personnel\n2) Expérience professionnelle\n3) Compétences\n4) Projets\n5) Services et consultation\n6) Formation et certifications\n\nRépondez par un numéro ou un mot-clé.'
+      : 'Patrice Mirindi is a bilingual (EN/FR) data systems analyst, developer and development economist based in Ottawa, Canada. He turns complex data into decisions people act on — pipelines, dashboards and impact analysis for public-sector, non-profit and development teams.\n\nWhat would you like to know about him?\n1) Personal background\n2) Professional experience\n3) Skills\n4) Projects\n5) Services & consulting\n6) Education & certifications\n\nReply with a number or a keyword.';
+    return { lang: lang, text: text, links: [{ title: pageName('/about.html', lang), url: '/about.html' }] };
+  }
+  function aboutCategory(cat, lang) {
+    var t = T[lang];
+    aboutState = null;
+    if (cat === 'personal') {
+      return { lang: lang, links: [{ title: pageName('/about.html', lang), url: '/about.html' }],
+        text: lang === 'fr'
+          ? 'La biographie publique, en bref : Patrice Mirindi est basé à Ottawa, au Canada. Il travaille en français et en anglais (il parle aussi le swahili et le lingala) comme analyste des systèmes de données, développeur et économiste du développement. Il détient une maîtrise en économie agricole de l\u2019Université de Nairobi et la certification PMP. C\u2019est la biographie professionnelle publique — pour le reste, il faut le demander à Patrice lui-même.'
+          : 'The public bio, in short: Patrice Mirindi is based in Ottawa, Canada. He works in English and French (he also speaks Swahili and Lingala) as a data systems analyst, developer and development economist. He holds an MSc in Agricultural Economics from the University of Nairobi and is PMP certified. That\u2019s the public professional bio — anything more personal, you\u2019d have to ask Patrice himself.' };
+    }
+    if (cat === 'professional') {
+      aboutState = 'positions';
+      var list = expDocs().map(function (d, i) {
+        var title = d.title;
+        if (!/,/.test(title)) title += lang === 'fr' ? ' — Ottawa (employeur non indiqué publiquement)' : ' — Ottawa (employer not listed publicly)';
+        return (i + 1) + ') ' + title;
+      }).join('\n');
+      return { lang: lang, links: [{ title: pageName('/work-experience.html', lang), url: '/work-experience.html' }],
+        text: (lang === 'fr'
+          ? 'Patrice a travaillé dans des instituts de recherche, en consultation et dans des équipes de données d\u2019entreprise. Son poste actuel : analyste des systèmes de données à Ottawa (2026–présent) — son employeur n\u2019est pas indiqué publiquement ; auparavant, des rôles seniors en données et en consultation (résilience financière, développement des affaires, soutien aux entrepreneurs).\n\nSur quel poste ou organisation voulez-vous plus de détails ?'
+          : 'Patrice has worked across research institutes, consulting and enterprise data teams. His current role is Data Systems Analyst in Ottawa (2026–present) — his employer isn\u2019t listed publicly; before that, senior data and consulting roles in financial resilience, business development and entrepreneur support.\n\nWhich position or organisation do you want more detail on?') + '\n' + list };
+    }
+    if (cat === 'skills') {
+      return { lang: lang, links: [{ title: pageName('/skills-expertise.html', lang), url: '/skills-expertise.html' }],
+        text: lang === 'fr'
+          ? 'Les compétences centrales de Patrice, d\u2019après sa page Compétences : SQL, Power BI et Microsoft Fabric au centre ; ingénierie des données et flux (Azure Synapse, Synapse Link, Dataflows Gen2, modèles Direct Lake) ; Python & PySpark et R & Stata pour l\u2019analyse ; prévision et apprentissage automatique (tests A/B, détection d\u2019anomalies) ; gouvernance des données (Microsoft Purview, catalogage, standardisation des indicateurs) ; et la création d\u2019agents IA & LLM. Vous voulez du détail sur un domaine ? Demandez-moi son ingénierie des données, son travail BI/Fabric ou ses analyses.'
+          : 'Patrice\u2019s core skills, from his Skills page: SQL, Power BI and Microsoft Fabric at the centre; data engineering and pipelines (Azure Synapse, Synapse Link, Dataflows Gen2, Direct Lake models); Python & PySpark and R & Stata for analysis; forecasting and machine learning (A/B testing, anomaly detection); data governance (Microsoft Purview, cataloguing, KPI standardisation); and building AI & LLM agents. Want depth on one area? Ask me about his data engineering, BI/Fabric, or analysis work.' };
+    }
+    if (cat === 'projects') {
+      aboutState = 'projects';
+      var plist = projDocs().map(function (d, i) { return (i + 1) + ') ' + d.title; }).join('\n');
+      return { lang: lang, links: [{ title: pageName('/key-projects.html', lang), url: '/key-projects.html' }],
+        text: (lang === 'fr'
+          ? 'Quelques projets phares (la page Projets en présente davantage) :\n'
+          : 'A few flagship projects (the Projects page has more):\n') + plist +
+          (lang === 'fr' ? '\n\nSur quel projet voulez-vous plus de détails ? Répondez par un numéro ou un nom.' : '\n\nWhich project do you want more on? Reply with a number or a name.') };
+    }
+    if (cat === 'services') {
+      return { lang: lang, text: t.hire, links: [{ title: t.contact, url: '/contact.html' }] };
+    }
+    // education
+    return { lang: lang, links: [{ title: pageName('/about.html', lang), url: '/about.html' }],
+      text: lang === 'fr'
+        ? 'Formation et certifications : maîtrise (MSc) en économie agricole — Université de Nairobi. PMP (Project Management Professional), certifié 2024–2027. Il travaille en français et en anglais. Tous les détails sont sur la page À propos.'
+        : 'Education & certifications: MSc in Agricultural Economics — University of Nairobi. PMP (Project Management Professional), certified 2024–2027. He also works bilingually in English and French. Full details are on the About page.' };
+  }
+  function aboutSelect(q, lang) {
+    var nq = norm(q);
+    var num = nq.match(/^\s*([1-6])\b/);
+    if (aboutState === 'menu') {
+      var cats = ['personal', 'professional', 'skills', 'projects', 'services', 'education'];
+      if (num) return aboutCategory(cats[+num[1] - 1], lang);
+      if (/\b(personal|background|personnel|parcours personnel|bio)\b/.test(nq)) return aboutCategory('personal', lang);
+      if (/\b(profession\w*|experience|career|carriere|emplois?|parcours)\b/.test(nq)) return aboutCategory('professional', lang);
+      if (/\b(skills?|competences?)\b/.test(nq)) return aboutCategory('skills', lang);
+      if (/\b(projects?|projets?)\b/.test(nq)) return aboutCategory('projects', lang);
+      if (/\b(services?|consult\w*|tarifs?|prix|hire)\b/.test(nq)) return aboutCategory('services', lang);
+      if (/\b(educat\w*|certif\w*|formation|diplomes?|etudes)\b/.test(nq)) return aboutCategory('education', lang);
+      return null;
+    }
+    if (aboutState === 'positions' || aboutState === 'projects') {
+      var docs = aboutState === 'positions' ? expDocs() : projDocs();
+      var url = aboutState === 'positions' ? '/work-experience.html' : '/key-projects.html';
+      if (num && docs[+num[1] - 1]) {
+        var d = docs[+num[1] - 1]; aboutState = null;
+        return { lang: lang, text: firstSentences(d.text, 3), links: [{ title: pageName(url, lang), url: url }] };
+      }
+      var toks = tokens(q);
+      for (var i = 0; i < docs.length; i++) {
+        var tt = tokens(docs[i].title).filter(function (x) { return x.length >= 5; });
+        if (toks.some(function (x) { return tt.indexOf(x) >= 0; })) {
+          var dd = docs[i]; aboutState = null;
+          return { lang: lang, text: firstSentences(dd.text, 3), links: [{ title: pageName(url, lang), url: url }] };
+        }
+      }
+      return null;
+    }
+    return null;
+  }
 
   function answer(q) {
     var lang = FR_HINT.test(q) ? 'fr' : (/[a-z]/i.test(q) ? (pageLang === 'fr' && !/\b(the|what|how|you)\b/i.test(q) ? 'fr' : 'en') : pageLang);
     var t = T[lang];
     if (HELLO_RE.test(q)) return { lang: lang, text: t.hello };
+    if (aboutState) { var sel = aboutSelect(q, lang); if (sel) return sel; aboutState = null; }
     if (ROLE_RE.test(q)) {
       var role = kb.docs.filter(function (x) { return x.type === 'faq' && x.lang === lang && /(current role|poste actuel)/i.test(x.title); })[0];
       if (role) return { lang: lang, text: role.text, links: [{ title: pageName(role.url, lang), url: role.url }] };
     }
+    var nq = norm(q);
+    if (ABOUT_SKILLS_RE.test(nq)) return aboutCategory('skills', lang);
+    if (ABOUT_EXP_RE.test(nq)) return aboutCategory('professional', lang);
+    if (ABOUT_EDU_RE.test(nq)) return aboutCategory('education', lang);
+    if (ABOUT_PROJ_RE.test(nq)) return aboutCategory('projects', lang);
+    if (ABOUT_RE.test(nq)) return aboutMenu(lang);
     if (DASHBOARD_RE.test(q) && !BUILD_RE.test(q)) {
       return { lang: lang, text: t.dash, links: [{ title: pageName('/data-analytics.html', lang), url: '/data-analytics.html' },
         { title: lang === 'fr' ? 'Le monde en chiffres, fin 2026' : 'The world in numbers, late 2026', url: '/blog/world-bank-numbers-late-2026' + (lang === 'fr' ? '.fr' : '') + '.html' }] };
