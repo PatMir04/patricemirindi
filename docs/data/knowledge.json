@@ -1,6 +1,6 @@
 {
 "generated": "2026-11-20",
-"count": 143,
+"count": 149,
 "docs": [
 {
 "id": "article-0",
@@ -1863,6 +1863,101 @@
 "id": "faq-141",
 "type": "faq",
 "lang": "en",
+"title": "Who is Patrice Mirindi?",
+"url": "/about.html",
+"tags": [
+"who",
+"patrice",
+"mirindi",
+"about",
+"bio",
+"background",
+"author",
+"owner"
+],
+"text": "Patrice Mirindi is a bilingual (EN/FR) data systems analyst, developer and development economist based in Ottawa, Canada. He builds data pipelines, dashboards and impact analyses for public-sector, non-profit and development teams, and consults through this site. Ask the assistant about his background, experience, skills, projects, services or education."
+},
+{
+"id": "faq-142",
+"type": "faq",
+"lang": "fr",
+"title": "Qui est Patrice Mirindi ?",
+"url": "/about.html",
+"tags": [
+"qui",
+"patrice",
+"mirindi",
+"propos",
+"bio",
+"parcours",
+"auteur"
+],
+"text": "Patrice Mirindi est un analyste des systèmes de données, développeur et économiste du développement bilingue (FR/EN) basé à Ottawa, au Canada. Il construit des flux de données, des tableaux de bord et des analyses d'impact pour le secteur public, les organismes sans but lucratif et le développement international, et offre ses services de consultation via ce site. Demandez à l'assistant son parcours, son expérience, ses compétences, ses projets, ses services ou sa formation."
+},
+{
+"id": "faq-143",
+"type": "faq",
+"lang": "en",
+"title": "How can I work with Patrice?",
+"url": "/contact.html",
+"tags": [
+"work with",
+"hire",
+"engage",
+"consult",
+"collaborate",
+"travailler"
+],
+"text": "You can work with Patrice as a consultant — dashboards, data pipelines and impact analysis for public-sector, non-profit and development teams. Start with the contact form: a first 30-minute consultation is free and he replies within 24 hours. Pricing depends on the project; the form asks for your budget range (from under $5k to $50k+)."
+},
+{
+"id": "faq-144",
+"type": "faq",
+"lang": "fr",
+"title": "Comment travailler avec Patrice ?",
+"url": "/contact.html",
+"tags": [
+"travailler",
+"engager",
+"consultation",
+"collaborer",
+"embaucher"
+],
+"text": "Vous pouvez travailler avec Patrice comme consultant — tableaux de bord, flux de données et analyses d'impact pour le secteur public, les organismes sans but lucratif et le développement international. Commencez par le formulaire de contact : une première consultation de 30 minutes est gratuite et il répond dans les 24 heures. Les tarifs dépendent du projet ; le formulaire demande votre fourchette de budget (de moins de 5 000 $ à 50 000 $ et plus)."
+},
+{
+"id": "faq-145",
+"type": "faq",
+"lang": "en",
+"title": "What do clients say about Patrice?",
+"url": "/",
+"tags": [
+"testimonials",
+"clients",
+"reviews",
+"references",
+"avis"
+],
+"text": "Tamara Flink (Programme Manager, CBI) praised Patrice's data collection, analysis and presentation support to her programme team. The site also carries testimonials from Kerry Kyd, Melanie van der Baaren-Haga (CBI), Nikki Naiker (Economic Sense) and Rexford Akrong (University of Nairobi) — see the home page."
+},
+{
+"id": "faq-146",
+"type": "faq",
+"lang": "fr",
+"title": "Que disent les clients de Patrice ?",
+"url": "/",
+"tags": [
+"temoignages",
+"clients",
+"avis",
+"references"
+],
+"text": "Tamara Flink (responsable de programme, CBI) a salué le soutien de Patrice en collecte, analyse et présentation de données pour son équipe de programme. Le site présente aussi les témoignages de Kerry Kyd, Melanie van der Baaren-Haga (CBI), Nikki Naiker (Economic Sense) et Rexford Akrong (Université de Nairobi) — voir la page d'accueil."
+},
+{
+"id": "faq-147",
+"type": "faq",
+"lang": "en",
 "title": "How much does it cost to hire Patrice?",
 "url": "/contact.html",
 "tags": [
@@ -1877,7 +1972,7 @@
 "text": "Pricing depends on the project. The contact form asks for your budget range — from under $5k to $50k+ — and a first 30-minute consultation is free. Patrice replies within 24 hours with next steps."
 },
 {
-"id": "faq-142",
+"id": "faq-148",
 "type": "faq",
 "lang": "fr",
 "title": "Quels sont les tarifs de Patrice ?",
