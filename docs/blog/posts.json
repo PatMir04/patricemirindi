@@ -1,5 +1,39 @@
 [
  {
+  "slug": "world-bank-numbers-late-2026",
+  "lang": "en",
+  "title": "The world in numbers, late 2026: five signals from the newest World Bank data",
+  "summary": "The World Bank updated its World Development Indicators on 11 November 2026. Working from the same 15 indicators as this site's dashboard, five signals stand out: steady growth, a more connected world, wider financial inclusion, slow poverty progress — and one series that has quietly stopped in 2023.",
+  "date": "2026-11-20",
+  "series": "trends",
+  "seriesLabel": "Trends in data & development",
+  "tags": [
+   "World Bank",
+   "Data",
+   "Dashboards"
+  ],
+  "url": "/blog/world-bank-numbers-late-2026.html",
+  "readMinutes": 3,
+  "published": true
+ },
+ {
+  "slug": "world-bank-numbers-late-2026",
+  "lang": "fr",
+  "title": "Le monde en chiffres, fin 2026 : cinq signaux des nouvelles données de la Banque mondiale",
+  "summary": "La Banque mondiale a mis à jour ses Indicateurs du développement dans le monde le 11 novembre 2026. À partir des 15 indicateurs du tableau de bord de ce site, cinq signaux ressortent : une croissance stable, un monde plus connecté, une inclusion financière élargie, une pauvreté qui recule lentement — et une série discrètement figée en 2023.",
+  "date": "2026-11-20",
+  "series": "trends",
+  "seriesLabel": "Tendances données et développement",
+  "tags": [
+   "World Bank",
+   "Data",
+   "Dashboards"
+  ],
+  "url": "/blog/world-bank-numbers-late-2026.fr.html",
+  "readMinutes": 4,
+  "published": true
+ },
+ {
   "slug": "power-bi-field-parameters",
   "lang": "en",
   "title": "One chart, many views: field parameters in Power BI after the October 2026 update",
