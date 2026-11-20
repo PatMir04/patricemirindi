@@ -1558,7 +1558,7 @@
 "title": "Data Systems Analyst",
 "url": "/work-experience.html",
 "tags": [],
-"text": "Data Systems Analyst (2026 - Present, Ottawa, Canada). Designing and maintaining enterprise data pipelines, data models and Power BI reporting that turn operational data into reliable decision support."
+"text": "Data Systems Analyst (2026 - Present, Ottawa, Canada). Enterprise data role combining data engineering, analytics and applied data science. Builds and maintains reliable pipelines and integrations across enterprise systems (ERP, PLM, MES) and analytics platforms, producing trusted datasets for reporting, advanced analytics and AI use cases. Designs and optimises Power BI semantic models — including Direct Lake — for self-serve analytics, and develops dashboards and analytics products for Finance, Operations, Commercial, HR, Legal and IT stakeholders. Builds and maintains scalable data pipelines and integrations across enterprise systems (ERP, PLM, MES) and analytics platforms Designs and optimises semantic models (including Direct Lake) for self-serve analytics and consistent business logic Applies statistical and ML methods — forecasting, A/B testing, anomaly detection — for predictive insight Documents data flows, definitions and metadata in the data catalog; contributes to governance, security standards and KPI standardisation Drives continuous improvement through automation, monitoring and performance tuning"
 },
 {
 "id": "experience-120",
@@ -1701,7 +1701,7 @@
 "currently",
 "position"
 ],
-"text": "Patrice currently works as a Data Systems Analyst in Ottawa, building data pipelines, data models and Power BI reporting. Before that he was a Senior Data Analyst and Consultant at the Financial Resilience Institute (2024–2026). For more on his current role, connect with him on LinkedIn."
+"text": "Patrice currently works as a Data Systems Analyst in Ottawa (he doesn't list his employer publicly). The role combines data engineering, analytics and applied data science on enterprise platforms — Microsoft Fabric, Azure Synapse and Power BI: pipelines and integrations across enterprise systems (ERP, PLM, MES), Direct Lake semantic models, dashboards for Finance, Operations, Commercial, HR, Legal and IT stakeholders, and forecasting and ML work. Before that he was a Senior Data Analyst and Consultant at the Financial Resilience Institute (2024–2026)."
 },
 {
 "id": "faq-131",
@@ -1715,7 +1715,7 @@
 "travail",
 "employeur"
 ],
-"text": "Patrice est actuellement analyste des systèmes de données à Ottawa. Il conçoit des flux de données, des modèles de données et des rapports Power BI. Auparavant, il a été analyste de données principal et consultant au Financial Resilience Institute (2024–2026)."
+"text": "Patrice est actuellement analyste des systèmes de données à Ottawa (il ne nomme pas son employeur publiquement). Le poste combine ingénierie des données, analytique et science des données appliquée sur des plateformes d'entreprise — Microsoft Fabric, Azure Synapse et Power BI : flux et intégrations entre systèmes d'entreprise (ERP, PLM, MES), modèles sémantiques Direct Lake, tableaux de bord pour les Finances, les Opérations, le Commercial, les RH, le Juridique et les TI, et des travaux de prévision et d'apprentissage automatique. Auparavant, il a été analyste de données principal et consultant au Financial Resilience Institute (2024–2026)."
 },
 {
 "id": "faq-132",
