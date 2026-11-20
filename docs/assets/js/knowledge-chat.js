@@ -363,6 +363,11 @@
     '.kc-form input{flex:1;min-width:0;background:#0B1B33;border:1px solid #1E3A63;border-radius:12px;color:#F1F5F9;padding:12px;font:inherit}.kc-form input::placeholder{color:#94A3B8}' +
     '.kc-form button{background:#FF7A1A;color:#0B1B33;border:0;border-radius:12px;padding:0 16px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}' +
     '@media (max-width:900px){.kc-btn span{display:none}.kc-btn{padding:0;width:56px;height:56px;min-height:56px;border-radius:50%;justify-content:center}}' +
+    '.kc-typing{display:flex;gap:5px;align-items:center;padding:14px 16px}' +
+    '.kc-dot{width:7px;height:7px;border-radius:50%;background:#94A3B8;animation:kcBlink 1.2s infinite}' +
+    '.kc-dot:nth-child(2){animation-delay:.15s}.kc-dot:nth-child(3){animation-delay:.3s}' +
+    '@keyframes kcBlink{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}' +
+    '@media (prefers-reduced-motion: reduce){.kc-dot{animation:none;opacity:.6}}' +
     '@media print{.kc-btn,.kc-panel{display:none!important}}';
 
   function el(tag, attrs, text) {
@@ -394,8 +399,8 @@
     panel.appendChild(head); panel.appendChild(log); panel.appendChild(chips); panel.appendChild(form);
     document.body.appendChild(panel); document.body.appendChild(btn);
 
-    function say(who, text, links, code) {
-      var m = el('div', { class: 'kc-msg ' + (who === 'me' ? 'kc-me' : 'kc-bot') }, text);
+    function fillMsg(m, text, links, code) {
+      m.textContent = text;
       if (code) {
         var pre = el('pre', { class: 'kc-code' }); pre.appendChild(el('code', {}, code)); m.appendChild(pre);
         var cp = el('button', { type: 'button', class: 'kc-copy' }, pageLang === 'fr' ? 'Copier le code' : 'Copy code');
@@ -407,7 +412,12 @@
         links.forEach(function (l) { var li = el('li'); li.appendChild(el('a', { href: l.url }, '→ ' + l.title)); ul.appendChild(li); });
         m.appendChild(ul);
       }
+    }
+    function say(who, text, links, code) {
+      var m = el('div', { class: 'kc-msg ' + (who === 'me' ? 'kc-me' : 'kc-bot') });
+      fillMsg(m, text, links, code);
       log.appendChild(m); log.scrollTop = log.scrollHeight;
+      return m;
     }
     function showChips(lang) {
       chips.innerHTML = '';
@@ -422,18 +432,68 @@
       return fetch(KB_URL).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(function (d) { kb = d; index = buildIndex(d.docs || []); });
     }
+    var REDUCED = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var typing = null; // { el, interval, finish } while a typewriter reveal is running
+    function finishTyping() {
+      if (!typing) return;
+      var ty = typing; typing = null;
+      if (ty.interval) clearInterval(ty.interval);
+      ty.finish();
+    }
+    function reveal(m, a, done) {
+      // Swap the typing dots for the answer, revealed word by word; links and
+      // code are only added once the text is complete, so no partial markup
+      // ever shows. Tap the bubble (or reduced motion) to get it instantly.
+      var finish = function () {
+        m.classList.remove('kc-typing', 'kc-typing-on');
+        m.removeAttribute('role'); m.removeAttribute('aria-label');
+        fillMsg(m, a.text, a.links, a.code);
+        log.scrollTop = log.scrollHeight;
+        if (done) done();
+      };
+      if (REDUCED || !a.text) { finish(); return; }
+      finishTyping(); // never run two reveals at once
+      m.classList.add('kc-typing-on');
+      var chunks = a.text.match(/\S+\s*/g) || [a.text];
+      var target = Math.min(2600, Math.max(500, chunks.length * 28)); // total reveal time, capped ~2.6s
+      var perTick = Math.max(1, Math.ceil(chunks.length / (target / 30)));
+      var shown = 0;
+      m.textContent = '';
+      var span = el('span', { 'aria-hidden': 'true' });
+      m.appendChild(span);
+      var iv = setInterval(function () {
+        shown = Math.min(chunks.length, shown + perTick);
+        span.textContent = chunks.slice(0, shown).join('');
+        log.scrollTop = log.scrollHeight;
+        if (shown >= chunks.length) { clearInterval(iv); typing = null; finish(); }
+      }, 30);
+      typing = { el: m, interval: iv, finish: function () { span.remove(); finish(); } };
+      m.onclick = function () { finishTyping(); };
+    }
     function ask(q) {
       q = (q || '').trim();
       if (!q) return;
+      finishTyping(); // a new message completes any reveal still running
       say('me', q);
       input.value = '';
       chips.innerHTML = '';
-      load().then(function () {
-        return answerRemote(q).then(function (a) {
-          say('bot', a.text, a.links, a.code);
-          if (a.chips) showChips(a.lang);
-        });
-      }).catch(function () { say('bot', t.error, [{ title: t.contact, url: '/contact.html' }]); });
+      var started = Date.now();
+      var dots = el('div', { class: 'kc-msg kc-bot kc-typing', role: 'status',
+        'aria-label': pageLang === 'fr' ? "L'assistant écrit" : 'Assistant is typing' });
+      dots.innerHTML = '<span class="kc-dot"></span><span class="kc-dot"></span><span class="kc-dot"></span>';
+      log.appendChild(dots); log.scrollTop = log.scrollHeight;
+      load().then(function () { return answerRemote(q); }).then(function (a) {
+        // Built-in answers get a short natural pause; worker answers have
+        // already taken their real time. Reduced motion: no added pause.
+        var minMs = (REDUCED || a.viaWorker) ? 0 : 750;
+        var wait = Math.max(0, minMs - (Date.now() - started));
+        setTimeout(function () {
+          reveal(dots, a, function () { if (a.chips) showChips(a.lang); });
+        }, wait);
+      }).catch(function () {
+        dots.remove();
+        say('bot', t.error, [{ title: t.contact, url: '/contact.html' }]);
+      });
     }
     function answerRemote(q) {
       if (!WORKER_URL) return Promise.resolve(answer(q));
@@ -447,7 +507,7 @@
         signal: ctrl ? ctrl.signal : undefined
       }).then(function (r) { return r.json(); }).then(function (d) {
         if (timer) clearTimeout(timer);
-        if (d && d.text && !d.fallback) return { lang: pageLang, text: d.text, links: d.links || [] };
+        if (d && d.text && !d.fallback) return { lang: pageLang, text: d.text, links: d.links || [], viaWorker: true };
         return answer(q);
       }).catch(function () { if (timer) clearTimeout(timer); return answer(q); });
     }
