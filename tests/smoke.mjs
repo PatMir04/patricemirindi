@@ -196,6 +196,16 @@ async function main() {
     for (const term of PRIVATE) check(!JSON.stringify(a15).toLowerCase().includes(term), 'chatbot: company answer leaks a private term');
     const a16 = await ask("What are Patrice's skills?");
     check(/Fabric/.test(a16.text) && !/What would you like to know/.test(a16.text), 'chatbot: skills question answered directly, no menu');
+    const paraphrases = [
+      "who's this guy", 'Who runs this site?', 'Tell me about the author', "what's Patrice's background",
+      'and his skills?', 'where is he based?', 'What does Patrice do for a living?', 'Patrice expereince',
+      'Mirindi skills', "c'est qui Patrice", 'présente-moi Patrice', 'que fait Patrice', 'et ses projets ?',
+      'Patrice competences', 'il est basé où ?', 'Que disent les clients de Patrice ?', 'Patris Mirindi parcours'
+    ];
+    for (const q of paraphrases) {
+      const a = await ask(q);
+      check(!/couldn’t find|n’ai pas trouvé/.test(a.text), 'chatbot: paraphrase answered, not fallback: "' + q + '"');
+    }
     const a5 = await ask('Show me recent articles');
     check((a5.links || []).length >= 1, 'chatbot: lists recent articles');
     await page.click('.kc-btn');

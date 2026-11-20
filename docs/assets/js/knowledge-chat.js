@@ -46,7 +46,9 @@
     'il elle ils vous nous je mon ma mes son sa ses leur leurs pas plus avec comment où est-ce y a-t-il votre vos patrice').split(' '));
   var SYN = { powerbi: ['power', 'bi'], powerquery: ['power', 'query'], cv: ['experience', 'about'],
     resume: ['experience', 'about'], cout: ['service', 'contact'], prix: ['service', 'contact'],
-    tarifs: ['service', 'contact'], tarif: ['service', 'contact'] };
+    tarifs: ['service', 'contact'], tarif: ['service', 'contact'],
+    job: ['experience'], career: ['experience'], work: ['experience'], parcours: ['experience'],
+    ability: ['skill'], expertise: ['skill'], competence: ['skill'], realisation: ['project'] };
   function expand(qt) {
     var out = qt.slice();
     qt.forEach(function (tk) { (SYN[tk] || []).forEach(function (s) { if (out.indexOf(s) < 0) out.push(s); }); });
@@ -116,11 +118,14 @@
   var BUILD_RE = /\b(power bi|fabric|excel|tableau software|build|building|create|make|cr[ée]er|construire)\b/i;
   var HIRE_RE = /\b(hire|hiring|engage|engager|embaucher|cost|costs|price|pricing|rates|fees|prix|tarifs?|co[ûu]t\w*)\b/i;
   var BOOKING_RE = /\b(book|booking|schedule|consultation|appointment|rendez-vous|r[ée]server|appel|rencontrer)\b/i;
-  var ABOUT_RE = /\b(who is patrice|who's patrice|tell me about patrice|about patrice|who are you|qui est patrice|parlez-moi de patrice|a propos de patrice|presentez patrice|presente patrice)\b/;
-  var ABOUT_SKILLS_RE = /\b(patrice's skills|skills of patrice|what are (his|patrice's) skills|competences de patrice|quelles sont (ses|les) competences)\b/;
-  var ABOUT_EXP_RE = /\b(where (has|did) (he|patrice) work|patrice's (experience|career)|his (career|experience)|parcours de patrice|experience de patrice|ou (a-t-il|patrice a) travaille)\b/;
+  var NAME_RE = /\b(patric\w*|patris|mirindi|mirndi|miridi)\b/;
+  var ABOUT_RE = /\b(who is patrice|who's patrice|tell me about patrice|about patrice|who are you|who is he|who's this (guy|person)|who is this (guy|person)|who (runs|owns|built|made) this site|(author|owner) of this site|tell me about the author|qui est patrice|qui est-il|c'est qui|parlez-moi de patrice|a propos de patrice|presentez?(-moi)? patrice)\b/;
+  var ABOUT_SKILLS_RE = /\b(patrice's skills|skills of patrice|what are (his|patrice's) skills|competences de patrice|quelles sont (ses|les) competences|what (skills|abilities) (does|has)|que sait-il faire|savoir-faire)\b/;
+  var ABOUT_EXP_RE = /\b(where (has|did) (he|patrice) work|patrice's (experience|career)|his (career|experience)|parcours de patrice|experience de patrice|ou (a-t-il|patrice a) travaille|que fait patrice|que fait-il|what does (patrice|he) do|do for a living|patrice's job|his job|son travail|son metier|metier de patrice|fait-il dans la vie)\b/;
   var ABOUT_EDU_RE = /\b(patrice's education|his education|education of patrice|formation de patrice|etudes de patrice|diplomes? de patrice|where did (he|patrice) study)\b/;
   var ABOUT_PROJ_RE = /\b(patrice's projects|his projects|projets de patrice)\b/;
+  var LOC_RE = /\b(where (is|does) he (based|live)|base ou|ou (vit|habite)-t-il|ou est-il base|where is patrice based)\b/;
+  var TESTI_RE = /\b(testimonials?|temoignages?|disent (les|ses) clients|clients? (say|disent)|avis (des )?clients|what do (clients|people) say)\b/;
   var ARTICLES_RE = /\b(article|articles|blog|insight|insights|post|posts|analyse|analyses|recent|récent)/i;
 
   // ---------- About Patrice: guided follow-up flow ----------
@@ -131,12 +136,44 @@
     var s = text.match(/[^.!?]+[.!?]+/g) || [text];
     return s.slice(0, n).map(function (x) { return x.trim(); }).join(' ');
   }
-  function aboutMenu(lang) {
+  function aboutMenu(lang, soft) {
     aboutState = 'menu';
+    if (soft) {
+      return { lang: lang, links: [{ title: pageName('/about.html', lang), url: '/about.html' }],
+        text: lang === 'fr'
+          ? 'Je peux vous parler de Patrice — son parcours personnel, son expérience, ses compétences, ses projets, ses services ou sa formation. Lequel vous intéresse ?\n1) Parcours personnel\n2) Expérience professionnelle\n3) Compétences\n4) Projets\n5) Services et consultation\n6) Formation et certifications\n\nRépondez par un numéro ou un mot-clé.'
+          : 'I can tell you about Patrice — his background, experience, skills, projects, services or education. Which one?\n1) Personal background\n2) Professional experience\n3) Skills\n4) Projects\n5) Services & consulting\n6) Education & certifications\n\nReply with a number or a keyword.' };
+    }
     var text = lang === 'fr'
       ? 'Patrice Mirindi est un analyste des systèmes de données, développeur et économiste du développement bilingue (FR/EN) basé à Ottawa, au Canada. Il transforme des données complexes en décisions concrètes — flux de données, tableaux de bord et analyses d\u2019impact pour le secteur public, les organismes sans but lucratif et le développement international.\n\nQue voulez-vous savoir sur lui ?\n1) Parcours personnel\n2) Expérience professionnelle\n3) Compétences\n4) Projets\n5) Services et consultation\n6) Formation et certifications\n\nRépondez par un numéro ou un mot-clé.'
       : 'Patrice Mirindi is a bilingual (EN/FR) data systems analyst, developer and development economist based in Ottawa, Canada. He turns complex data into decisions people act on — pipelines, dashboards and impact analysis for public-sector, non-profit and development teams.\n\nWhat would you like to know about him?\n1) Personal background\n2) Professional experience\n3) Skills\n4) Projects\n5) Services & consulting\n6) Education & certifications\n\nReply with a number or a keyword.';
     return { lang: lang, text: text, links: [{ title: pageName('/about.html', lang), url: '/about.html' }] };
+  }
+  function aboutTestimonials(lang) {
+    aboutState = null;
+    return { lang: lang, links: [{ title: lang === 'fr' ? 'Accueil — témoignages' : 'Home — testimonials', url: '/' }],
+      text: lang === 'fr'
+        ? 'Ce que disent les clients et collaborateurs : Tamara Flink (responsable de programme, CBI) a salué le soutien de Patrice en collecte, analyse et présentation de données pour son équipe de programme. Le site présente aussi les témoignages de Kerry Kyd, Melanie van der Baaren-Haga (CBI), Nikki Naiker (Economic Sense) et Rexford Akrong (Université de Nairobi) — voir la page d\u2019accueil.'
+        : 'What clients and collaborators say: Tamara Flink (Programme Manager, CBI) praised Patrice\u2019s data collection, analysis and presentation support to her programme team. The site also carries testimonials from Kerry Kyd, Melanie van der Baaren-Haga (CBI), Nikki Naiker (Economic Sense) and Rexford Akrong (University of Nairobi) — see the home page.' };
+  }
+  function possCategory(nq) {
+    if (!/\b(his|her|ses|son|sa)\b/.test(nq)) return null;
+    if (/(skills?|competences?)/.test(nq)) return 'skills';
+    if (/(projects?|projets?)/.test(nq)) return 'projects';
+    if (/(experience|parcours|career)/.test(nq)) return 'professional';
+    if (/(education|formation|certif)/.test(nq)) return 'education';
+    if (/background/.test(nq)) return 'personal';
+    if (/(services?|consult)/.test(nq)) return 'services';
+    return null;
+  }
+  function nameComboCategory(nq) {
+    if (/(skills?|competences?|expertise|abilit|savoir)/.test(nq)) return 'skills';
+    if (/(projects?|projets?|realisations?)/.test(nq)) return 'projects';
+    if (/(educat|formation|diplom|etudes|universit|certif)/.test(nq)) return 'education';
+    if (/(experience|parcours|career|emplois?)/.test(nq)) return 'professional';
+    if (/background/.test(nq)) return 'personal';
+    if (/(services?|consult|tarifs?|prix|hire)/.test(nq)) return 'services';
+    return null;
   }
   function aboutCategory(cat, lang) {
     var t = T[lang];
@@ -227,10 +264,14 @@
       if (role) return { lang: lang, text: role.text, links: [{ title: pageName(role.url, lang), url: role.url }] };
     }
     var nq = norm(q);
+    var poss = possCategory(nq); if (poss) return aboutCategory(poss, lang);
+    if (LOC_RE.test(nq)) return aboutCategory('personal', lang);
+    if (TESTI_RE.test(nq)) return aboutTestimonials(lang);
     if (ABOUT_SKILLS_RE.test(nq)) return aboutCategory('skills', lang);
     if (ABOUT_EXP_RE.test(nq)) return aboutCategory('professional', lang);
     if (ABOUT_EDU_RE.test(nq)) return aboutCategory('education', lang);
     if (ABOUT_PROJ_RE.test(nq)) return aboutCategory('projects', lang);
+    if (NAME_RE.test(nq) && tokens(q).length <= 5) { var combo = nameComboCategory(nq); return combo ? aboutCategory(combo, lang) : aboutMenu(lang); }
     if (ABOUT_RE.test(nq)) return aboutMenu(lang);
     if (DASHBOARD_RE.test(q) && !BUILD_RE.test(q)) {
       return { lang: lang, text: t.dash, links: [{ title: pageName('/data-analytics.html', lang), url: '/data-analytics.html' },
@@ -266,6 +307,10 @@
     }
     var hits = search(q, lang);
     if (!hits.length || hits[0].score < 2.2) {
+      if (NAME_RE.test(nq) || ABOUT_RE.test(nq) ||
+          (/\b(he|him|his|il|lui|ses|son)\b/.test(nq) && /(skill|competence|project|projet|experience|parcours|educat|formation|based|background|client)/.test(nq))) {
+        return aboutMenu(lang, true);
+      }
       return { lang: lang, text: t.none, links: [{ title: t.contact, url: '/contact.html' }], chips: true };
     }
     var top = hits[0].doc;
