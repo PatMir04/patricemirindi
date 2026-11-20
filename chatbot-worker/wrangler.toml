@@ -9,9 +9,12 @@ main = "src/index.js"
 compatibility_date = "2026-11-01"
 
 [vars]
-# Default chat model: Llama 3.1 8B keeps the free neuron budget healthy.
-# Switch to "@cf/meta/llama-3.3-70b-fp8-fast" for quality at ~10x the neurons.
-CHAT_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+# Default chat model: Llama 3.1 8B (fast variant) keeps the free neuron
+# budget healthy. NOTE: @cf/meta/llama-3.1-8b-instruct and its -fp8 variant
+# were deprecated by Cloudflare on 2026-11-20; production runs the -fast
+# model below. For a quality switch, check Cloudflare's current model
+# catalogue first — names change as models are deprecated.
+CHAT_MODEL = "@cf/meta/llama-3.1-8b-instruct-fast"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 # Workers AI binding (no API key needed).

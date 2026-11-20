@@ -124,8 +124,16 @@ async function handleChat(request, env) {
     await chargeNeurons(env, 5); // rough estimate for one embedding
     const vec = emb.data?.[0];
     if (!vec) throw new Error('no-embedding');
-    const found = await env.INDEX.query(vec, { topK: 6, returnMetadata: 'all' });
-    matches = (found.matches || []).filter(m => m.score >= MIN_SCORE);
+    const found = await env.INDEX.query(vec, { topK: 10, returnMetadata: 'all' });
+    const scored = (found.matches || []).filter(m => m.score >= MIN_SCORE);
+    // Diversify: guarantee the best FAQ chunk and the best non-FAQ chunk a
+    // seat, then fill by score (max 6 in context). A live probe showed short
+    // FAQ chunks crowding out the services/pricing content at topK=6.
+    matches = [];
+    const addMatch = (m) => { if (m && !matches.includes(m)) matches.push(m); };
+    addMatch(scored.find(m => m.metadata.type === 'faq'));
+    addMatch(scored.find(m => m.metadata.type !== 'faq'));
+    for (const m of scored) { if (matches.length >= 6) break; addMatch(m); }
   } catch { return json({ fallback: true, reason: 'retrieve-error' }, origin); }
 
   if (!matches.length) return json({ fallback: true, reason: 'no-context' }, origin);
@@ -142,12 +150,14 @@ async function handleChat(request, env) {
 
   // Workers AI first; Groq on quota/neurons errors.
   try {
-    const out = await env.AI.run(env.CHAT_MODEL || '@cf/meta/llama-3.1-8b-instruct', {
+    const out = await env.AI.run(env.CHAT_MODEL || '@cf/meta/llama-3.1-8b-instruct-fast', {
       messages: [{ role: 'system', content: SYSTEM_SITE }, { role: 'user', content: user }],
       max_tokens: 400, temperature: 0.2,
     });
     await chargeNeurons(env, 50); // rough estimate for a short 8B chat
-    const text = (out.response || '').trim();
+    // The -fast models return the OpenAI shape (choices[0].message.content);
+    // older models return { response }. Accept both.
+    const text = (out.response || out.choices?.[0]?.message?.content || '').trim();
     if (!text) throw new Error('empty');
     if (privateTermHit(env, text)) return json({ fallback: true, reason: 'filtered' }, origin);
     return json({ text, links, source: 'workers-ai' }, origin);

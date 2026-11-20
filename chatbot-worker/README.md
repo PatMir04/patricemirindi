@@ -8,7 +8,7 @@ assistant, so the chat can never be dead.
 ```
 question ─► Worker /chat ─► embed (Workers AI, bge-m3, EN/FR)
                          ─► Vectorize search over the site's own content
-                         ─► answer from retrieved chunks only (Llama 3.1 8B)
+                         ─► answer from retrieved chunks only (Llama 3.1 8B, -fast variant)
                              └─ on Workers AI quota error ─► Groq Llama 3.3 70B
                          ─► { fallback: true } whenever unsure ─► built-in bot
 ```
@@ -41,40 +41,37 @@ Rough neuron costs (estimates — the dashboard shows actuals):
 | Step | Estimate |
 |---|---|
 | Embed one question (bge-m3) | ~5 neurons |
-| One short chat, Llama 3.1 8B (~600 tokens in/out) | ~50 neurons |
+| One short chat, Llama 3.1 8B -fast (~600 tokens in/out) | ~50 neurons |
 | **One answered question, total** | **~55 neurons** |
 | **Capacity on 10,000/day** | **~180 questions/day** |
 | Same chat on Llama 3.3 70B | ~10× more → only dozens/day |
 
-That is why the 8B model is the default (`CHAT_MODEL` in `wrangler.toml`)
+That is why the 8B -fast model is the default (`CHAT_MODEL` in `wrangler.toml`; the original `@cf/meta/llama-3.1-8b-instruct` and its -fp8 variant were deprecated by Cloudflare on 2026-11-20)
 and Groq is the overflow: Groq's free tier allows **1,000 requests/day and
 100k tokens/day on Llama 3.3 70B** (14,400/day on 8B), no card required.
 For a personal portfolio's traffic, this is comfortably $0.
 
-## Patrice's setup checklist (~10 minutes, one time)
+## Setup status (updated 2026-11-20)
 
-Only you can do these — they need your accounts. Nothing here costs money
-and no key ever goes in chat or in the repo.
+**Deployed and verified live on 2026-11-20** (via the Cloudflare API):
+worker `patrice-chat` at patrice-chat.patricemirindi.workers.dev, Vectorize
+index `patrice-chat-index` (1024, cosine), AI + INDEX bindings, ADMIN_TOKEN
+secret set, first reindex done (141 chunks), /chat verified in EN and FR
+with correct employer-privacy behaviour.
 
-1. **Cloudflare account** (free) at dash.cloudflare.com, if you don't have one.
-2. In this repo's `chatbot-worker/` folder: `npm install` then
-   `npx wrangler login`.
-3. **Create the index:** `npx wrangler vectorize create patrice-chat-index --dimensions=1024 --metric=cosine`
-4. **(Recommended) KV for the guards:** `npx wrangler kv namespace create BUDGET`,
-   paste the returned id into `wrangler.toml` and uncomment the block.
-5. **Secrets** (you type these in your terminal/dashboard — never share them):
-   - `npx wrangler secret put ADMIN_TOKEN` — invent a long random string.
-   - `npx wrangler secret put PRIVATE_TERMS` — the private terms that must
-     never appear in an answer, comma-separated.
-   - Optional: create a free API key at groq.com and
-     `npx wrangler secret put GROQ_API_KEY`.
-6. **Deploy:** `npx wrangler deploy` → note the `*.workers.dev` URL.
-7. **Build the index:** `curl -X POST https://<your-worker>/admin/reindex -H "x-admin-token: <your token>"`
-   → expect `{"ok":true,"chunks":...}`. Re-run this whenever site content
-   changes (or use `tools/build_chat_index.py` offline instead).
-8. **Turn it on:** in `docs/assets/js/knowledge-chat.js`, set
-   `WORKER_URL` to your worker's `/chat` URL and open a small PR — until
-   then the merged code changes nothing live.
+Still open:
+- [ ] Optional: set the `PRIVATE_TERMS` secret (dashboard) as a backstop filter.
+- [ ] Optional: set `GROQ_API_KEY` (free at groq.com) to enable overflow +
+      research mode — currently off.
+- [ ] Optional: create the KV namespace for the rate-limit / budget guards.
+- [ ] **Turn-on:** set `WORKER_URL` in `docs/assets/js/knowledge-chat.js` —
+      sequenced after the About-flow and AI PRs merge.
+- [ ] Re-run POST /admin/reindex whenever site content changes
+      (or use `tools/build_chat_index.py` offline instead).
+
+For reference, the original one-time steps were: free Cloudflare account →
+create the Vectorize index → set secrets (never in chat or the repo) →
+deploy → reindex → set WORKER_URL.
 
 ## Files
 

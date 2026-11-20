@@ -227,5 +227,34 @@
    "world bank"
   ],
   "a": "The Dashboard page lets you compare development indicators across countries and over time, using World Bank data, and export the results."
+ },
+ {
+  "lang": "en",
+  "q": "How much does it cost to hire Patrice?",
+  "url": "/contact.html",
+  "tags": [
+   "cost",
+   "price",
+   "pricing",
+   "rates",
+   "fees",
+   "hire",
+   "budget"
+  ],
+  "a": "Pricing depends on the project. The contact form asks for your budget range — from under $5k to $50k+ — and a first 30-minute consultation is free. Patrice replies within 24 hours with next steps."
+ },
+ {
+  "lang": "fr",
+  "q": "Quels sont les tarifs de Patrice ?",
+  "url": "/contact.html",
+  "tags": [
+   "tarifs",
+   "prix",
+   "coût",
+   "budget",
+   "embaucher",
+   "combien"
+  ],
+  "a": "Les tarifs dépendent du projet. Le formulaire de contact demande votre fourchette de budget — de moins de 5 000 $ à 50 000 $ et plus — et une première consultation de 30 minutes est gratuite. Patrice répond dans les 24 heures avec les prochaines étapes."
  }
 ]
