@@ -175,6 +175,8 @@ async function main() {
     for (const term of PRIVATE) check(!JSON.stringify(a4).toLowerCase().includes(term), 'chatbot: current-role answer leaks a private term');
     const a6 = await ask('How do I let viewers change a chart axis with field parameters in Power BI?');
     check(/field-parameters|NAMEOF/.test(JSON.stringify(a6)), 'chatbot: field parameters question finds the Power BI article');
+    const a7 = await ask('What share of the world uses the internet in the latest World Bank data?');
+    check(/73\.6|world-bank-numbers/.test(JSON.stringify(a7)), 'chatbot: internet question finds the World Bank numbers article');
     const a5 = await ask('Show me recent articles');
     check((a5.links || []).length >= 1, 'chatbot: lists recent articles');
     await page.click('.kc-btn');
