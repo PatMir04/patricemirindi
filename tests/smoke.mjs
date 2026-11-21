@@ -215,6 +215,19 @@ async function main() {
     // the answer to appear instead of assuming the local engine's speed.
     await page.waitForFunction(() => document.querySelectorAll('.kc-bot').length >= 2, null, { timeout: 15000 }).catch(() => {});
     check(await page.locator('.kc-bot').count() >= 2, 'chatbot: UI shows an answer');
+    await page.fill('.kc-form input', 'Who is Patrice?');
+    await page.press('.kc-form input', 'Enter');
+    const sawDots = await page.waitForSelector('.kc-typing', { timeout: 3000 }).then(() => true).catch(() => false);
+    check(sawDots, 'chatbot: typing indicator appears while the answer is prepared');
+    await page.waitForFunction(() => {
+      const b = document.querySelectorAll('.kc-bot');
+      const last = b[b.length - 1];
+      return last && !last.classList.contains('kc-typing') && !last.classList.contains('kc-typing-on') &&
+        /Patrice Mirindi is/.test(last.textContent) && /Professional experience/.test(last.textContent);
+    }, null, { timeout: 15000 }).catch(() => {});
+    const typedText = await page.locator('.kc-bot').last().textContent();
+    check(/Patrice Mirindi is/.test(typedText) && /Professional experience/.test(typedText),
+      'chatbot: typewriter reveal lands the complete answer text in the DOM');
     await page.close();
   }
 
