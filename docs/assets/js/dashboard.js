@@ -104,6 +104,7 @@
   }
 
   function render() {
+    var CH = chrome(), PAL = isLight() ? PALETTE_LIGHT : PALETTE;
     if (!current) return;
     var ind = IND[current.indicator];
     var rows = current.rows.filter(function (r) { return r.year >= state.from && r.year <= state.to && state.countries.indexOf(r.country) > -1; });
@@ -146,7 +147,6 @@
         borderColor: col, backgroundColor: col, borderWidth: 2.5, pointRadius: years.length > 25 ? 0 : 3, pointHoverRadius: 6,
         spanGaps: true, tension: 0.25 };
     });
-    var CH = chrome(), PAL = isLight() ? PALETTE_LIGHT : PALETTE;
     var tick = { color: CH.tick }, grid = { color: CH.grid };
     var tooltip = { backgroundColor: CH.tipBg, borderColor: CH.tipBorder, borderWidth: 1, titleColor: CH.tipTitle, bodyColor: CH.tipBody,
       callbacks: { label: function (ctx) { return ' ' + ctx.dataset.label + ': ' + fmt(ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed.x, ind.unit) + ' ' + (ind.unit === 'US$' || ind.unit === 'people' ? '' : ind.unit); } } };
