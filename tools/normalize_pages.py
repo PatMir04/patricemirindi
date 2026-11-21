@@ -36,6 +36,7 @@ def nav_html(page, prefix=""):
             cls += " active"
         aria = ' aria-current="page"' if href == page else ""
         items.append(f'<li class="nav-item"><a href="{prefix}{href}" class="{cls}"{aria}>{label}</a></li>')
+    items.append('<li class="nav-item nav-theme-item"><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button></li>')
     return '<ul class="nav-menu">\n                ' + "\n                ".join(items) + "\n            </ul>"
 
 
@@ -50,6 +51,8 @@ def normalize(page):
         s = s.replace("</head>", f"    {FONT_LINK}\n</head>", 1)
     if "assets/css/theme.css" not in s:
         s = s.replace("</head>", f'    <link rel="stylesheet" href="{prefix}assets/css/theme.css">\n</head>', 1)
+    if "pm-theme" not in s:
+        s = s.replace("</head>", '    <script>try{var t=localStorage.getItem(\'pm-theme\');if(t===\'light\'||t===\'dark\')document.documentElement.setAttribute(\'data-theme\',t);}catch(e){}</script>\n</head>', 1)
     if page == "404.html":
         s = s.replace('href="assets/', 'href="/assets/').replace('src="assets/', 'src="/assets/')
 

@@ -148,6 +148,7 @@ def nav():
     for href, label in NAV:
         cls = "nav-link" + (" nav-cta" if label == "Contact" else "") + (" active" if label == "Insights" else "")
         li.append(f'<li class="nav-item"><a href="{href}" class="{cls}">{label}</a></li>')
+    li.append('<li class="nav-item nav-theme-item"><button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></button></li>')
     return "\n                ".join(li)
 
 
@@ -196,6 +197,7 @@ def page(post, other):
     <link rel="stylesheet" href="/assets/css/theme.css">
     <link rel="stylesheet" href="/assets/css/article.css">
     <script type="application/ld+json">{ld}</script>
+    <script>try{{var t=localStorage.getItem('pm-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 </head>
 <body class="article-page">
     <nav class="navbar" aria-label="Main">
