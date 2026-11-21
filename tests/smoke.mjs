@@ -227,6 +227,7 @@ async function main() {
     await page.click('.theme-toggle');
     check(await page.evaluate(() => document.documentElement.getAttribute('data-theme')) === 'dark',
       'theme toggle: clicking again switches back to dark');
+    await page.click('.kc-btn'); // reopen the chat panel the reload closed, for the typing checks below
     await page.fill('.kc-form input', 'Who is Patrice?');
     await page.press('.kc-form input', 'Enter');
     const sawDots = await page.waitForSelector('.kc-typing', { timeout: 3000 }).then(() => true).catch(() => false);
