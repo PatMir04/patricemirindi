@@ -197,7 +197,10 @@ h1, h2, h3, h4 { color: var(--mn-ink) !important; }
 .timeline-date, .project-meta, .competency-level { color: var(--mn-muted) !important; }
 
 /* Body links on Midnight use the accent (6.6:1), not the old navy */
-main a:not(.btn-primary):not(.btn-secondary) { color: var(--mn-accent) !important; }
+main a:not(.btn-primary):not(.btn-secondary):not(.pill-accent) { color: var(--mn-accent) !important; }
+/* Filled accent elements keep their on-accent text: accent text on an
+   accent fill is invisible (this rule guards the hero/article pills). */
+.pill-accent, a.btn-primary, .dash-btn-accent { color: var(--mn-on-accent) !important; }
 
 /* Content tables share the dashboard table's language */
 main thead th { background: var(--mn-surface) !important; color: var(--mn-ink) !important; border-color: var(--mn-line) !important; }

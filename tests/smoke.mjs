@@ -123,6 +123,15 @@ async function main() {
     check(await page.locator('#post-cards .card').count() >= 1, 'home: recent articles listed');
     const charts = await page.evaluate(() => ['c-pov', 'c-acc', 'c-agr', 'c-co2'].map(id => !!(window.Chart && Chart.getChart(id))));
     check(charts.every(Boolean), `home: all four indicator charts render (${charts})`);
+    const heroPill = await page.evaluate(() => {
+      const el = document.querySelector('a.pill-accent');
+      if (!el) return null;
+      const cs = getComputedStyle(el);
+      return { text: el.textContent.trim(), color: cs.color, bg: cs.backgroundColor };
+    });
+    check(!!heroPill && heroPill.text.length > 0, 'home: hero CTA pill has a label');
+    check(!!heroPill && heroPill.color !== heroPill.bg,
+      'home: hero CTA label colour differs from its orange fill (no orange-on-orange)');
     await page.close();
   }
 
@@ -261,6 +270,14 @@ async function main() {
       const a = await open(p.url);
       check(await a.page.locator('.sources li').count() >= 1, `${p.url}: lists sources`);
       check(await a.page.locator('link[hreflang]').count() === 2, `${p.url}: links its translation`);
+      const pill = await a.page.evaluate(() => {
+        const el = document.querySelector('a.pill-accent');
+        if (!el) return null;
+        const cs = getComputedStyle(el);
+        return { text: el.textContent.trim(), color: cs.color, bg: cs.backgroundColor };
+      });
+      check(!!pill && pill.text.length > 0 && pill.color !== pill.bg,
+        `${p.url}: accent pill label is readable (not orange-on-orange)`);
       check(!a.errors.length, `${p.url}: JavaScript errors: ${a.errors.join(' | ')}`);
       await a.page.close();
     }
