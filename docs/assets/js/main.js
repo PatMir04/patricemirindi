@@ -13,8 +13,30 @@
         initializePortfolio();
     });
 
+    function initThemeToggle() {
+        var btn = document.querySelector('.theme-toggle');
+        if (!btn) return;
+        var fr = (document.documentElement.lang || '').indexOf('fr') === 0;
+        function sync() {
+            var light = document.documentElement.getAttribute('data-theme') === 'light';
+            btn.setAttribute('aria-label', light
+                ? (fr ? 'Passer au thème sombre' : 'Switch to dark theme')
+                : (fr ? 'Passer au thème clair' : 'Switch to light theme'));
+            btn.setAttribute('aria-pressed', light ? 'true' : 'false');
+        }
+        sync();
+        btn.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            try { localStorage.setItem('pm-theme', next); } catch (e) {}
+            sync();
+            document.dispatchEvent(new CustomEvent('pm-theme-change', { detail: { theme: next } }));
+        });
+    }
+
     function initializePortfolio() {
         initNavigation();
+        initThemeToggle();
         initMobileMenu();
         initScrollEffects();
         initCounters();

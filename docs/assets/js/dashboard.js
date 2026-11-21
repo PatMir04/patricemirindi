@@ -21,6 +21,15 @@
     compare: { label: 'Africa vs world', codes: ['SSF', 'LMC', 'WLD'] }
   };
   var PALETTE = ['#FF7A1A', '#60A5FA', '#34D399', '#F472B6', '#FBBF24', '#A78BFA', '#22D3EE', '#F87171', '#E2E8F0', '#4ADE80'];
+  var PALETTE_LIGHT = ['#C2410C', '#2563EB', '#059669', '#DB2777', '#D97706', '#7C3AED', '#0891B2', '#DC2626', '#475569', '#16A34A'];
+  function isLight() { return document.documentElement.getAttribute('data-theme') === 'light'; }
+  function chrome() {
+    return isLight()
+      ? { tick: '#475569', legend: '#334155', grid: 'rgba(11,27,51,0.10)', axis: '#64748B',
+          tipBg: '#FFFFFF', tipBorder: '#D7E0EC', tipTitle: '#0B1B33', tipBody: '#334155' }
+      : { tick: '#CBD5E1', legend: '#E2E8F0', grid: 'rgba(203,213,225,0.12)', axis: '#94A3B8',
+          tipBg: '#12284A', tipBorder: '#1E3A63', tipTitle: '#F1F5F9', tipBody: '#E2E8F0' };
+  }
 
   var IND = {};
   var NAME = {};
@@ -95,6 +104,7 @@
   }
 
   function render() {
+    var CH = chrome(), PAL = isLight() ? PALETTE_LIGHT : PALETTE;
     if (!current) return;
     var ind = IND[current.indicator];
     var rows = current.rows.filter(function (r) { return r.year >= state.from && r.year <= state.to && state.countries.indexOf(r.country) > -1; });
@@ -132,22 +142,22 @@
     setStatus('', '');
 
     var datasets = withData.map(function (c, i) {
-      var col = PALETTE[state.countries.indexOf(c) % PALETTE.length];
+      var col = PAL[state.countries.indexOf(c) % PAL.length];
       return { label: NAME[c] || c, data: years.map(function (yr) { return byC[c][yr] === undefined ? null : byC[c][yr]; }),
         borderColor: col, backgroundColor: col, borderWidth: 2.5, pointRadius: years.length > 25 ? 0 : 3, pointHoverRadius: 6,
         spanGaps: true, tension: 0.25 };
     });
-    var tick = { color: '#CBD5E1' }, grid = { color: 'rgba(203,213,225,0.12)' };
-    var tooltip = { backgroundColor: '#12284A', borderColor: '#1E3A63', borderWidth: 1, titleColor: '#F1F5F9', bodyColor: '#E2E8F0',
+    var tick = { color: CH.tick }, grid = { color: CH.grid };
+    var tooltip = { backgroundColor: CH.tipBg, borderColor: CH.tipBorder, borderWidth: 1, titleColor: CH.tipTitle, bodyColor: CH.tipBody,
       callbacks: { label: function (ctx) { return ' ' + ctx.dataset.label + ': ' + fmt(ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed.x, ind.unit) + ' ' + (ind.unit === 'US$' || ind.unit === 'people' ? '' : ind.unit); } } };
 
     if (charts.trend) charts.trend.destroy();
     charts.trend = new Chart($('trend-chart'), {
       type: 'line', data: { labels: years, datasets: datasets },
       options: { responsive: true, maintainAspectRatio: false, animation: false, interaction: { mode: 'index', intersect: false },
-        plugins: { legend: { position: 'bottom', labels: { color: '#E2E8F0', usePointStyle: true, boxWidth: 8, padding: 16 } }, tooltip: tooltip },
+        plugins: { legend: { position: 'bottom', labels: { color: CH.legend, usePointStyle: true, boxWidth: 8, padding: 16 } }, tooltip: tooltip },
         scales: { x: { ticks: tick, grid: { display: false } },
-          y: { ticks: { color: '#CBD5E1', callback: function (v) { return fmt(v, ind.unit); } }, grid: grid, title: { display: true, text: ind.unit, color: '#94A3B8' } } } }
+          y: { ticks: { color: CH.tick, callback: function (v) { return fmt(v, ind.unit); } }, grid: grid, title: { display: true, text: ind.unit, color: CH.axis } } } }
     });
 
     var latest = withData.map(function (c) {
@@ -158,10 +168,10 @@
     charts.rank = new Chart($('rank-chart'), {
       type: 'bar',
       data: { labels: latest.map(function (l) { return (NAME[l.c] || l.c) + ' (' + l.year + ')'; }),
-        datasets: [{ data: latest.map(function (l) { return l.value; }), backgroundColor: latest.map(function (l) { return PALETTE[state.countries.indexOf(l.c) % PALETTE.length]; }), borderRadius: 6 }] },
+        datasets: [{ data: latest.map(function (l) { return l.value; }), backgroundColor: latest.map(function (l) { return PAL[state.countries.indexOf(l.c) % PAL.length]; }), borderRadius: 6 }] },
       options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, animation: false,
         plugins: { legend: { display: false }, tooltip: tooltip },
-        scales: { x: { ticks: { color: '#CBD5E1', callback: function (v) { return fmt(v, ind.unit); } }, grid: grid }, y: { ticks: tick, grid: { display: false } } } }
+        scales: { x: { ticks: { color: CH.tick, callback: function (v) { return fmt(v, ind.unit); } }, grid: grid }, y: { ticks: tick, grid: { display: false } } } }
     });
 
     // table
@@ -287,6 +297,8 @@
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
+
+  document.addEventListener('pm-theme-change', function () { if (charts.trend || charts.rank) render(); });
 
   var CATALOGUE_URL = 'data/dashboard-catalogue.json';
   function start() {

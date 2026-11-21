@@ -224,3 +224,73 @@ main tbody tr:hover { background: var(--mn-surface-2); }
   background: var(--mn-bg) !important;
 }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--mn-muted); }
+
+/* ==========================================================================
+   Light theme (visitor toggle): the same Midnight system with the
+   palette flipped. Dark stays the default and the identity; choosing
+   light sets html[data-theme="light"], persisted in localStorage by
+   an inline head script (no flash) and the nav toggle in main.js.
+   Everything built on --mn-* tokens flips automatically; the rules
+   below re-point the few hard-coded colours and restore the original
+   light-design touches (hero gradient, soft shadows, tinted alt
+   sections). Light pairings (WCAG 2.1, computed): ink #0B1B33 on
+   white 17.2:1, body #334155 on white 10.4:1, muted #5B6B84 on
+   white 5.4:1 (5.1:1 on the tinted alt sections), accent #C2410C
+   on white 5.2:1, navy #004085 on white 10.1:1, white on accent
+   5.2:1 — all AA or better.
+   ========================================================================== */
+html[data-theme="light"] {
+  color-scheme: light;
+  --mn-bg: #FFFFFF;
+  --mn-surface: #FFFFFF;
+  --mn-surface-2: #EEF2F7;
+  --mn-line: #D7E0EC;
+  --mn-ink: #0B1B33;
+  --mn-body: #334155;
+  --mn-muted: #5B6B84;
+  --mn-accent: #C2410C;
+  --mn-accent-hover: #9A3412;
+  --mn-on-accent: #FFFFFF;
+}
+html[data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.97) !important; }
+@media (max-width: 768px) {
+  html[data-theme="light"] .nav-menu { background: rgba(255, 255, 255, 0.99) !important; }
+}
+html[data-theme="light"] .hero,
+html[data-theme="light"] .about-hero, html[data-theme="light"] .work-hero,
+html[data-theme="light"] .skills-hero, html[data-theme="light"] .projects-hero,
+html[data-theme="light"] .contact-hero {
+  background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%) !important;
+}
+html[data-theme="light"] .professional-timeline, html[data-theme="light"] .personal-interests,
+html[data-theme="light"] .skills-showcase, html[data-theme="light"] .language-skills,
+html[data-theme="light"] .featured-projects, html[data-theme="light"] .testimonials-section,
+html[data-theme="light"] .section-alt {
+  background: #F6F8FB !important;
+}
+html[data-theme="light"] .card, html[data-theme="light"] .stat-card,
+html[data-theme="light"] .story-card, html[data-theme="light"] .stats-card,
+html[data-theme="light"] .languages-card, html[data-theme="light"] .timeline-card,
+html[data-theme="light"] .value-card, html[data-theme="light"] .interest-card,
+html[data-theme="light"] .impact-stat-card, html[data-theme="light"] .competency-card,
+html[data-theme="light"] .skill-category, html[data-theme="light"] .language-card,
+html[data-theme="light"] .project-card, html[data-theme="light"] .testimonial-card,
+html[data-theme="light"] .map-container, html[data-theme="light"] .post-card {
+  box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08) !important;
+}
+html[data-theme="light"] .dash-status.error { background: #FDECEC; border-color: #F0B4B4; color: #7F1D1D; }
+
+/* ---------- Theme toggle button (in the shared nav) ---------- */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 999px; cursor: pointer;
+  background: transparent; color: var(--mn-body);
+  border: 1px solid var(--mn-line);
+}
+.theme-toggle:hover { color: var(--mn-accent); border-color: var(--mn-accent); }
+.theme-toggle svg { width: 19px; height: 19px; }
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+.nav-theme-item { display: flex; align-items: center; }

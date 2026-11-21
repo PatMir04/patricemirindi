@@ -215,6 +215,19 @@ async function main() {
     // the answer to appear instead of assuming the local engine's speed.
     await page.waitForFunction(() => document.querySelectorAll('.kc-bot').length >= 2, null, { timeout: 15000 }).catch(() => {});
     check(await page.locator('.kc-bot').count() >= 2, 'chatbot: UI shows an answer');
+    check(await page.locator('.theme-toggle').count() === 1, 'theme toggle: button present in the nav');
+    await page.click('.theme-toggle');
+    check(await page.evaluate(() => document.documentElement.getAttribute('data-theme')) === 'light',
+      'theme toggle: clicking switches to the light theme');
+    check(await page.evaluate(() => getComputedStyle(document.body).backgroundColor) === 'rgb(255, 255, 255)',
+      'theme toggle: light theme paints a white page background');
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    check(await page.evaluate(() => document.documentElement.getAttribute('data-theme')) === 'light',
+      'theme toggle: choice persists after reload');
+    await page.click('.theme-toggle');
+    check(await page.evaluate(() => document.documentElement.getAttribute('data-theme')) === 'dark',
+      'theme toggle: clicking again switches back to dark');
+    await page.click('.kc-btn'); // reopen the chat panel the reload closed, for the typing checks below
     await page.fill('.kc-form input', 'Who is Patrice?');
     await page.press('.kc-form input', 'Enter');
     const sawDots = await page.waitForSelector('.kc-typing', { timeout: 3000 }).then(() => true).catch(() => false);
