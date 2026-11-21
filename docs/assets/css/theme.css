@@ -80,9 +80,10 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing
 .btn-primary:hover { background: var(--mn-accent-hover) !important; }
 .btn-secondary {
   background: transparent !important;
-  color: var(--mn-navy) !important;
-  border: 2px solid var(--mn-navy) !important;
+  color: var(--mn-ink) !important;
+  border: 2px solid var(--mn-body) !important;
 }
+.btn-secondary:hover { border-color: var(--mn-accent) !important; color: var(--mn-accent) !important; }
 .mn-dark .btn-secondary, .footer .btn-secondary {
   color: var(--mn-ink) !important;
   border-color: var(--mn-body) !important;
@@ -112,5 +113,114 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing
 .home p, .blog-page p, .article-page p, .dash-page p, .mn-dark p { color: var(--mn-body); }
 .dash-head .lead, .blog-page .lead { color: var(--mn-body); }
 
-/* Light sections on older pages: navy headings, accessible orange */
-.section-title { color: var(--mn-navy); }
+/* (The old "light sections" rule lived here; superseded by the Midnight
+   completion block below — there are no light sections anymore.) */
+
+/* ==========================================================================
+   Midnight completion: the whole site is now ONE dark design system.
+   The legacy pages' inline styles still describe the old light design
+   (white cards, #f8fbff hero gradients, navy headings, gradient text);
+   the rules below re-point those components at the Midnight tokens.
+   !important is used only where a page's inline <style> (which loads
+   after this file) would otherwise win on source order.
+   Pairings after the change (WCAG 2.1, computed): ink on bg 15.7:1,
+   body on bg 11.6:1, muted on bg 6.7:1, accent on bg 6.6:1, ink on
+   surface 13.4:1, body on surface 9.9:1, muted on surface 5.7:1,
+   accent on surface 5.6:1 — every text pairing stays AA or better.
+   Deliberately left light: the Leaflet map tiles on the Projects page
+   and the legend that sits on top of them — map data is light by
+   nature, and dark text on the near-white legend is the readable
+   pairing there. The map's surrounding card goes Midnight like
+   everything else.
+   ========================================================================== */
+:root { color-scheme: dark; }
+::selection { background: var(--mn-accent); color: var(--mn-on-accent); }
+
+body { background: var(--mn-bg) !important; color: var(--mn-body); }
+
+/* Headings read as light ink on Midnight everywhere */
+h1, h2, h3, h4 { color: var(--mn-ink) !important; }
+.section-subtitle { color: var(--mn-muted) !important; }
+
+/* Gradient text (navy -> dark orange) disappears on dark backgrounds;
+   titles become solid ink, big numbers become solid accent */
+.section-title, .hero-text h1 {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--mn-ink) !important;
+  color: var(--mn-ink) !important;
+}
+.stat-number, .stat-card .stat-number {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: var(--mn-accent) !important;
+  color: var(--mn-accent) !important;
+}
+.stat-label, .stat-detail { color: var(--mn-muted) !important; }
+
+/* Heroes: the home hero (style.css) and the five legacy page heroes */
+.hero, .about-hero, .work-hero, .skills-hero, .projects-hero, .contact-hero {
+  background: linear-gradient(180deg, #0E2240 0%, var(--mn-bg) 100%) !important;
+}
+.hero-tagline { color: var(--mn-body) !important; }
+.credential-item {
+  background: var(--mn-surface) !important;
+  border-color: var(--mn-line) !important;
+  color: var(--mn-body) !important;
+}
+.credential-item:hover { background: var(--mn-surface-2) !important; border-color: var(--mn-accent) !important; }
+.credential-item i { color: var(--mn-accent) !important; }
+.credential-item strong { color: var(--mn-ink) !important; }
+
+/* Legacy light sections become Midnight sections */
+.professional-timeline, .personal-interests, .career-impact, .testimonials-showcase,
+.competency-overview, .skills-showcase, .certifications-showcase, .language-skills,
+.project-map-section, .featured-projects, .additional-projects, .testimonials-section,
+.section-alt {
+  background: var(--mn-bg) !important;
+}
+
+/* Cards: one surface language on every page */
+.card, .stat-card, .story-card, .stats-card, .languages-card, .timeline-card,
+.value-card, .interest-card, .impact-stat-card, .competency-card, .skill-category,
+.language-card, .project-card, .testimonial-card, .map-container, .post-card {
+  background: var(--mn-surface) !important;
+  border: 1px solid var(--mn-line) !important;
+  color: var(--mn-body) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35) !important;
+}
+.card::before { background: var(--mn-accent) !important; }
+[class*="-card"] h3, [class*="-card"] h4 { color: var(--mn-ink) !important; }
+[class*="-card"] p, [class*="-card"] li { color: var(--mn-body) !important; }
+.timeline-date, .project-meta, .competency-level { color: var(--mn-muted) !important; }
+
+/* Body links on Midnight use the accent (6.6:1), not the old navy */
+main a:not(.btn-primary):not(.btn-secondary) { color: var(--mn-accent) !important; }
+
+/* Content tables share the dashboard table's language */
+main thead th { background: var(--mn-surface) !important; color: var(--mn-ink) !important; border-color: var(--mn-line) !important; }
+main tbody td { color: var(--mn-body) !important; border-color: var(--mn-line) !important; }
+main tbody tr:hover { background: var(--mn-surface-2); }
+
+/* Contact form: dark fields with light text. color-scheme: dark (above)
+   keeps native controls — select dropdowns, scrollbars — in the same
+   language, so nothing renders as a stray light widget. */
+.contact-form-section {
+  background: var(--mn-surface) !important;
+  border: 1px solid var(--mn-line) !important;
+}
+.form-group label, .contact-form-section label { color: var(--mn-body) !important; }
+.form-group input, .form-group select, .form-group textarea,
+.contact-form-section input, .contact-form-section select, .contact-form-section textarea {
+  background: var(--mn-bg) !important;
+  color: var(--mn-ink) !important;
+  border: 1px solid var(--mn-line) !important;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus,
+.contact-form-section input:focus, .contact-form-section select:focus, .contact-form-section textarea:focus {
+  border-color: var(--mn-accent) !important;
+  background: var(--mn-bg) !important;
+}
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--mn-muted); }
