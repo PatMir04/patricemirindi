@@ -1,6 +1,6 @@
 {
-"generated": "2026-11-21",
-"count": 149,
+"generated": "2026-11-23",
+"count": 155,
 "docs": [
 {
 "id": "article-0",
@@ -1986,6 +1986,104 @@
 "combien"
 ],
 "text": "Les tarifs dépendent du projet. Le formulaire de contact demande votre fourchette de budget — de moins de 5 000 $ à 50 000 $ et plus — et une première consultation de 30 minutes est gratuite. Patrice répond dans les 24 heures avec les prochaines étapes."
+},
+{
+"id": "faq-149",
+"type": "faq",
+"lang": "en",
+"title": "When should I use a Lakehouse vs a Warehouse in Microsoft Fabric?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"lakehouse",
+"warehouse",
+"microsoft fabric",
+"onelake",
+"delta lake",
+"architecture"
+],
+"text": "Choose by how your data arrives and how your team works. A Lakehouse stores Delta Lake tables in OneLake and pairs Spark notebooks with a read-oriented SQL analytics endpoint: pick it for data engineering, semi-structured files (JSON, CSV, Parquet) and medallion architectures (bronze, silver, gold) where transformations happen in notebooks. A Warehouse is a full T-SQL engine over structured relational tables, with DML, stored procedures and multi-table transactions: pick it when a SQL-centric BI team wants familiar relational modelling and tight control. They combine well: land and transform in a Lakehouse, publish curated tables to a Warehouse for serving, and query across both in the same workspace. Patrice designs and builds Lakehouse and Warehouse setups like these for consulting clients."
+},
+{
+"id": "faq-150",
+"type": "faq",
+"lang": "fr",
+"title": "Quand utiliser un Lakehouse ou un Warehouse dans Microsoft Fabric ?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"lakehouse",
+"warehouse",
+"microsoft fabric",
+"onelake",
+"delta lake",
+"architecture"
+],
+"text": "Choisissez selon la forme de vos données et la façon de travailler de votre équipe. Un Lakehouse stocke des tables Delta Lake dans OneLake et combine les notebooks Spark avec un point de terminaison SQL en lecture : idéal pour l'ingénierie de données, les fichiers semi-structurés (JSON, CSV, Parquet) et les architectures médaillon (bronze, argent, or) où les transformations se font dans des notebooks. Un Warehouse est un moteur T-SQL complet sur des tables relationnelles structurées, avec DML, procédures stockées et transactions multi-tables : idéal pour une équipe BI centrée sur SQL qui veut une modélisation relationnelle familière et un contrôle strict. Les deux se combinent bien : déposez et transformez dans un Lakehouse, publiez les tables soignées dans un Warehouse pour la diffusion, et interrogez les deux dans le même espace de travail. Patrice conçoit et met en place ce type d'architecture Lakehouse et Warehouse pour ses clients en consultation."
+},
+{
+"id": "faq-151",
+"type": "faq",
+"lang": "en",
+"title": "What is Direct Lake in Power BI and Microsoft Fabric?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"direct lake",
+"power bi",
+"semantic model",
+"onelake",
+"performance"
+],
+"text": "Direct Lake is a semantic model mode that reads Delta tables straight from OneLake. Instead of importing on a schedule or pushing every query back to a source system (DirectQuery), it pages table data into memory on demand, so reports feel near-Import fast while the data stays as fresh as the underlying Delta tables: no refresh window to wait for. It requires Fabric capacity, and if a query exceeds Direct Lake guardrails or uses an unsupported feature, the model can fall back to DirectQuery when fallback is enabled. Use Direct Lake when your curated data already lives in Fabric, in a Lakehouse or a Warehouse, and you want Import-like speed without scheduled refreshes. Patrice builds Direct Lake semantic models as part of his Power BI and Fabric consulting."
+},
+{
+"id": "faq-152",
+"type": "faq",
+"lang": "fr",
+"title": "Qu'est-ce que Direct Lake dans Power BI et Microsoft Fabric ?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"direct lake",
+"power bi",
+"modèle sémantique",
+"onelake",
+"performance"
+],
+"text": "Direct Lake est un mode de modèle sémantique qui lit les tables Delta directement depuis OneLake. Au lieu d'importer selon un horaire ou de renvoyer chaque requête vers un système source (DirectQuery), il charge les données des tables en mémoire à la demande : les rapports ont une rapidité proche du mode Import, tandis que les données restent aussi fraîches que les tables Delta sous-jacentes, sans fenêtre d'actualisation à attendre. Il faut une capacité Fabric, et si une requête dépasse les limites de Direct Lake ou utilise une fonction non prise en charge, le modèle peut basculer vers DirectQuery lorsque le repli est activé. Utilisez Direct Lake lorsque vos données soignées sont déjà dans Fabric, dans un Lakehouse ou un Warehouse, et que vous voulez une vitesse proche de l'Import sans actualisations planifiées. Patrice crée des modèles sémantiques Direct Lake dans le cadre de ses mandats Power BI et Fabric."
+},
+{
+"id": "faq-153",
+"type": "faq",
+"lang": "en",
+"title": "What is the difference between Dataflows Gen2 and Pipelines in Microsoft Fabric?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"dataflows gen2",
+"pipelines",
+"power query",
+"orchestration",
+"etl"
+],
+"text": "They do different jobs. Dataflows Gen2 are the transformation tool: Power Query in the browser to clean and shape data, with data destinations that write the result into a Lakehouse, a Warehouse or other Fabric stores. Pipelines are the orchestration tool: they schedule and sequence activities, copying data from external sources, then running notebooks, dataflows or stored procedures in order, with retries and alerts. A common pattern is a pipeline that copies raw files into a Lakehouse, triggers a Dataflow Gen2 or a notebook to transform them, and repeats on a schedule. Patrice sets up these ingestion and orchestration patterns for clients moving their reporting onto Fabric."
+},
+{
+"id": "faq-154",
+"type": "faq",
+"lang": "fr",
+"title": "Quelle est la différence entre Dataflows Gen2 et les Pipelines dans Microsoft Fabric ?",
+"url": "/skills-expertise.html",
+"tags": [
+"fabric",
+"dataflows gen2",
+"pipelines",
+"power query",
+"orchestration",
+"etl"
+],
+"text": "Ils jouent des rôles différents. Dataflows Gen2 est l'outil de transformation : Power Query dans le navigateur pour nettoyer et structurer les données, avec des destinations qui écrivent le résultat dans un Lakehouse, un Warehouse ou d'autres magasins Fabric. Les Pipelines sont l'outil d'orchestration : ils planifient et enchaînent les activités, copient des données depuis des sources externes, puis exécutent notebooks, dataflows ou procédures stockées dans l'ordre, avec reprises et alertes. Un schéma courant : un pipeline copie les fichiers bruts dans un Lakehouse, déclenche un Dataflow Gen2 ou un notebook pour les transformer, et répète le tout selon un horaire. Patrice met en place ces mécanismes d'ingestion et d'orchestration pour les clients qui déplacent leurs rapports vers Fabric."
 }
 ]
 }
