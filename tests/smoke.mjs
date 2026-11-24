@@ -132,6 +132,22 @@ async function main() {
     check(!!heroPill && heroPill.text.length > 0, 'home: hero CTA pill has a label');
     check(!!heroPill && heroPill.color !== heroPill.bg,
       'home: hero CTA label colour differs from its orange fill (no orange-on-orange)');
+    const menuPairing = await page.evaluate(() => {
+      const lum = (r, g, b) => {
+        const f = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+        return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+      };
+      const parse = c => c.match(/[\d.]+/g).map(Number);
+      const link = document.querySelector('.nav-menu .nav-link:not(.active):not(.nav-cta)');
+      if (!link) return null;
+      const cs = getComputedStyle(link);
+      const F = parse(cs.color), B = parse(cs.backgroundColor);
+      const bgEff = B.length === 4 ? [0, 1, 2].map(i => Math.round(B[i] * B[3] + [11, 27, 51][i] * (1 - B[3]))) : B;
+      const ratio = (Math.max(lum(...F), lum(...bgEff)) + 0.05) / (Math.min(lum(...F), lum(...bgEff)) + 0.05);
+      return { text: link.textContent.trim(), ratio };
+    });
+    check(!!menuPairing && menuPairing.ratio >= 4.5,
+      `home: mobile menu link "${menuPairing && menuPairing.text}" reads clearly on its pill (${menuPairing && menuPairing.ratio.toFixed(1)}:1)`);
     await page.close();
   }
 
@@ -280,6 +296,55 @@ async function main() {
         `${p.url}: accent pill label is readable (not orange-on-orange)`);
       check(!a.errors.length, `${p.url}: JavaScript errors: ${a.errors.join(' | ')}`);
       await a.page.close();
+    }
+  }
+
+  // 6. Component contrast: key components must meet WCAG AA in both themes
+  console.log('• component contrast');
+  {
+    const CONTRAST_FN = () => {
+      const parse = c => { const m = (c || '').match(/rgba?\(([^)]+)\)/); if (!m) return null; const v = m[1].split(',').map(Number); return { r: v[0], g: v[1], b: v[2], a: v.length > 3 ? v[3] : 1 }; };
+      const effBg = el => {
+        const stack = []; let n = el;
+        while (n && n !== document.documentElement) { const bg = parse(getComputedStyle(n).backgroundColor); if (bg && bg.a > 0) stack.push(bg); if (bg && bg.a === 1) break; n = n.parentElement; }
+        let base = { r: 255, g: 255, b: 255 };
+        for (let i = stack.length - 1; i >= 0; i--) { const c = stack[i]; base = { r: Math.round(c.r * c.a + base.r * (1 - c.a)), g: Math.round(c.g * c.a + base.g * (1 - c.a)), b: Math.round(c.b * c.a + base.b * (1 - c.a)) }; }
+        return base;
+      };
+      const lum = ({ r, g, b }) => { const f = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+      window.__contrastOf = sel => {
+        const el = document.querySelector(sel);
+        if (!el || !el.textContent.trim()) return null;
+        const cs = getComputedStyle(el);
+        const fg = parse(cs.color); if (!fg) return null;
+        const bg = effBg(el);
+        const ratio = (Math.max(lum(fg), lum(bg)) + 0.05) / (Math.min(lum(fg), lum(bg)) + 0.05);
+        const large = parseFloat(cs.fontSize) >= 24 || (parseFloat(cs.fontSize) >= 18.66 && parseInt(cs.fontWeight) >= 700);
+        return { ratio, need: large ? 3 : 4.5 };
+      };
+    };
+    const samples = [
+      ['/work-experience.html', '.achievement-tag', 'experience achievement tag'],
+      ['/work-experience.html', '.company-tag', 'experience company tag'],
+      ['/skills-expertise.html', '.skill-tag', 'skills tag'],
+      ['/about.html', '.language-level', 'about language level'],
+      ['/contact.html', '.process-step p', 'contact process step text'],
+      ['/contact.html', '.method-note', 'contact method note'],
+      ['/key-projects.html', '.map-legend h4', 'projects map legend heading'],
+    ];
+    for (const [url, sel, label] of samples) {
+      const { page } = await open(url);
+      await page.evaluate(CONTRAST_FN);
+      const dark = await page.evaluate(s2 => window.__contrastOf(s2), sel);
+      check(!!dark && dark.ratio >= dark.need, `${label}: readable in the dark theme (${dark && dark.ratio.toFixed(1)}:1)`);
+      await page.evaluate(() => localStorage.setItem('pm-theme', 'light'));
+      await page.reload({ waitUntil: 'domcontentloaded' });
+      await page.waitForTimeout(700);
+      await page.evaluate(CONTRAST_FN);
+      const light = await page.evaluate(s2 => window.__contrastOf(s2), sel);
+      check(!!light && light.ratio >= light.need, `${label}: readable in the light theme (${light && light.ratio.toFixed(1)}:1)`);
+      await page.evaluate(() => localStorage.removeItem('pm-theme'));
+      await page.close();
     }
   }
 

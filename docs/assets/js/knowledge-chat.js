@@ -349,7 +349,7 @@
     '.kc-panel{position:fixed;right:20px;bottom:calc(84px + env(safe-area-inset-bottom, 0px));z-index:10000;width:min(380px,calc(100vw - 32px));height:min(560px,calc(100vh - 120px));display:flex;flex-direction:column;background:#0B1B33;color:#CBD5E1;border:1px solid #1E3A63;border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.5);font:15px/1.5 "Avenir Next",Avenir,"Nunito Sans",system-ui,sans-serif;overflow:hidden}' +
     '.kc-panel[hidden]{display:none}.kc-panel,.kc-panel *{box-sizing:border-box}.kc-panel{padding:0;margin:0}' +
     '.kc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #1E3A63;background:#12284A}' +
-    '.kc-head h2{margin:0;font-size:15px;line-height:1.3;letter-spacing:0;color:#F1F5F9;font-weight:700}.kc-head p{margin:2px 0 0;font-size:12px;color:#94A3B8}' +
+    '.kc-head h2{margin:0;font-size:15px;line-height:1.3;letter-spacing:0;color:#F1F5F9 !important;font-weight:700}.kc-head p{margin:2px 0 0;font-size:12px;color:#94A3B8}' +
     '.kc-x{background:none;border:0;color:#CBD5E1;cursor:pointer;width:40px;height:40px;border-radius:10px;font-size:22px;line-height:1}.kc-x:hover{background:#183259;color:#fff}' +
     '.kc-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}' +
     '.kc-msg{max-width:88%;padding:10px 14px;border-radius:14px;white-space:pre-wrap;word-wrap:break-word}' +
@@ -372,6 +372,7 @@
     ':root[data-theme="light"] .kc-log{background:#F6F8FB}' +
     ':root[data-theme="light"] .kc-bot{background:#FFFFFF;color:#1E293B;border-color:#D7E0EC}' +
     ':root[data-theme="light"] .kc-bot a{color:#C2410C}' +
+    ':root[data-theme="light"] .kc-form input::placeholder{color:#5B6B84}' +
     ':root[data-theme="light"] .kc-me{background:#C2410C;color:#FFFFFF}' +
     ':root[data-theme="light"] .kc-src a{background:#EEF2F7;color:#004085;border-color:#D7E0EC}' +
     ':root[data-theme="light"] .kc-chip{background:#FFFFFF;color:#004085;border-color:#C7D3E4}' +

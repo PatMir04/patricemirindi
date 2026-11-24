@@ -63,3 +63,5 @@ details.panel summary { cursor: pointer; color: var(--mn-ink); font-weight: 600;
   .chart-box { height: 300px; }
   .dash-wrap { padding-top: 104px; }
 }
+
+#country-search::placeholder { color: var(--mn-muted); }

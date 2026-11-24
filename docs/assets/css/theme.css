@@ -69,6 +69,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing
 .reading-progress-bar { background: var(--mn-accent) !important; }
 @media (max-width: 768px) {
   .nav-menu { background: rgba(11, 27, 51, 0.99) !important; }
+  .nav-menu .nav-link.active, .nav-menu .nav-link:hover { color: #FFFFFF !important; }
 }
 
 /* ---------- Buttons ---------- */
@@ -92,9 +93,18 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing
 /* ---------- Footer ---------- */
 .footer { background: var(--mn-bg) !important; color: var(--mn-body); border-top: 1px solid var(--mn-line); }
 .footer h3, .footer h4 { color: var(--mn-ink); }
-.footer a { color: var(--mn-body); }
+.footer a { color: var(--mn-body) !important; }
+.footer p { color: var(--mn-body) !important; }
 .footer a:hover { color: var(--mn-accent); }
-.footer-bottom { border-top-color: var(--mn-line) !important; color: var(--mn-muted); }
+.footer-bottom { border-top-color: var(--mn-line) !important; color: var(--mn-muted) !important; }
+.method-content p { color: var(--mn-body) !important; }
+.services-overview { background: var(--mn-surface) !important; border: 1px solid var(--mn-line) !important; color: var(--mn-body) !important; }
+.services-overview li { color: var(--mn-body) !important; }
+.achievement-tag, .company-tag, .skill-tag { background: var(--mn-surface-2) !important; color: var(--mn-body) !important; border: 1px solid var(--mn-line) !important; }
+.language-level { color: var(--mn-muted) !important; }
+.process-step p { color: var(--mn-body) !important; }
+.map-legend, .map-legend h3, .map-legend h4, .map-legend p, .map-legend li, .map-legend span { color: #0B1B33 !important; }
+.method-note { color: var(--mn-muted) !important; }
 
 /* ---------- Dark section helper ---------- */
 .mn-dark { background: var(--mn-bg); color: var(--mn-body); }
@@ -175,17 +185,22 @@ h1, h2, h3, h4 { color: var(--mn-ink) !important; }
 .credential-item strong { color: var(--mn-ink) !important; }
 
 /* Legacy light sections become Midnight sections */
-.professional-timeline, .personal-interests, .career-impact, .testimonials-showcase,
+.professional-timeline, .personal-interests, .personal-journey, .values-approach, .career-impact, .testimonials-showcase,
 .competency-overview, .skills-showcase, .certifications-showcase, .language-skills,
 .project-map-section, .featured-projects, .additional-projects, .testimonials-section,
 .section-alt {
   background: var(--mn-bg) !important;
 }
 
+/* Any other *-card container takes the same surface (background only,
+   so inner card headers keep their own framing). */
+[class*="-card"] { background: var(--mn-surface) !important; }
+
 /* Cards: one surface language on every page */
 .card, .stat-card, .story-card, .stats-card, .languages-card, .timeline-card,
 .value-card, .interest-card, .impact-stat-card, .competency-card, .skill-category,
-.language-card, .project-card, .testimonial-card, .map-container, .post-card {
+.language-card, .project-card, .testimonial-card, .map-container, .post-card,
+.certification-card, .summary-card {
   background: var(--mn-surface) !important;
   border: 1px solid var(--mn-line) !important;
   color: var(--mn-body) !important;
@@ -198,6 +213,7 @@ h1, h2, h3, h4 { color: var(--mn-ink) !important; }
 
 /* Body links on Midnight use the accent (6.6:1), not the old navy */
 main a:not(.btn-primary):not(.btn-secondary):not(.pill-accent) { color: var(--mn-accent) !important; }
+section.section[style] { background: var(--mn-bg) !important; }
 /* Filled accent elements keep their on-accent text: accent text on an
    accent fill is invisible (this rule guards the hero/article pills). */
 .pill-accent, a.btn-primary, .dash-btn-accent { color: var(--mn-on-accent) !important; }
@@ -282,6 +298,16 @@ html[data-theme="light"] .map-container, html[data-theme="light"] .post-card {
   box-shadow: 0 8px 32px rgba(0, 64, 133, 0.08) !important;
 }
 html[data-theme="light"] .dash-status.error { background: #FDECEC; border-color: #F0B4B4; color: #7F1D1D; }
+html[data-theme="light"] .band { background: #F6F8FB !important; }
+html[data-theme="light"] section.section[style] { background: #F6F8FB !important; }
+html[data-theme="light"] .band .meta, html[data-theme="light"] #latest-card .meta { color: var(--mn-accent) !important; }
+/* The SDG dashboard is an intentionally dark futuristic design in both
+   themes: keep its token values dark so its text stays readable. */
+html[data-theme="light"] body.futuristic-theme {
+  --mn-bg: #0B1B33; --mn-surface: #12284A; --mn-surface-2: #1B3A66;
+  --mn-line: #1E3A63; --mn-ink: #F1F5F9; --mn-body: #CBD5E1; --mn-muted: #94A3B8;
+  --mn-accent: #FF7A1A; --mn-accent-hover: #FF8C42; --mn-on-accent: #0B1B33;
+}
 
 /* ---------- Theme toggle button (in the shared nav) ---------- */
 .theme-toggle {
