@@ -341,6 +341,7 @@ async function main() {
       ['/contact.html', '.process-step p', 'contact process step text'],
       ['/contact.html', '.method-note', 'contact method note'],
       ['/key-projects.html', '.map-legend h4', 'projects map legend heading'],
+      ['/key-projects.html', '.tech-tag', 'projects tech tag'],
     ];
     for (const [url, sel, label] of samples) {
       const { page } = await open(url);

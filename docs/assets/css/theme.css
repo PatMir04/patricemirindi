@@ -100,7 +100,7 @@ h1, h2, h3, h4, .section-title { font-family: var(--font-avenir); letter-spacing
 .method-content p { color: var(--mn-body) !important; }
 .services-overview { background: var(--mn-surface) !important; border: 1px solid var(--mn-line) !important; color: var(--mn-body) !important; }
 .services-overview li { color: var(--mn-body) !important; }
-.achievement-tag, .company-tag, .skill-tag { background: var(--mn-surface-2) !important; color: var(--mn-body) !important; border: 1px solid var(--mn-line) !important; }
+.achievement-tag, .company-tag, .skill-tag, .tech-tag { background: var(--mn-surface-2) !important; color: var(--mn-body) !important; border: 1px solid var(--mn-line) !important; }
 .language-level { color: var(--mn-muted) !important; }
 .process-step p { color: var(--mn-body) !important; }
 .map-legend, .map-legend h3, .map-legend h4, .map-legend p, .map-legend li, .map-legend span { color: #0B1B33 !important; }
