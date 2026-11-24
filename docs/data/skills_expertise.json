@@ -7,6 +7,9 @@
           "name": "Microsoft Fabric (lakehouses, warehouses, pipelines)"
         },
         {
+          "name": "Microsoft Dynamics 365 F&O (Synapse Link, reporting and analytics support)"
+        },
+        {
           "name": "SQL (T-SQL, Spark SQL)"
         },
         {

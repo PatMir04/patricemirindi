@@ -509,5 +509,121 @@
    "relations"
   ],
   "a": "Un schéma en étoile place une table de faits centrale — les événements mesurables, comme les ventes, les visites ou les paiements — au milieu, entourée de tables de dimensions (date, produit, région, client) dont les filtres circulent dans un seul sens, de la dimension vers les faits. Il rapporte de trois façons. D'abord, le DAX devient plus simple et plus rapide : les mesures agrègent les faits pendant que les dimensions les segmentent, et le moteur est conçu exactement pour cette forme. Ensuite, une vraie table de dates débloque l'intelligence temporelle — cumul annuel, même période l'an dernier — qui échoue silencieusement sur une seule table plate. Enfin, il évite les contournements en relations plusieurs-à-plusieurs et bidirectionnelles qui rendent les filtres ambigus et les totaux subtilement faux. En pratique : divisez un extrait large dans Power Query en faits et dimensions, créez les relations dimension → faits avec un filtrage à sens unique, marquez la table de dates comme table de dates, et masquez les colonnes de clés de la table de faits dans la vue rapport. Patrice remodèle des jeux de données Power BI plats en schémas en étoile pour ses clients en consultation — c'est souvent la correction la plus rentable pour des rapports lents et des totaux auxquels personne ne fait confiance."
+ },
+ {
+  "lang": "en",
+  "q": "Does Patrice work with Microsoft Dynamics 365?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "dynamics 365",
+   "d365",
+   "dynamics 365 f&o",
+   "erp",
+   "synapse link",
+   "support"
+  ],
+  "a": "Yes. Microsoft Dynamics 365 Finance & Operations is part of Patrice's day-to-day data work: he works with D365 F&O data pipelines and integrations, including a production Azure Synapse Link implementation that moves ERP data into analytics platforms for reporting. As a consultant he supports organisations with the data side of Dynamics 365: getting F&O data out reliably, modelling it in Microsoft Fabric or Azure Synapse, and building Power BI semantic models and reports on top, so finance and operations teams can trust the numbers they see. If your team runs Dynamics 365 and struggles with reporting from it, that is exactly the kind of problem he helps with."
+ },
+ {
+  "lang": "fr",
+  "q": "Patrice travaille-t-il avec Microsoft Dynamics 365 ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "dynamics 365",
+   "d365",
+   "dynamics 365 f&o",
+   "erp",
+   "synapse link",
+   "soutien"
+  ],
+  "a": "Oui. Microsoft Dynamics 365 Finance & Operations fait partie du travail quotidien de Patrice sur les données : il travaille avec les pipelines et intégrations de données D365 F&O, y compris une implémentation Azure Synapse Link en production qui amène les données de l'ERP vers des plateformes analytiques pour la production de rapports. Comme consultant, il accompagne les organisations sur le volet données de Dynamics 365 : extraire les données F&O de façon fiable, les modéliser dans Microsoft Fabric ou Azure Synapse, et construire des modèles sémantiques et des rapports Power BI par-dessus, pour que les équipes finances et opérations puissent faire confiance aux chiffres qu'elles voient. Si votre équipe utilise Dynamics 365 et peine à en tirer des rapports, c'est exactement le genre de problème qu'il aide à régler."
+ },
+ {
+  "lang": "en",
+  "q": "How do I get Dynamics 365 F&O data into Microsoft Fabric or Power BI for reporting?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "dynamics 365",
+   "d365",
+   "synapse link",
+   "fabric",
+   "power bi",
+   "data pipeline",
+   "reporting"
+  ],
+  "a": "The pattern built for this is Azure Synapse Link. Enable Synapse Link for your Dynamics 365 F&O environment and choose the finance and operations tables you need; Synapse Link then keeps those tables flowing, in near real time and in Delta/Parquet form, into a data lake, creating them automatically and applying incremental updates, inserts and deletes. From there, land the tables in a Microsoft Fabric Lakehouse (or query them in Azure Synapse), clean and model them into proper fact and dimension tables, and publish a Power BI semantic model on top — reports then read governed, modelled data instead of hitting the ERP directly, which keeps D365 fast and reporting flexible. Watch three things: only replicate the tables reporting actually needs, agree the KPI definitions with finance before building measures, and plan security, because ERP data is sensitive — row-level security in the semantic model usually mirrors who may see what in D365. Patrice designs and builds exactly these D365-to-Fabric/Power BI pipelines for consulting clients."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment amener les données Dynamics 365 F&O dans Microsoft Fabric ou Power BI pour les rapports ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "dynamics 365",
+   "d365",
+   "synapse link",
+   "fabric",
+   "power bi",
+   "pipeline de données",
+   "rapports"
+  ],
+  "a": "Le motif conçu pour cela est Azure Synapse Link. Activez Synapse Link pour votre environnement Dynamics 365 F&O et choisissez les tables finances et opérations dont vous avez besoin ; Synapse Link fait ensuite circuler ces tables, en quasi temps réel et en format Delta/Parquet, vers un lac de données, en les créant automatiquement et en appliquant les mises à jour incrémentales, insertions et suppressions. De là, déposez les tables dans un Lakehouse Microsoft Fabric (ou interrogez-les dans Azure Synapse), nettoyez-les et modélisez-les en tables de faits et de dimensions propres, puis publiez un modèle sémantique Power BI par-dessus — les rapports lisent alors des données gouvernées et modélisées au lieu d'interroger l'ERP directement, ce qui garde D365 rapide et les rapports flexibles. Surveillez trois choses : ne répliquez que les tables dont les rapports ont vraiment besoin, convenez des définitions d'indicateurs avec les finances avant de construire les mesures, et planifiez la sécurité, car les données d'ERP sont sensibles — la sécurité au niveau des lignes dans le modèle sémantique reflète habituellement qui peut voir quoi dans D365. Patrice conçoit et construit exactement ces pipelines D365 vers Fabric et Power BI pour ses clients en consultation."
+ },
+ {
+  "lang": "en",
+  "q": "What is a semantic model in Power BI and Microsoft Fabric, and why does it matter?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "semantic model",
+   "power bi",
+   "fabric",
+   "dax",
+   "data modelling",
+   "governance"
+  ],
+  "a": "A semantic model (what Power BI used to call a dataset) is the governed layer between your data and your reports. It holds the tables and their relationships, the DAX measures that define your KPIs, hierarchies, formats and row-level security. It matters because it is where consistency is won or lost: build one good semantic model over your warehouse or lakehouse and every report on top of it shows the same revenue, the same margin, the same definitions — instead of each report author re-inventing the logic and producing different numbers. In Microsoft Fabric, semantic models sit directly on Lakehouse and Warehouse tables, and the storage mode decides how they read data: Import copies data in for maximum speed, DirectQuery pushes queries back to the source, and Direct Lake reads Delta tables straight from OneLake for near-import speed with always-current data. Treat the semantic model as a product: model it as a star schema, name measures clearly, and certify the models everyone should reuse. Patrice designs and builds semantic models like these for consulting clients — it is the core of his Power BI and Fabric work."
+ },
+ {
+  "lang": "fr",
+  "q": "Qu'est-ce qu'un modèle sémantique dans Power BI et Microsoft Fabric, et pourquoi est-ce important ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "modèle sémantique",
+   "power bi",
+   "fabric",
+   "dax",
+   "modélisation des données",
+   "gouvernance"
+  ],
+  "a": "Un modèle sémantique (ce que Power BI appelait auparavant un jeu de données) est la couche gouvernée entre vos données et vos rapports. Il contient les tables et leurs relations, les mesures DAX qui définissent vos indicateurs, les hiérarchies, les formats et la sécurité au niveau des lignes. Il compte parce que c'est là que la cohérence se gagne ou se perd : construisez un bon modèle sémantique sur votre entrepôt ou votre lakehouse et chaque rapport par-dessus affichera le même revenu, la même marge, les mêmes définitions — au lieu que chaque auteur de rapport réinvente la logique et produise des chiffres différents. Dans Microsoft Fabric, les modèles sémantiques s'appuient directement sur les tables des Lakehouses et des Warehouses, et le mode de stockage décide comment ils lisent les données : Import copie les données pour une vitesse maximale, DirectQuery renvoie les requêtes à la source, et Direct Lake lit les tables Delta directement dans OneLake pour une vitesse proche de l'import avec des données toujours à jour. Traitez le modèle sémantique comme un produit : modélisez-le en schéma en étoile, nommez les mesures clairement, et certifiez les modèles que tout le monde devrait réutiliser. Patrice conçoit et construit des modèles sémantiques de ce type pour ses clients en consultation — c'est le cœur de son travail Power BI et Fabric."
+ },
+ {
+  "lang": "en",
+  "q": "How do I bring data into Microsoft Fabric?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "fabric",
+   "data ingestion",
+   "pipelines",
+   "dataflows gen2",
+   "shortcuts",
+   "mirroring",
+   "onelake"
+  ],
+  "a": "Microsoft Fabric gives you four main routes in, and the right one depends on the source and how fresh the data must be. Shortcuts point at data where it already lives — Azure Data Lake, Amazon S3, Google Cloud Storage or Dataverse — and make it appear in OneLake without copying anything. Mirroring keeps a database continuously replicated into OneLake for you (for example Azure SQL Database or Cosmos DB), so analytics always sees current data with no pipeline to maintain. Pipelines are the classic copy tool: scheduled or triggered copy activities from 100+ connectors into a Lakehouse or Warehouse, with orchestration around them. Dataflows Gen2 bring the Power Query experience: connect, clean and shape data with a familiar interface and land it in Fabric destinations. In practice most setups combine them: shortcuts or mirroring for data that already lives in the cloud, pipelines for scheduled extracts from business systems like Dynamics 365, and Dataflows Gen2 for smaller sources a business team manages itself. Patrice builds Fabric ingestion setups like these for consulting clients, usually landing data in a Lakehouse bronze layer before modelling it for reporting."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment amener des données dans Microsoft Fabric ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "fabric",
+   "ingestion de données",
+   "pipelines",
+   "dataflows gen2",
+   "raccourcis",
+   "miroir",
+   "onelake"
+  ],
+  "a": "Microsoft Fabric offre quatre grandes voies d'entrée, et le bon choix dépend de la source et de la fraîcheur requise. Les raccourcis (shortcuts) pointent vers les données où elles vivent déjà — Azure Data Lake, Amazon S3, Google Cloud Storage ou Dataverse — et les font apparaître dans OneLake sans rien copier. La mise en miroir (mirroring) garde une base de données répliquée en continu dans OneLake pour vous (par exemple Azure SQL Database ou Cosmos DB), de sorte que l'analytique voit toujours des données à jour sans pipeline à maintenir. Les pipelines sont l'outil de copie classique : des activités de copie planifiées ou déclenchées depuis plus de 100 connecteurs vers un Lakehouse ou un Warehouse, avec de l'orchestration autour. Dataflows Gen2 apporte l'expérience Power Query : se connecter, nettoyer et façonner les données avec une interface familière, puis les déposer dans des destinations Fabric. En pratique, la plupart des montages les combinent : raccourcis ou miroir pour les données déjà dans le nuage, pipelines pour les extraits planifiés de systèmes d'affaires comme Dynamics 365, et Dataflows Gen2 pour les petites sources qu'une équipe d'affaires gère elle-même. Patrice construit des montages d'ingestion Fabric de ce type pour ses clients en consultation, en déposant habituellement les données dans une couche bronze de Lakehouse avant de les modéliser pour les rapports."
  }
 ]
