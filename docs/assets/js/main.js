@@ -479,7 +479,7 @@
                     left: 0;
                     right: 0;
                     height: calc(100vh - 80px);
-                    background: rgba(255, 255, 255, 0.98);
+                    background: var(--mn-bg);
                     backdrop-filter: blur(20px) saturate(180%);
                     transform: translateX(-100%);
                     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -504,16 +504,23 @@
                     font-weight: 500;
                     border-radius: 1rem;
                     text-align: center;
-                    background: rgba(248, 250, 252, 0.8);
-                    border: 2px solid transparent;
+                    background: var(--mn-surface);
+                    color: var(--mn-body);
+                    border: 2px solid var(--mn-line);
                     margin-bottom: 0.5rem;
                 }
                 
+                .nav-menu .nav-link.nav-cta {
+                    background: var(--mn-accent);
+                    color: var(--mn-on-accent);
+                    border-color: transparent;
+                }
+
                 .nav-menu .nav-link:hover,
                 .nav-menu .nav-link.active {
-                    background: #004085;
+                    background: var(--mn-navy);
                     color: white;
-                    border-color: #FF6600;
+                    border-color: var(--mn-accent);
                     transform: translateY(-2px);
                     box-shadow: 0 4px 12px rgba(0, 64, 133, 0.3);
                 }
