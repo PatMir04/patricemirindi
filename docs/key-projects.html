@@ -21,6 +21,14 @@
     
     <!-- Leaflet CSS for Interactive Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+    <style>
+    .pm-cluster { width: 40px; height: 40px; border-radius: 50%; background: #C2410C; border: 3px solid #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.35); color: #ffffff; font: 700 14px/34px Inter, sans-serif; text-align: center; }
+    .leaflet-marker-icon.custom-marker > div { transition: transform 0.2s ease; }
+    .leaflet-marker-icon.custom-marker:hover > div { transform: scale(1.25); }
+    .pm-fit-btn { background: #ffffff; border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 6px 12px; font: 600 12px Inter, sans-serif; color: #0B1B33; cursor: pointer; }
+    .pm-fit-btn:hover { background: #f4f4f4; }
+    </style>
     <link rel="stylesheet" href="assets/css/theme.css">
     <script>try{var t=localStorage.getItem('pm-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
@@ -1374,6 +1382,325 @@
 
     <!-- Leaflet JavaScript for Interactive Map -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Interactive Map JavaScript -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize the map
+        var map = L.map('projectMap').setView([12.0, 0.0], 3);
+
+        // Tile layers follow the site theme: standard OpenStreetMap in light
+        // mode, CARTO dark basemap in Midnight mode.
+        var lightTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        });
+        var darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            maxZoom: 18
+        });
+        var currentTiles = null;
+        function applyTiles() {
+            var want = (document.documentElement.getAttribute('data-theme') === 'light') ? lightTiles : darkTiles;
+            if (currentTiles === want) return;
+            if (currentTiles) map.removeLayer(currentTiles);
+            currentTiles = want;
+            currentTiles.addTo(map);
+        }
+        applyTiles();
+        document.addEventListener('pm-theme-change', applyTiles);
+
+        // Define custom icons for different project types
+        var createCustomIcon = function(color) {
+            return L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background-color: ' + color + '; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
+                iconSize: [26, 26],
+                iconAnchor: [13, 13]
+            });
+        };
+
+        // Project data with locations and details
+        var projects = [
+
+            {
+                name: "Financial Resilience Institute – Global Framework",
+                lat: 49.2827, lng: -123.1207,
+                location: "Vancouver, Canada",
+                value: "N/A",
+                status: "Completed",
+                funder: "Financial Resilience Institute",
+                description: "Development of a comprehensive framework for assessing financial resilience of Canadians and globally.",
+                impact: "Framework for policy & resilience measurement",
+                icon: createCustomIcon('#2563eb')
+            },
+
+            // Burkina Faso cluster
+            {
+                name: "Hortiplus - Gender Transformative Horticulture",
+                lat: 12.2383, lng: -1.5616,
+                location: "Burkina Faso",
+                value: "N/A",
+                status: "Completed",
+                funder: "Netherlands Embassy / RVO",
+                description: "Diversification project increasing production of horticulture crops by 50%, improving climate resilience and nutrition security.",
+                impact: "8,000 farmers; 50,000 consumers; 50% production increase",
+                icon: createCustomIcon('#10b981')
+            },
+            {
+                name: "Burkina DryMore – Value Chains",
+                lat: 12.3714, lng: -1.5197,
+                location: "Burkina Faso",
+                value: "N/A",
+                status: "Completed",
+                funder: "Netherlands Embassy / RVO",
+                description: "Developed hibiscus, fonio, ginger & dried meat value chains for year-round factory use.",
+                impact: "4 value chains; year-round utilization",
+                icon: createCustomIcon('#10b981')
+            },
+            {
+                name: "Dried Mango Export Coaching",
+                lat: 12.3714, lng: -1.5197,
+                location: "Burkina Faso",
+                value: "N/A",
+                status: "Completed",
+                funder: "CBI – Netherlands MFA",
+                description: "Business coaching to eight factories to increase EU & regional exports of dried mango.",
+                impact: "8 factories; 30% export capacity increase",
+                icon: createCustomIcon('#f59e0b')
+            },
+            {
+                name: "Youth-led Compost Enterprises",
+                lat: 12.3714, lng: -1.5197,
+                location: "Burkina Faso",
+                value: "N/A",
+                status: "Completed",
+                funder: "GIZ ProEmploi",
+                description: "Established 15 youth-led compost businesses; supported equipment acquisition and productivity.",
+                impact: "15 businesses; 10 equipped firms; 30% efficiency gain",
+                icon: createCustomIcon('#8b5cf6')
+            },
+
+            // Benin
+            {
+                name: "Dried Pineapple Export Development",
+                lat: 9.3077, lng: 2.3158,
+                location: "Benin",
+                value: "N/A",
+                status: "Completed",
+                funder: "CBI – Netherlands MFA",
+                description: "Sector evaluation & support to meet EU export quality standards; women’s inclusion strengthened.",
+                impact: "8 plants; +25% women’s participation",
+                icon: createCustomIcon('#f59e0b')
+            },
+
+            // Rice Mill Academy across 4 countries
+            {   name: "Rice Mill Academy – Capacity Building",
+                lat: 7.5399, lng: -5.5471,
+                location: "Côte d'Ivoire",
+                value: "N/A",
+                status: "Completed",
+                funder: "GIZ – MOVE",
+                description: "Business advisory & coaching for rice mills; data-driven capacity building.",
+                impact: "Regional food security; 50+ mills",
+                icon: createCustomIcon('#10b981')
+            },
+            {   name: "Rice Mill Academy – Capacity Building",
+                lat: 12.2383, lng: -1.5616,
+                location: "Burkina Faso",
+                value: "N/A",
+                status: "Completed",
+                funder: "GIZ – MOVE",
+                description: "Business advisory & coaching for rice mills; data-driven capacity building.",
+                impact: "Regional food security; 50+ mills",
+                icon: createCustomIcon('#10b981')
+            },
+            {   name: "Rice Mill Academy – Capacity Building",
+                lat: 7.9465, lng: -1.0232,
+                location: "Ghana",
+                value: "N/A",
+                status: "Completed",
+                funder: "GIZ – MOVE",
+                description: "Business advisory & coaching for rice mills; data-driven capacity building.",
+                impact: "Regional food security; 50+ mills",
+                icon: createCustomIcon('#10b981')
+            },
+            {   name: "Rice Mill Academy – Capacity Building",
+                lat: 9.0820, lng: 8.6753,
+                location: "Nigeria",
+                value: "N/A",
+                status: "Completed",
+                funder: "GIZ – MOVE",
+                description: "Business advisory & coaching for rice mills; data-driven capacity building.",
+                impact: "Regional food security; 50+ mills",
+                icon: createCustomIcon('#10b981')
+            },
+
+            // Burundi
+            {
+                name: "Dairy Sector Feasibility Study",
+                lat: -3.3614, lng: 29.3599,
+                location: "Bujumbura, Burundi",
+                value: "N/A",
+                status: "Completed",
+                funder: "IFC – World Bank",
+                description: "Market demand/supply analysis, profitability & competitiveness assessment; expansion blueprint.",
+                impact: "Investment opportunities identified",
+                icon: createCustomIcon('#ef4444')
+            },
+
+            // Root Capital – Women in Agriculture (EA region)
+            {
+                name: "Women in Agriculture Market Study",
+                lat: -1.9579, lng: 30.1127,
+                location: "Rwanda (EA regional)",
+                value: "N/A",
+                status: "Completed",
+                funder: "Root Capital",
+                description: "Gender inclusion across coffee, sorghum & macadamia value chains in DRC, Kenya, Rwanda & Uganda.",
+                impact: "Inclusive value chain strategies",
+                icon: createCustomIcon('#8b5cf6')
+            },
+
+            // Anzisha Prize – South Africa
+            {
+                name: "Anzisha Prize – Youth Entrepreneurship",
+                lat: -26.2041, lng: 28.0473,
+                location: "South Africa",
+                value: "N/A",
+                status: "Completed",
+                funder: "ALA & Mastercard Foundation",
+                description: "3-year support program enabling very young entrepreneurs to build job-generative businesses.",
+                impact: "50+ ventures; 40% ↑ sustainability",
+                icon: createCustomIcon('#8b5cf6')
+            },
+
+            // AERC Research – Kenya/DRC
+            {
+                name: "AERC – Socio-Economic Food Systems Research",
+                lat: -1.286389, lng: 36.817223,
+                location: "Nairobi, Kenya",
+                value: "N/A",
+                status: "Completed",
+                funder: "African Economic Research Consortium",
+                description: "Micro & macro research on DRC food environments; evidence for policy and practice.",
+                impact: "Peer-reviewed outputs & policy insights",
+                icon: createCustomIcon('#3b82f6')
+            },
+
+            // Agronomist – DRC
+            {
+                name: "Agronomist – Plaine de la Ruzizi",
+                lat: -2.509, lng: 28.853,
+                location: "Bukavu, DRC",
+                value: "N/A",
+                status: "Completed",
+                funder: "Cellule d’Appui Technique",
+                description: "Implemented strategies to improve farmer livelihoods, capacity and household nutrition.",
+                impact: "Farmer capacity & nutrition improved",
+                icon: createCustomIcon('#10b981')
+            }
+        ];
+
+        // Popup for a project; the value badge only appears when there is a value
+        function popupHtml(project) {
+            var badge = (project.value && project.value !== 'N/A')
+                ? '<span style="background: linear-gradient(135deg, #C2410C, #9A3412); color: white; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700;">' + project.value + '</span>'
+                : '';
+            return '<div style="width: 280px; font-family: Inter, sans-serif;">' +
+                '<h4 style="color: #004085; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 700;">' + project.name + '</h4>' +
+                '<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">' +
+                '<span style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600;">' + project.status + '</span>' +
+                badge +
+                '</div>' +
+                '<p style="color: #374151; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.75rem;">' + project.description + '</p>' +
+                '<div style="margin-bottom: 0.5rem;">' +
+                '<strong style="color: #004085; font-size: 0.8rem;">Funder:</strong> ' +
+                '<span style="color: #6B7280; font-size: 0.8rem;">' + project.funder + '</span>' +
+                '</div>' +
+                '<div style="margin-bottom: 0.5rem;">' +
+                '<strong style="color: #004085; font-size: 0.8rem;">Location:</strong> ' +
+                '<span style="color: #6B7280; font-size: 0.8rem;">' + project.location + '</span>' +
+                '</div>' +
+                '<div style="padding: 0.75rem; background: #f8fbff; border-radius: 8px; border-left: 3px solid #C2410C;">' +
+                '<strong style="color: #004085; font-size: 0.8rem;">Impact:</strong> ' +
+                '<span style="color: #374151; font-size: 0.8rem;">' + project.impact + '</span>' +
+                '</div>' +
+                '</div>';
+        }
+
+        // "Show all" reset button for the card filter, placed above the grid
+        var showAllBtn = document.createElement('button');
+        showAllBtn.textContent = 'Show All Projects';
+        showAllBtn.id = 'showAllBtn';
+        showAllBtn.style.cssText = 'display:none;margin:1rem auto;padding:0.75rem 2rem;background:#C2410C;color:white;border:none;border-radius:2rem;font-weight:700;cursor:pointer;font-size:1rem;';
+        showAllBtn.addEventListener('click', function() {
+            document.querySelectorAll('.project-card').forEach(function(c) { c.style.display = ''; });
+            showAllBtn.style.display = 'none';
+        });
+        var showcase = document.querySelector('.projects-showcase .container');
+        if (showcase) showcase.insertBefore(showAllBtn, showcase.querySelector('.projects-grid'));
+
+        // Clicking a pin filters the project cards to that pin's location
+        function filterCards(location) {
+            // Match the full location, then its parts ("Bujumbura, Burundi" -> "Burundi")
+            var candidates = [location];
+            location.split(',').forEach(function(part) {
+                var t = part.replace(/\(.*?\)/g, '').trim();
+                if (t && candidates.indexOf(t) === -1) candidates.push(t);
+            });
+            var found = false;
+            document.querySelectorAll('.project-card').forEach(function(c) {
+                var hit = candidates.some(function(cand) { return c.textContent.indexOf(cand) !== -1; });
+                if (hit) { c.style.display = ''; found = true; }
+                else { c.style.display = 'none'; }
+            });
+            if (found) showAllBtn.style.display = 'block';
+        }
+
+        // Markers live in a cluster group, so pins sharing a city stay reachable:
+        // the cluster shows a count and zooms in or fans the pins out on click.
+        var cluster = L.markerClusterGroup({
+            showCoverageOnHover: false,
+            spiderfyOnMaxZoom: true,
+            maxClusterRadius: 50,
+            iconCreateFunction: function(c) {
+                return L.divIcon({
+                    html: '<div class="pm-cluster">' + c.getChildCount() + '</div>',
+                    className: 'pm-cluster-wrap',
+                    iconSize: [40, 40]
+                });
+            }
+        });
+        projects.forEach(function(project) {
+            var marker = L.marker([project.lat, project.lng], { icon: project.icon });
+            marker.bindPopup(popupHtml(project));
+            marker.on('click', function() { filterCards(project.location); });
+            cluster.addLayer(marker);
+        });
+        map.addLayer(cluster);
+
+        // Frame every project, and give visitors a working control to re-frame
+        var bounds = L.latLngBounds(projects.map(function(project) { return [project.lat, project.lng]; }));
+        map.fitBounds(bounds.pad(0.1));
+        var FitControl = L.Control.extend({
+            options: { position: 'topleft' },
+            onAdd: function() {
+                var btn = L.DomUtil.create('button', 'pm-fit-btn');
+                btn.type = 'button';
+                btn.textContent = 'Fit all';
+                btn.title = 'Show all projects on the map';
+                L.DomEvent.on(btn, 'click', function(e) {
+                    L.DomEvent.stop(e);
+                    map.fitBounds(bounds.pad(0.1));
+                });
+                return btn;
+            }
+        });
+        map.addControl(new FitControl());
+    });
+    </script>
     
     <!-- Interactive Map JavaScript -->
     <script>
@@ -1622,79 +1949,4 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/knowledge-chat.js" defer></script>
 </body>
-
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Add Show All button above project cards
-  var showcase = document.querySelector('.projects-showcase .container');
-  if (showcase) {
-    var btn = document.createElement('button');
-    btn.textContent = 'Show All Projects';
-    btn.id = 'showAllBtn';
-    btn.style.cssText = 'display:none;margin:1rem auto;padding:0.75rem 2rem;background:#C2410C;color:white;border:none;border-radius:2rem;font-weight:700;cursor:pointer;font-size:1rem;';
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.project-card').forEach(function(c){c.style.display='';});
-      btn.style.display='none';
-    });
-    showcase.insertBefore(btn, showcase.querySelector('.projects-grid'));
-  }
-  // Override marker click to filter project cards by location
-  setTimeout(function() {
-    var markers = document.querySelectorAll('.leaflet-marker-icon');
-    markers.forEach(function(m) {
-      m.addEventListener('click', function() {
-        setTimeout(function() {
-          var popup = document.querySelector('.leaflet-popup-content');
-          if (!popup) return;
-          var locEl = popup.querySelector('span');
-          var spans = popup.querySelectorAll('span');
-          var loc = '';
-          spans.forEach(function(s) { if (s.previousElementSibling && s.previousElementSibling.textContent.indexOf('Location') !== -1) loc = s.textContent; });
-          if (!loc) return;
-          var cards = document.querySelectorAll('.project-card');
-          var found = false;
-          cards.forEach(function(c) {
-            if (c.textContent.indexOf(loc.trim()) !== -1) { c.style.display=''; found=true; }
-            else { c.style.display='none'; }
-          });
-          if (found) { var b=document.getElementById('showAllBtn'); if(b) b.style.display='block'; }
-        }, 300);
-      });
-    });
-  }, 2000);
-});
-</script>
-
-    <script>
-// Improve Canada marker visibility
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    // Find and enhance Canada marker via popup content check
-    var markers = document.querySelectorAll('.leaflet-marker-icon');
-    markers.forEach(function(m) {
-      m.style.filter = 'hue-rotate(0deg)';
-    });
-    // Add pulsing effect to all markers for better visibility
-    var style = document.createElement('style');
-    style.textContent = '.leaflet-marker-icon{transition:transform 0.3s!important}.leaflet-marker-icon:hover{transform:scale(1.3)!important;z-index:9999!important}';
-    document.head.appendChild(style);
-    // Zoom controls enhancement
-    var map = document.querySelector('.leaflet-container');
-    if (map && map._leaflet_id) {
-      // Add fit bounds button
-      var fitBtn = document.createElement('button');
-      fitBtn.textContent = 'Fit All';
-      fitBtn.style.cssText = 'position:absolute;top:80px;left:10px;z-index:1000;padding:6px 12px;background:white;border:2px solid rgba(0,0,0,0.2);border-radius:4px;cursor:pointer;font-size:12px;font-weight:600';
-      fitBtn.addEventListener('click', function() {
-        var mapEl = document.querySelector('#project-map, .map-container, [id*=map]');
-        if (mapEl && mapEl._leaflet_id) {
-          // Trigger window resize to refresh map
-          window.dispatchEvent(new Event('resize'));
-        }
-      });
-      map.appendChild(fitBtn);
-    }
-  }, 3000);
-});
-</script>
 </html>
