@@ -241,14 +241,24 @@ async function main() {
     await page.press('.kc-form input', 'Enter');
     const sawDots = await page.waitForSelector('.kc-typing', { timeout: 3000 }).then(() => true).catch(() => false);
     check(sawDots, 'chatbot: typing indicator appears while the answer is prepared');
+    // Responder-agnostic: the answer may come from the built-in bot (fixed
+    // wording) or from the AI worker (its own prose), so assert that the
+    // reveal *completed* — typing state gone, text stable across two polls
+    // and about Patrice — instead of matching one responder's exact phrases.
+    // (The old exact-phrase check flapped the weekly live run whenever the
+    // worker answered with different wording.)
     await page.waitForFunction(() => {
       const b = document.querySelectorAll('.kc-bot');
       const last = b[b.length - 1];
-      return last && !last.classList.contains('kc-typing') && !last.classList.contains('kc-typing-on') &&
-        /Patrice Mirindi is/.test(last.textContent) && /Professional experience/.test(last.textContent);
-    }, null, { timeout: 15000 }).catch(() => {});
+      if (!last || last.classList.contains('kc-typing') || last.classList.contains('kc-typing-on')) return false;
+      const text = last.textContent || '';
+      if (!/Patrice/.test(text) || text.trim().length < 40) { window.__kcPrev = text; return false; }
+      if (window.__kcPrev === text) return true;
+      window.__kcPrev = text;
+      return false;
+    }, null, { timeout: 15000, polling: 700 }).catch(() => {});
     const typedText = await page.locator('.kc-bot').last().textContent();
-    check(/Patrice Mirindi is/.test(typedText) && /Professional experience/.test(typedText),
+    check(/Patrice/.test(typedText) && typedText.trim().length >= 40,
       'chatbot: typewriter reveal lands the complete answer text in the DOM');
     await page.close();
   }
