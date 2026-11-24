@@ -28,6 +28,8 @@
     .leaflet-marker-icon.custom-marker:hover > div { transform: scale(1.25); }
     .pm-fit-btn { background: #ffffff; border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; padding: 6px 12px; font: 600 12px Inter, sans-serif; color: #0B1B33; cursor: pointer; }
     .pm-fit-btn:hover { background: #f4f4f4; }
+    #projectMap { background: #12284A; }
+    html[data-theme="light"] #projectMap { background: #E9E4DA; }
     </style>
     <link rel="stylesheet" href="assets/css/theme.css">
     <script>try{var t=localStorage.getItem('pm-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
@@ -939,7 +941,7 @@
         border-radius: 12px;
         box-shadow: 0 8px 32px rgba(0, 64, 133, 0.15);
         border: 1px solid rgba(0, 64, 133, 0.1);
-        z-index: 1000;
+        z-index: 500;
     }
     
     .legend-items {
@@ -1388,18 +1390,25 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize the map
-        var map = L.map('projectMap').setView([12.0, 0.0], 3);
+        var map = L.map('projectMap', { scrollWheelZoom: false }).setView([12.0, 0.0], 3);
+        map.on('focus', function() { map.scrollWheelZoom.enable(); });
+        map.on('blur', function() { map.scrollWheelZoom.disable(); });
 
         // Tile layers follow the site theme: standard OpenStreetMap in light
-        // mode, CARTO dark basemap in Midnight mode.
+        // mode, Esri dark gray basemap in Midnight mode.
         var lightTiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 18
         });
-        var darkTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-            maxZoom: 18
-        });
+        var darkTiles = L.layerGroup([
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, (c) OpenStreetMap contributors, and the GIS user community',
+                maxZoom: 18
+            }),
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+                maxZoom: 18
+            })
+        ]);
         var currentTiles = null;
         function applyTiles() {
             var want = (document.documentElement.getAttribute('data-theme') === 'light') ? lightTiles : darkTiles;
@@ -1609,7 +1618,7 @@
                 ? '<span style="background: linear-gradient(135deg, #C2410C, #9A3412); color: white; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 700;">' + project.value + '</span>'
                 : '';
             return '<div style="width: 280px; font-family: Inter, sans-serif;">' +
-                '<h4 style="color: #004085; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 700;">' + project.name + '</h4>' +
+                '<h4 style="color: #004085 !important; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 700;">' + project.name + '</h4>' +
                 '<div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">' +
                 '<span style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.25rem 0.5rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600;">' + project.status + '</span>' +
                 badge +
@@ -1639,8 +1648,8 @@
             document.querySelectorAll('.project-card').forEach(function(c) { c.style.display = ''; });
             showAllBtn.style.display = 'none';
         });
-        var showcase = document.querySelector('.projects-showcase .container');
-        if (showcase) showcase.insertBefore(showAllBtn, showcase.querySelector('.projects-grid'));
+        var grid = document.querySelector('.projects-grid');
+        if (grid && grid.parentNode) grid.parentNode.insertBefore(showAllBtn, grid);
 
         // Clicking a pin filters the project cards to that pin's location;
         // the location's parts are tried too ("Bujumbura, Burundi" -> "Burundi")
