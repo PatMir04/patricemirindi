@@ -465,7 +465,7 @@
       finishTyping(); // never run two reveals at once
       m.classList.add('kc-typing-on');
       var chunks = a.text.match(/\S+\s*/g) || [a.text];
-      var target = Math.min(2600, Math.max(500, chunks.length * 28)); // total reveal time, capped ~2.6s
+      var target = Math.min(4000, Math.max(500, chunks.length * 45)); // total reveal time, capped ~4s
       var perTick = Math.max(1, Math.ceil(chunks.length / (target / 30)));
       var shown = 0;
       m.textContent = '';
@@ -495,7 +495,7 @@
       load().then(function () { return answerRemote(q); }).then(function (a) {
         // Built-in answers get a short natural pause; worker answers have
         // already taken their real time. Reduced motion: no added pause.
-        var minMs = (REDUCED || a.viaWorker) ? 0 : 750;
+        var minMs = (REDUCED || a.viaWorker) ? 0 : 1100;
         var wait = Math.max(0, minMs - (Date.now() - started));
         setTimeout(function () {
           reveal(dots, a, function () { if (a.chips) showChips(a.lang); });
