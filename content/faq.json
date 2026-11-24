@@ -425,5 +425,89 @@
    "etl"
   ],
   "a": "Ils jouent des rôles différents. Dataflows Gen2 est l'outil de transformation : Power Query dans le navigateur pour nettoyer et structurer les données, avec des destinations qui écrivent le résultat dans un Lakehouse, un Warehouse ou d'autres magasins Fabric. Les Pipelines sont l'outil d'orchestration : ils planifient et enchaînent les activités, copient des données depuis des sources externes, puis exécutent notebooks, dataflows ou procédures stockées dans l'ordre, avec reprises et alertes. Un schéma courant : un pipeline copie les fichiers bruts dans un Lakehouse, déclenche un Dataflow Gen2 ou un notebook pour les transformer, et répète le tout selon un horaire. Patrice met en place ces mécanismes d'ingestion et d'orchestration pour les clients qui déplacent leurs rapports vers Fabric."
+ },
+ {
+  "lang": "en",
+  "q": "How do I create a DAX measure in Power BI, and how is a measure different from a calculated column?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "dax",
+   "measures",
+   "calculated columns",
+   "calculate",
+   "data modelling"
+  ],
+  "a": "A measure is a DAX formula evaluated at query time, in the filter context of whatever visual uses it — it stores nothing in the model. Create one from Modeling → New measure (or right-click a table → New measure) and write an aggregation, for example Total Sales = SUM(Sales[Amount]). Measures build on each other: Sales LY = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Dates[Date])) reuses the first measure under a modified filter, which is what CALCULATE does — it is the single most important DAX function. A calculated column is different: it is computed row by row at refresh and stored in the model, so it uses memory, but it can sit on rows, columns and slicers. Rule of thumb: numbers that must react to filters (totals, ratios, time comparisons) belong in measures; row-level attributes you slice by belong in calculated columns — or better, upstream in Power Query, which keeps the model lean. Patrice builds Power BI semantic models and DAX measure libraries for consulting clients, including time-intelligence and KPI patterns like these."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment créer une mesure DAX dans Power BI, et en quoi une mesure diffère-t-elle d'une colonne calculée ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "dax",
+   "mesures",
+   "colonnes calculées",
+   "calculate",
+   "modélisation des données"
+  ],
+  "a": "Une mesure est une formule DAX évaluée au moment de la requête, dans le contexte de filtre du visuel qui l'utilise — elle ne stocke rien dans le modèle. Créez-la via Modélisation → Nouvelle mesure (ou clic droit sur une table → Nouvelle mesure) et écrivez une agrégation, par exemple Ventes totales = SUM(Ventes[Montant]). Les mesures s'appuient les unes sur les autres : Ventes année précédente = CALCULATE([Ventes totales], SAMEPERIODLASTYEAR(Dates[Date])) réutilise la première mesure sous un filtre modifié — c'est le rôle de CALCULATE, la fonction DAX la plus importante. Une colonne calculée est différente : elle est calculée ligne par ligne à l'actualisation et stockée dans le modèle, donc elle consomme de la mémoire, mais elle peut servir dans les lignes, les colonnes et les segments. Règle pratique : les chiffres qui doivent réagir aux filtres (totaux, ratios, comparaisons dans le temps) vont dans des mesures ; les attributs au niveau ligne qui servent à segmenter vont dans des colonnes calculées — ou mieux, en amont dans Power Query, ce qui garde le modèle léger. Patrice construit des modèles sémantiques Power BI et des bibliothèques de mesures DAX pour ses clients en consultation, y compris les motifs d'intelligence temporelle et d'indicateurs de ce type."
+ },
+ {
+  "lang": "en",
+  "q": "How do I set up row-level security in Power BI so each manager only sees their own region?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "row-level security",
+   "rls",
+   "security",
+   "userprincipalname",
+   "dynamic rls"
+  ],
+  "a": "In Power BI Desktop, go to Modeling → Manage roles, create a role such as Regional managers, and give it a DAX filter on the region or dimension table, for example [Region] = \"East\". Test it before publishing with Modeling → View as, then publish and assign people to the role in the Power BI service, under the semantic model's Security settings. When there are many managers, static roles do not scale — use dynamic row-level security instead: keep a small users table (email, region), filter it with [Email] = USERPRINCIPALNAME(), and let the relationships carry that filter through to the fact tables, so one role serves everyone based on who is signed in. Three cautions: row-level security filters data but is not a sharing permission — viewers still need access to the report; avoid bidirectional relationships just to make security work, fix the model instead; and test with real accounts as well as View as, because the two can disagree. Patrice sets up static and dynamic row-level security in Power BI models for consulting clients, so teams see exactly the data they should."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment configurer la sécurité au niveau des lignes dans Power BI pour que chaque gestionnaire ne voie que sa région ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "sécurité au niveau des lignes",
+   "rls",
+   "sécurité",
+   "userprincipalname",
+   "rls dynamique"
+  ],
+  "a": "Dans Power BI Desktop, allez à Modélisation → Gérer les rôles, créez un rôle comme Gestionnaires régionaux et donnez-lui un filtre DAX sur la table de région ou de dimension, par exemple [Région] = \"Est\". Testez-le avant de publier avec Modélisation → Afficher en tant que, puis publiez et affectez les personnes au rôle dans le service Power BI, dans les paramètres de sécurité du modèle sémantique. Quand il y a beaucoup de gestionnaires, les rôles statiques ne suffisent plus — utilisez plutôt la sécurité dynamique au niveau des lignes : gardez une petite table d'utilisateurs (courriel, région), filtrez-la avec [Courriel] = USERPRINCIPALNAME(), et laissez les relations propager ce filtre jusqu'aux tables de faits, de sorte qu'un seul rôle serve tout le monde selon l'identité de connexion. Trois précautions : la sécurité au niveau des lignes filtre les données mais n'est pas un droit de partage — les lecteurs doivent quand même avoir accès au rapport ; évitez les relations bidirectionnelles juste pour faire fonctionner la sécurité, corrigez plutôt le modèle ; et testez avec de vrais comptes en plus d'Afficher en tant que, car les deux peuvent différer. Patrice configure la sécurité au niveau des lignes, statique et dynamique, dans les modèles Power BI de ses clients en consultation, pour que chaque équipe voie exactement les données qui la concernent."
+ },
+ {
+  "lang": "en",
+  "q": "Why should I model my Power BI data as a star schema?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "star schema",
+   "data modelling",
+   "fact table",
+   "dimensions",
+   "relationships"
+  ],
+  "a": "A star schema puts one central fact table — the measurable events, such as sales, visits or payments — in the middle, surrounded by dimension tables (date, product, region, client) whose filters flow one way, from dimension to fact. It pays off in three ways. First, DAX gets simpler and faster: measures aggregate the fact while dimensions slice it, and the engine is built for exactly this shape. Second, a proper date dimension unlocks time intelligence — year-to-date, same period last year — which quietly fails on a single flat table. Third, it avoids the many-to-many and bidirectional workarounds that make filters ambiguous and totals subtly wrong. In practice: split a wide extract in Power Query into facts and dimensions, build relationships dimension → fact with single-direction filtering, mark the date table as the date table, and hide the fact table's key columns from report view. Patrice remodels flat Power BI datasets into star schemas for consulting clients — it is usually the single biggest fix for slow reports and totals nobody trusts."
+ },
+ {
+  "lang": "fr",
+  "q": "Pourquoi modéliser mes données Power BI en schéma en étoile ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "power bi",
+   "schéma en étoile",
+   "modélisation des données",
+   "table de faits",
+   "dimensions",
+   "relations"
+  ],
+  "a": "Un schéma en étoile place une table de faits centrale — les événements mesurables, comme les ventes, les visites ou les paiements — au milieu, entourée de tables de dimensions (date, produit, région, client) dont les filtres circulent dans un seul sens, de la dimension vers les faits. Il rapporte de trois façons. D'abord, le DAX devient plus simple et plus rapide : les mesures agrègent les faits pendant que les dimensions les segmentent, et le moteur est conçu exactement pour cette forme. Ensuite, une vraie table de dates débloque l'intelligence temporelle — cumul annuel, même période l'an dernier — qui échoue silencieusement sur une seule table plate. Enfin, il évite les contournements en relations plusieurs-à-plusieurs et bidirectionnelles qui rendent les filtres ambigus et les totaux subtilement faux. En pratique : divisez un extrait large dans Power Query en faits et dimensions, créez les relations dimension → faits avec un filtrage à sens unique, marquez la table de dates comme table de dates, et masquez les colonnes de clés de la table de faits dans la vue rapport. Patrice remodèle des jeux de données Power BI plats en schémas en étoile pour ses clients en consultation — c'est souvent la correction la plus rentable pour des rapports lents et des totaux auxquels personne ne fait confiance."
  }
 ]
