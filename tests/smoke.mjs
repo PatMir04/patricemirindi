@@ -337,6 +337,7 @@ async function main() {
       ['/work-experience.html', '.achievement-tag', 'experience achievement tag'],
       ['/work-experience.html', '.company-tag', 'experience company tag'],
       ['/skills-expertise.html', '.skill-tag', 'skills tag'],
+      ['/skills-expertise.html', '.app-tag', 'skills app tag'],
       ['/about.html', '.language-level', 'about language level'],
       ['/contact.html', '.process-step p', 'contact process step text'],
       ['/contact.html', '.method-note', 'contact method note'],
