@@ -1,6 +1,6 @@
 {
 "generated": "2026-11-26",
-"count": 173,
+"count": 181,
 "docs": [
 {
 "id": "article-0",
@@ -2379,6 +2379,128 @@
 "tendances parallèles"
 ],
 "text": "La méthode des doubles différences estime l'effet d'un programme en comparant l'évolution dans le temps d'un groupe traité à celle d'un groupe témoin : effet = (traité après − traité avant) − (témoin après − témoin avant). La seconde différence élimine à la fois les écarts fixes entre les groupes et les chocs qui touchent les deux groupes de la même façon ; c'est pourquoi la DiD exige des données avant et après l'intervention pour les deux groupes. L'hypothèse clé est celle des tendances parallèles : sans le programme, les deux groupes auraient évolué en parallèle. On ne peut pas la prouver, mais on peut l'étayer — tracer ou tester les tendances d'avant l'intervention quand plusieurs périodes préalables existent, garder la composition des groupes stable, et surveiller les autres politiques ou chocs qui ne toucheraient qu'un seul groupe au même moment. En régression, c'est le terme d'interaction : résultat ~ traité + après + traité×après (avec des erreurs-types regroupées au niveau où le traitement a été assigné, généralement le village, l'école ou l'établissement). Présentez la vérification des tendances préalables à côté de l'estimation ; un chiffre DiD sans elle est difficile à défendre. Patrice conçoit et mène des évaluations DiD et autres évaluations quasi expérimentales — conception d'enquêtes, estimation sous R et Stata, et rapports — pour des programmes de développement."
+},
+{
+"id": "faq-173",
+"type": "faq",
+"lang": "en",
+"title": "What are the capital cities of West Africa?",
+"url": "/data-analytics.html",
+"tags": [
+"geography",
+"capitals",
+"west africa",
+"africa",
+"countries"
+],
+"text": "The West African countries on Patrice's development dashboard and their capitals: Burkina Faso: Ouagadougou. Benin: Porto-Novo (the seat of government is Cotonou). Côte d'Ivoire: Yamoussoukro (the economic hub is Abidjan). Ghana: Accra. Nigeria: Abuja. Senegal: Dakar. Mali: Bamako. Niger: Niamey. Togo: Lomé. Most of these countries are members of ECOWAS, the Economic Community of West African States, and French is an official language in most of them, with English in Ghana and Nigeria."
+},
+{
+"id": "faq-174",
+"type": "faq",
+"lang": "fr",
+"title": "Quelles sont les capitales des pays d'Afrique de l'Ouest ?",
+"url": "/data-analytics.html",
+"tags": [
+"géographie",
+"capitales",
+"afrique de l'ouest",
+"afrique",
+"pays"
+],
+"text": "Les pays d'Afrique de l'Ouest présents dans le tableau de bord de Patrice et leurs capitales : Burkina Faso : Ouagadougou. Bénin : Porto-Novo (le siège du gouvernement est à Cotonou). Côte d'Ivoire : Yamoussoukro (le centre économique est Abidjan). Ghana : Accra. Nigéria : Abuja. Sénégal : Dakar. Mali : Bamako. Niger : Niamey. Togo : Lomé. La plupart de ces pays sont membres de la CEDEAO, la Communauté économique des États de l'Afrique de l'Ouest, et le français est langue officielle dans la plupart d'entre eux, avec l'anglais au Ghana et au Nigéria."
+},
+{
+"id": "faq-175",
+"type": "faq",
+"lang": "en",
+"title": "What are the capital cities of East and Central Africa?",
+"url": "/data-analytics.html",
+"tags": [
+"geography",
+"capitals",
+"east africa",
+"central africa",
+"africa",
+"countries"
+],
+"text": "The East and Central African countries on Patrice's development dashboard and their capitals: DR Congo: Kinshasa. Burundi: Gitega (the economic capital is Bujumbura). Rwanda: Kigali. Kenya: Nairobi. Uganda: Kampala. Tanzania: Dodoma (the largest city is Dar es Salaam). Ethiopia: Addis Ababa. Cameroon: Yaoundé (often counted as Central Africa). Kenya, Uganda, Tanzania, Rwanda, Burundi and DR Congo are members of the East African Community (EAC), and Swahili is widely spoken across the region alongside English and French."
+},
+{
+"id": "faq-176",
+"type": "faq",
+"lang": "fr",
+"title": "Quelles sont les capitales des pays d'Afrique de l'Est et d'Afrique centrale ?",
+"url": "/data-analytics.html",
+"tags": [
+"géographie",
+"capitales",
+"afrique de l'est",
+"afrique centrale",
+"afrique",
+"pays"
+],
+"text": "Les pays d'Afrique de l'Est et centrale présents dans le tableau de bord de Patrice et leurs capitales : RD Congo : Kinshasa. Burundi : Gitega (la capitale économique est Bujumbura). Rwanda : Kigali. Kenya : Nairobi. Ouganda : Kampala. Tanzanie : Dodoma (la plus grande ville est Dar es Salaam). Éthiopie : Addis-Abeba. Cameroun : Yaoundé (souvent classé en Afrique centrale). Le Kenya, l'Ouganda, la Tanzanie, le Rwanda, le Burundi et la RD Congo sont membres de la Communauté d'Afrique de l'Est (CAE), et le swahili est largement parlé dans la région, aux côtés de l'anglais et du français."
+},
+{
+"id": "faq-177",
+"type": "faq",
+"lang": "en",
+"title": "What are the capitals of the other countries on the dashboard?",
+"url": "/data-analytics.html",
+"tags": [
+"geography",
+"capitals",
+"countries",
+"world"
+],
+"text": "The remaining countries on Patrice's development dashboard and their capitals: South Africa: Pretoria (the legislative capital is Cape Town and the largest city Johannesburg). Morocco: Rabat. Egypt: Cairo. Canada: Ottawa, where Patrice is based. United States: Washington, D.C. France: Paris. United Kingdom: London. Germany: Berlin. Netherlands: Amsterdam (the seat of government is The Hague). India: New Delhi. Brazil: Brasília. China: Beijing. The dashboard compares these countries with African economies using World Bank indicators."
+},
+{
+"id": "faq-178",
+"type": "faq",
+"lang": "fr",
+"title": "Quelles sont les capitales des autres pays du tableau de bord ?",
+"url": "/data-analytics.html",
+"tags": [
+"géographie",
+"capitales",
+"pays",
+"monde"
+],
+"text": "Les autres pays présents dans le tableau de bord de Patrice et leurs capitales : Afrique du Sud : Pretoria (la capitale législative est Le Cap et la plus grande ville Johannesburg). Maroc : Rabat. Égypte : Le Caire. Canada : Ottawa, où Patrice est basé. États-Unis : Washington, D.C. France : Paris. Royaume-Uni : Londres. Allemagne : Berlin. Pays-Bas : Amsterdam (le siège du gouvernement est à La Haye). Inde : New Delhi. Brésil : Brasília. Chine : Pékin. Le tableau de bord compare ces pays aux économies africaines à l'aide des indicateurs de la Banque mondiale."
+},
+{
+"id": "faq-179",
+"type": "faq",
+"lang": "en",
+"title": "What are the Sahel, ECOWAS and Sub-Saharan Africa?",
+"url": "/data-analytics.html",
+"tags": [
+"geography",
+"sahel",
+"ecowas",
+"regions",
+"africa",
+"definitions"
+],
+"text": "Three geography terms that come up often in development work. Sub-Saharan Africa means the part of Africa south of the Sahara desert, as opposed to North Africa (Morocco, Egypt and their neighbours on the Mediterranean). The Sahel is the semi-arid band just south of the Sahara, stretching from Senegal through Mali, Burkina Faso and Niger toward Chad and Sudan; several dashboard countries are Sahelian. ECOWAS, the Economic Community of West African States, is the regional bloc of West African countries, while the East African Community (EAC) plays the same role for Kenya, Uganda, Tanzania, Rwanda, Burundi and DR Congo, and SADC covers Southern Africa, including South Africa and Tanzania."
+},
+{
+"id": "faq-180",
+"type": "faq",
+"lang": "fr",
+"title": "Que sont le Sahel, la CEDEAO et l'Afrique subsaharienne ?",
+"url": "/data-analytics.html",
+"tags": [
+"géographie",
+"sahel",
+"cedeao",
+"régions",
+"afrique",
+"définitions"
+],
+"text": "Trois termes de géographie qui reviennent souvent dans le travail de développement. L'Afrique subsaharienne désigne la partie de l'Afrique au sud du désert du Sahara, par opposition à l'Afrique du Nord (le Maroc, l'Égypte et leurs voisins de la Méditerranée). Le Sahel est la bande semi-aride juste au sud du Sahara, qui s'étend du Sénégal vers le Tchad et le Soudan en passant par le Mali, le Burkina Faso et le Niger ; plusieurs pays du tableau de bord sont sahéliens. La CEDEAO, Communauté économique des États de l'Afrique de l'Ouest, est le bloc régional des pays ouest-africains, tandis que la Communauté d'Afrique de l'Est (CAE) joue le même rôle pour le Kenya, l'Ouganda, la Tanzanie, le Rwanda, le Burundi et la RD Congo, et la SADC couvre l'Afrique australe, dont l'Afrique du Sud et la Tanzanie."
 }
 ]
 }
