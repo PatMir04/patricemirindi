@@ -628,6 +628,65 @@
  },
  {
   "lang": "en",
+  "q": "How do I implement a slowly changing dimension Type 2 in PySpark?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "pyspark",
+   "spark",
+   "slowly changing dimension",
+   "scd type 2",
+   "delta lake",
+   "merge",
+   "data pipelines"
+  ],
+  "a": "SCD Type 2 keeps history by closing the old row and inserting a new version whenever a tracked attribute changes. Give the dimension these columns: a surrogate key, the business key, the tracked attributes, effective_from, effective_to (NULL while current) and is_current. The load then has three steps: (1) join the incoming batch to the current rows on the business key and compare the tracked columns — use null-safe equality (<=> in Spark SQL) so a change from a value to NULL is still caught; (2) for changed keys, close the old version by setting effective_to to the batch date minus a day (or the change timestamp) and is_current to false; (3) insert the new version with effective_from set, effective_to NULL and is_current true, plus a fresh surrogate key. Brand-new business keys are simply inserted as current rows. On Delta Lake, a single MERGE statement can do the close-and-insert in one pass; without Delta, do it as two writes — an update pass for closures, then an append for new versions. Two traps: never update a tracked attribute in place, or you silently destroy the history SCD2 exists to keep; and make the batch idempotent — re-running the same load should produce no duplicate versions, so key the merge on business key + effective_from. Patrice builds PySpark dimension loads like these — SCD1, SCD2 and large fact-table pipelines — in the data platforms he delivers for clients."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment implémenter une dimension à évolution lente de type 2 (SCD2) dans PySpark ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "pyspark",
+   "spark",
+   "dimension à évolution lente",
+   "scd type 2",
+   "delta lake",
+   "merge",
+   "pipelines de données"
+  ],
+  "a": "Le SCD de type 2 conserve l'historique en fermant l'ancienne ligne et en insérant une nouvelle version chaque fois qu'un attribut suivi change. Donnez à la dimension ces colonnes : une clé de substitution, la clé métier, les attributs suivis, effective_from, effective_to (NULL tant que la ligne est courante) et is_current. Le chargement se fait ensuite en trois étapes : (1) joignez le lot entrant aux lignes courantes sur la clé métier et comparez les colonnes suivies — utilisez l'égalité tolérante aux NULL (<=> en Spark SQL) pour détecter aussi un passage d'une valeur à NULL ; (2) pour les clés modifiées, fermez l'ancienne version en fixant effective_to à la date du lot moins un jour (ou à l'horodatage du changement) et is_current à false ; (3) insérez la nouvelle version avec effective_from renseigné, effective_to à NULL et is_current à true, plus une nouvelle clé de substitution. Les nouvelles clés métier sont simplement insérées comme lignes courantes. Sur Delta Lake, une seule instruction MERGE peut fermer et insérer en un passage ; sans Delta, faites-le en deux écritures — un passage de mise à jour pour les fermetures, puis un ajout pour les nouvelles versions. Deux pièges : ne mettez jamais un attribut suivi à jour en place, sinon vous détruisez silencieusement l'historique que le SCD2 doit conserver ; et rendez le lot idempotent — relancer le même chargement ne doit produire aucune version en double, donc fondez la fusion sur clé métier + effective_from. Patrice construit des chargements de dimensions PySpark de ce type — SCD1, SCD2 et pipelines de grandes tables de faits — dans les plateformes de données qu'il livre pour ses clients."
+ },
+ {
+  "lang": "en",
+  "q": "How does a difference-in-differences (DiD) design work for impact evaluation?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "difference-in-differences",
+   "did",
+   "impact evaluation",
+   "survey methods",
+   "causal inference",
+   "parallel trends"
+  ],
+  "a": "Difference-in-differences estimates a programme's effect by comparing the change over time in a treated group with the change over time in a comparison group: effect = (treated after − treated before) − (comparison after − comparison before). The second difference removes both fixed differences between the groups and shocks that hit both groups equally, which is why DiD needs data from before and after the intervention for both groups. The identifying assumption is parallel trends: without the programme, both groups would have moved in parallel. You cannot prove it, but you can support it — plot or test the pre-intervention trends when several pre-periods exist, keep the groups' composition stable, and watch for other policies or shocks that hit only one group at the same time. In a regression it is the interaction term: outcome ~ treated + post + treated×post (with standard errors clustered at the level the treatment was assigned, usually the village, school or facility). Report the pre-trend check alongside the estimate; a DiD number without it is hard to defend. Patrice designs and runs DiD and other quasi-experimental evaluations — survey design, estimation in R and Stata, and reporting — for development programmes."
+ },
+ {
+  "lang": "fr",
+  "q": "Comment fonctionne la méthode des doubles différences (DiD) pour l'évaluation d'impact ?",
+  "url": "/skills-expertise.html",
+  "tags": [
+   "doubles différences",
+   "difference-in-differences",
+   "did",
+   "évaluation d'impact",
+   "méthodes d'enquête",
+   "inférence causale",
+   "tendances parallèles"
+  ],
+  "a": "La méthode des doubles différences estime l'effet d'un programme en comparant l'évolution dans le temps d'un groupe traité à celle d'un groupe témoin : effet = (traité après − traité avant) − (témoin après − témoin avant). La seconde différence élimine à la fois les écarts fixes entre les groupes et les chocs qui touchent les deux groupes de la même façon ; c'est pourquoi la DiD exige des données avant et après l'intervention pour les deux groupes. L'hypothèse clé est celle des tendances parallèles : sans le programme, les deux groupes auraient évolué en parallèle. On ne peut pas la prouver, mais on peut l'étayer — tracer ou tester les tendances d'avant l'intervention quand plusieurs périodes préalables existent, garder la composition des groupes stable, et surveiller les autres politiques ou chocs qui ne toucheraient qu'un seul groupe au même moment. En régression, c'est le terme d'interaction : résultat ~ traité + après + traité×après (avec des erreurs-types regroupées au niveau où le traitement a été assigné, généralement le village, l'école ou l'établissement). Présentez la vérification des tendances préalables à côté de l'estimation ; un chiffre DiD sans elle est difficile à défendre. Patrice conçoit et mène des évaluations DiD et autres évaluations quasi expérimentales — conception d'enquêtes, estimation sous R et Stata, et rapports — pour des programmes de développement."
+ },
+ {
+  "lang": "en",
   "q": "What are the capital cities of West Africa?",
   "url": "/data-analytics.html",
   "tags": [
