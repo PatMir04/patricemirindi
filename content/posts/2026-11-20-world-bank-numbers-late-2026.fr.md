@@ -18,7 +18,7 @@ Une précaution avant les chiffres : chaque indicateur suit son propre calendrie
 
 ## Une croissance stable
 
-L'économie mondiale a crû de **2,92 % en 2025**, et le PIB par habitant a atteint **14 406 $**. L'inflation a reculé à **3,04 %**, les exportations se sont maintenues à **29,5 % du PIB** et le chômage s'établissait à **4,79 %**. Aucun de ces chiffres ne décrit un boom, mais ensemble ils décrivent une expansion toujours intacte : une production en hausse, des tensions sur les prix qui s'apaisent et des marchés du travail qui tiennent. Pour les équipes de programmes, c'est l'arrière-plan auquel comparer les résultats par pays : un pays dont la croissance était inférieure à 2,9 % en 2025 perdait du terrain par rapport à la moyenne mondiale.
+L'économie mondiale a crû de **2,92 % en 2025**, et le PIB par habitant a atteint **14 406 $**. L'inflation s'est maintenue à **3,04 %**, les exportations se sont maintenues à **29,5 % du PIB** et le chômage s'établissait à **4,79 %**. Aucun de ces chiffres ne décrit un boom, mais ensemble ils décrivent une expansion toujours intacte : une production en hausse, des tensions sur les prix stables et des marchés du travail qui tiennent. Pour les équipes de programmes, c'est l'arrière-plan auquel comparer les résultats par pays : un pays dont la croissance était inférieure à 2,9 % en 2025 perdait du terrain par rapport à la moyenne mondiale.
 
 ## Un monde plus connecté
 

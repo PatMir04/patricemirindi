@@ -18,7 +18,7 @@ One caution before the numbers: each indicator keeps its own calendar. Some seri
 
 ## Growth held steady
 
-The world economy grew **2.92% in 2025**, and GDP per capita reached **$14,406**. Inflation eased to **3.04%**, exports held at **29.5% of GDP**, and unemployment sat at **4.79%**. None of these numbers describes a boom, but together they describe an expansion that is still intact: output rising, price pressures cooling, and labour markets holding. For programme teams, this is the backdrop against which country-level results should be read — a country growing more slowly than 2.9% in 2025 was losing ground against the world average.
+The world economy grew **2.92% in 2025**, and GDP per capita reached **$14,406**. Inflation held near 3% in 2025, at **3.04%**, exports held at **29.5% of GDP**, and unemployment sat at **4.79%**. None of these numbers describes a boom, but together they describe an expansion that is still intact: output rising, price pressures steady, and labour markets holding. For programme teams, this is the backdrop against which country-level results should be read — a country growing more slowly than 2.9% in 2025 was losing ground against the world average.
 
 ## A more connected world
 
